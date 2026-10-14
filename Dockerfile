@@ -14,7 +14,10 @@ COPY apache.conf /etc/apache2/sites-available/000-default.conf
 COPY php.ini /usr/local/etc/php/conf.d/motor-test.ini
 COPY entrypoint.sh /usr/local/bin/motor-entrypoint
 COPY auth.php /opt/motor-auth.php
-RUN chmod 755 /usr/local/bin/motor-entrypoint
+RUN chmod 755 /usr/local/bin/motor-entrypoint \
+ && a2dismod mpm_event mpm_worker \
+ && a2enmod mpm_prefork \
+ && apache2ctl -t
 ENV PORT=8080
 EXPOSE 8080
 ENTRYPOINT ["motor-entrypoint"]
