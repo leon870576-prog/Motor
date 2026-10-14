@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-14",
+  "source": "motor21.zip",
+  "source_sha256": "0c82a03df74672465dd1a774cf8160a267c3fdddbb086e22c0e55be6eda5fa99",
+  "purpose": "Отдельная личная тестовая копия владельца архива",
+  "files": [
+    {
+      "path": "site/INSTALL.php",
+      "change": "Разрешён адрес HTTPS, из ссылки входа после установки убран пароль.",
+      "original_sha256": "fb7dc7b6220fc4e3995963cacd5b07a8c25a6a5462fcf37075f952402c602a34",
+      "sha256": "a60bd0c8af85e3adf5d78168646208034c49a8a2682bc3a01903536914cf15ef"
+    },
+    {
+      "path": "site/_health.php",
+      "change": "Техническая проверка доступности каталога данных для хостинга.",
+      "original_sha256": null,
+      "sha256": "217efaae024a6a7e36853df7b3350e19163700645e97c4b138e66dde09c5b389"
+    },
+    {
+      "path": "site/includes/counters.php",
+      "change": "Начальные значения счётчиков на чистой установке.",
+      "original_sha256": "0a8f7c69728c64e68543ab6912e9cd0bde07ab3b343217966a04cfb335954b2d",
+      "sha256": "d3a5559eabf5040371f46f8d2266afc09fe8d1d9169d7c5d9f3c69c7d2fd668c"
+    },
+    {
+      "path": "site/includes/functions.php",
+      "change": "Индексация строк совместима с PHP 8; preg_replace /e заменён callback; заполнение отсутствующих полей профиля; проверка обновлений учитывает allow_url_fopen.",
+      "original_sha256": "86e775b059f2ad4c72124135a929c247b00acfb57b896dea483f19deaba3ad91",
+      "sha256": "3f115354f0333743e583de517624dc04bc18edd3c986a13041ce5027dfea006f"
+    },
+    {
+      "path": "site/includes/pclzip.php",
+      "change": "Старый конструктор PclZip заменён __construct.",
+      "original_sha256": "1dab453742d108646aa59d48d145c3152f80fc5178a2cb6943ed2a0dc7bf0b87",
+      "sha256": "6bf737b9e1be762ffca08ef8e1ccbaa8c3ef8812ea4f98c1a64cd6905176ec7b"
+    },
+    {
+      "path": "site/includes/php8_compat.php",
+      "change": "Слой совместимости each/set_magic_quotes_runtime и значения серверного окружения по умолчанию.",
+      "original_sha256": null,
+      "sha256": "23dd75cf4dac3f8b199f50810dfe3d3ea4cab9bd77108229047a253ad064b290"
+    },
+    {
+      "path": "site/includes/start.php",
+      "change": "Подключён слой совместимости PHP 8, обращения к удалённым magic_quotes-функциям защищены проверкой.",
+      "original_sha256": "1f7dd0524c6927b6518861d2cb408aa99d0d3482a19112d7f9f508ae99a151c2",
+      "sha256": "e2d991a584e7b00a0127fd0249b8eb8ec7d271f08bc8ae72d5b59f226a776591"
+    }
+  ],
+  "additional_files": [
+    "Dockerfile",
+    "railway.json",
+    "deploy/apache.conf",
+    "deploy/php.ini",
+    "deploy/entrypoint.sh",
+    "deploy/auth.php",
+    "checks/smoke.mjs",
+    "package.json",
+    "README-TEST.md",
+    ".dockerignore"
+  ],
+  "delivery_note": "GitHub upload: source tree packed in motor-source.tar.gz; Dockerfile ADD extracts it, deploy helper files are in repository root."
+}
