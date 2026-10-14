@@ -20,5 +20,5 @@ RUN chmod 755 /usr/local/bin/motor-entrypoint \
  && apache2ctl -t
 ENV PORT=8080
 EXPOSE 8080
-ENTRYPOINT ["motor-entrypoint"]
-CMD ["apache2-foreground"]
+ENTRYPOINT ["docker-php-entrypoint"]
+CMD ["motor-entrypoint", "apache2-foreground"]
