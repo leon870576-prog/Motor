@@ -1,0 +1,35 @@
+{
+  "id": "2026-10-15-footer-clean-v1",
+  "config_fields": {
+    "11": {
+      "from": "VISAVI.NET",
+      "to": "Лесика"
+    },
+    "12": {
+      "from": "Приветствую всех на моем сайте",
+      "to": "Добро пожаловать на сайт Лесика"
+    },
+    "14": {
+      "from": "http://visavi.net",
+      "to": ""
+    },
+    "15": {
+      "from": "http://visavi.net/images/img/logo.png",
+      "to": ""
+    }
+  },
+  "replace_files": [
+    {
+      "path": "datamain/buttons.dat",
+      "old_sha256": "00e176193b063956179f631735503aea46ed89aa334deb7f4fb5575aedf76381"
+    },
+    {
+      "path": "datamain/reklama_head.dat",
+      "old_sha256": "661ef2c1eb864309358aa1b8e7843f1edb101bb40b394c11a3785a227a9edbc3"
+    },
+    {
+      "path": "datamain/reklama_foot.dat",
+      "old_sha256": "166f639d6a13bfa06e89486e4012147eed369e14bd0442133678406ad08a5bfa"
+    }
+  ]
+}

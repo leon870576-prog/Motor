@@ -1,63 +1,79 @@
 {
-  "date": "2026-10-14",
-  "source": "motor21.zip",
-  "source_sha256": "0c82a03df74672465dd1a774cf8160a267c3fdddbb086e22c0e55be6eda5fa99",
-  "purpose": "Отдельная личная тестовая копия владельца архива",
+  "date": "2026-10-15",
+  "release": "2026-10-15-footer-clean-r1",
+  "source": "wapmotor_php84_footer_clean.zip",
+  "source_sha256": "3404edbaf6c08f60b78584a66132c35938701b9b44f7e8675f0f2307e225a66c",
+  "source_selection": "Последняя исправленная сборка подтверждена владельцем 15 октября 2026 года. motor21.zip не использован как рабочая основа.",
+  "preserved_from_source": [
+    "Название Лесика и приветствие",
+    "Удаление демонстрационной рекламы и кнопок",
+    "Удаление согласованной строки в шести шаблонах foot.php",
+    "Исправления SID, foreach и magic_quotes"
+  ],
   "files": [
     {
       "path": "site/INSTALL.php",
-      "change": "Разрешён адрес HTTPS, из ссылки входа после установки убран пароль.",
-      "original_sha256": "fb7dc7b6220fc4e3995963cacd5b07a8c25a6a5462fcf37075f952402c602a34",
+      "change": "HTTPS по умолчанию и разрешён при установке; пароль исключён из URL входа.",
+      "base_sha256": "fb7dc7b6220fc4e3995963cacd5b07a8c25a6a5462fcf37075f952402c602a34",
       "sha256": "a60bd0c8af85e3adf5d78168646208034c49a8a2682bc3a01903536914cf15ef"
     },
     {
       "path": "site/_health.php",
-      "change": "Техническая проверка доступности каталога данных для хостинга.",
-      "original_sha256": null,
-      "sha256": "217efaae024a6a7e36853df7b3350e19163700645e97c4b138e66dde09c5b389"
+      "change": "Проверка постоянного каталога данных; заголовок версии для контроля развёртывания.",
+      "base_sha256": null,
+      "sha256": "68e439b42c04420a92eae44f8a87d1c58e9d3d227d6ae044e69a11519e586b2f"
     },
     {
       "path": "site/includes/counters.php",
-      "change": "Начальные значения счётчиков на чистой установке.",
-      "original_sha256": "0a8f7c69728c64e68543ab6912e9cd0bde07ab3b343217966a04cfb335954b2d",
+      "change": "Начальные значения счётчиков для PHP 8.4 на чистой установке.",
+      "base_sha256": "0a8f7c69728c64e68543ab6912e9cd0bde07ab3b343217966a04cfb335954b2d",
       "sha256": "d3a5559eabf5040371f46f8d2266afc09fe8d1d9169d7c5d9f3c69c7d2fd668c"
     },
     {
       "path": "site/includes/functions.php",
-      "change": "Индексация строк совместима с PHP 8; preg_replace /e заменён callback; заполнение отсутствующих полей профиля; проверка обновлений учитывает allow_url_fopen.",
-      "original_sha256": "86e775b059f2ad4c72124135a929c247b00acfb57b896dea483f19deaba3ad91",
-      "sha256": "3f115354f0333743e583de517624dc04bc18edd3c986a13041ce5027dfea006f"
+      "change": "Callback для BB-кода вместо preg_replace /e, сохранён foreach из последней сборки, восстановлен уровень вложенности text_dump, значения отсутствующих полей профиля и проверка allow_url_fopen.",
+      "base_sha256": "e0c9218c02f63a1ad862afdf6b3ebe17ba822af10baaedf7372fc0ecf466a092",
+      "sha256": "7f027eb37de81c694e21e305c4540b03aae4787e5e3fbe69d9776c7ed4eef767"
     },
     {
       "path": "site/includes/pclzip.php",
-      "change": "Старый конструктор PclZip заменён __construct.",
-      "original_sha256": "1dab453742d108646aa59d48d145c3152f80fc5178a2cb6943ed2a0dc7bf0b87",
-      "sha256": "6bf737b9e1be762ffca08ef8e1ccbaa8c3ef8812ea4f98c1a64cd6905176ec7b"
+      "change": "Конструктор __construct, сохранены проверки удалённых magic_quotes API из последней сборки.",
+      "base_sha256": "e8f3e2b49cbd77e59acc8d948e3bf1938c68590449b2665b973a82c1bec55a8f",
+      "sha256": "d66bcdb18f2e727ba208309f6bc5caa4ec1d4edf36b0a74fd3bd12231e5a8e16"
     },
     {
       "path": "site/includes/php8_compat.php",
-      "change": "Слой совместимости each/set_magic_quotes_runtime и значения серверного окружения по умолчанию.",
-      "original_sha256": null,
+      "change": "Совместимость устаревших API и значения серверного окружения по умолчанию.",
+      "base_sha256": null,
       "sha256": "23dd75cf4dac3f8b199f50810dfe3d3ea4cab9bd77108229047a253ad064b290"
     },
     {
       "path": "site/includes/start.php",
-      "change": "Подключён слой совместимости PHP 8, обращения к удалённым magic_quotes-функциям защищены проверкой.",
-      "original_sha256": "1f7dd0524c6927b6518861d2cb408aa99d0d3482a19112d7f9f508ae99a151c2",
-      "sha256": "e2d991a584e7b00a0127fd0249b8eb8ec7d271f08bc8ae72d5b59f226a776591"
+      "change": "Подключён слой совместимости, сохранены отключение SID в URL и cookie-сессии из последней сборки.",
+      "base_sha256": "bb43f5a06f44455834a0bf289e8bf65270f5eb14acf3cd16d8da7e7918e4b82b",
+      "sha256": "b3f9b82d38be136930c53731e31ec9c178cea7722365d97c2d172eacfde915b1"
     }
   ],
-  "additional_files": [
-    "Dockerfile",
-    "railway.json",
-    "deploy/apache.conf",
-    "deploy/php.ini",
-    "deploy/entrypoint.sh",
-    "deploy/auth.php",
-    "checks/smoke.mjs",
-    "package.json",
-    "README-TEST.md",
-    ".dockerignore"
+  "hosting_changes": [
+    "Работающий Docker PHP 8.4/Apache с настройкой prefork при старте",
+    "HTTPS и HTTP-пароль тестового доступа",
+    "Постоянный диск /data и сохранение сессий",
+    "Однократная адресная миграция настроек с резервной копией; пользовательские значения сохраняются"
   ],
-  "delivery_note": "GitHub upload: source tree packed in motor-source.tar.gz; Dockerfile ADD extracts it, deploy helper files are in repository root."
+  "deployment_files": [
+    "Dockerfile",
+    "apache.conf",
+    "php.ini",
+    "entrypoint.sh",
+    "auth.php",
+    "migrate.php",
+    "MIGRATION.json"
+  ],
+  "validation": [
+    "PHP 8.4: синтаксис 166 файлов",
+    "Установка на временных данных, HTTPS, главная, новости, форум, гостевая, галерея, формы регистрации и входа, вход администратора, BB-коды",
+    "Название Лесика, отсутствие удалённой строки и демонстрационной рекламы на главной",
+    "Миграция старых данных, точность резервной копии, повторный запуск, сохранение пользовательских значений и профиля",
+    "Конструктор PclZip и проверки magic_quotes на PHP 8.4"
+  ]
 }

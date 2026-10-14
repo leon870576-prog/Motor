@@ -14,7 +14,10 @@ COPY apache.conf /etc/apache2/sites-available/000-default.conf
 COPY php.ini /usr/local/etc/php/conf.d/motor-test.ini
 COPY entrypoint.sh /usr/local/bin/motor-entrypoint
 COPY auth.php /opt/motor-auth.php
+COPY migrate.php /opt/motor-migrate.php
+COPY MIGRATION.json /opt/motor-migration.json
 RUN chmod 755 /usr/local/bin/motor-entrypoint \
+ && php -l /opt/motor-migrate.php \
  && a2dismod mpm_event mpm_worker \
  && a2enmod mpm_prefork \
  && apache2ctl -t
