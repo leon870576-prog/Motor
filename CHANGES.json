@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "release": "2026-10-15-smiles-r1",
+  "release": "2026-10-15-smile-picker-r1",
   "source": "wapmotor_php84_footer_clean.zip",
   "source_sha256": "3404edbaf6c08f60b78584a66132c35938701b9b44f7e8675f0f2307e225a66c",
   "source_selection": "Последняя исправленная сборка подтверждена владельцем 15 октября 2026 года. motor21.zip не использован как рабочая основа.",
@@ -15,7 +15,7 @@
       "path": "site/_health.php",
       "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": "68e439b42c04420a92eae44f8a87d1c58e9d3d227d6ae044e69a11519e586b2f",
-      "sha256": "9d8196e6656c5a4074950762d2a42b5bebfa600cf39cd1c16ae14057dd524e80"
+      "sha256": "8892e04f4b85ffe6101504b9d78108603b2702630c637d1c7bfa2bebc4211dc3"
     },
     {
       "path": "site/assets/lesika/leaf.svg",
@@ -33,19 +33,19 @@
       "path": "site/assets/lesika/site.css",
       "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": null,
-      "sha256": "6504d8fceb799c787e4d872f09cb478e6a45b78fcf7d6122a9de8114068899a3"
+      "sha256": "2ae64d6af4821fdaf7cdb86735326ce6ce70af21922269c2ac74f7676b52fe11"
     },
     {
       "path": "site/includes/functions.php",
       "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": "7f027eb37de81c694e21e305c4540b03aae4787e5e3fbe69d9776c7ed4eef767",
-      "sha256": "4fc3c3a86f84797da4575f84796387a090d1ffcd3556d111e9dfb7c0abef7926"
+      "sha256": "ffb1450194fc149c2e42a19f81d453d896acbe291ed7456385049034ecf7b8df"
     },
     {
       "path": "site/includes/header.php",
       "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": "cc1708d19fb3d461911b5921b6155178a626855631ac0375afc54e20326f6ff5",
-      "sha256": "e401640ac633274f3b390858bb6f38d99f28be1b0824be59b7ff9fe411418428"
+      "sha256": "ef14af90d3a91891961d8e123e33b87f07cc1211864a29d57aaf377132cc2c33"
     },
     {
       "path": "site/includes/lesika/catalog.php",
@@ -57,13 +57,13 @@
       "path": "site/includes/lesika/foot.php",
       "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": null,
-      "sha256": "476850d614a4ab00c1bdd2a6d19c744faeb0c3138564b15b35fb8933457a885f"
+      "sha256": "a43f89841f9b4a033d4a71a12ed8c19847dacec92c2f41462d6fa3ca0464aef3"
     },
     {
       "path": "site/includes/lesika/head.php",
       "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": null,
-      "sha256": "22a6463b8cebb8b3cd73873b5035d219704b6d95a8485ba822c2e26a83921fdf"
+      "sha256": "2b1f5b91eb6b2789674caca88e0e16bbebaf66fc4c3c6db70638d36b43d0db75"
     },
     {
       "path": "site/includes/lesika/home.php",
@@ -217,22 +217,22 @@
     {
       "path": "site/book/index.php",
       "base_sha256": "48a51c3b04335b31e92074a15e14dd92fb82529a86dc4005a16d6052063040f8",
-      "sha256": "4e98dbaa54863cef998dfdfc88c23af01b949e8a8008543492ae07a551a82837"
+      "sha256": "fa3c607fcec8f129766eddb542780d0636b32cbe0ea30b750ea06e898efd0c19"
     },
     {
       "path": "site/chat/add.php",
       "base_sha256": "b0afc693dc6ac800d13066d6a449b7d5724df45667e9f77632d6fee334e95b5c",
-      "sha256": "b2306e43adb89f0d47bc9fe9048da71d25bdbaa0676a0fc85c0f42be2343d527"
+      "sha256": "9404c128d293595933b267cd9678fb6792b200414c3caa8294d87d0844525abb"
     },
     {
       "path": "site/gallery/index.php",
       "base_sha256": "46352126cbbc31701cd8888cca419f5a5031403e118a267201895d3938dc53e4",
-      "sha256": "40a63086803df3599d043c5d09a6b95cde1c6308f77a3116523f59b5ceb89368"
+      "sha256": "dbacb3c422526d034b739694dbb76cc5c7fa0a3cada49c3df1a2e7e911b419df"
     },
     {
       "path": "site/includes/smiles.php",
       "base_sha256": null,
-      "sha256": "a9cfbe13cd129ffbc7557a6565a37060740e643ad58304356316ad16f977f55c"
+      "sha256": "595a054af39f9b463df46532eb0f14dff5fde25dbf2d5c1a476266fdd0a989a7"
     },
     {
       "path": "site/mpanel/board.php",
@@ -242,22 +242,22 @@
     {
       "path": "site/mpanel/book.php",
       "base_sha256": "3737ac0e1a901c117f75f58ad9ba43da0cbbf421df6491bb14c988e1bac9fcfc",
-      "sha256": "51faab09600bd54f5977f7645a881957331c9ac60cb74da691a2bc5f7c3682e9"
+      "sha256": "a175be33cd366fbf304fe61ea247fa15c936e4d6fa4408a0bc031983af53184f"
     },
     {
       "path": "site/mpanel/forum.php",
       "base_sha256": "4de7f11d77985cbe24d0a6020ce7ff178d5d4d277cee6525326d54f45b0fd5ea",
-      "sha256": "cc49808415e9e1aef3db45ee36e092da2c14e956d0adbe621de6a91b4e7f65d0"
+      "sha256": "b5db4ee878a06bc1f52a313f32b3a62f00378b09c09819c06f00e73267cc46d9"
     },
     {
       "path": "site/mpanel/gallery.php",
       "base_sha256": "868260da88f5b9d8afbe5fb2c89b15a38afa4680206d239b2eb12863ad324135",
-      "sha256": "3998f8785744b5dffbcc3b453081cc4ddd66dae033778e0986ebcbda23c0f6da"
+      "sha256": "8e5e3ae127001baedee0c8c3daa0feffcd09f325fa7621a4c3b9e95001613772"
     },
     {
       "path": "site/mpanel/news.php",
       "base_sha256": "ccf2b39df429af7a8aa19ae768cb9f8f500604ebe4643e63e99577d23d26b9d5",
-      "sha256": "0a40eecdd875b21200e2d2635bb6e8cd5c304c781e9b166480a73231683bfb1b"
+      "sha256": "5afc9921516520bba96d0ebbe95a9eaf4c7fc4cdf1c57af238155eba9b1f9fcd"
     },
     {
       "path": "site/pages/anketa.php",
@@ -283,6 +283,101 @@
       "path": "site/votes/vote.php",
       "base_sha256": "b601f1614a7ff2d4845185f5ff541d0089378c9e89c8971c72f77de73ef673ee",
       "sha256": "932ca010f086824f3e239dcbce10ad7c9e5192bdb1c21089ab3064ad78ccb52f"
+    },
+    {
+      "path": "site/assets/lesika/smile-picker.js",
+      "base_sha256": null,
+      "sha256": "b29489f445ad2fe7aef77c78c8b92f48f4c50382b90d711293814d9b260429e3"
+    },
+    {
+      "path": "site/board/add.php",
+      "base_sha256": "e475fbb6036300acd619df41cb226bd37001becb938a6c6f7bd2e61b0f18960a",
+      "sha256": "52c5b951887ffa442d7c094a2b24cfc46529cc802ed57f0a9a01e5ddc06be2c2"
+    },
+    {
+      "path": "site/chat/index.php",
+      "base_sha256": "0b07f2aa0f4b52d4e1b976c635d355292d9465c9b2748682cc67b8011482eebe",
+      "sha256": "6dced15940576b5bfb505654ecc39741a087d533abaf41ece6b2399af4fcd530"
+    },
+    {
+      "path": "site/forum/edit.php",
+      "base_sha256": "7c5d8da7a4f29f0b1df6475658a0f9b7c0b36c69503b01205200ae73dc80bcc6",
+      "sha256": "0c09e79eb700d891255d1844f7f650fd2487b0b9318829bccf9a7e9e3042cca8"
+    },
+    {
+      "path": "site/forum/forum.php",
+      "base_sha256": "95d407b2b71c73dd644e2ddfafc81a927f9315f676f24aa1d17c37f5bca0cad1",
+      "sha256": "bef8be4be8eb93ff7277c8fdd5a5aeafa5e6761622b586a132b5f22f793761c1"
+    },
+    {
+      "path": "site/forum/topic.php",
+      "base_sha256": "662bc684fccc17cf3cd6c39a39d25e3da6f7c612f769a32d0d3e730e45eb7bff",
+      "sha256": "71cfff39d28b46c1d7a267f5f601f5f8f37202c389b3d441e8c595c2fa0e9d8b"
+    },
+    {
+      "path": "site/includes/form_security.php",
+      "base_sha256": null,
+      "sha256": "2ee4313d5122a1000659f7076f465a36d4804dfc5f463d77f46c761f20761a89"
+    },
+    {
+      "path": "site/mpanel/adminchat.php",
+      "base_sha256": "ef73310ddf1ea588b7c2a05d08e2b716e2fbc4d3371ad79a9760c8e690a33fa9",
+      "sha256": "9b762307f0969351dc4426df19dbf44304d3f0aff07e5ac574eb5a757aed6c0c"
+    },
+    {
+      "path": "site/mpanel/chat.php",
+      "base_sha256": "121a8bd885184bdb75cb5b03baab470bd7a674e7cb38a7a6c72abc75e5dd0976",
+      "sha256": "a15a0152e07593413685902d247047fd73b3f01c05de645fe393002cb2899811"
+    },
+    {
+      "path": "site/mpanel/users.php",
+      "base_sha256": "9d0110523528e974b7fb0ac9d23a3cf1c2b4e5cee46ddd7428460606a6119911",
+      "sha256": "02dca4245c42a9b33d5aa3c916d54a4daa50a0e9f53a2d7271e864f39a7e67b3"
+    },
+    {
+      "path": "site/mpanel/votes.php",
+      "base_sha256": "35c1f982be3adb5c7bbaa6b673bc215c7a8111b30ff8b2625c3cf48f3822ad06",
+      "sha256": "2de9d285d541e492568c1c5f2e8f18ffcb470a99a18674c303762230d2f872e6"
+    },
+    {
+      "path": "site/news/komm.php",
+      "base_sha256": "b8cd2819b9341e467ac73f39e2df5cb74654f6ecd09fd7a24fa273f96c3a76c3",
+      "sha256": "605447b541901877fc7031f05725a2f71d0d9bff25650381665e5662727697c7"
+    },
+    {
+      "path": "site/pages/adminlist.php",
+      "base_sha256": "7ff89bc0e56080591402e2a1d98cc5fd60880664cc0c146182e47ed34291906c",
+      "sha256": "cb0b3f0b4e0075f3eae1e884b8f6b491dfaf10821263f56b26cd06f3d73fd487"
+    },
+    {
+      "path": "site/pages/ban.php",
+      "base_sha256": "90ccf7469020c5433fa56fd5f67c7834d082f55a078c4951e54ce9f3456e32af",
+      "sha256": "7a8b40546c4d089bfa798e192ffe33590c6fc638f4053b4247e906e01e4ac192"
+    },
+    {
+      "path": "site/pages/privat.php",
+      "base_sha256": "37275e01388a2a5b335f758e299f7de44889c288f6ea91e120fa5c3caf3e3711",
+      "sha256": "0bb4bce9c2a3586a082278e81a2c7a815dbcefee9fe449ad50003b3abf6052bb"
+    },
+    {
+      "path": "site/pages/profil.php",
+      "base_sha256": "79d7879c5d8afccfc87aafcf84df4ba0571499938b09649cd00f23ee822e1cc7",
+      "sha256": "de1ea0593785b23460e5c033c3d9fa360b844ba89331e7e06c20fa64a45c2a88"
+    },
+    {
+      "path": "site/pages/smiles.php",
+      "base_sha256": "b4d12460a33ce42ffbcfa4a61e5144c6da5458328f36135a1335b8b7cd4dc39a",
+      "sha256": "ace32db13c97b5c4c9110a744ec82018b3af302d0fb8a794f253f4e888774d9f"
+    },
+    {
+      "path": "site/pyramid/go.php",
+      "base_sha256": "24dd39aa03d241c34979c99c04510b7602e98b504a5548e6e0aeff8b03380b9b",
+      "sha256": "b307a628ee6b36116c9e4eb6131cc31a44f0c6c48423e8efcf51d8aec3ead4e1"
+    },
+    {
+      "path": "site/pyramid/index.php",
+      "base_sha256": "66da2a687a78fb00ad37e320799886ea1c30bd3e17068cf66651e1b55cb9a9df",
+      "sha256": "d07f9233cccd7bfd3821323ef9222d5f12b5c72944fc629efa3d86f58ec203e7"
     }
   ],
   "hosting_changes": [
@@ -400,8 +495,8 @@
     "themez",
     "toonel"
   ],
-  "previous_release": "2026-10-15-attachments-r1",
-  "base_commit": "e6f7797ce8ee1e0fef026049f2c3a197d1053d3c",
+  "previous_release": "2026-10-15-smiles-r1",
+  "base_commit": "3967fd653f602248c7453b0ed5b9e7ebc96966b3",
   "attachment_changes": [
     {
       "path": "site/_health.php",
@@ -695,5 +790,664 @@
     ],
     "device_browser_qa": "Not performed",
     "syntax_files": 177
-  }
+  },
+  "picker_changes": [
+    "One compact, closed-by-default, inline picker for 48 content fields across 21 files.",
+    "105 common GIFs, 16 admin GIFs under existing permissions, 32 Unicode emoji; search and click/tap insertion at caret.",
+    "Maximum panel height 232px, internal scrolling, one active panel, automatic close; all seven themes.",
+    "Clickable standalone catalogue copies codes; original uncollapsed icon strip removed from active forms.",
+    "CSRF checks added to previously unguarded message forms; cryptographic session token; malformed text input rejected.",
+    "Security review and permanent owner instruction recorded; legacy password-system risks documented."
+  ],
+  "picker_files": [
+    {
+      "path": "site/_health.php",
+      "base_sha256": "9d8196e6656c5a4074950762d2a42b5bebfa600cf39cd1c16ae14057dd524e80",
+      "sha256": "8892e04f4b85ffe6101504b9d78108603b2702630c637d1c7bfa2bebc4211dc3"
+    },
+    {
+      "path": "site/assets/lesika/site.css",
+      "base_sha256": "6504d8fceb799c787e4d872f09cb478e6a45b78fcf7d6122a9de8114068899a3",
+      "sha256": "2ae64d6af4821fdaf7cdb86735326ce6ce70af21922269c2ac74f7676b52fe11"
+    },
+    {
+      "path": "site/assets/lesika/smile-picker.js",
+      "base_sha256": null,
+      "sha256": "b29489f445ad2fe7aef77c78c8b92f48f4c50382b90d711293814d9b260429e3"
+    },
+    {
+      "path": "site/board/add.php",
+      "base_sha256": "e475fbb6036300acd619df41cb226bd37001becb938a6c6f7bd2e61b0f18960a",
+      "sha256": "52c5b951887ffa442d7c094a2b24cfc46529cc802ed57f0a9a01e5ddc06be2c2"
+    },
+    {
+      "path": "site/book/index.php",
+      "base_sha256": "4e98dbaa54863cef998dfdfc88c23af01b949e8a8008543492ae07a551a82837",
+      "sha256": "fa3c607fcec8f129766eddb542780d0636b32cbe0ea30b750ea06e898efd0c19"
+    },
+    {
+      "path": "site/chat/add.php",
+      "base_sha256": "b2306e43adb89f0d47bc9fe9048da71d25bdbaa0676a0fc85c0f42be2343d527",
+      "sha256": "9404c128d293595933b267cd9678fb6792b200414c3caa8294d87d0844525abb"
+    },
+    {
+      "path": "site/chat/index.php",
+      "base_sha256": "0b07f2aa0f4b52d4e1b976c635d355292d9465c9b2748682cc67b8011482eebe",
+      "sha256": "6dced15940576b5bfb505654ecc39741a087d533abaf41ece6b2399af4fcd530"
+    },
+    {
+      "path": "site/forum/edit.php",
+      "base_sha256": "7c5d8da7a4f29f0b1df6475658a0f9b7c0b36c69503b01205200ae73dc80bcc6",
+      "sha256": "0c09e79eb700d891255d1844f7f650fd2487b0b9318829bccf9a7e9e3042cca8"
+    },
+    {
+      "path": "site/forum/forum.php",
+      "base_sha256": "95d407b2b71c73dd644e2ddfafc81a927f9315f676f24aa1d17c37f5bca0cad1",
+      "sha256": "bef8be4be8eb93ff7277c8fdd5a5aeafa5e6761622b586a132b5f22f793761c1"
+    },
+    {
+      "path": "site/forum/topic.php",
+      "base_sha256": "662bc684fccc17cf3cd6c39a39d25e3da6f7c612f769a32d0d3e730e45eb7bff",
+      "sha256": "71cfff39d28b46c1d7a267f5f601f5f8f37202c389b3d441e8c595c2fa0e9d8b"
+    },
+    {
+      "path": "site/gallery/index.php",
+      "base_sha256": "40a63086803df3599d043c5d09a6b95cde1c6308f77a3116523f59b5ceb89368",
+      "sha256": "dbacb3c422526d034b739694dbb76cc5c7fa0a3cada49c3df1a2e7e911b419df"
+    },
+    {
+      "path": "site/includes/form_security.php",
+      "base_sha256": null,
+      "sha256": "2ee4313d5122a1000659f7076f465a36d4804dfc5f463d77f46c761f20761a89"
+    },
+    {
+      "path": "site/includes/functions.php",
+      "base_sha256": "4fc3c3a86f84797da4575f84796387a090d1ffcd3556d111e9dfb7c0abef7926",
+      "sha256": "ffb1450194fc149c2e42a19f81d453d896acbe291ed7456385049034ecf7b8df"
+    },
+    {
+      "path": "site/includes/header.php",
+      "base_sha256": "ebf5627be2cdf4ff9972eb875f286b2d9dd721a0fc6c1ae029cc5cef164af63b",
+      "sha256": "ef14af90d3a91891961d8e123e33b87f07cc1211864a29d57aaf377132cc2c33"
+    },
+    {
+      "path": "site/includes/lesika/foot.php",
+      "base_sha256": "476850d614a4ab00c1bdd2a6d19c744faeb0c3138564b15b35fb8933457a885f",
+      "sha256": "a43f89841f9b4a033d4a71a12ed8c19847dacec92c2f41462d6fa3ca0464aef3"
+    },
+    {
+      "path": "site/includes/lesika/head.php",
+      "base_sha256": "22a6463b8cebb8b3cd73873b5035d219704b6d95a8485ba822c2e26a83921fdf",
+      "sha256": "2b1f5b91eb6b2789674caca88e0e16bbebaf66fc4c3c6db70638d36b43d0db75"
+    },
+    {
+      "path": "site/includes/smiles.php",
+      "base_sha256": "a9cfbe13cd129ffbc7557a6565a37060740e643ad58304356316ad16f977f55c",
+      "sha256": "595a054af39f9b463df46532eb0f14dff5fde25dbf2d5c1a476266fdd0a989a7"
+    },
+    {
+      "path": "site/mpanel/adminchat.php",
+      "base_sha256": "ef73310ddf1ea588b7c2a05d08e2b716e2fbc4d3371ad79a9760c8e690a33fa9",
+      "sha256": "9b762307f0969351dc4426df19dbf44304d3f0aff07e5ac574eb5a757aed6c0c"
+    },
+    {
+      "path": "site/mpanel/book.php",
+      "base_sha256": "51faab09600bd54f5977f7645a881957331c9ac60cb74da691a2bc5f7c3682e9",
+      "sha256": "a175be33cd366fbf304fe61ea247fa15c936e4d6fa4408a0bc031983af53184f"
+    },
+    {
+      "path": "site/mpanel/chat.php",
+      "base_sha256": "121a8bd885184bdb75cb5b03baab470bd7a674e7cb38a7a6c72abc75e5dd0976",
+      "sha256": "a15a0152e07593413685902d247047fd73b3f01c05de645fe393002cb2899811"
+    },
+    {
+      "path": "site/mpanel/forum.php",
+      "base_sha256": "cc49808415e9e1aef3db45ee36e092da2c14e956d0adbe621de6a91b4e7f65d0",
+      "sha256": "b5db4ee878a06bc1f52a313f32b3a62f00378b09c09819c06f00e73267cc46d9"
+    },
+    {
+      "path": "site/mpanel/gallery.php",
+      "base_sha256": "3998f8785744b5dffbcc3b453081cc4ddd66dae033778e0986ebcbda23c0f6da",
+      "sha256": "8e5e3ae127001baedee0c8c3daa0feffcd09f325fa7621a4c3b9e95001613772"
+    },
+    {
+      "path": "site/mpanel/news.php",
+      "base_sha256": "0a40eecdd875b21200e2d2635bb6e8cd5c304c781e9b166480a73231683bfb1b",
+      "sha256": "5afc9921516520bba96d0ebbe95a9eaf4c7fc4cdf1c57af238155eba9b1f9fcd"
+    },
+    {
+      "path": "site/mpanel/users.php",
+      "base_sha256": "9d0110523528e974b7fb0ac9d23a3cf1c2b4e5cee46ddd7428460606a6119911",
+      "sha256": "02dca4245c42a9b33d5aa3c916d54a4daa50a0e9f53a2d7271e864f39a7e67b3"
+    },
+    {
+      "path": "site/mpanel/votes.php",
+      "base_sha256": "35c1f982be3adb5c7bbaa6b673bc215c7a8111b30ff8b2625c3cf48f3822ad06",
+      "sha256": "2de9d285d541e492568c1c5f2e8f18ffcb470a99a18674c303762230d2f872e6"
+    },
+    {
+      "path": "site/news/komm.php",
+      "base_sha256": "b8cd2819b9341e467ac73f39e2df5cb74654f6ecd09fd7a24fa273f96c3a76c3",
+      "sha256": "605447b541901877fc7031f05725a2f71d0d9bff25650381665e5662727697c7"
+    },
+    {
+      "path": "site/pages/adminlist.php",
+      "base_sha256": "7ff89bc0e56080591402e2a1d98cc5fd60880664cc0c146182e47ed34291906c",
+      "sha256": "cb0b3f0b4e0075f3eae1e884b8f6b491dfaf10821263f56b26cd06f3d73fd487"
+    },
+    {
+      "path": "site/pages/ban.php",
+      "base_sha256": "90ccf7469020c5433fa56fd5f67c7834d082f55a078c4951e54ce9f3456e32af",
+      "sha256": "7a8b40546c4d089bfa798e192ffe33590c6fc638f4053b4247e906e01e4ac192"
+    },
+    {
+      "path": "site/pages/privat.php",
+      "base_sha256": "37275e01388a2a5b335f758e299f7de44889c288f6ea91e120fa5c3caf3e3711",
+      "sha256": "0bb4bce9c2a3586a082278e81a2c7a815dbcefee9fe449ad50003b3abf6052bb"
+    },
+    {
+      "path": "site/pages/profil.php",
+      "base_sha256": "79d7879c5d8afccfc87aafcf84df4ba0571499938b09649cd00f23ee822e1cc7",
+      "sha256": "de1ea0593785b23460e5c033c3d9fa360b844ba89331e7e06c20fa64a45c2a88"
+    },
+    {
+      "path": "site/pages/smiles.php",
+      "base_sha256": "b4d12460a33ce42ffbcfa4a61e5144c6da5458328f36135a1335b8b7cd4dc39a",
+      "sha256": "ace32db13c97b5c4c9110a744ec82018b3af302d0fb8a794f253f4e888774d9f"
+    },
+    {
+      "path": "site/pyramid/go.php",
+      "base_sha256": "24dd39aa03d241c34979c99c04510b7602e98b504a5548e6e0aeff8b03380b9b",
+      "sha256": "b307a628ee6b36116c9e4eb6131cc31a44f0c6c48423e8efcf51d8aec3ead4e1"
+    },
+    {
+      "path": "site/pyramid/index.php",
+      "base_sha256": "66da2a687a78fb00ad37e320799886ea1c30bd3e17068cf66651e1b55cb9a9df",
+      "sha256": "d07f9233cccd7bfd3821323ef9222d5f12b5c72944fc629efa3d86f58ec203e7"
+    }
+  ],
+  "picker_backend_tests": {
+    "php": "8.4",
+    "requests": 150,
+    "fixtures": 28,
+    "passed": [
+      "121 valid GIFs, picker, limits, admin rules, Unicode, legacy paths, edit roundtrip, safe URL/code handling",
+      "news create/edit, home feed, comments, admin view and absolute smile URLs in RSS",
+      "forum topic/reply, member edit, moderator edit, multiline records and author-scoped admin smiles",
+      "guestbook, administrator answer, mini-chat and admin chat, including moderation views",
+      "gallery descriptions, image detail, comments and moderation",
+      "announcements list/detail/moderation and profile About me",
+      "private messages, sent and received, with temporary accounts only",
+      "poll question/options, results and archive",
+      "pyramid messages, history and home rendering",
+      "all seven themes, inline size bounds and valid asset paths on every checked page",
+      "picker catalogues and explicit field markers in all public forms and comments",
+      "CSRF, array input rejection, strong session tokens and unchanged records after rejected requests",
+      "stored HTML/script payload remains escaped after save and display",
+      "admin create/edit forms, poll fields, and the permitted ban-appeal form",
+      "guest access, no admin catalogue leakage, and clickable standalone smile catalogue"
+    ],
+    "fields": {
+      "book/index.php": 2,
+      "chat/index.php": 1,
+      "forum/forum.php": 1,
+      "forum/topic.php": 1,
+      "forum/edit.php": 1,
+      "news/komm.php": 1,
+      "board/add.php": 1,
+      "gallery/index.php": 2,
+      "pyramid/index.php": 1,
+      "pages/privat.php": 2,
+      "pages/adminlist.php": 1,
+      "pages/ban.php": 1,
+      "mpanel/adminchat.php": 1,
+      "mpanel/book.php": 2,
+      "mpanel/chat.php": 1,
+      "mpanel/forum.php": 2,
+      "mpanel/news.php": 2,
+      "mpanel/gallery.php": 1,
+      "pages/profil.php": 1,
+      "mpanel/users.php": 1,
+      "mpanel/votes.php": 22
+    }
+  },
+  "picker_browser_tests": {
+    "browser": "153.0.8010.0",
+    "passed": [
+      "all PHP-generated composition/edit/comment forms: compact toggle, correct catalogue, insertion, auto-close, no unintended POST",
+      "cursor position, replacing selection, Unicode emoji and returning focus to text",
+      "search, empty result, escaping, Enter prevention, Escape/close and maxlength enforcement",
+      "multiple fields use one panel, correct destination, and outside-click dismissal",
+      "35 real Chromium mobile/landscape layouts: all seven themes, <=232 px panel, no overlay/overflow, scrolling and 44 px smile targets",
+      "last smile is reachable and inserts correctly after scrolling",
+      "native touchscreen taps: opening, group selection, insertion, auto-close and switching fields",
+      "standalone catalogue click-to-copy"
+    ],
+    "measurements": [
+      {
+        "width": 250,
+        "height": 204.46875,
+        "theme": "lesika_dvor",
+        "left": 35,
+        "right": 285,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 44,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 250,
+        "height": 204.46875,
+        "theme": "lesika_gazeta",
+        "left": 35,
+        "right": 285,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 44,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 250,
+        "height": 204.46875,
+        "theme": "lesika_gostinaya",
+        "left": 35,
+        "right": 285,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 44,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 250,
+        "height": 204.46875,
+        "theme": "lesika_solnce",
+        "left": 35,
+        "right": 285,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 44,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 250,
+        "height": 204.46875,
+        "theme": "lesika_vecher",
+        "left": 35,
+        "right": 285,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 44,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 250,
+        "height": 204.46875,
+        "theme": "lesika_albom",
+        "left": 35,
+        "right": 285,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 44,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 250,
+        "height": 204.46875,
+        "theme": "lesika_uyut",
+        "left": 35,
+        "right": 285,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 44,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 284,
+        "height": 232,
+        "theme": "lesika_dvor",
+        "left": 38,
+        "right": 322,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 50.796875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 284,
+        "height": 232,
+        "theme": "lesika_gazeta",
+        "left": 38,
+        "right": 322,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 50.796875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 284,
+        "height": 232,
+        "theme": "lesika_gostinaya",
+        "left": 38,
+        "right": 322,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 50.796875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 284,
+        "height": 232,
+        "theme": "lesika_solnce",
+        "left": 38,
+        "right": 322,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 50.796875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 284,
+        "height": 232,
+        "theme": "lesika_vecher",
+        "left": 38,
+        "right": 322,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 50.796875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 284,
+        "height": 232,
+        "theme": "lesika_albom",
+        "left": 38,
+        "right": 322,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 50.796875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 284,
+        "height": 232,
+        "theme": "lesika_uyut",
+        "left": 38,
+        "right": 322,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 50.796875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 314,
+        "height": 232,
+        "theme": "lesika_dvor",
+        "left": 38,
+        "right": 352,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 46.828125,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 314,
+        "height": 232,
+        "theme": "lesika_gazeta",
+        "left": 38,
+        "right": 352,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 46.828125,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 314,
+        "height": 232,
+        "theme": "lesika_gostinaya",
+        "left": 38,
+        "right": 352,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 46.828125,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 314,
+        "height": 232,
+        "theme": "lesika_solnce",
+        "left": 38,
+        "right": 352,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 46.828125,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 314,
+        "height": 232,
+        "theme": "lesika_vecher",
+        "left": 38,
+        "right": 352,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 46.828125,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 314,
+        "height": 232,
+        "theme": "lesika_albom",
+        "left": 38,
+        "right": 352,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 46.828125,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 314,
+        "height": 232,
+        "theme": "lesika_uyut",
+        "left": 38,
+        "right": 352,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 46.828125,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 354,
+        "height": 232,
+        "theme": "lesika_dvor",
+        "left": 38,
+        "right": 392,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 45.421875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 354,
+        "height": 232,
+        "theme": "lesika_gazeta",
+        "left": 38,
+        "right": 392,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 45.421875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 354,
+        "height": 232,
+        "theme": "lesika_gostinaya",
+        "left": 38,
+        "right": 392,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 45.421875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 354,
+        "height": 232,
+        "theme": "lesika_solnce",
+        "left": 38,
+        "right": 392,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 45.421875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 354,
+        "height": 232,
+        "theme": "lesika_vecher",
+        "left": 38,
+        "right": 392,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 45.421875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 354,
+        "height": 232,
+        "theme": "lesika_albom",
+        "left": 38,
+        "right": 392,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 45.421875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 354,
+        "height": 232,
+        "theme": "lesika_uyut",
+        "left": 38,
+        "right": 392,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 45.421875,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 484,
+        "height": 132,
+        "theme": "lesika_dvor",
+        "left": 128,
+        "right": 612,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 49.109375,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 484,
+        "height": 132,
+        "theme": "lesika_gazeta",
+        "left": 128,
+        "right": 612,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 49.109375,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 484,
+        "height": 132,
+        "theme": "lesika_gostinaya",
+        "left": 128,
+        "right": 612,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 49.109375,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 484,
+        "height": 132,
+        "theme": "lesika_solnce",
+        "left": 128,
+        "right": 612,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 49.109375,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 484,
+        "height": 132,
+        "theme": "lesika_vecher",
+        "left": 128,
+        "right": 612,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 49.109375,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 484,
+        "height": 132,
+        "theme": "lesika_albom",
+        "left": 128,
+        "right": 612,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 49.109375,
+        "cellHeight": 44,
+        "position": "static"
+      },
+      {
+        "width": 484,
+        "height": 132,
+        "theme": "lesika_uyut",
+        "left": 128,
+        "right": 612,
+        "overflow": false,
+        "scrollable": true,
+        "cellWidth": 49.109375,
+        "cellHeight": 44,
+        "position": "static"
+      }
+    ],
+    "jsErrors": [],
+    "unexpectedDialogs": [],
+    "physical_devices": false
+  },
+  "picker_syntax_files": 178
 }

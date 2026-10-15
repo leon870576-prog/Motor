@@ -113,21 +113,21 @@ edit=await req(adminEdit);assert.match(edit.text,/<textarea[^>]*>[^<]*:ban/);pas
 assert.equal((await req('/book/add.php?uid='+uid,{msg:message})).httpStatusCode,302);await rendered('/book/index.php');await rendered('/mpanel/book.php');
 const bookId=lines('book.dat').length-1;
 assert.equal((await req('/mpanel/book.php?action=addotvet&id='+bookId+'&uid='+uid,{otvet:message+' ответ администрации'})).httpStatusCode,302);await rendered('/book/index.php','ответ администрации');
-assert.equal((await req('/chat/add.php',{msg:message})).httpStatusCode,302);await rendered('/chat/index.php');await rendered('/mpanel/chat.php');
+assert.equal((await req('/chat/add.php',{uid,msg:message})).httpStatusCode,302);await rendered('/chat/index.php');await rendered('/mpanel/chat.php');
 assert.equal((await req('/mpanel/adminchat.php?action=add&uid='+uid,{msg:message})).httpStatusCode,302);await rendered('/mpanel/adminchat.php');pass('guestbook, administrator answer, mini-chat and admin chat, including moderation views');
 // A fixture image is local to this disposable runtime; comments use the real POST endpoint.
 const stamp=Math.floor(Date.now()/1000);php.writeFile('/www/local/datagallery/smile-test.gif',readFileSync(join(root,'images/img/news.gif')));php.writeFile('/www/local/datagallery/fotobase.dat',`${message}|Фото смайлов|MotorTestAdmin||${stamp}||smile-test.gif|\r\n`);
 await rendered('/gallery/index.php');await rendered('/gallery/index.php?action=showimg&gid=smile-test.gif');await rendered('/mpanel/gallery.php');
-assert.equal((await req('/gallery/index.php?action=addkomm&gid=smile-test.gif',{msg:message})).httpStatusCode,302);await rendered('/gallery/index.php?action=komm&gid=smile-test.gif');pass('gallery descriptions, image detail, comments and moderation');
+assert.equal((await req('/gallery/index.php?action=addkomm&gid=smile-test.gif',{uid,msg:message})).httpStatusCode,302);await rendered('/gallery/index.php?action=komm&gid=smile-test.gif');pass('gallery descriptions, image detail, comments and moderation');
 php.writeFile('/www/local/databoard/database.dat','Тест|Тестовая рубрика|987|\r\n');
-r=await req('/board/add.php?action=add&id=987',{zag:'Объявление смайлов',msg:message,days:'3'});assert.equal(r.httpStatusCode,302);const bid=lines('databoard/987.dat').at(-1).split('|')[5];
+r=await req('/board/add.php?action=add&id=987',{uid,zag:'Объявление смайлов',msg:message,days:'3'});assert.equal(r.httpStatusCode,302);const bid=lines('databoard/987.dat').at(-1).split('|')[5];
 await rendered('/board/index.php?action=board&id=987');await rendered('/board/index.php?action=view&id=987&bid='+bid);await rendered('/mpanel/board.php?action=board&id=987');await rendered('/pages/anketa.php?uz=SmileAuthor');pass('announcements list/detail/moderation and profile About me');
 // Private-message testing is restricted to temporary accounts in the in-memory site.
 r=await req('/pages/privat.php?action=send&uz=SmileAuthor&uid='+uid,{msg:message});assert.equal(r.httpStatusCode,302);await rendered('/pages/privat.php?action=output');
 await req('/input.php?action=exit');await req('/input.php',{login:'SmileAuthor',pass:password});uid=await token();await rendered('/pages/privat.php');pass('private messages, sent and received, with temporary accounts only');
 php.writeFile('/www/local/datavotes/votes.dat',`${message}|${message} вариант|Нет|`);php.writeFile('/www/local/datavotes/result.dat','0|1|1|0');php.writeFile('/www/local/datavotes/allvotes.dat',[message,message+' - 1','Нет - 1','','','','','','','','','2',''].join('|')+'\r\n');
 await rendered('/votes/index.php');await rendered('/votes/vote.php');await rendered('/votes/allvotes.php');pass('poll question/options, results and archive');
-assert.equal((await req('/pyramid/go.php',{msg:message,icq:'123456'})).httpStatusCode,302);await rendered('/pyramid/history.php');await rendered('/index.php');pass('pyramid messages, history and home rendering');
+assert.equal((await req('/pyramid/go.php',{uid,msg:message,icq:'123456'})).httpStatusCode,302);await rendered('/pyramid/history.php');await rendered('/index.php');pass('pyramid messages, history and home rendering');
 // Same stored content must render in each palette; the stylesheet bounds inline GIFs.
 const themes=['lesika_dvor','lesika_gazeta','lesika_gostinaya','lesika_solnce','lesika_vecher','lesika_albom','lesika_uyut'];
 for(const skin of themes){await req('/pages/skin.php',{skins:skin,uid,return:'themes'});r=await rendered(topicURL,'модератор исправил',':ban');assert.ok(r.text.includes('<body data-theme="'+skin+'">'));await rendered('/board/index.php?action=view&id=987&bid='+bid);}

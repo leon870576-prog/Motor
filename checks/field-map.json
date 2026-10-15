@@ -1,0 +1,23 @@
+{
+  "book/index.php": 2,
+  "chat/index.php": 1,
+  "forum/forum.php": 1,
+  "forum/topic.php": 1,
+  "forum/edit.php": 1,
+  "news/komm.php": 1,
+  "board/add.php": 1,
+  "gallery/index.php": 2,
+  "pyramid/index.php": 1,
+  "pages/privat.php": 2,
+  "pages/adminlist.php": 1,
+  "pages/ban.php": 1,
+  "mpanel/adminchat.php": 1,
+  "mpanel/book.php": 2,
+  "mpanel/chat.php": 1,
+  "mpanel/forum.php": 2,
+  "mpanel/news.php": 2,
+  "mpanel/gallery.php": 1,
+  "pages/profil.php": 1,
+  "mpanel/users.php": 1,
+  "mpanel/votes.php": 22
+}
