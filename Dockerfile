@@ -16,8 +16,10 @@ COPY entrypoint.sh /usr/local/bin/motor-entrypoint
 COPY auth.php /opt/motor-auth.php
 COPY migrate.php /opt/motor-migrate.php
 COPY MIGRATION.json /opt/motor-migration.json
+COPY migrate-themes.php /opt/motor-migrate-themes.php
 RUN chmod 755 /usr/local/bin/motor-entrypoint \
  && php -l /opt/motor-migrate.php \
+ && php -l /opt/motor-migrate-themes.php \
  && a2dismod mpm_event mpm_worker \
  && a2enmod mpm_prefork \
  && apache2ctl -t

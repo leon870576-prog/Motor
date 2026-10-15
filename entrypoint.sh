@@ -14,6 +14,7 @@ if [ ! -d /data/local ]; then
     mv /data/local.initializing /data/local
 fi
 php /opt/motor-migrate.php
+php /opt/motor-migrate-themes.php
 chown -R www-data:www-data /data/local /data/sessions
 chmod 700 /data/local /data/sessions
 # The data volume survives deployments; the installer must stay disabled after setup.

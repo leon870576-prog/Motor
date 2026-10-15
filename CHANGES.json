@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "release": "2026-10-15-footer-clean-r1",
+  "release": "2026-10-15-lesika-themes-r1",
   "source": "wapmotor_php84_footer_clean.zip",
   "source_sha256": "3404edbaf6c08f60b78584a66132c35938701b9b44f7e8675f0f2307e225a66c",
   "source_selection": "Последняя исправленная сборка подтверждена владельцем 15 октября 2026 года. motor21.zip не использован как рабочая основа.",
@@ -12,53 +12,204 @@
   ],
   "files": [
     {
-      "path": "site/INSTALL.php",
-      "change": "HTTPS по умолчанию и разрешён при установке; пароль исключён из URL входа.",
-      "base_sha256": "fb7dc7b6220fc4e3995963cacd5b07a8c25a6a5462fcf37075f952402c602a34",
-      "sha256": "a60bd0c8af85e3adf5d78168646208034c49a8a2682bc3a01903536914cf15ef"
-    },
-    {
       "path": "site/_health.php",
-      "change": "Проверка постоянного каталога данных; заголовок версии для контроля развёртывания.",
-      "base_sha256": null,
-      "sha256": "68e439b42c04420a92eae44f8a87d1c58e9d3d227d6ae044e69a11519e586b2f"
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": "68e439b42c04420a92eae44f8a87d1c58e9d3d227d6ae044e69a11519e586b2f",
+      "sha256": "2e1284291ebfe6cc33953f287e64387ba7dc0f7e415eb4e537041087ba217806"
     },
     {
-      "path": "site/includes/counters.php",
-      "change": "Начальные значения счётчиков для PHP 8.4 на чистой установке.",
-      "base_sha256": "0a8f7c69728c64e68543ab6912e9cd0bde07ab3b343217966a04cfb335954b2d",
-      "sha256": "d3a5559eabf5040371f46f8d2266afc09fe8d1d9169d7c5d9f3c69c7d2fd668c"
+      "path": "site/assets/lesika/leaf.svg",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "753d7783e7239dbb0e5b3ff6d185ea04b1372792c2f30ac106e404499948a737"
+    },
+    {
+      "path": "site/assets/lesika/palettes.css",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "ed5639f75fcb2a9eac447d5b4ca991a0997c5ec1f64b0f4a2a5228f4d2d99b68"
+    },
+    {
+      "path": "site/assets/lesika/site.css",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "52d1f52b4738f0bb014db55b4cc9409f30701058d89b587b65dff0268185e5de"
     },
     {
       "path": "site/includes/functions.php",
-      "change": "Callback для BB-кода вместо preg_replace /e, сохранён foreach из последней сборки, восстановлен уровень вложенности text_dump, значения отсутствующих полей профиля и проверка allow_url_fopen.",
-      "base_sha256": "e0c9218c02f63a1ad862afdf6b3ebe17ba822af10baaedf7372fc0ecf466a092",
-      "sha256": "7f027eb37de81c694e21e305c4540b03aae4787e5e3fbe69d9776c7ed4eef767"
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": "7f027eb37de81c694e21e305c4540b03aae4787e5e3fbe69d9776c7ed4eef767",
+      "sha256": "3f45966272651dcea881e1684009fb6def23620fd1531c094541658f166b0261"
     },
     {
-      "path": "site/includes/pclzip.php",
-      "change": "Конструктор __construct, сохранены проверки удалённых magic_quotes API из последней сборки.",
-      "base_sha256": "e8f3e2b49cbd77e59acc8d948e3bf1938c68590449b2665b973a82c1bec55a8f",
-      "sha256": "d66bcdb18f2e727ba208309f6bc5caa4ec1d4edf36b0a74fd3bd12231e5a8e16"
+      "path": "site/includes/header.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": "cc1708d19fb3d461911b5921b6155178a626855631ac0375afc54e20326f6ff5",
+      "sha256": "e401640ac633274f3b390858bb6f38d99f28be1b0824be59b7ff9fe411418428"
     },
     {
-      "path": "site/includes/php8_compat.php",
-      "change": "Совместимость устаревших API и значения серверного окружения по умолчанию.",
+      "path": "site/includes/lesika/catalog.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": null,
-      "sha256": "23dd75cf4dac3f8b199f50810dfe3d3ea4cab9bd77108229047a253ad064b290"
+      "sha256": "006143df65b395e116ee66223a462c28a90724ae8a7e057ea4535d77f737c750"
     },
     {
-      "path": "site/includes/start.php",
-      "change": "Подключён слой совместимости, сохранены отключение SID в URL и cookie-сессии из последней сборки.",
-      "base_sha256": "bb43f5a06f44455834a0bf289e8bf65270f5eb14acf3cd16d8da7e7918e4b82b",
-      "sha256": "b3f9b82d38be136930c53731e31ec9c178cea7722365d97c2d172eacfde915b1"
+      "path": "site/includes/lesika/foot.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "476850d614a4ab00c1bdd2a6d19c744faeb0c3138564b15b35fb8933457a885f"
+    },
+    {
+      "path": "site/includes/lesika/head.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "4136ac9f63afd3a5029637fced071b42e29ec38df61c474ee7818ee401269f66"
+    },
+    {
+      "path": "site/includes/lesika/home.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "d92b3d4a971a0761a5f2fdda9418b1bbe9d60adc1e95ae6ec3ff48ddee3a969b"
+    },
+    {
+      "path": "site/includes/lesika/themes.json",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "c5af5a47369dfc0599c13399d3e4fb18c96e7a7d1965e11b88cf9ee2ed20485f"
+    },
+    {
+      "path": "site/includes/skin.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": "efd30efd22488527b765eef77267585dc5eaa39a52130af25e663878f3fea3c7",
+      "sha256": "3efb286f4a4e7667a5db25817ac7f61e97c84a26af915e62aa0844295dd01434"
+    },
+    {
+      "path": "site/index.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": "bc80f3b935df4d5a05902bba981d84fc71fe0ef272fceb92f5c4312e76d722f3",
+      "sha256": "662691f1a452778065c85a49b1d013e7dc919c074c9a0376dda091a9e8488cd2"
+    },
+    {
+      "path": "site/local/datalocal/config.dat",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": "f9601bb04063c4d48f8f7dbb533ba141ec5bc760395cb3d7f732f2fae2c9097a",
+      "sha256": "638ff2faeb8a2bb84de789fdd2cdeb387ed2e31908e5c7c80ac32b62a5a12d34"
+    },
+    {
+      "path": "site/mpanel/setting.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": "94acf3da9c16f2f58906fcbb99cfa79e68d7aeb6a25ca759de88aaaf72509957",
+      "sha256": "02e258fe155f03a6adf34a431a230e972175f7fe92b89472e622a002acfecaf8"
+    },
+    {
+      "path": "site/pages/setting.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": "d5fb6d084c3e6c2585dcf9d38ad5c0fcf214f71edc67801ea663f4fbb5ae4d52",
+      "sha256": "1018ca782fbd25b1da48432cf228144c3ffd84cf10507997b02251f3c3cbefa0"
+    },
+    {
+      "path": "site/pages/skin.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": "bc2244e6faf69def044157d3c561a06975a4105be3f93765441c8be4dd105ce5",
+      "sha256": "e6b219b14cb5d685a3a4058f9158488519055a39258463c4951fe5d9663af660"
+    },
+    {
+      "path": "site/pages/themes.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": "cd04f9631d7aa76d6f1c0acbc21c664078b775b8b8c10c498f06c648a2d5dd59",
+      "sha256": "4ee241111dc054318b92f1ceb488cbca20e1867ae24db416b75c7e1f0791f558"
+    },
+    {
+      "path": "site/themes/lesika_albom/foot.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "site/themes/lesika_albom/index.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "71578b0d8311ffdf47eb8da3aced8e7d421d90c642fe64af63aa8b8ec4f4f850"
+    },
+    {
+      "path": "site/themes/lesika_dvor/foot.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "site/themes/lesika_dvor/index.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "80b98ac63e9731c8210cf54e26a3952a6e15f042d65b8de7f9440ef774785768"
+    },
+    {
+      "path": "site/themes/lesika_gazeta/foot.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "site/themes/lesika_gazeta/index.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "9e9534855777b68081355f7f5db03ee23dcc88c69fb68ee6dd1701f4a2769c09"
+    },
+    {
+      "path": "site/themes/lesika_gostinaya/foot.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "site/themes/lesika_gostinaya/index.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "8aa58d47815d565c817e0b2e86ab7b4658165fc09778bc9d29ae0d6dd5c204d9"
+    },
+    {
+      "path": "site/themes/lesika_solnce/foot.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "site/themes/lesika_solnce/index.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "34759cd941fb89fa9139bfa7ef07c116c0028aac7f439040c9c184e5faf57441"
+    },
+    {
+      "path": "site/themes/lesika_uyut/foot.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "site/themes/lesika_uyut/index.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "433070a9ff0210cb8b88a0348f7b2c833d1783baebd07bebf018c36fb13d4971"
+    },
+    {
+      "path": "site/themes/lesika_vecher/foot.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "site/themes/lesika_vecher/index.php",
+      "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
+      "base_sha256": null,
+      "sha256": "dc11636ea0cfea3f46b116b037645181c48398080a27cb151f96966f121225c5"
     }
   ],
   "hosting_changes": [
     "Работающий Docker PHP 8.4/Apache с настройкой prefork при старте",
     "HTTPS и HTTP-пароль тестового доступа",
     "Постоянный диск /data и сохранение сессий",
-    "Однократная адресная миграция настроек с резервной копией; пользовательские значения сохраняются"
+    "Однократная адресная миграция настроек с резервной копией; пользовательские значения сохраняются",
+    "Однократная миграция старых тем в конфигурации и профилях с резервной копией в /data/motor-backups/2026-10-15-lesika-themes-v1; старые сессии обрабатываются выбором новой темы."
   ],
   "deployment_files": [
     "Dockerfile",
@@ -67,13 +218,104 @@
     "entrypoint.sh",
     "auth.php",
     "migrate.php",
-    "MIGRATION.json"
+    "MIGRATION.json",
+    "migrate-themes.php"
   ],
   "validation": [
-    "PHP 8.4: синтаксис 166 файлов",
-    "Установка на временных данных, HTTPS, главная, новости, форум, гостевая, галерея, формы регистрации и входа, вход администратора, BB-коды",
-    "Название Лесика, отсутствие удалённой строки и демонстрационной рекламы на главной",
-    "Миграция старых данных, точность резервной копии, повторный запуск, сохранение пользовательских значений и профиля",
-    "Конструктор PclZip и проверки magic_quotes на PHP 8.4"
+    "PHP 8.4: синтаксис 172 PHP-файлов",
+    "Все семь палитр: переключение и сохранение профиля, 35 страниц после смены оформления",
+    "Главная, новости, форум, гостевая, галерея, вход и панель администратора",
+    "Выбор темы в личных и административных настройках; отклонение неверного CSRF и удалённой темы",
+    "Миграция профилей и настроек: сохранение всех остальных полей, резервные копии, очистка старого кэша, повторный запуск",
+    "Интерактивная браузерная проверка недоступна в текущей среде"
+  ],
+  "previous_releases": [
+    {
+      "date": "2026-10-15",
+      "release": "2026-10-15-footer-clean-r1",
+      "source": "wapmotor_php84_footer_clean.zip",
+      "source_sha256": "3404edbaf6c08f60b78584a66132c35938701b9b44f7e8675f0f2307e225a66c",
+      "files": [
+        {
+          "path": "site/INSTALL.php",
+          "change": "HTTPS по умолчанию и разрешён при установке; пароль исключён из URL входа.",
+          "base_sha256": "fb7dc7b6220fc4e3995963cacd5b07a8c25a6a5462fcf37075f952402c602a34",
+          "sha256": "a60bd0c8af85e3adf5d78168646208034c49a8a2682bc3a01903536914cf15ef"
+        },
+        {
+          "path": "site/_health.php",
+          "change": "Проверка постоянного каталога данных; заголовок версии для контроля развёртывания.",
+          "base_sha256": null,
+          "sha256": "68e439b42c04420a92eae44f8a87d1c58e9d3d227d6ae044e69a11519e586b2f"
+        },
+        {
+          "path": "site/includes/counters.php",
+          "change": "Начальные значения счётчиков для PHP 8.4 на чистой установке.",
+          "base_sha256": "0a8f7c69728c64e68543ab6912e9cd0bde07ab3b343217966a04cfb335954b2d",
+          "sha256": "d3a5559eabf5040371f46f8d2266afc09fe8d1d9169d7c5d9f3c69c7d2fd668c"
+        },
+        {
+          "path": "site/includes/functions.php",
+          "change": "Callback для BB-кода вместо preg_replace /e, сохранён foreach из последней сборки, восстановлен уровень вложенности text_dump, значения отсутствующих полей профиля и проверка allow_url_fopen.",
+          "base_sha256": "e0c9218c02f63a1ad862afdf6b3ebe17ba822af10baaedf7372fc0ecf466a092",
+          "sha256": "7f027eb37de81c694e21e305c4540b03aae4787e5e3fbe69d9776c7ed4eef767"
+        },
+        {
+          "path": "site/includes/pclzip.php",
+          "change": "Конструктор __construct, сохранены проверки удалённых magic_quotes API из последней сборки.",
+          "base_sha256": "e8f3e2b49cbd77e59acc8d948e3bf1938c68590449b2665b973a82c1bec55a8f",
+          "sha256": "d66bcdb18f2e727ba208309f6bc5caa4ec1d4edf36b0a74fd3bd12231e5a8e16"
+        },
+        {
+          "path": "site/includes/php8_compat.php",
+          "change": "Совместимость устаревших API и значения серверного окружения по умолчанию.",
+          "base_sha256": null,
+          "sha256": "23dd75cf4dac3f8b199f50810dfe3d3ea4cab9bd77108229047a253ad064b290"
+        },
+        {
+          "path": "site/includes/start.php",
+          "change": "Подключён слой совместимости, сохранены отключение SID в URL и cookie-сессии из последней сборки.",
+          "base_sha256": "bb43f5a06f44455834a0bf289e8bf65270f5eb14acf3cd16d8da7e7918e4b82b",
+          "sha256": "b3f9b82d38be136930c53731e31ec9c178cea7722365d97c2d172eacfde915b1"
+        }
+      ],
+      "hosting_changes": [
+        "Работающий Docker PHP 8.4/Apache с настройкой prefork при старте",
+        "HTTPS и HTTP-пароль тестового доступа",
+        "Постоянный диск /data и сохранение сессий",
+        "Однократная адресная миграция настроек с резервной копией; пользовательские значения сохраняются",
+        "Однократная миграция старых тем в конфигурации и профилях с резервной копией в /data/motor-backups/2026-10-15-lesika-themes-v1; старые сессии обрабатываются выбором новой темы."
+      ],
+      "validation": [
+        "PHP 8.4: синтаксис 166 файлов",
+        "Установка на временных данных, HTTPS, главная, новости, форум, гостевая, галерея, формы регистрации и входа, вход администратора, BB-коды",
+        "Название Лесика, отсутствие удалённой строки и демонстрационной рекламы на главной",
+        "Миграция старых данных, точность резервной копии, повторный запуск, сохранение пользовательских значений и профиля",
+        "Конструктор PclZip и проверки magic_quotes на PHP 8.4"
+      ]
+    }
+  ],
+  "theme_source": {
+    "site": "Лесика — городской портал",
+    "project_id": "appgprj_6acf693bf1a48191b6669311fec7163d",
+    "source_commit": "0c4b6473ba20d585d996f6a49465734155f885b9",
+    "source_css_sha256": "510b0a405345a1cc6eca807008e5d0286ae02010ed725ddb025cc134ca1e6d7d",
+    "themes": {
+      "lesika_dvor": "Тёплый двор",
+      "lesika_gazeta": "Городская газета",
+      "lesika_gostinaya": "Городская гостиная",
+      "lesika_solnce": "Солнечный город",
+      "lesika_vecher": "Вечерний уют",
+      "lesika_albom": "Соседский альбом",
+      "lesika_uyut": "Современный уют"
+    }
+  },
+  "deleted_theme_directories": [
+    "default",
+    "lite",
+    "mobile",
+    "night_city",
+    "themez",
+    "toonel"
   ]
 }
