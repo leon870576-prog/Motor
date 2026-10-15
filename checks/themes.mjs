@@ -1,11 +1,14 @@
 import { PHP, PHPRequestHandler, setPhpIniEntries } from '@php-wasm/universal';
 import { loadNodeRuntime } from '@php-wasm/node';
-import { readdirSync, readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomBytes } from 'node:crypto';
 import assert from 'node:assert/strict';
 
+const fixtureDir=new URL('./touch-fixtures/',import.meta.url);mkdirSync(fixtureDir,{recursive:true});
+const fixtures=[];
+function capture(response,url,role,theme='lesika_dvor'){const file=fixtures.length+'.html';writeFileSync(new URL(file,fixtureDir),response.text);fixtures.push({file,url,role,theme});}
 const source = process.argv[2] || fileURLToPath(new URL('../site', import.meta.url));
 const php = new PHP(await loadNodeRuntime('8.4', { emscriptenOptions: { processId: process.pid } }));
 function copy(root, target) {
@@ -46,7 +49,7 @@ try {
   }});
   assert.equal(setup.httpStatusCode, 200);
   assert.ok(php.fileExists('/www/local/profil/MotorTestAdmin.prof'));
-  for (const path of ['/index.php', '/news/index.php', '/forum/index.php', '/book/index.php', '/gallery/index.php', '/pages/registration.php', '/pages/login.php']) {
+  for (const path of ['/index.php', '/news/index.php', '/forum/index.php', '/book/index.php', '/gallery/index.php', '/pages/registration.php', '/pages/login.php','/pages/themes.php','/board/index.php','/chat/index.php']) {
     const r = await request({ url: path });
     assert.equal(r.httpStatusCode, 200, path);
     assert.ok(r.text.length > 1000, path);
@@ -56,7 +59,7 @@ try {
       assert.ok(!r.text.includes('Все для WAP-Motor'));
     }
     if (path === '/news/index.php') assert.ok(r.text.includes('Ура! Мы установили'));
-    console.log('PASS', path);
+    capture(r,path,'guest');console.log('PASS', path);
   }
   const login = await request({ url: '/input.php', method: 'POST', body: { login: 'MotorTestAdmin', pass: password, cookietrue: '1' } });
   assert.equal(login.httpStatusCode, 302);
@@ -68,12 +71,12 @@ try {
   assert.ok(bb.text.includes('<b>жирный</b>'));
   assert.ok(bb.text.includes('echo'));
   
-  const ids = ['lesika_dvor','lesika_gazeta','lesika_gostinaya','lesika_solnce','lesika_vecher','lesika_albom','lesika_uyut'];
+  const ids = Object.keys(JSON.parse(readFileSync(join(source,'includes/lesika/themes.json'))));assert.equal(ids.length,12);
   assert.deepEqual(readdirSync(join(source, 'themes')).sort(), [...ids].sort());
   for (const id of ids) {
     const picker = await request({ url: '/pages/themes.php' });
     assert.equal(picker.httpStatusCode, 200);
-    assert.equal((picker.text.match(/class="theme-card"/g) || []).length, 7);
+    assert.equal((picker.text.match(/class="theme-card"/g) || []).length, 12);
     const token = picker.text.match(/name="uid" value="([^"]+)"/)[1];
     const chosen = await request({ url: '/pages/skin.php', method: 'POST', body: { skins: id, uid: token, return: 'themes' } });
     assert.equal(chosen.httpStatusCode, 303, id);
@@ -85,9 +88,11 @@ try {
       assert.ok(page.text.includes('name="viewport"'));
       assert.ok(!page.text.includes('/themes/default/') && !page.text.includes('/themes/toonel/'));
       assert.ok(!page.text.includes('Fatal error'));
+      if(['/index.php','/pages/themes.php'].includes(url))capture(page,url,'admin',id);
     }
     console.log('PASS palette, selection and profile persistence:', id);
   }
+  for(const url of ['/mpanel/index.php','/mpanel/attachments.php','/mpanel/setting.php?action=setone','/pages/setting.php','/pages/index.php?action=menu','/pages/anketa.php?uz=MotorTestAdmin','/pages/userlist.php','/votes/index.php','/games/index.php','/pages/index.php?action=info']){const response=await request({url});assert.equal(response.httpStatusCode,200,url);capture(response,url,'admin','lesika_web_evening');}
   const personal = await request({url:'/pages/setting.php'});
   assert.ok(personal.text.includes('Тёплый двор'));
   assert.ok(!personal.text.includes('value="default"'));
@@ -97,9 +102,13 @@ try {
   assert.ok(!settings.text.includes('value="toonel"'));
   const badToken = await request({url:'/pages/skin.php',method:'POST',body:{skins:'lesika_dvor',uid:'wrong'}});
   assert.equal(badToken.httpStatusCode, 403);
-  assert.equal(php.readFileAsText('/www/local/profil/MotorTestAdmin.prof').split(':||:')[20], 'lesika_uyut');
+  assert.equal(php.readFileAsText('/www/local/profil/MotorTestAdmin.prof').split(':||:')[20], 'lesika_web_evening');
   const retired = await request({url:'/pages/skin.php?skins=default'});
   assert.equal(retired.httpStatusCode, 400);
-  console.log('PASS: seven palettes, 35 themed pages, profile persistence, settings, rejected invalid token and retired theme.');
+  const beforeProfile=php.readFileAsText('/www/local/profil/MotorTestAdmin.prof');
+  for(const body of [{skins:'../local',uid:'wrong'},{'skins[0]':'lesika_dvor',uid:'wrong'},{skins:'lesika_dvor','uid[0]':'wrong'}]){const bad=await request({url:'/pages/skin.php',method:'POST',body});assert.ok([400,403].includes(bad.httpStatusCode));assert.equal(php.readFileAsText('/www/local/profil/MotorTestAdmin.prof'),beforeProfile);}
+  writeFileSync(new URL('manifest.json',fixtureDir),JSON.stringify(fixtures,null,2));
+  writeFileSync(new URL('./touch-backend-results.json',import.meta.url),JSON.stringify({php:'8.4',syntax:JSON.parse(lint.text),themes:ids,themed_pages:ids.length*5,fixtures:fixtures.length,invalid_themes_and_tokens_rejected:true},null,2));
+  console.log('PASS: 12 palettes, 60 themed pages, profile persistence, settings, rejected invalid/array token and theme.');
 
 } finally { php.exit(); }

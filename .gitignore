@@ -4,3 +4,4 @@ node_modules/
 checks/fixtures/
 checks/*.png
 .browser-cache/
+checks/touch-fixtures/

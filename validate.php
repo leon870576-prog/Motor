@@ -25,3 +25,11 @@ foreach (motor_smile_catalog() as $group => $names) foreach ($names as $name => 
 }
 if ($smileCount !== 121) throw new RuntimeException('Incomplete smile catalogue');
 echo 'PASS: native PHP smile renderer, emoji roundtrip, limits, and '.$smileCount.' GIF assets'.PHP_EOL;
+require_once $root.'/includes/lesika/catalog.php';
+$themes = lesika_themes();
+if (count($themes) !== 12 || count(array_filter($themes, fn($theme) => ($theme['layout'] ?? '') === 'web')) !== 5) throw new RuntimeException('Incomplete theme catalogue');
+foreach ($themes as $id => $theme) {
+    if (!preg_match('/^lesika_[a-z_]+$/D', $id) || !is_file($root.'/themes/'.$id.'/index.php') || !is_file($root.'/themes/'.$id.'/foot.php')) throw new RuntimeException('Invalid theme entry');
+}
+foreach (['responsive.css', 'touch.js'] as $asset) if (!is_file($root.'/assets/lesika/'.$asset)) throw new RuntimeException('Missing touch asset');
+echo 'PASS: 12 themes including five responsive web themes; shared touch assets'.PHP_EOL;

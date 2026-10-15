@@ -1,6 +1,6 @@
 {
   "php": "8.4",
-  "requests": 150,
+  "requests": 165,
   "fixtures": 28,
   "passed": [
     "121 valid GIFs, picker, limits, admin rules, Unicode, legacy paths, edit roundtrip, safe URL/code handling",
@@ -12,7 +12,7 @@
     "private messages, sent and received, with temporary accounts only",
     "poll question/options, results and archive",
     "pyramid messages, history and home rendering",
-    "all seven themes, inline size bounds and valid asset paths on every checked page",
+    "all twelve themes, inline size bounds and valid asset paths on every checked page",
     "picker catalogues and explicit field markers in all public forms and comments",
     "CSRF, array input rejection, strong session tokens and unchanged records after rejected requests",
     "stored HTML/script payload remains escaped after save and display",

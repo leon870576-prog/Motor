@@ -1,12 +1,12 @@
 {
-  "release": "2026-10-15-smile-picker-r1",
+  "release": "2026-10-15-touch-web-r1",
   "baseline_archive_unchanged": true,
   "baseline_public_github_blob": "439eb3ae3867124f8189634bfdcaf7b75e00c7b6",
   "code_archive": "motor-code.tar.gz",
-  "code_archive_bytes": 714964,
-  "code_archive_sha256": "d59b999f32da36e5970a3d9528f2f17385907e0a16030b8ef405b6afe56d05ba",
-  "code_archive_git_blob": "105fd4dfb5e758ed9514cf01460c70852b63c934",
+  "code_archive_bytes": 721374,
+  "code_archive_sha256": "b838335379651abe1665e16846531bd787a9a213fa898d5c7954b05f63d956d2",
+  "code_archive_git_blob": "cd612411cb02dec83620c78ddebd682e008da487",
   "local_directory_in_code_archive": false,
   "assembled_file_hashes_match_tested_source": true,
-  "purpose": "Publish application code without republishing or changing seed data or live data."
+  "purpose": "Application code only; existing seed archive and live data unchanged."
 }

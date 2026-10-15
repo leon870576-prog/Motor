@@ -1,0 +1,1266 @@
+{
+  "browser": "153.0.8010.0",
+  "pages": [
+    {
+      "url": "/index.php",
+      "role": "guest",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/news/index.php",
+      "role": "guest",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/forum/index.php",
+      "role": "guest",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/book/index.php",
+      "role": "guest",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/gallery/index.php",
+      "role": "guest",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/registration.php",
+      "role": "guest",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/login.php",
+      "role": "guest",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "guest",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/board/index.php",
+      "role": "guest",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/chat/index.php",
+      "role": "guest",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_dvor",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_gazeta",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_gazeta",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_gostinaya",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_gostinaya",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_solnce",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_solnce",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_vecher",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_vecher",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_albom",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_albom",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_uyut",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_uyut",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_web_terrace",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_web_terrace",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_web_press",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_web_press",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_web_garden",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_web_garden",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_web_coffee",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_web_coffee",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/index.php",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/themes.php",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/index.php",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/attachments.php",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/setting.php?action=setone",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/setting.php",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/index.php?action=menu",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/anketa.php?uz=MotorTestAdmin",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/userlist.php",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/votes/index.php",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/games/index.php",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/index.php?action=info",
+      "role": "admin",
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/book/index.php",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/chat/index.php",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/forum/forum.php?act=new&fid=1",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/forum/topic.php?fid=1&id=1",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/forum/edit.php?fid=1&id=1&post=0",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/news/komm.php?id=2",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/gallery/index.php?action=addfoto",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/gallery/index.php?action=komm&gid=smile-test.gif",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/board/add.php?id=987",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/privat.php?action=submit&uz=MotorTestAdmin",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/adminlist.php",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/profil.php",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pyramid/index.php",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/news.php?action=addnews",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/news.php?action=editnews&id=1",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/forum.php?act=topic&fid=1&id=1",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/forum.php?act=editpost&fid=1&id=1&post=0",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/book.php?action=edit&id=0",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/book.php?action=otvet&id=0",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/chat.php?action=edit&id=4",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/gallery.php?action=edit&id=0",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/adminchat.php",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/users.php?action=edit&users=SmileAuthor",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/votes.php?action=new",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/mpanel/votes.php",
+      "role": "admin",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/ban.php",
+      "role": "member",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/book/index.php",
+      "role": "guest",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    },
+    {
+      "url": "/pages/smiles.php",
+      "role": "guest",
+      "theme": "stored",
+      "width": 320,
+      "targets44": true,
+      "noOverflow": true
+    }
+  ],
+  "layouts": [
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_dvor",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_gazeta",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_gostinaya",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_solnce",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_vecher",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_albom",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_uyut",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_web_terrace",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_web_press",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_web_garden",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_web_coffee",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "theme": "lesika_web_evening",
+      "columns": 1,
+      "shell": 320,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_dvor",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_gazeta",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_gostinaya",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_solnce",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_vecher",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_albom",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_uyut",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_web_terrace",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_web_press",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_web_garden",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_web_coffee",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 360,
+      "height": 780,
+      "theme": "lesika_web_evening",
+      "columns": 1,
+      "shell": 360,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_dvor",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_gazeta",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_gostinaya",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_solnce",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_vecher",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_albom",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_uyut",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_web_terrace",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_web_press",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_web_garden",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_web_coffee",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "theme": "lesika_web_evening",
+      "columns": 1,
+      "shell": 390,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_dvor",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_gazeta",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_gostinaya",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_solnce",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_vecher",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_albom",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_uyut",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_web_terrace",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_web_press",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_web_garden",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_web_coffee",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "theme": "lesika_web_evening",
+      "columns": 1,
+      "shell": 430,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_dvor",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_gazeta",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_gostinaya",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_solnce",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_vecher",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_albom",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_uyut",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_web_terrace",
+      "columns": 2,
+      "shell": 760,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_web_press",
+      "columns": 2,
+      "shell": 760,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_web_garden",
+      "columns": 2,
+      "shell": 760,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_web_coffee",
+      "columns": 2,
+      "shell": 760,
+      "noOverflow": true
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "theme": "lesika_web_evening",
+      "columns": 2,
+      "shell": 760,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_dvor",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_gazeta",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_gostinaya",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_solnce",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_vecher",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_albom",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_uyut",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_web_terrace",
+      "columns": 2,
+      "shell": 1024,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_web_press",
+      "columns": 3,
+      "shell": 1024,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_web_garden",
+      "columns": 3,
+      "shell": 1024,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_web_coffee",
+      "columns": 2,
+      "shell": 1024,
+      "noOverflow": true
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "theme": "lesika_web_evening",
+      "columns": 2,
+      "shell": 1024,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_dvor",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_gazeta",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_gostinaya",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_solnce",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_vecher",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_albom",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_uyut",
+      "columns": 1,
+      "shell": 560,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_web_terrace",
+      "columns": 2,
+      "shell": 1180,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_web_press",
+      "columns": 3,
+      "shell": 1240,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_web_garden",
+      "columns": 3,
+      "shell": 1200,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_web_coffee",
+      "columns": 2,
+      "shell": 1240,
+      "noOverflow": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "theme": "lesika_web_evening",
+      "columns": 2,
+      "shell": 1160,
+      "noOverflow": true
+    }
+  ],
+  "passed": [
+    "72 PHP-generated pages/forms at 320px: readable text, 44px actions, no overflow and unchanged form values",
+    "84 real Chromium layouts: 12 themes, 320–1440px, adaptive columns and desktop navigation",
+    "native touch menu, internal scrolling, outside dismissal and keyboard Escape",
+    "touch radio/checkbox labels preserve native behavior without submitting",
+    "200% text reflow and user zoom remain available",
+    "simulated visual viewport: navigation yields space to keyboard, pinch zoom does not hide it"
+  ],
+  "jsErrors": [],
+  "physical_devices": false,
+  "unintendedPosts": 0
+}

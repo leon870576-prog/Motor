@@ -1,0 +1,24 @@
+{
+  "php": "8.4",
+  "syntax": {
+    "files": 188,
+    "errors": []
+  },
+  "themes": [
+    "lesika_dvor",
+    "lesika_gazeta",
+    "lesika_gostinaya",
+    "lesika_solnce",
+    "lesika_vecher",
+    "lesika_albom",
+    "lesika_uyut",
+    "lesika_web_terrace",
+    "lesika_web_press",
+    "lesika_web_garden",
+    "lesika_web_coffee",
+    "lesika_web_evening"
+  ],
+  "themed_pages": 60,
+  "fixtures": 44,
+  "invalid_themes_and_tokens_rejected": true
+}

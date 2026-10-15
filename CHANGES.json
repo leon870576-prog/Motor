@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "release": "2026-10-15-smile-picker-r1",
+  "release": "2026-10-15-touch-web-r1",
   "source": "wapmotor_php84_footer_clean.zip",
   "source_sha256": "3404edbaf6c08f60b78584a66132c35938701b9b44f7e8675f0f2307e225a66c",
   "source_selection": "Последняя исправленная сборка подтверждена владельцем 15 октября 2026 года. motor21.zip не использован как рабочая основа.",
@@ -1449,5 +1449,160 @@
     "unexpectedDialogs": [],
     "physical_devices": false
   },
-  "picker_syntax_files": 178
+  "picker_syntax_files": 178,
+  "touch_web_changes": [
+    {
+      "path": "_health.php",
+      "base_sha256": "8892e04f4b85ffe6101504b9d78108603b2702630c637d1c7bfa2bebc4211dc3",
+      "sha256": "6bc0a0aead550786858296706fb51a59dd40f1ba95d6a8000893cc61f145693b"
+    },
+    {
+      "path": "assets/lesika/palettes.css",
+      "base_sha256": "ed5639f75fcb2a9eac447d5b4ca991a0997c5ec1f64b0f4a2a5228f4d2d99b68",
+      "sha256": "a55b74768937194db7623766b5d0cd44aec3c223ca5d9d3d4a78ea64ad0e88c2"
+    },
+    {
+      "path": "assets/lesika/responsive.css",
+      "base_sha256": null,
+      "sha256": "33d8e223c996e9d9a052fda58a3e56ccfa1d857cdf6d204357f5c2ec398feb14"
+    },
+    {
+      "path": "assets/lesika/touch.js",
+      "base_sha256": null,
+      "sha256": "5ce76024282d16460518f10c9759b8fa45ba71daf37569bf96440ae4c3f159c3"
+    },
+    {
+      "path": "includes/lesika/catalog.php",
+      "base_sha256": "006143df65b395e116ee66223a462c28a90724ae8a7e057ea4535d77f737c750",
+      "sha256": "42edfd562d39461d67d289c9029ebc561be2b1ca3f9b32218f6574d3e410d8a0"
+    },
+    {
+      "path": "includes/lesika/head.php",
+      "base_sha256": "2b1f5b91eb6b2789674caca88e0e16bbebaf66fc4c3c6db70638d36b43d0db75",
+      "sha256": "b3e83e1abadf027c8e3bc2fbb2dafd1084be1d9335cf7a8f5d36891c94f4bf89"
+    },
+    {
+      "path": "includes/lesika/themes.json",
+      "base_sha256": "c5af5a47369dfc0599c13399d3e4fb18c96e7a7d1965e11b88cf9ee2ed20485f",
+      "sha256": "0d5dac867c409b3c69b91e6f0d22650b80894eb341454bd010e83475236eeaea"
+    },
+    {
+      "path": "pages/setting.php",
+      "base_sha256": "1018ca782fbd25b1da48432cf228144c3ffd84cf10507997b02251f3c3cbefa0",
+      "sha256": "2cbadb1d8892d86cd98724faa0a54ff43d9367d6427d0eee7d30ae231c1d9f9e"
+    },
+    {
+      "path": "pages/skin.php",
+      "base_sha256": "e6b219b14cb5d685a3a4058f9158488519055a39258463c4951fe5d9663af660",
+      "sha256": "e90c772ac1b2c2e99731432cd92b7278806be2975aadb6f8db85031328ff2c74"
+    },
+    {
+      "path": "pages/themes.php",
+      "base_sha256": "4ee241111dc054318b92f1ceb488cbca20e1867ae24db416b75c7e1f0791f558",
+      "sha256": "96d00660b54a018f5f073e47c755f92029f65893d98c2f6e725b1d7fd4c574ba"
+    },
+    {
+      "path": "pages/userlist.php",
+      "base_sha256": "a3227b319ab0800e5a9b11b5af0a624bacd608155b02cf82985190733b29d9d3",
+      "sha256": "3238d7350b2be04ffe60c8c3ffc07920bf417fc1fbbe838214055f5fb46cbe40"
+    },
+    {
+      "path": "themes/lesika_web_coffee/foot.php",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "themes/lesika_web_coffee/index.php",
+      "base_sha256": null,
+      "sha256": "7138bdca13026f43786399afe6f2ce21bf2fb681756f498984e6262404da45f2"
+    },
+    {
+      "path": "themes/lesika_web_evening/foot.php",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "themes/lesika_web_evening/index.php",
+      "base_sha256": null,
+      "sha256": "7138bdca13026f43786399afe6f2ce21bf2fb681756f498984e6262404da45f2"
+    },
+    {
+      "path": "themes/lesika_web_garden/foot.php",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "themes/lesika_web_garden/index.php",
+      "base_sha256": null,
+      "sha256": "7138bdca13026f43786399afe6f2ce21bf2fb681756f498984e6262404da45f2"
+    },
+    {
+      "path": "themes/lesika_web_press/foot.php",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "themes/lesika_web_press/index.php",
+      "base_sha256": null,
+      "sha256": "7138bdca13026f43786399afe6f2ce21bf2fb681756f498984e6262404da45f2"
+    },
+    {
+      "path": "themes/lesika_web_terrace/foot.php",
+      "base_sha256": null,
+      "sha256": "b2c1964d6ff6d331f7e3255bc9d6bf137801e729f395e08ee40e3db3f65a912c"
+    },
+    {
+      "path": "themes/lesika_web_terrace/index.php",
+      "base_sha256": null,
+      "sha256": "7138bdca13026f43786399afe6f2ce21bf2fb681756f498984e6262404da45f2"
+    }
+  ],
+  "touch_web_base_commit": "9cee0d8b281aed1d49b7d345722d71d401fced58",
+  "touch_web_verification": {
+    "backend": {
+      "php": "8.4",
+      "syntax": {
+        "files": 188,
+        "errors": []
+      },
+      "themes": [
+        "lesika_dvor",
+        "lesika_gazeta",
+        "lesika_gostinaya",
+        "lesika_solnce",
+        "lesika_vecher",
+        "lesika_albom",
+        "lesika_uyut",
+        "lesika_web_terrace",
+        "lesika_web_press",
+        "lesika_web_garden",
+        "lesika_web_coffee",
+        "lesika_web_evening"
+      ],
+      "themed_pages": 60,
+      "fixtures": 44,
+      "invalid_themes_and_tokens_rejected": true
+    },
+    "browser": {
+      "pages": 72,
+      "layouts": 84,
+      "smile_picker_layouts": 60,
+      "widths": [
+        320,
+        360,
+        390,
+        430,
+        768,
+        1024,
+        1440
+      ],
+      "jsErrors": [],
+      "physical_devices": false
+    },
+    "smile_requests": 165,
+    "attachment_requests": 147,
+    "contrast_minimum": 4.5,
+    "data_unchanged": true,
+    "security_review": "SECURITY_REVIEW.md"
+  }
 }

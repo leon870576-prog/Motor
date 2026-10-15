@@ -68,7 +68,7 @@ try {
  // Actual layout at narrow, normal, wide mobile and landscape sizes in all themes.
  for(const [width,height]of [[320,568],[360,740],[390,844],[430,932],[740,360]]){
   await page.setViewportSize({width,height});await load(forum);
-  for(const theme of ['lesika_dvor','lesika_gazeta','lesika_gostinaya','lesika_solnce','lesika_vecher','lesika_albom','lesika_uyut']){
+  for(const theme of Object.keys(JSON.parse(readFileSync(join(root,'includes/lesika/themes.json'))))){
    await page.evaluate(theme=>document.body.dataset.theme=theme,theme);await trigger().click();
    const m=await page.locator('.smile-picker-panel').evaluate(el=>{const box=el.getBoundingClientRect(),grid=el.querySelector('.smile-picker-grid'),cell=grid.querySelector('button').getBoundingClientRect();return{width:box.width,height:box.height,left:box.left,right:box.right,overflow:document.documentElement.scrollWidth>innerWidth,scrollable:grid.scrollHeight>grid.clientHeight,cellWidth:cell.width,cellHeight:cell.height,position:getComputedStyle(el).position};});
    assert.ok(m.height<=233,JSON.stringify(m));assert.ok(m.left>=0&&m.right<=width+1,JSON.stringify(m));assert.equal(m.overflow,false);assert.equal(m.scrollable,true);assert.ok(m.cellWidth>=43&&m.cellHeight>=43);assert.equal(m.position,'static');measurements.push({width,height,theme,...m});
@@ -76,7 +76,7 @@ try {
    await page.getByRole('button',{name:'Закрыть смайлы'}).click();
   }
  }
- pass('35 real Chromium mobile/landscape layouts: all seven themes, <=232 px panel, no overlay/overflow, scrolling and 44 px smile targets');
+ pass('60 real Chromium mobile/landscape layouts: all twelve themes, <=232 px panel, no overlay/overflow, scrolling and 44 px smile targets');
  // Click the last catalogue item after scrolling: all 105 remain reachable.
  await load(forum);await trigger().click();await page.locator('.smile-picker-choice').last().scrollIntoViewIfNeeded();const label=await page.locator('.smile-picker-choice').last().getAttribute('aria-label');await page.locator('.smile-picker-choice').last().click();assert.ok((await field().inputValue()).includes(label.replace('Вставить ','')));pass('last smile is reachable and inserts correctly after scrolling');
  // Real touch events must still produce clicks after pointerdown prevention.

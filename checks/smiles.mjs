@@ -129,8 +129,8 @@ php.writeFile('/www/local/datavotes/votes.dat',`${message}|${message} вариа
 await rendered('/votes/index.php');await rendered('/votes/vote.php');await rendered('/votes/allvotes.php');pass('poll question/options, results and archive');
 assert.equal((await req('/pyramid/go.php',{uid,msg:message,icq:'123456'})).httpStatusCode,302);await rendered('/pyramid/history.php');await rendered('/index.php');pass('pyramid messages, history and home rendering');
 // Same stored content must render in each palette; the stylesheet bounds inline GIFs.
-const themes=['lesika_dvor','lesika_gazeta','lesika_gostinaya','lesika_solnce','lesika_vecher','lesika_albom','lesika_uyut'];
+const themes=Object.keys(JSON.parse(readFileSync(join(root,'includes/lesika/themes.json'))));
 for(const skin of themes){await req('/pages/skin.php',{skins:skin,uid,return:'themes'});r=await rendered(topicURL,'модератор исправил',':ban');assert.ok(r.text.includes('<body data-theme="'+skin+'">'));await rendered('/board/index.php?action=view&id=987&bid='+bid);}
-assert.match(readFileSync(join(root,'assets/lesika/site.css'),'utf8'),/img\.motor-smile\{[^}]*max-height:48px/);pass('all seven themes, inline size bounds and valid asset paths on every checked page');
+assert.match(readFileSync(join(root,'assets/lesika/site.css'),'utf8'),/img\.motor-smile\{[^}]*max-height:48px/);pass('all twelve themes, inline size bounds and valid asset paths on every checked page');
 writeFileSync(new URL('./smiles-results.json',import.meta.url),JSON.stringify({php:'8.4',requests,catalogue,passed,views:[...new Set(views)],device_browser_qa:'Not performed'},null,2));console.log(JSON.stringify({requests,groups:passed.length,views:new Set(views).size}));
 }finally{php.exit()}
