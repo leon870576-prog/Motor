@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "mkdir -p .test-site && tar -xzf motor-source.tar.gz -C .test-site && tar -xzf motor-code.tar.gz -C .test-site && node checks/themes.mjs .test-site && node checks/attachments.mjs .test-site && node checks/picker-backend.mjs .test-site && node --check .test-site/assets/lesika/smile-picker.js && node --check .test-site/assets/lesika/touch.js && node checks/contrast.mjs .test-site",
-    "test:browser": "node checks/picker-browser.mjs .test-site && node checks/touch-browser.mjs .test-site"
+    "test": "mkdir -p .test-site && tar -xzf motor-source.tar.gz -C .test-site && tar -xzf motor-code.tar.gz -C .test-site && node checks/themes.mjs .test-site && node checks/attachments.mjs .test-site && node checks/picker-backend.mjs .test-site && node checks/gallery.mjs .test-site && node --check .test-site/assets/lesika/gallery.js && node --check .test-site/assets/lesika/smile-picker.js && node --check .test-site/assets/lesika/touch.js && node checks/contrast.mjs .test-site",
+    "test:browser": "node checks/picker-browser.mjs .test-site && node checks/touch-browser.mjs .test-site && node checks/gallery-browser.mjs .test-site"
   },
   "devDependencies": {
     "@php-wasm/node": "3.1.43",

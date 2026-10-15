@@ -7,7 +7,7 @@ foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root, Fil
     token_get_all(file_get_contents($file->getPathname()), TOKEN_PARSE);
     $count++;
 }
-foreach (['fileinfo','gd','mbstring','zip','session','json'] as $extension) {
+foreach (['fileinfo','gd','exif','mbstring','zip','session','json'] as $extension) {
     if (!extension_loaded($extension)) throw new RuntimeException('Missing PHP extension: '.$extension);
 }
 if (ini_get('upload_max_filesize') !== '32M' || ini_get('post_max_size') !== '64M') throw new RuntimeException('Unexpected upload limits');
@@ -31,5 +31,5 @@ if (count($themes) !== 12 || count(array_filter($themes, fn($theme) => ($theme['
 foreach ($themes as $id => $theme) {
     if (!preg_match('/^lesika_[a-z_]+$/D', $id) || !is_file($root.'/themes/'.$id.'/index.php') || !is_file($root.'/themes/'.$id.'/foot.php')) throw new RuntimeException('Invalid theme entry');
 }
-foreach (['responsive.css', 'touch.js'] as $asset) if (!is_file($root.'/assets/lesika/'.$asset)) throw new RuntimeException('Missing touch asset');
+foreach (['responsive.css', 'touch.js', 'gallery.css', 'gallery.js'] as $asset) if (!is_file($root.'/assets/lesika/'.$asset)) throw new RuntimeException('Missing touch asset');
 echo 'PASS: 12 themes including five responsive web themes; shared touch assets'.PHP_EOL;

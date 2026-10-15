@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "release": "2026-10-15-touch-web-r1",
+  "release": "2026-10-15-gallery-r1",
   "source": "wapmotor_php84_footer_clean.zip",
   "source_sha256": "3404edbaf6c08f60b78584a66132c35938701b9b44f7e8675f0f2307e225a66c",
   "source_selection": "Последняя исправленная сборка подтверждена владельцем 15 октября 2026 года. motor21.zip не использован как рабочая основа.",
@@ -1602,6 +1602,144 @@
     "smile_requests": 165,
     "attachment_requests": 147,
     "contrast_minimum": 4.5,
+    "data_unchanged": true,
+    "security_review": "SECURITY_REVIEW.md"
+  },
+  "gallery_changes": [
+    {
+      "path": "_health.php",
+      "base_sha256": "6bc0a0aead550786858296706fb51a59dd40f1ba95d6a8000893cc61f145693b",
+      "sha256": "b6e248a4bc72fd0369f4f92b2fdb498bcb2e47bbd577507c846a16756dd66a61"
+    },
+    {
+      "path": "assets/lesika/gallery.css",
+      "base_sha256": null,
+      "sha256": "7cf4164a6edef2e8aa281c07765972d31b29ca460a0220e21819960af75c3825"
+    },
+    {
+      "path": "assets/lesika/gallery.js",
+      "base_sha256": null,
+      "sha256": "b6d732e9fc5118f9b89a2f22dcb1ebcd9cc5ae12d84a039dcbcb732f855b92f4"
+    },
+    {
+      "path": "gallery/fullsize.php",
+      "base_sha256": "8831a53f0d432fb5335c6945bfd51b1b0ec606b4be3fe604274ebeefb2302ca2",
+      "sha256": "862271d1fe8f772c420173927db94cc5c6014cb029c84095d6462ee6599f5062"
+    },
+    {
+      "path": "gallery/index.php",
+      "base_sha256": "dbacb3c422526d034b739694dbb76cc5c7fa0a3cada49c3df1a2e7e911b419df",
+      "sha256": "2e925ad0e7b869f94d9b01872ac9f144556ed0d068cb28f66c8f8ccbdd1145ba"
+    },
+    {
+      "path": "gallery/resize.php",
+      "base_sha256": "ec1a977ba2934494ad4046c91235d8094f6cc234b7406c11061c930433265fbb",
+      "sha256": "e6967c1af37e38b1d605e6f04c5b68101946282b4b1c33ed6a393a47a95c2012"
+    },
+    {
+      "path": "includes/functions.php",
+      "base_sha256": "ffb1450194fc149c2e42a19f81d453d896acbe291ed7456385049034ecf7b8df",
+      "sha256": "752a37c782947a090f642c3279cfa541f70299cddc1869bfb3f7c1a893837c40"
+    },
+    {
+      "path": "includes/gallery.php",
+      "base_sha256": null,
+      "sha256": "79075f39198fabd311122a5966f3443ac9d245c3ab092c7bf38c80732798b452"
+    },
+    {
+      "path": "includes/header.php",
+      "base_sha256": "ef14af90d3a91891961d8e123e33b87f07cc1211864a29d57aaf377132cc2c33",
+      "sha256": "5ebb1f930473e3311a07dd74bca43a7c4d2419bb1bef90326e0a094e40fe497b"
+    },
+    {
+      "path": "includes/lesika/head.php",
+      "base_sha256": "b3e83e1abadf027c8e3bc2fbb2dafd1084be1d9335cf7a8f5d36891c94f4bf89",
+      "sha256": "4a785c68b0c683b552836c67d0ceca873d59813f279667a81453ea7d2cf60bff"
+    },
+    {
+      "path": "mpanel/attachments.php",
+      "base_sha256": "93fbb5e83ce18d188290bd5b0505567457d11484959fd41b632d959c549e6212",
+      "sha256": "6c6e67a4b5b458511066ab72151e73cc762db48416f45abc327ca10b67e3d221"
+    },
+    {
+      "path": "mpanel/backup.php",
+      "base_sha256": "7bad0e5b74fbe4537712ff0051115c3e78571a55ceec95c7ac329d590c5c669b",
+      "sha256": "a62ac931d28f453daacd0aac65ea98290e6f6844d064942a13d36a90c432651d"
+    },
+    {
+      "path": "mpanel/gallery-settings.php",
+      "base_sha256": null,
+      "sha256": "9061b3a32b33ec9904c5aba3448f8756ee4f1fdc8700374fa10a3be985d42914"
+    },
+    {
+      "path": "mpanel/gallery.php",
+      "base_sha256": "8e5e3ae127001baedee0c8c3daa0feffcd09f325fa7621a4c3b9e95001613772",
+      "sha256": "f3522347f253b19d0424c9b53a29846aa2e70d8763cb28d001362496ba2a70d0"
+    },
+    {
+      "path": "mpanel/index.php",
+      "base_sha256": "c106a36fe1a3a287a3fba1418ef57c17a3d49a503803a67589288bb663388285",
+      "sha256": "422b610d84563027b29f081a52c2a5031d3b3586dcd9f2d838a629b7f5018ee5"
+    },
+    {
+      "path": "mpanel/setting.php",
+      "base_sha256": "02e258fe155f03a6adf34a431a230e972175f7fe92b89472e622a002acfecaf8",
+      "sha256": "68983f099e39e2609ffce58d48e1e3e8aff1965abc96a673ce94e18922d8283d"
+    },
+    {
+      "path": "pages/anketa.php",
+      "base_sha256": "58caef474a76478dc7162cd849a803bc8e47b4c11fe89bfa5911e633583f3a21",
+      "sha256": "d62227ae1bbd7396ad4a699f01be9f7c89f8991446fd86c96cf3ac2e50634004"
+    },
+    {
+      "path": "pages/faq.php",
+      "base_sha256": "b4334ad9852221e3fbf9a302331db2a1f2d83d0d05d45c97eb3276f4fb6083e7",
+      "sha256": "aed842faf736b2f82343eb2bebaaf430de119e0e8b75cd048195703be6666702"
+    }
+  ],
+  "gallery_base_commit": "34d5f0f7d45efa08af3fc737a5742632221e3e7b",
+  "gallery_verification": {
+    "backend": {
+      "php": "8.4",
+      "requests": 267,
+      "passed": [
+        "one source of gallery settings; bounds, format allowlist, CSRF, stale settings, old panel link",
+        "real 3+ MB, 4000×3000 upload; original unchanged, 960×720 preview, profile, HEAD/download and no-store",
+        "JPG/JPEG/PNG/GIF/WebP validated, decoded and served without changing original bytes",
+        "malformed/spoofed/oversized uploads, path traversal, arrays, orphans, CSRF and member privilege escalation denied",
+        "admin settings synchronize upload form, allowed formats, limits, viewer and cache; existing originals remain readable",
+        "all four staff roles edit/hide/restore; admin-only settings; hidden photos inaccessible in lists, profile, comments, original and preview to guests/owner",
+        "stale bulk/comment edits rejected; delete confirmation and CSRF required; exact comment removed",
+        "12 warm themes share responsive gallery and viewer; upload/comment/edit/settings fixtures captured",
+        "actual backup/restore preserves originals, previews, comments, hidden state, settings and audit",
+        "bulk deletion removes only selected original/comment/cache files and clears author profile photo",
+        "binary routes obey site closure and authenticated access gates"
+      ],
+      "large_upload_bytes": 3493618,
+      "large_upload_pixels": [
+        4000,
+        3000
+      ]
+    },
+    "browser": {
+      "layouts": 84,
+      "widths": [
+        320,
+        360,
+        390,
+        430,
+        768,
+        1024,
+        1440
+      ],
+      "jsErrors": [],
+      "touch_pinch_pan_double_tap": true,
+      "physical_devices": false
+    },
+    "php_syntax_files": 190,
+    "native_build_gate": "checks/gallery-native.php",
+    "smile_requests": 165,
+    "attachment_requests": 147,
     "data_unchanged": true,
     "security_review": "SECURITY_REVIEW.md"
   }

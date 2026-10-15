@@ -5,3 +5,4 @@ checks/fixtures/
 checks/*.png
 .browser-cache/
 checks/touch-fixtures/
+checks/gallery-fixtures/
