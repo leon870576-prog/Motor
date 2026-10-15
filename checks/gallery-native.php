@@ -4,6 +4,7 @@ $root='/var/www/html';
 $temp=sys_get_temp_dir().'/motor-gallery-'.bin2hex(random_bytes(8));
 mkdir($temp,0700);
 define('DATADIR',$temp.'/');
+define('BASEDIR',$root.'/');
 require_once $root.'/includes/gallery.php';
 $settings=['max_side'=>8000,'max_mp'=>24,'preview_px'=>960,'quality'=>90,'watermark'=>0];
 function demand(bool $ok,string $message): void {if (!$ok) throw new RuntimeException($message);}
@@ -38,5 +39,11 @@ try {
     $im=imagecreatetruecolor(4000,3000);imagejpeg($im,$temp.'/large.jpg');imagedestroy($im);
     motor_gallery_preview($temp.'/large.jpg',$temp.'/preview.jpg',$settings);
     $info=getimagesize($temp.'/preview.jpg');demand($info[0]===960 && $info[1]===720,'Native 12MP scaling');
-    echo "PASS: native gallery JPEG/PNG/GIF/WebP preview; 12MP scaling; all 8 EXIF orientations; originals unchanged\n";
+    $without=file_get_contents($temp.'/preview.jpg');
+    $settings['watermark']=1;
+    motor_gallery_preview($temp.'/large.jpg',$temp.'/marked.jpg',$settings);
+    $marked=file_get_contents($temp.'/marked.jpg');
+    $quant=function($bytes){$pos=strpos($bytes,"\xff\xdb");demand($pos!==false,'Missing JPEG quality table');return substr($bytes,$pos,unpack('n',substr($bytes,$pos+2,2))[1]+2);};
+    demand($marked!==$without && $quant($marked)===$quant($without),'Watermark must preserve selected JPEG quality');
+    echo "PASS: native gallery JPEG/PNG/GIF/WebP preview; 12MP scaling; all 8 EXIF orientations; watermark quality; originals unchanged\n";
 } finally {foreach (glob($temp.'/*') as $file) unlink($file);rmdir($temp);}

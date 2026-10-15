@@ -1,11 +1,11 @@
 {
-  "release": "2026-10-15-gallery-r1",
+  "release": "2026-10-15-gallery-r2",
   "baseline_archive_unchanged": true,
   "baseline_public_github_blob": "439eb3ae3867124f8189634bfdcaf7b75e00c7b6",
   "code_archive": "motor-code.tar.gz",
-  "code_archive_bytes": 733784,
-  "code_archive_sha256": "0c9b77438dd08429eef48bae7b96bfebad1b5df32ad3c68473b23a8c69241197",
-  "code_archive_git_blob": "ae2a289bb187fee652b314b38985465e6373e55b",
+  "code_archive_bytes": 733837,
+  "code_archive_sha256": "11eac4933bc5b38612b6a465642de1c287c066a4259ff185074af76b377fd83e",
+  "code_archive_git_blob": "d355f41063f6b8009cf8122fec9b1c5a584aca35",
   "local_directory_in_code_archive": false,
   "assembled_file_hashes_match_tested_source": true,
   "purpose": "Application code only; existing seed archive and live data unchanged."

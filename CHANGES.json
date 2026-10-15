@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "release": "2026-10-15-gallery-r1",
+  "release": "2026-10-15-gallery-r2",
   "source": "wapmotor_php84_footer_clean.zip",
   "source_sha256": "3404edbaf6c08f60b78584a66132c35938701b9b44f7e8675f0f2307e225a66c",
   "source_selection": "Последняя исправленная сборка подтверждена владельцем 15 октября 2026 года. motor21.zip не использован как рабочая основа.",
@@ -1609,7 +1609,7 @@
     {
       "path": "_health.php",
       "base_sha256": "6bc0a0aead550786858296706fb51a59dd40f1ba95d6a8000893cc61f145693b",
-      "sha256": "b6e248a4bc72fd0369f4f92b2fdb498bcb2e47bbd577507c846a16756dd66a61"
+      "sha256": "cf41d0d5f438bf0b6db8499ad90cc92981b3d4ebdd83254d5192f3e81bc7940b"
     },
     {
       "path": "assets/lesika/gallery.css",
@@ -1644,7 +1644,7 @@
     {
       "path": "includes/gallery.php",
       "base_sha256": null,
-      "sha256": "79075f39198fabd311122a5966f3443ac9d245c3ab092c7bf38c80732798b452"
+      "sha256": "c17c60bdbc644cc027213f146551840bd057c65623ec87baf9a8c0c9d925325e"
     },
     {
       "path": "includes/header.php",
