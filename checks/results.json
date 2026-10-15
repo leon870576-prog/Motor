@@ -1,0 +1,22 @@
+{
+  "php": "8.4",
+  "requests": 147,
+  "passed": [
+    "admin-only settings, CSRF, format allowlist and atomic validation",
+    "real multipart photos/video/documents; byte-exact downloads, Unicode names, video seek/HEAD/416",
+    "forbidden extension, forged MIME, empty/corrupt files and count limit reject the whole post",
+    "news editing preserves IDs/author, updates all views, removes files, prevents stale overwrites",
+    "image dimension limit, failed replacement rollback and oversized request handling",
+    "all 16 advertised extensions accept valid files and download byte-for-byte unchanged",
+    "independent per-section size/count/formats; invalid uploads never create an empty forum topic",
+    "member creates topic/reply, edits own attachments; stable message IDs and rejected CSRF",
+    "guest/non-owner restrictions; media obeys public access and site closure",
+    "moderator edit, old-record compatibility, deletion shifts rows without shifting attachments",
+    "closed-topic permissions and attachment rendering in all seven warm themes",
+    "backup contains attachment settings, manifests, binaries and forum records",
+    "backup restore recovers a deleted attachment with its exact original bytes",
+    "disabling future uploads keeps old media; topic/news deletion removes binaries and manifests",
+    "automatic old-topic pruning and whole-forum deletion clean up attachments",
+    "orphan access denied after parent removal"
+  ]
+}

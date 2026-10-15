@@ -1,0 +1,12 @@
+{
+  "release": "2026-10-15-attachments-r1",
+  "baseline_archive_unchanged": true,
+  "baseline_public_github_blob": "439eb3ae3867124f8189634bfdcaf7b75e00c7b6",
+  "code_archive": "motor-code.tar.gz",
+  "code_archive_bytes": 707442,
+  "code_archive_sha256": "18be5290a6ff4995854d4b7a52f424e8eaaef98e2951b70f528dbcf9f26ccbd1",
+  "code_archive_git_blob": "08be2d16fd159e8168b59ddb2808ea171e1dc12e",
+  "local_directory_in_code_archive": false,
+  "assembled_file_hashes_match_tested_source": true,
+  "purpose": "Publish application code without republishing or changing seed data or live data."
+}

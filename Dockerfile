@@ -6,6 +6,7 @@ RUN apt-get update \
  && a2enmod rewrite headers \
  && rm -rf /var/lib/apt/lists/*
 ADD motor-source.tar.gz /var/www/html/
+ADD motor-code.tar.gz /var/www/html/
 RUN mkdir -p /opt/motor-seed \
  && mv /var/www/html/local /opt/motor-seed/local \
  && ln -s /data/local /var/www/html/local \
@@ -15,9 +16,11 @@ COPY php.ini /usr/local/etc/php/conf.d/motor-test.ini
 COPY entrypoint.sh /usr/local/bin/motor-entrypoint
 COPY auth.php /opt/motor-auth.php
 COPY migrate.php /opt/motor-migrate.php
+COPY validate.php /opt/motor-validate.php
 COPY MIGRATION.json /opt/motor-migration.json
 COPY migrate-themes.php /opt/motor-migrate-themes.php
 RUN chmod 755 /usr/local/bin/motor-entrypoint \
+ && php /opt/motor-validate.php \
  && php -l /opt/motor-migrate.php \
  && php -l /opt/motor-migrate-themes.php \
  && a2dismod mpm_event mpm_worker \

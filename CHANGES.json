@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "release": "2026-10-15-lesika-themes-r2",
+  "release": "2026-10-15-attachments-r1",
   "source": "wapmotor_php84_footer_clean.zip",
   "source_sha256": "3404edbaf6c08f60b78584a66132c35938701b9b44f7e8675f0f2307e225a66c",
   "source_selection": "Последняя исправленная сборка подтверждена владельцем 15 октября 2026 года. motor21.zip не использован как рабочая основа.",
@@ -324,5 +324,147 @@
     "night_city",
     "themez",
     "toonel"
-  ]
+  ],
+  "previous_release": "2026-10-15-lesika-themes-r2",
+  "base_commit": "caaa1a338f141fcb10ace45ca623aa98f9101a16",
+  "attachment_changes": [
+    {
+      "path": "site/_health.php",
+      "base_sha256": "311608ce3acbf3b86e04190af33744066329773eed92980870a082865d929150",
+      "sha256": "aae91b61b4effe3432168f82fd2c0371ffb7508e2798c5aa442c70ae04c962ff"
+    },
+    {
+      "path": "site/assets/lesika/site.css",
+      "base_sha256": "52d1f52b4738f0bb014db55b4cc9409f30701058d89b587b65dff0268185e5de",
+      "sha256": "be3061accffe496d0ca182580c4c4933652296fd8ee5d6174c4e6c0c71728ed9"
+    },
+    {
+      "path": "site/attachment.php",
+      "base_sha256": null,
+      "sha256": "7d72a3bd549241ec9c9101433264b072263da90ac1a20f17e37d671e0d8805e3"
+    },
+    {
+      "path": "site/forum/edit.php",
+      "base_sha256": null,
+      "sha256": "7c5d8da7a4f29f0b1df6475658a0f9b7c0b36c69503b01205200ae73dc80bcc6"
+    },
+    {
+      "path": "site/forum/forum.php",
+      "base_sha256": "7492e8c8a87bc12f86835b3b70fcdd88b62331576b4e5e8907983e636a9c97e2",
+      "sha256": "95d407b2b71c73dd644e2ddfafc81a927f9315f676f24aa1d17c37f5bca0cad1"
+    },
+    {
+      "path": "site/forum/index.php",
+      "base_sha256": "fd1f4f047a821604f525c09d731d13e37222adc4b010e810e502812cb5787be5",
+      "sha256": "c4b2f3bf0c1017dd1374a1169b021024d6a76a564ccd9605bd2928edf2f00847"
+    },
+    {
+      "path": "site/forum/topic.php",
+      "base_sha256": "62928504b9aaddf16a3439fca37cce94d548d9da546e0798f0e84d20d010900b",
+      "sha256": "662bc684fccc17cf3cd6c39a39d25e3da6f7c612f769a32d0d3e730e45eb7bff"
+    },
+    {
+      "path": "site/includes/attachments.php",
+      "base_sha256": null,
+      "sha256": "3d5de18be66eca0363f7b90132625209384f6ea9a62aeba50e8d55e69584c77f"
+    },
+    {
+      "path": "site/includes/functions.php",
+      "base_sha256": "3f45966272651dcea881e1684009fb6def23620fd1531c094541658f166b0261",
+      "sha256": "564f0d68fa1026e7a22e38fa3fe623112522e8ae9ebe1bf2300619ba5c914ab4"
+    },
+    {
+      "path": "site/includes/header.php",
+      "base_sha256": "e401640ac633274f3b390858bb6f38d99f28be1b0824be59b7ff9fe411418428",
+      "sha256": "ebf5627be2cdf4ff9972eb875f286b2d9dd721a0fc6c1ae029cc5cef164af63b"
+    },
+    {
+      "path": "site/includes/lesika/head.php",
+      "base_sha256": "4136ac9f63afd3a5029637fced071b42e29ec38df61c474ee7818ee401269f66",
+      "sha256": "fbdaa04983c11dff57419fa0e68cb85d37a3cb5a017031aee08f552880557e93"
+    },
+    {
+      "path": "site/includes/pclzip.php",
+      "base_sha256": "d66bcdb18f2e727ba208309f6bc5caa4ec1d4edf36b0a74fd3bd12231e5a8e16",
+      "sha256": "57bc44c9b16d5c108348b62d9661dcf365c82138c47d8d2066a221c6e135aff7"
+    },
+    {
+      "path": "site/includes/start.php",
+      "base_sha256": "b3f9b82d38be136930c53731e31ec9c178cea7722365d97c2d172eacfde915b1",
+      "sha256": "1d3da43394d037d60ea68645bdab2b7e74fed30c8ce6f6a93d938c750d16c5ce"
+    },
+    {
+      "path": "site/input.php",
+      "base_sha256": "02e5a8195c56d990e0f1bed727b9d45d85dee3a3ba6d06ea34b5545738f7668b",
+      "sha256": "d7ac14a93b191f1c621c1f900243c4c4621af322a5474e52c902067dbff6c0fc"
+    },
+    {
+      "path": "site/mpanel/attachments.php",
+      "base_sha256": null,
+      "sha256": "93fbb5e83ce18d188290bd5b0505567457d11484959fd41b632d959c549e6212"
+    },
+    {
+      "path": "site/mpanel/backup.php",
+      "base_sha256": "b2b34440d288bf6ab547fc035ba9437b959f4d8c7c358e26945978194aceb161",
+      "sha256": "7bad0e5b74fbe4537712ff0051115c3e78571a55ceec95c7ac329d590c5c669b"
+    },
+    {
+      "path": "site/mpanel/forum.php",
+      "base_sha256": "bd3343665d0eba6b25381374ce5333862d7b109f26e81053d6d6464e6bab4dc1",
+      "sha256": "4de7f11d77985cbe24d0a6020ce7ff178d5d4d277cee6525326d54f45b0fd5ea"
+    },
+    {
+      "path": "site/mpanel/index.php",
+      "base_sha256": "e189dcf1f2cfc9893679a0d31ff4ba04b3e93244a02e6e2d436469cc6487cfd8",
+      "sha256": "c106a36fe1a3a287a3fba1418ef57c17a3d49a503803a67589288bb663388285"
+    },
+    {
+      "path": "site/mpanel/news.php",
+      "base_sha256": "50c179c10a81b3e9ea3d80a551e26739147ead9d5a98525308ab52b231bd72d1",
+      "sha256": "ccf2b39df429af7a8aa19ae768cb9f8f500604ebe4643e63e99577d23d26b9d5"
+    },
+    {
+      "path": "site/news/index.php",
+      "base_sha256": "f1b14f93fb04b8e5de62be394ea92c1c014e5ae8f1ee8ddbda60d7940f59443b",
+      "sha256": "4dbed6a43bd34d6e32352e00900dec1d80b576c58c9bce344be65ebb93d36283"
+    },
+    {
+      "path": "site/news/komm.php",
+      "base_sha256": "5e2c6c5eea2fabbb8ad15d50375957c4cc2edf1e2317237abcc057b0712f7540",
+      "sha256": "b8cd2819b9341e467ac73f39e2df5cb74654f6ecd09fd7a24fa273f96c3a76c3"
+    }
+  ],
+  "attachment_tests": {
+    "php": "8.4",
+    "requests": 147,
+    "passed": [
+      "admin-only settings, CSRF, format allowlist and atomic validation",
+      "real multipart photos/video/documents; byte-exact downloads, Unicode names, video seek/HEAD/416",
+      "forbidden extension, forged MIME, empty/corrupt files and count limit reject the whole post",
+      "news editing preserves IDs/author, updates all views, removes files, prevents stale overwrites",
+      "image dimension limit, failed replacement rollback and oversized request handling",
+      "all 16 advertised extensions accept valid files and download byte-for-byte unchanged",
+      "independent per-section size/count/formats; invalid uploads never create an empty forum topic",
+      "member creates topic/reply, edits own attachments; stable message IDs and rejected CSRF",
+      "guest/non-owner restrictions; media obeys public access and site closure",
+      "moderator edit, old-record compatibility, deletion shifts rows without shifting attachments",
+      "closed-topic permissions and attachment rendering in all seven warm themes",
+      "backup contains attachment settings, manifests, binaries and forum records",
+      "backup restore recovers a deleted attachment with its exact original bytes",
+      "disabling future uploads keeps old media; topic/news deletion removes binaries and manifests",
+      "automatic old-topic pruning and whole-forum deletion clean up attachments",
+      "orphan access denied after parent removal"
+    ],
+    "syntax_files": 176,
+    "device_browser_qa": "Not performed; no interactive browser available"
+  },
+  "packaging": {
+    "base_archive": "motor-source.tar.gz",
+    "base_archive_unchanged": true,
+    "code_archive": "motor-code.tar.gz",
+    "code_archive_excludes": [
+      "local"
+    ],
+    "reason": "Public release contains code only; existing published seed data is not republished or modified."
+  }
 }
