@@ -1,0 +1,48 @@
+{
+  "php": "8.4",
+  "requests": 89,
+  "catalogue": {
+    "assets": 121,
+    "picker": 10
+  },
+  "passed": [
+    "121 valid GIFs, picker, limits, admin rules, Unicode, legacy paths, edit roundtrip, safe URL/code handling",
+    "news create/edit, home feed, comments, admin view and absolute smile URLs in RSS",
+    "forum topic/reply, member edit, moderator edit, multiline records and author-scoped admin smiles",
+    "guestbook, administrator answer, mini-chat and admin chat, including moderation views",
+    "gallery descriptions, image detail, comments and moderation",
+    "announcements list/detail/moderation and profile About me",
+    "private messages, sent and received, with temporary accounts only",
+    "poll question/options, results and archive",
+    "pyramid messages, history and home rendering",
+    "all seven themes, inline size bounds and valid asset paths on every checked page"
+  ],
+  "views": [
+    "/news/index.php",
+    "/news/komm.php?id=2",
+    "/mpanel/news.php",
+    "/index.php",
+    "/forum/topic.php?fid=1&id=1",
+    "/mpanel/forum.php?act=topic&fid=1&id=1",
+    "/book/index.php",
+    "/mpanel/book.php",
+    "/chat/index.php",
+    "/mpanel/chat.php",
+    "/mpanel/adminchat.php",
+    "/gallery/index.php",
+    "/gallery/index.php?action=showimg&gid=smile-test.gif",
+    "/mpanel/gallery.php",
+    "/gallery/index.php?action=komm&gid=smile-test.gif",
+    "/board/index.php?action=board&id=987",
+    "/board/index.php?action=view&id=987&bid=1",
+    "/mpanel/board.php?action=board&id=987",
+    "/pages/anketa.php?uz=SmileAuthor",
+    "/pages/privat.php?action=output",
+    "/pages/privat.php",
+    "/votes/index.php",
+    "/votes/vote.php",
+    "/votes/allvotes.php",
+    "/pyramid/history.php"
+  ],
+  "device_browser_qa": "Not performed"
+}

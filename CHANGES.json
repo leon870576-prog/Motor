@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "release": "2026-10-15-attachments-r1",
+  "release": "2026-10-15-smiles-r1",
   "source": "wapmotor_php84_footer_clean.zip",
   "source_sha256": "3404edbaf6c08f60b78584a66132c35938701b9b44f7e8675f0f2307e225a66c",
   "source_selection": "Последняя исправленная сборка подтверждена владельцем 15 октября 2026 года. motor21.zip не использован как рабочая основа.",
@@ -15,7 +15,7 @@
       "path": "site/_health.php",
       "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": "68e439b42c04420a92eae44f8a87d1c58e9d3d227d6ae044e69a11519e586b2f",
-      "sha256": "311608ce3acbf3b86e04190af33744066329773eed92980870a082865d929150"
+      "sha256": "9d8196e6656c5a4074950762d2a42b5bebfa600cf39cd1c16ae14057dd524e80"
     },
     {
       "path": "site/assets/lesika/leaf.svg",
@@ -33,13 +33,13 @@
       "path": "site/assets/lesika/site.css",
       "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": null,
-      "sha256": "52d1f52b4738f0bb014db55b4cc9409f30701058d89b587b65dff0268185e5de"
+      "sha256": "6504d8fceb799c787e4d872f09cb478e6a45b78fcf7d6122a9de8114068899a3"
     },
     {
       "path": "site/includes/functions.php",
       "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": "7f027eb37de81c694e21e305c4540b03aae4787e5e3fbe69d9776c7ed4eef767",
-      "sha256": "3f45966272651dcea881e1684009fb6def23620fd1531c094541658f166b0261"
+      "sha256": "4fc3c3a86f84797da4575f84796387a090d1ffcd3556d111e9dfb7c0abef7926"
     },
     {
       "path": "site/includes/header.php",
@@ -63,7 +63,7 @@
       "path": "site/includes/lesika/head.php",
       "change": "Перенос тёплых тем Лесики, адаптивное оформление и сохранение выбора темы.",
       "base_sha256": null,
-      "sha256": "4136ac9f63afd3a5029637fced071b42e29ec38df61c474ee7818ee401269f66"
+      "sha256": "22a6463b8cebb8b3cd73873b5035d219704b6d95a8485ba822c2e26a83921fdf"
     },
     {
       "path": "site/includes/lesika/home.php",
@@ -208,6 +208,81 @@
       "change": "Исправлено завершение страницы с HTTP 500 при первом часовом/суточном обновлении статистики, если файлы истории отсутствуют.",
       "base_sha256": "d3a5559eabf5040371f46f8d2266afc09fe8d1d9169d7c5d9f3c69c7d2fd668c",
       "sha256": "d466f89b5d69fe2161ea58561db40e8030e66f247a0186e9dbff202e8795382d"
+    },
+    {
+      "path": "site/board/index.php",
+      "base_sha256": "b039c40c7e733732f262ab6a88bf67869db8cae8bb1de8c8e22881e673a5c221",
+      "sha256": "8cb93c04354ec766e539bc8248555c2b8ce3052c175dd0d907ec90fac7183de1"
+    },
+    {
+      "path": "site/book/index.php",
+      "base_sha256": "48a51c3b04335b31e92074a15e14dd92fb82529a86dc4005a16d6052063040f8",
+      "sha256": "4e98dbaa54863cef998dfdfc88c23af01b949e8a8008543492ae07a551a82837"
+    },
+    {
+      "path": "site/chat/add.php",
+      "base_sha256": "b0afc693dc6ac800d13066d6a449b7d5724df45667e9f77632d6fee334e95b5c",
+      "sha256": "b2306e43adb89f0d47bc9fe9048da71d25bdbaa0676a0fc85c0f42be2343d527"
+    },
+    {
+      "path": "site/gallery/index.php",
+      "base_sha256": "46352126cbbc31701cd8888cca419f5a5031403e118a267201895d3938dc53e4",
+      "sha256": "40a63086803df3599d043c5d09a6b95cde1c6308f77a3116523f59b5ceb89368"
+    },
+    {
+      "path": "site/includes/smiles.php",
+      "base_sha256": null,
+      "sha256": "a9cfbe13cd129ffbc7557a6565a37060740e643ad58304356316ad16f977f55c"
+    },
+    {
+      "path": "site/mpanel/board.php",
+      "base_sha256": "a4b95a883c7dfa45e2bed77d7284a312212a985e22a27cad16a3d320c5c969d8",
+      "sha256": "2a6e11955c73e29583e412c9eeb219cb6c39988acd8d7bff9d001649ebcd91fc"
+    },
+    {
+      "path": "site/mpanel/book.php",
+      "base_sha256": "3737ac0e1a901c117f75f58ad9ba43da0cbbf421df6491bb14c988e1bac9fcfc",
+      "sha256": "51faab09600bd54f5977f7645a881957331c9ac60cb74da691a2bc5f7c3682e9"
+    },
+    {
+      "path": "site/mpanel/forum.php",
+      "base_sha256": "4de7f11d77985cbe24d0a6020ce7ff178d5d4d277cee6525326d54f45b0fd5ea",
+      "sha256": "cc49808415e9e1aef3db45ee36e092da2c14e956d0adbe621de6a91b4e7f65d0"
+    },
+    {
+      "path": "site/mpanel/gallery.php",
+      "base_sha256": "868260da88f5b9d8afbe5fb2c89b15a38afa4680206d239b2eb12863ad324135",
+      "sha256": "3998f8785744b5dffbcc3b453081cc4ddd66dae033778e0986ebcbda23c0f6da"
+    },
+    {
+      "path": "site/mpanel/news.php",
+      "base_sha256": "ccf2b39df429af7a8aa19ae768cb9f8f500604ebe4643e63e99577d23d26b9d5",
+      "sha256": "0a40eecdd875b21200e2d2635bb6e8cd5c304c781e9b166480a73231683bfb1b"
+    },
+    {
+      "path": "site/pages/anketa.php",
+      "base_sha256": "4599d5da46545c45f5eebe66b4999159852ee1689db4ed6a17690b6b87a4c8fc",
+      "sha256": "58caef474a76478dc7162cd849a803bc8e47b4c11fe89bfa5911e633583f3a21"
+    },
+    {
+      "path": "site/pyramid/conf.php",
+      "base_sha256": "2432cb4268d47661112bc4e2273bff5a1b4c8469fa862ad1bc0f6ab417e79711",
+      "sha256": "9bcb4af36983109cbb1cf7101035eb6aada7499e1d1d2d943bc7bea01a1699a1"
+    },
+    {
+      "path": "site/votes/allvotes.php",
+      "base_sha256": "d481ed5472bf73d5969a111d7bb2b3a23412e4db0120c3db17a5dc44a23a3bdb",
+      "sha256": "5642a94dac38ac9fe0711771be99a1676f499d6b5871ca167afdd7a5da2c88ff"
+    },
+    {
+      "path": "site/votes/index.php",
+      "base_sha256": "bc16d7427427cdda5546bc4d57a4e2e43a6f61e9675f323773f2ae272d61b4bd",
+      "sha256": "9f924823db3eeb280640e7d29417b6d11de4c5cd90699d763d6b122fa479eb80"
+    },
+    {
+      "path": "site/votes/vote.php",
+      "base_sha256": "b601f1614a7ff2d4845185f5ff541d0089378c9e89c8971c72f77de73ef673ee",
+      "sha256": "932ca010f086824f3e239dcbce10ad7c9e5192bdb1c21089ab3064ad78ccb52f"
     }
   ],
   "hosting_changes": [
@@ -325,8 +400,8 @@
     "themez",
     "toonel"
   ],
-  "previous_release": "2026-10-15-lesika-themes-r2",
-  "base_commit": "caaa1a338f141fcb10ace45ca623aa98f9101a16",
+  "previous_release": "2026-10-15-attachments-r1",
+  "base_commit": "e6f7797ce8ee1e0fef026049f2c3a197d1053d3c",
   "attachment_changes": [
     {
       "path": "site/_health.php",
@@ -466,5 +541,159 @@
       "local"
     ],
     "reason": "Public release contains code only; existing published seed data is not republished or modified."
+  },
+  "smile_changes": [
+    "Shared catalogue-based smile rendering in all message sections; Unicode emoji preserved.",
+    "Board, profile About me, gallery captions and polls now expand ordinary smile codes.",
+    "Moderator forum editor decodes stored smile images and correctly saves multiline edits.",
+    "Limit counts actual smiles, preserves URLs/code and author-only admin smile permission; legacy paths normalised.",
+    "All seven themes bound GIF dimensions and include native emoji font fallbacks.",
+    "Empty chat game fields and missing optional pyramid configuration handled without PHP 8.4 warnings."
+  ],
+  "smile_files": [
+    {
+      "path": "site/_health.php",
+      "base_sha256": "aae91b61b4effe3432168f82fd2c0371ffb7508e2798c5aa442c70ae04c962ff",
+      "sha256": "9d8196e6656c5a4074950762d2a42b5bebfa600cf39cd1c16ae14057dd524e80"
+    },
+    {
+      "path": "site/assets/lesika/site.css",
+      "base_sha256": "be3061accffe496d0ca182580c4c4933652296fd8ee5d6174c4e6c0c71728ed9",
+      "sha256": "6504d8fceb799c787e4d872f09cb478e6a45b78fcf7d6122a9de8114068899a3"
+    },
+    {
+      "path": "site/board/index.php",
+      "base_sha256": "b039c40c7e733732f262ab6a88bf67869db8cae8bb1de8c8e22881e673a5c221",
+      "sha256": "8cb93c04354ec766e539bc8248555c2b8ce3052c175dd0d907ec90fac7183de1"
+    },
+    {
+      "path": "site/book/index.php",
+      "base_sha256": "48a51c3b04335b31e92074a15e14dd92fb82529a86dc4005a16d6052063040f8",
+      "sha256": "4e98dbaa54863cef998dfdfc88c23af01b949e8a8008543492ae07a551a82837"
+    },
+    {
+      "path": "site/chat/add.php",
+      "base_sha256": "b0afc693dc6ac800d13066d6a449b7d5724df45667e9f77632d6fee334e95b5c",
+      "sha256": "b2306e43adb89f0d47bc9fe9048da71d25bdbaa0676a0fc85c0f42be2343d527"
+    },
+    {
+      "path": "site/gallery/index.php",
+      "base_sha256": "46352126cbbc31701cd8888cca419f5a5031403e118a267201895d3938dc53e4",
+      "sha256": "40a63086803df3599d043c5d09a6b95cde1c6308f77a3116523f59b5ceb89368"
+    },
+    {
+      "path": "site/includes/functions.php",
+      "base_sha256": "564f0d68fa1026e7a22e38fa3fe623112522e8ae9ebe1bf2300619ba5c914ab4",
+      "sha256": "4fc3c3a86f84797da4575f84796387a090d1ffcd3556d111e9dfb7c0abef7926"
+    },
+    {
+      "path": "site/includes/lesika/head.php",
+      "base_sha256": "fbdaa04983c11dff57419fa0e68cb85d37a3cb5a017031aee08f552880557e93",
+      "sha256": "22a6463b8cebb8b3cd73873b5035d219704b6d95a8485ba822c2e26a83921fdf"
+    },
+    {
+      "path": "site/includes/smiles.php",
+      "base_sha256": null,
+      "sha256": "a9cfbe13cd129ffbc7557a6565a37060740e643ad58304356316ad16f977f55c"
+    },
+    {
+      "path": "site/mpanel/board.php",
+      "base_sha256": "a4b95a883c7dfa45e2bed77d7284a312212a985e22a27cad16a3d320c5c969d8",
+      "sha256": "2a6e11955c73e29583e412c9eeb219cb6c39988acd8d7bff9d001649ebcd91fc"
+    },
+    {
+      "path": "site/mpanel/book.php",
+      "base_sha256": "3737ac0e1a901c117f75f58ad9ba43da0cbbf421df6491bb14c988e1bac9fcfc",
+      "sha256": "51faab09600bd54f5977f7645a881957331c9ac60cb74da691a2bc5f7c3682e9"
+    },
+    {
+      "path": "site/mpanel/forum.php",
+      "base_sha256": "4de7f11d77985cbe24d0a6020ce7ff178d5d4d277cee6525326d54f45b0fd5ea",
+      "sha256": "cc49808415e9e1aef3db45ee36e092da2c14e956d0adbe621de6a91b4e7f65d0"
+    },
+    {
+      "path": "site/mpanel/gallery.php",
+      "base_sha256": "868260da88f5b9d8afbe5fb2c89b15a38afa4680206d239b2eb12863ad324135",
+      "sha256": "3998f8785744b5dffbcc3b453081cc4ddd66dae033778e0986ebcbda23c0f6da"
+    },
+    {
+      "path": "site/mpanel/news.php",
+      "base_sha256": "ccf2b39df429af7a8aa19ae768cb9f8f500604ebe4643e63e99577d23d26b9d5",
+      "sha256": "0a40eecdd875b21200e2d2635bb6e8cd5c304c781e9b166480a73231683bfb1b"
+    },
+    {
+      "path": "site/pages/anketa.php",
+      "base_sha256": "4599d5da46545c45f5eebe66b4999159852ee1689db4ed6a17690b6b87a4c8fc",
+      "sha256": "58caef474a76478dc7162cd849a803bc8e47b4c11fe89bfa5911e633583f3a21"
+    },
+    {
+      "path": "site/pyramid/conf.php",
+      "base_sha256": "2432cb4268d47661112bc4e2273bff5a1b4c8469fa862ad1bc0f6ab417e79711",
+      "sha256": "9bcb4af36983109cbb1cf7101035eb6aada7499e1d1d2d943bc7bea01a1699a1"
+    },
+    {
+      "path": "site/votes/allvotes.php",
+      "base_sha256": "d481ed5472bf73d5969a111d7bb2b3a23412e4db0120c3db17a5dc44a23a3bdb",
+      "sha256": "5642a94dac38ac9fe0711771be99a1676f499d6b5871ca167afdd7a5da2c88ff"
+    },
+    {
+      "path": "site/votes/index.php",
+      "base_sha256": "bc16d7427427cdda5546bc4d57a4e2e43a6f61e9675f323773f2ae272d61b4bd",
+      "sha256": "9f924823db3eeb280640e7d29417b6d11de4c5cd90699d763d6b122fa479eb80"
+    },
+    {
+      "path": "site/votes/vote.php",
+      "base_sha256": "b601f1614a7ff2d4845185f5ff541d0089378c9e89c8971c72f77de73ef673ee",
+      "sha256": "932ca010f086824f3e239dcbce10ad7c9e5192bdb1c21089ab3064ad78ccb52f"
+    }
+  ],
+  "smile_tests": {
+    "php": "8.4",
+    "requests": 89,
+    "catalogue": {
+      "assets": 121,
+      "picker": 10
+    },
+    "passed": [
+      "121 valid GIFs, picker, limits, admin rules, Unicode, legacy paths, edit roundtrip, safe URL/code handling",
+      "news create/edit, home feed, comments, admin view and absolute smile URLs in RSS",
+      "forum topic/reply, member edit, moderator edit, multiline records and author-scoped admin smiles",
+      "guestbook, administrator answer, mini-chat and admin chat, including moderation views",
+      "gallery descriptions, image detail, comments and moderation",
+      "announcements list/detail/moderation and profile About me",
+      "private messages, sent and received, with temporary accounts only",
+      "poll question/options, results and archive",
+      "pyramid messages, history and home rendering",
+      "all seven themes, inline size bounds and valid asset paths on every checked page"
+    ],
+    "views": [
+      "/news/index.php",
+      "/news/komm.php?id=2",
+      "/mpanel/news.php",
+      "/index.php",
+      "/forum/topic.php?fid=1&id=1",
+      "/mpanel/forum.php?act=topic&fid=1&id=1",
+      "/book/index.php",
+      "/mpanel/book.php",
+      "/chat/index.php",
+      "/mpanel/chat.php",
+      "/mpanel/adminchat.php",
+      "/gallery/index.php",
+      "/gallery/index.php?action=showimg&gid=smile-test.gif",
+      "/mpanel/gallery.php",
+      "/gallery/index.php?action=komm&gid=smile-test.gif",
+      "/board/index.php?action=board&id=987",
+      "/board/index.php?action=view&id=987&bid=1",
+      "/mpanel/board.php?action=board&id=987",
+      "/pages/anketa.php?uz=SmileAuthor",
+      "/pages/privat.php?action=output",
+      "/pages/privat.php",
+      "/votes/index.php",
+      "/votes/vote.php",
+      "/votes/allvotes.php",
+      "/pyramid/history.php"
+    ],
+    "device_browser_qa": "Not performed",
+    "syntax_files": 177
   }
 }

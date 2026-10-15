@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "mkdir -p .test-site && tar -xzf motor-source.tar.gz -C .test-site && tar -xzf motor-code.tar.gz -C .test-site && node checks/themes.mjs .test-site && node checks/attachments.mjs .test-site"
+    "test": "mkdir -p .test-site && tar -xzf motor-source.tar.gz -C .test-site && tar -xzf motor-code.tar.gz -C .test-site && node checks/themes.mjs .test-site && node checks/attachments.mjs .test-site && node checks/smiles.mjs .test-site"
   },
   "devDependencies": {
     "@php-wasm/node": "3.1.43",
