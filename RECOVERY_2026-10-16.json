@@ -1,0 +1,33 @@
+{
+  "recovered_at_utc": "2026-10-16T08:43:09.423358+00:00",
+  "source_chat": "Создание образцов сайта",
+  "source_commit": "710b9aaad04aaacc58cd34198b28fb2a919c1dcf",
+  "observed_remote_main": "c389eba86084c0ab671ac56b8424be84d5529c9e",
+  "release": "2026-10-15-tags-avatars-r1",
+  "application_files_equal_previous_working_copy": true,
+  "changed_php_js_css_sources": 19,
+  "avatar_files": 402,
+  "avatar_size": [
+    128,
+    128
+  ],
+  "original_avatar_filenames_preserved": true,
+  "npm_test": "passed",
+  "tags_browser_test": "passed",
+  "php": {
+    "files": 191,
+    "errors": []
+  },
+  "functional_http_requests": 617,
+  "tag_picker_forms": 27,
+  "browser_layouts": 60,
+  "browser_js_errors": [],
+  "browser_unexpected_dialogs": [],
+  "browser_posts": 0,
+  "deployment_performed_in_this_chat": false,
+  "limitations": [
+    "PHP 8.4 was exercised through the existing WebAssembly runtime; native Docker build was not run because Docker is not installed.",
+    "Browser checks used Chromium mobile emulation, not a physical phone.",
+    "Security checks cover changed and related paths; the legacy password scheme is preserved per the owner instruction."
+  ]
+}

@@ -1,0 +1,554 @@
+{
+  "passed": [
+    "all 27 PHP-generated message/comment/edit forms get functional tag pickers without POST",
+    "12 formatting tags, caret/selection, validated HTTPS links, search, keyboard, maxlength and text escaping",
+    "multiple inputs, switching smile/tag panels, one visible panel, outside dismissal",
+    "60 layouts across all 12 themes, mobile/landscape/desktop, 44px targets, bounded panel and 200% text",
+    "128px avatars load and fit narrow screens; real DOM has no injected scripts, handlers or unsafe links"
+  ],
+  "measurements": [
+    {
+      "width": 320,
+      "theme": "lesika_dvor",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_gazeta",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_gostinaya",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_solnce",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_vecher",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_albom",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_uyut",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_web_terrace",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_web_press",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_web_garden",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_web_coffee",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 320,
+      "theme": "lesika_web_evening",
+      "h": 232,
+      "l": 33,
+      "r": 287,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_dvor",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_gazeta",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_gostinaya",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_solnce",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_vecher",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_albom",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_uyut",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_web_terrace",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_web_press",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_web_garden",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_web_coffee",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 360,
+      "theme": "lesika_web_evening",
+      "h": 232,
+      "l": 36,
+      "r": 324,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_dvor",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_gazeta",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_gostinaya",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_solnce",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_vecher",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_albom",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_uyut",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_web_terrace",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_web_press",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_web_garden",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_web_coffee",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 390,
+      "theme": "lesika_web_evening",
+      "h": 232,
+      "l": 36,
+      "r": 354,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_dvor",
+      "h": 151.1875,
+      "l": 126,
+      "r": 614,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_gazeta",
+      "h": 151.1875,
+      "l": 126,
+      "r": 614,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_gostinaya",
+      "h": 151.1875,
+      "l": 126,
+      "r": 614,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_solnce",
+      "h": 151.1875,
+      "l": 126,
+      "r": 614,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_vecher",
+      "h": 151.1875,
+      "l": 126,
+      "r": 614,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_albom",
+      "h": 151.1875,
+      "l": 126,
+      "r": 614,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_uyut",
+      "h": 151.1875,
+      "l": 126,
+      "r": 614,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_web_terrace",
+      "h": 151.1875,
+      "l": 36,
+      "r": 704,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_web_press",
+      "h": 151.1875,
+      "l": 36,
+      "r": 704,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_web_garden",
+      "h": 151.1875,
+      "l": 36,
+      "r": 704,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_web_coffee",
+      "h": 151.1875,
+      "l": 36,
+      "r": 704,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 740,
+      "theme": "lesika_web_evening",
+      "h": 151.1875,
+      "l": 36,
+      "r": 704,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_dvor",
+      "h": 232,
+      "l": 476,
+      "r": 964,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_gazeta",
+      "h": 232,
+      "l": 476,
+      "r": 964,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_gostinaya",
+      "h": 232,
+      "l": 476,
+      "r": 964,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_solnce",
+      "h": 232,
+      "l": 476,
+      "r": 964,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_vecher",
+      "h": 232,
+      "l": 476,
+      "r": 964,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_albom",
+      "h": 232,
+      "l": 476,
+      "r": 964,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_uyut",
+      "h": 232,
+      "l": 476,
+      "r": 964,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_web_terrace",
+      "h": 232,
+      "l": 195,
+      "r": 995,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_web_press",
+      "h": 232,
+      "l": 165,
+      "r": 965,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_web_garden",
+      "h": 232,
+      "l": 185,
+      "r": 985,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_web_coffee",
+      "h": 232,
+      "l": 365,
+      "r": 1165,
+      "overflow": false,
+      "scroll": true
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_web_evening",
+      "h": 232,
+      "l": 205,
+      "r": 1005,
+      "overflow": false,
+      "scroll": true
+    }
+  ],
+  "jsErrors": [],
+  "unexpectedDialogs": [],
+  "posts": 0
+}

@@ -138,7 +138,7 @@ async function capture(url,role,expectedCount){
  const marker=(r.text.match(/data-smile-picker/g)||[]).length;assert.ok(marker>0,url+' missing field marker');if(expectedCount)assert.equal(marker,expectedCount,url);
  const json=r.text.match(/<script type="application\/json" id="motor-smile-data">([\s\S]*?)<\/script>/);assert.ok(json,url+' missing catalogue');
  const groups=JSON.parse(json[1]);assert.equal(groups.find(g=>g.id==='smiles').items.length,105);assert.equal(groups.find(g=>g.id==='emoji').items.length,32);assert.equal(groups.some(g=>g.id==='smiles2'),role==='admin');
- assert.equal((r.text.match(/smile-picker\.js\?v=picker1/g)||[]).length,1,url+' duplicate picker');
+ assert.equal((r.text.match(/smile-picker\.js\?v=tags1/g)||[]).length,1,url+' duplicate picker');
  assert.ok(!r.text.includes("tag(' :"),url+' old icon strip');
  const name=`${role}-${fixtures.length}.html`;writeFileSync(new URL(name,fixturesDir),r.text);fixtures.push({url,role,file:name,fields:marker});return r;
 }

@@ -33,3 +33,17 @@ foreach ($themes as $id => $theme) {
 }
 foreach (['responsive.css', 'touch.js', 'gallery.css', 'gallery.js'] as $asset) if (!is_file($root.'/assets/lesika/'.$asset)) throw new RuntimeException('Missing touch asset');
 echo 'PASS: 12 themes including five responsive web themes; shared touch assets'.PHP_EOL;
+
+require_once $root.'/includes/bbcode.php';
+if (motor_bb_render('[b]Тест[/b]') !== '<b>Тест</b>' ||
+    !str_contains(motor_bb_render('[url=https://example.test]Сайт[/url]'), 'href="https://example.test"') ||
+    str_contains(motor_bb_render('[url=javascript:alert(1)]X[/url]'), '<a ') ||
+    str_contains(motor_bb_render('<script>alert(1)</script>'), '<script')) throw new RuntimeException('BBCode security regression');
+$avatarCount = 0;
+foreach (['avators','avators2'] as $folder) foreach (glob($root.'/images/'.$folder.'/*.gif') as $file) {
+    $size = getimagesize($file);
+    if (!$size || $size[0] !== 128 || $size[1] !== 128 || $size[2] !== IMAGETYPE_GIF) throw new RuntimeException('Invalid avatar asset');
+    $avatarCount++;
+}
+if ($avatarCount !== 402 || !is_file($root.'/assets/lesika/tag-picker.js')) throw new RuntimeException('Incomplete editor/avatar assets');
+echo 'PASS: native safe BBCode renderer, HTTPS links and '.$avatarCount.' avatars at 128px'.PHP_EOL;

@@ -7,6 +7,11 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 ADD motor-source.tar.gz /var/www/html/
 ADD motor-code.tar.gz /var/www/html/
+COPY code-update/ /tmp/motor-update/code-update/
+COPY avatar-artwork/ /tmp/motor-update/avatar-artwork/
+COPY CODE_UPDATE_SHA256 apply-code-update.sh /tmp/motor-update/
+RUN sh /tmp/motor-update/apply-code-update.sh /var/www/html \
+ && rm -rf /tmp/motor-update
 RUN mkdir -p /opt/motor-seed \
  && mv /var/www/html/local /opt/motor-seed/local \
  && ln -s /data/local /var/www/html/local \

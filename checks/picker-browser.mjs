@@ -39,7 +39,7 @@ try {
  for(const f of fixtures.filter(f=>f.fields)){
   await load(f);assert.equal(await page.locator('.smile-picker-toggle').count(),f.fields,f.url);
   assert.equal(await page.locator('.smile-picker-panel:visible').count(),0,f.url);
-  await trigger().click();assert.equal(await page.locator('.smile-picker-panel:visible').count(),1,f.url);
+  await field().fill('');await trigger().click();assert.equal(await page.locator('.smile-picker-panel:visible').count(),1,f.url);
   assert.equal(await page.locator('.smile-picker-choice').count(),105,f.url);
   const expectedAdmin=f.role==='admin' && await field().getAttribute('data-smile-scope')!=='common';
   assert.equal(await page.getByRole('button',{name:'Админ',exact:true}).count(),expectedAdmin?1:0,f.url);

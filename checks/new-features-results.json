@@ -1,0 +1,24 @@
+{
+  "requests": 38,
+  "passed": [
+    "avatar selection/purchase, duplicate charge prevention, CSRF, GET rejection, invalid types/paths, malformed upload and array-safe image serving",
+    "all 402 GIF avatars, strict renderer tag allowlist, nesting, literal code, HTTP(S) validation, XSS escaping and legacy smile cleanup"
+  ],
+  "avatars": 402,
+  "security_outputs": [
+    "&lt;script&gt;alert(1)&lt;/script&gt;",
+    "&lt;/textarea&gt;&lt;img src=x onerror=alert(1)&gt;",
+    "[url=javascript:alert(1)]x[/url]",
+    "[url=data:text/html,x]x[/url]",
+    "[url=//evil.test]x[/url]",
+    "[url=java&#115;cript:alert(1)]x[/url]",
+    "[url=<a href=\"https://good.test&amp;quot\" rel=\"ugc nofollow noopener\">https://good.test&quot</a>; onmouseover=&quot;alert(1)]x[/url]",
+    "[url=https://user:secret@example.test]x[/url]",
+    "[url=https://example.test\\evil]x[/url]",
+    "<a href=\"https://example.test\" rel=\"ugc nofollow noopener\">&#60;img src=x onerror=alert(1)&#62;</a>",
+    "<code class=\"motor-code\">&lt;/code&gt;&lt;svg/onload=alert(1)&gt;</code>",
+    "<b><i>crossed[/b]</i></b>",
+    "[url=<a href=\"https://example.test\" rel=\"ugc nofollow noopener\">https://example.test</a>]<code class=\"motor-code\">literal</code>[/url]"
+  ],
+  "cases": 13
+}
