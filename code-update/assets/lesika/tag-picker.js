@@ -16,9 +16,10 @@
   const hint = make('p','tag-picker-hint','Выделите текст или вставьте тег в место курсора.');
   const grid = make('div','tag-picker-grid');
   const linkBox = make('div','tag-picker-link'); linkBox.hidden = true;
-  const label = make('label','','Адрес ссылки (http или https)');
-  const url = make('input','tag-picker-url'); url.type = 'url'; url.placeholder = 'https://'; url.maxLength = 2048; url.setAttribute('aria-label','Адрес ссылки'); label.append(url);
-  const addLink = button('tag-picker-add-link','Вставить ссылку'); linkBox.append(label,addLink);
+  const label = make('label','','Адрес ссылки');
+  const url = make('input','tag-picker-url'); url.type = 'text'; url.inputMode = 'url'; url.autocapitalize = 'off'; url.spellcheck = false; url.placeholder = 'сайт.ру'; url.maxLength = 2048; url.setAttribute('aria-label','Адрес ссылки'); label.append(url);
+  const linkHint = make('p','tag-picker-hint','Можно без https:// — добавится автоматически.');
+  const addLink = button('tag-picker-add-link','Вставить ссылку'); linkBox.append(label,linkHint,addLink);
   panel.append(bar,hint,grid,linkBox);
   let current = null;
   const remember = s => { if (document.activeElement === s.field) { s.start = s.field.selectionStart; s.end = s.field.selectionEnd; } };
@@ -44,9 +45,18 @@
     if (!grid.children.length) grid.append(make('p','','Теги не найдены'));
   };
   const putLink = () => {
-    const value = url.value.trim(); let valid = false;
-    try { const u = new URL(value); valid = /^https?:\/\//i.test(value) && ['http:','https:'].includes(u.protocol) && !!u.hostname && !u.username && !u.password && !/[\s<>"'\[\]\\]/.test(value); } catch { /* invalid address */ }
-    if (!valid) { current.status.textContent = 'Укажите корректную ссылку с http:// или https://.'; url.setAttribute('aria-invalid','true'); focus(url); return; }
+    const raw = url.value.trim(), explicit = /^https?:\/\//i.test(raw);
+    const value = explicit ? raw : 'https://' + raw; let valid = false;
+    try {
+      const u = new URL(value);
+      // A bare address must start with a domain, optionally followed by a port.
+      // Do not reinterpret another URI scheme or a relative path as a website.
+      const bare = !/^[/?#]/.test(raw) && u.hostname.includes('.') &&
+        (!/^[a-z][a-z\d+.-]*:/i.test(raw) || /^[^/?#:]+:\d+(?:[/?#]|$)/.test(raw));
+      valid = (explicit || bare) && value.length <= 2048 && ['http:','https:'].includes(u.protocol) &&
+        !!u.hostname && !u.username && !u.password && !/[\s\x00-\x1f\x7f<>"'\[\]\\]/.test(value);
+    } catch { /* invalid address */ }
+    if (!valid) { current.status.textContent = 'Укажите адрес сайта, например сайт.ру или https://сайт.ру.'; url.setAttribute('aria-invalid','true'); focus(url); return; }
     url.removeAttribute('aria-invalid'); insert('url', value);
   };
   fields.forEach((field,index)=> {

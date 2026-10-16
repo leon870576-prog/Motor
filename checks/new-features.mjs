@@ -88,6 +88,9 @@ $cases=['<script>alert(1)</script>','</textarea><img src=x onerror=alert(1)>','[
 $out=[];foreach($cases as $c){$o=bb_code($c);ok(!preg_match('~<(?:script|svg|iframe|object)\\b|<img[^>]+onerror|href="(?:javascript|data):~i',$o),'unsafe output');$out[]=$o;}
 $clean=bb_code('<img src="/images/smiles/hello.gif" onerror="alert(1)" />');ok(!str_contains($clean,'onerror'),'legacy smile attributes stripped');
 ok(str_contains(bb_code('[url=https://example.test/?a=1&amp;b=2]Сайт[/url]'),'href="https://example.test/?a=1&amp;b=2"'),'HTTPS query');
+foreach(['https://сайт.ру','https://пример.рф/страница?а=1&б=2#раздел','https://example.com:8443/path','http://example.com/path'] as $address) {
+    ok(str_contains(bb_code('[url='.$address.']Сайт[/url]'),'href="'.htmlspecialchars($address,ENT_QUOTES,'UTF-8').'"'),'normalised picker URL rendered: '.$address);
+}
 ok(!str_contains(motor_avatar_image('images/avators/1.gif" onerror="x'), 'onerror'),'avatar attribute injection');
 $n=0;foreach(['/www/images/avators/','/www/images/avators2/'] as $dir)foreach(glob($dir.'*.gif') as $f){$sz=getimagesize($f);ok($sz[0]===128 && $sz[1]===128 && $sz[2]===IMAGETYPE_GIF,'avatar dimensions');$n++;}ok($n===402,'all avatar names');
 echo json_encode(['avatars'=>$n,'security_outputs'=>$out,'cases'=>count($cases)],JSON_UNESCAPED_UNICODE);

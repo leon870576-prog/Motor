@@ -136,7 +136,7 @@ const fixtures=[];const fixturesDir=new URL('./fixtures/',import.meta.url);mkdir
 async function capture(url,role,expectedCount){
  const r=await req(url);assert.equal(r.httpStatusCode,200,url);
  const marker=(r.text.match(/data-smile-picker/g)||[]).length;assert.ok(marker>0,url+' missing field marker');if(expectedCount)assert.equal(marker,expectedCount,url);
- const json=r.text.match(/<script type="application\/json" id="motor-smile-data">([\s\S]*?)<\/script>/);assert.ok(json,url+' missing catalogue');assert.ok(r.text.includes('tag-picker.js?v=tags1'),url+' missing tag picker');
+ const json=r.text.match(/<script type="application\/json" id="motor-smile-data">([\s\S]*?)<\/script>/);assert.ok(json,url+' missing catalogue');assert.ok(r.text.includes('tag-picker.js?v=tags2'),url+' missing tag picker');
  const groups=JSON.parse(json[1]);assert.equal(groups.find(g=>g.id==='smiles').items.length,105);assert.equal(groups.find(g=>g.id==='emoji').items.length,32);assert.equal(groups.some(g=>g.id==='smiles2'),role==='admin');
  assert.equal((r.text.match(/smile-picker\.js\?v=tags1/g)||[]).length,1,url+' duplicate picker');
  assert.ok(!r.text.includes("tag(' :"),url+' old icon strip');

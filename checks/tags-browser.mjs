@@ -52,10 +52,20 @@ try {
  await field().fill('До после');await field().evaluate(el=>{el.focus();el.setSelectionRange(3,3);});await trigger().tap();await page.getByRole('button',{name:'Вставить тег: Жирный',exact:true}).tap();
  assert.equal(await field().inputValue(),'До [b][/b]после');assert.equal(await field().evaluate(el=>el.selectionStart),6);
  await field().fill('Сайт');await field().evaluate(el=>{el.focus();el.setSelectionRange(0,4);});await trigger().tap();await page.getByRole('button',{name:'Вставить тег: Ссылка',exact:true}).tap();
- for(const address of ['javascript:alert(1)','data:text/html,x','https://user:pass@example.test','https://x.test/"onerror=x']){
+ for(const address of ['', 'javascript:alert(1)', 'javascript://example.test', 'data:text/html,x', 'ftp://example.test', 'https://user:pass@example.test', 'user@example.test', 'https://x.test/"onerror=x', '/example.test', '?example.test', '#example.test', 'example.test/[b]', 'example.test\\bad', 'не адрес.ру']){
   await page.getByRole('textbox',{name:'Адрес ссылки',exact:true}).fill(address);await page.getByRole('button',{name:'Вставить ссылку',exact:true}).tap();assert.equal(await field().inputValue(),'Сайт');
  }
  await page.getByRole('textbox',{name:'Адрес ссылки',exact:true}).fill('https://example.test/path?a=1&b=2');await page.getByRole('button',{name:'Вставить ссылку',exact:true}).tap();assert.equal(await field().inputValue(),'[url=https://example.test/path?a=1&b=2]Сайт[/url]');
+ for(const [address,expected] of [
+  ['сайт.ру','https://сайт.ру'],['пример.рф/страница?а=1&б=2#раздел','https://пример.рф/страница?а=1&б=2#раздел'],
+  ['example.com','https://example.com'],[' www.example.com/path?q=1#part ','https://www.example.com/path?q=1#part'],
+  ['example.com:8443/path','https://example.com:8443/path'],['http://example.com/path','http://example.com/path']
+ ]) {
+  await field().fill('Сайт');await field().evaluate(el=>{el.focus();el.setSelectionRange(0,4);});await trigger().tap();await page.getByRole('button',{name:'Вставить тег: Ссылка',exact:true}).tap();
+  const addressField=page.getByRole('textbox',{name:'Адрес ссылки',exact:true});await addressField.fill(address);await addressField.press('Enter');
+  assert.equal(await field().inputValue(),`[url=${expected}]Сайт[/url]`);assert.equal(await page.locator('.tag-picker-url').evaluate(e=>e.validity.valid),true,'bare address must not block form submission');
+ }
+ assert.equal(posts,0);pass('bare Latin/Cyrillic domains, paths, queries and ports get HTTPS; explicit HTTP preserved; invalid schemes rejected without form submission');
  await trigger().tap();await page.getByRole('searchbox',{name:'Поиск тега'}).fill('жир');assert.equal(await page.locator('.tag-picker-choice').count(),1);
  await page.getByRole('searchbox',{name:'Поиск тега'}).press('Enter');assert.equal(posts,0);
  await page.getByRole('searchbox',{name:'Поиск тега'}).fill('<svg/onload=alert(1)>');assert.equal(await page.locator('.tag-picker-choice').count(),0);await page.keyboard.press('Escape');assert.equal(await page.locator('.tag-picker-panel:visible').count(),0);

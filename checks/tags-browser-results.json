@@ -1,6 +1,7 @@
 {
   "passed": [
     "all 27 PHP-generated message/comment/edit forms get functional tag pickers without POST",
+    "bare Latin/Cyrillic domains, paths, queries and ports get HTTPS; explicit HTTP preserved; invalid schemes rejected without form submission",
     "12 formatting tags, caret/selection, validated HTTPS links, search, keyboard, maxlength and text escaping",
     "multiple inputs, switching smile/tag panels, one visible panel, outside dismissal",
     "60 layouts across all 12 themes, mobile/landscape/desktop, 44px targets, bounded panel and 200% text",

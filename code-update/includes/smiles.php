@@ -107,5 +107,5 @@ function motor_smile_picker_assets() {
     array_splice($groups, 1, 0, [['id' => 'emoji', 'label' => 'Эмодзи', 'items' => $items]]);
     echo '<script type="application/json" id="motor-smile-data">'.json_encode($groups, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR).'</script>';
     echo '<script src="'.htmlspecialchars(BASEDIR.'assets/lesika/smile-picker.js?v=tags1', ENT_QUOTES, 'UTF-8').'" defer></script>';
-    echo '<script src="'.htmlspecialchars(BASEDIR.'assets/lesika/tag-picker.js?v=tags1', ENT_QUOTES, 'UTF-8').'" defer></script>';
+    echo '<script src="'.htmlspecialchars(BASEDIR.'assets/lesika/tag-picker.js?v=tags2', ENT_QUOTES, 'UTF-8').'" defer></script>';
 }
