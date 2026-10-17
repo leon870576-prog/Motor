@@ -5,8 +5,8 @@
     {
       "accept": "(absent)",
       "encoding": "identity",
-      "bytes": 17750,
-      "decodedBytes": 17750
+      "bytes": 17749,
+      "decodedBytes": 17749
     },
     {
       "accept": "",
@@ -29,14 +29,14 @@
     {
       "accept": "deflate",
       "encoding": "deflate",
-      "bytes": 2738,
-      "decodedBytes": 17773
+      "bytes": 2739,
+      "decodedBytes": 17774
     },
     {
       "accept": "gzip, deflate",
       "encoding": "gzip",
-      "bytes": 2750,
-      "decodedBytes": 17773
+      "bytes": 2751,
+      "decodedBytes": 17774
     },
     {
       "accept": "GZIP",

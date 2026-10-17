@@ -1,14 +1,15 @@
 {
   "runtime": "PHP 8.4 WASM",
-  "requests": 103,
+  "requests": 107,
   "dialog": {
-    "assertions": 127,
-    "topics": 37,
-    "variants": 171
+    "assertions": 578,
+    "topics": 52,
+    "variants": 267
   },
   "passed": [
     "admin settings, legacy links, bounds, custom phrases, CSRF and stale-save protection",
-    "127 conversation checks; 37 topics and 171 answers",
+    "578 conversation checks; 52 topics and 267 answers",
+    "real send: greeting without name, question priority, combined question, restored flowers and per-user context",
     "human + Nastya in one response, idempotent retry, conflict recovery, rejected inputs, unchanged 204 and compressed JSON",
     "member/guest access, author path validation, stored markup, metadata privacy and POST authorization",
     "scheduled joke and quiz, read-only guest refresh, no duplicate ticks, correct answer, timeout wait and welcome limit",

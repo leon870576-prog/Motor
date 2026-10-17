@@ -1,15 +1,17 @@
 <?php
 if (!defined('BASEDIR')) { http_response_code(403); exit; }
+require_once __DIR__.'/nastya-legacy.php';
 
 function motor_nastya_topics(): array {
     static $topics;
-    return $topics ??= [
+    if ($topics !== null) return $topics;
+    $topics = [
         'identity'=>['\b(бот\w*|робот\w*|настоящ\w*|живой|живая|человек|искусственн\w*)\b',[
             'Я Настя, чат-бот Лесики 🙂 Могу поддержать разговор, но за живого человека себя не выдаю.',
             'Да, я виртуальная собеседница. Давай познакомимся: о чём тебе интересно поболтать?',
             'Я бот этого чата. Стараюсь отвечать по теме, а если что-то не пойму — лучше переспрошу.'
         ]],
-        'name'=>['\b(как тебя зовут|твое имя|кто ты|познаком\w*)\b',[
+        'name'=>['\b(как (?:тебя )?зовут|твое имя|кто ты)\b',[
             'Я Настя 🙂 В чате мой ник — Настюха. А как к тебе обращаться?',
             'Давай знакомиться! Я Настя, виртуальная собеседница Лесики. Что привело тебя в чат?',
             'Можно просто Настя. Как проходит твой день?',
@@ -37,14 +39,14 @@ function motor_nastya_topics(): array {
             'До встречи в чате. Береги себя!', 'Хорошего отдыха! Продолжим разговор в следующий раз.',
             'Ладно, не задерживаю 🙂 Удачного дня!'
         ]],
-        'wellbeing'=>['\b(как дела|как ты|как жизнь|как настроение|что нового|как поживаешь)\b',[
-            'Я на связи 🙂 А у тебя день скорее удачный или утомительный?',
-            'Готова поболтать. Что сегодня порадовало тебя?',
-            'Здесь всё спокойно. А у тебя что нового?',
-            'Спасибо, что спросил 🙂 Давай лучше про тебя: как прошёл день?',
-            'Разговор уже начался — это хорошо! Какое у тебя сейчас настроение?'
+        'wellbeing'=>['\b(как (?:(?:у тебя|твои|твое) )?(?:дела|делишки|делишечки|оно|жизнь|настроение)|как ты(?! (?:думаешь|считаешь|узнала|работаешь))|что нового|как поживаешь|ты как(?! (?:думаешь|считаешь|узнала|работаешь))|как (?:ты )?себя чувствуешь)\b',[
+            'Хорошо, спасибо 🙂 А у тебя как дела?',
+            'Всё в порядке! Как проходит твой день?',
+            'Отлично, рада пообщаться 🙂 Как твоё настроение?',
+            'Нормально, спасибо, что спросил. У тебя что нового?',
+            'Всё спокойно 🙂 А твой день как складывается?'
         ]],
-        'activity'=>['\b(что делаешь|чем занимаешься|чем занята|что ты делаешь)\b',[
+        'activity'=>['\b(что (?:ты )?делаешь|чем (?:ты )?занимаешься|чем (?:ты )?занята)\b',[
             'Отвечаю тебе в чате 🙂 А ты сейчас отдыхаешь или ещё занят делами?',
             'Поддерживаю разговор здесь. Что у тебя сейчас на повестке?',
             'Читаю твоё сообщение и подбираю ответ. О чём хочешь поговорить?',
@@ -225,7 +227,7 @@ function motor_nastya_topics(): array {
             'Давай проще: что тебе ближе из того, что уже обсуждали?',
             'Тогда без сложного выбора 🙂 Как проходит сегодняшний день?'
         ]],
-        'question'=>['\b(почему|зачем|как думаешь|посоветуй|помоги|что значит)\b',[
+        'question'=>['\b(почему|зачем|как (?:ты )?думаешь|посоветуй|помоги|что значит)\b',[
             'Уточни немного: о какой ситуации речь?',
             'Не хочу отвечать наугад. Расскажешь подробнее?',
             'Какой результат тебе нужен? С этого будет проще начать.',
@@ -239,6 +241,25 @@ function motor_nastya_topics(): array {
             'Я могу ошибиться с темой. Подскажи, о чём сейчас речь?'
         ]]
     ];
+    foreach (motor_nastya_legacy_topics() as $key=>[$pattern,$answers]) {
+        if (isset($topics[$key])) {
+            $topics[$key][0]='(?:'.$topics[$key][0].')|(?:'.$pattern.')';
+            $topics[$key][1]=array_values(array_unique(array_merge($topics[$key][1],$answers)));
+        } else $topics[$key]=[$pattern,$answers];
+    }
+    $topics['wellbeing_activity']=['',[
+        'Хорошо, спасибо! Сейчас общаюсь с тобой 🙂 А у тебя как дела, чем занят?',
+        'Всё в порядке 🙂 Отвечаю в чате. Как проходит твой день?',
+        'Отлично! Болтаю здесь с вами. А ты сейчас отдыхаешь или занимаешься делами?',
+        'Нормально, спасибо. Поддерживаю разговор в чате 🙂 Что у тебя нового?'
+    ]];
+    $topics['wellbeing_reply']=['',[
+        'Рада слышать 🙂 Чем сегодня занимаешься?',
+        'Хорошо 🙂 Было что-нибудь интересное за день?',
+        'Вот и славно. О чём хочешь поболтать?',
+        'Здорово 🙂 Какие планы на оставшуюся часть дня?'
+    ]];
+    return $topics;
 }
 
 function motor_nastya_plain(string $text): string {
@@ -258,18 +279,50 @@ function motor_nastya_choose(array $answers, array &$context): string {
     $context['recent'] = array_slice(array_merge($recent,[hash('sha256',$answer)]),-5);
     return $answer;
 }
+// Resolve the question before a greeting or a generic keyword such as «что».
+function motor_nastya_intent(string $text,array $topics): string {
+    $matched=[];
+    foreach ($topics as $key=>[$pattern]) if ($pattern!=='' && preg_match('~(*UCP)'.$pattern.'~u',$text)) $matched[$key]=true;
+    if (isset($matched['identity'])) return 'identity';
+    if (isset($matched['wellbeing'],$matched['activity'])) return 'wellbeing_activity';
+    foreach (['identity','name','age','location','wellbeing','activity','acquaintance','flowers','cake','advertising','swearing','clever','affection','thanks'] as $key) if (isset($matched[$key])) return $key;
+    $generic=['greeting','positive','question','why','who','what','desire','invitation'];
+    foreach ($matched as $key=>$_) if (!in_array($key,$generic,true)) return $key;
+    foreach (['why','desire','invitation','question','who','what','positive','greeting'] as $key) if (isset($matched[$key])) return $key;
+    return 'fallback';
+}
+function motor_nastya_greeting(string $text): string {
+    if (!preg_match('~(*UCP)^(?:(?:настя|настюха|настенька|настюша|настюшка|насть|nastya)[\s\p{P}\p{S}]+)?(?:всем\s+)?(привет\w*|здравствуй\w*|здаров\w*|здорово|здрасьте|хай|салют|hello|hi|добр(?:ое утро|ый день|ый вечер)|с возвращением)\b~u',$text,$m)) return '';
+    return match($m[1]) {'доброе утро'=>'Доброе утро!', 'добрый день'=>'Добрый день!', 'добрый вечер'=>'Добрый вечер!', default=>'Привет!'};
+}
+function motor_nastya_starter(string $text): bool {
+    // A plain greeting/small-talk question may start a conversation without a bot name.
+    // «Привет, Ваня, как дела?» and quoted greetings are not generic invitations.
+    $rest=preg_replace('~(*UCP)^(?:(?:всем\s+)?(?:привет\w*|здравствуй\w*|здаров\w*|здорово|здрасьте|хай|салют|hello|hi|добр(?:ое утро|ый день|ый вечер)|с возвращением)(?:\s+всем)?)(?=$|[\s\p{P}\p{S}])~u','',$text,1,$greeted);
+    $rest=preg_replace('~^[\s\p{P}\p{S}]+|[\s\p{P}\p{S}]+$~u','',$rest);
+    if ($greeted && $rest==='') return true;
+    if (preg_match('~(*UCP)\b(?:дела|настроение|жизнь)\s+у\s+(?!тебя\b|вас\b)\w+~u',$rest)) return false;
+    return (bool)preg_match('~(*UCP)^(?:ну\s+|а\s+)?(?:как (?:(?:у тебя|твои|твое) )?(?:дела|делишки|делишечки|оно|жизнь|настроение)|как ты\b(?! (?:думаешь|считаешь|узнала|работаешь))|как поживаешь|ты как(?! (?:думаешь|считаешь|узнала|работаешь))|что нового|что (?:ты )?делаешь|чем (?:ты )?(?:занимаешься|занята)|как (?:ты )?себя чувствуешь|как (?:тебя )?зовут|кто ты|сколько тебе лет|сколько лет тебе|ты откуда|откуда ты|где (?:ты )?живешь|ты (?:бот|робот|человек))(?=$|[\s\p{P}\p{S}])~u',$rest);
+}
 function motor_nastya_reply(string $message, array &$context, array $settings, int $now): ?string {
     if (!$settings['bot_enabled']) return null;
-    $text = motor_nastya_plain($message);
+    $text = motor_nastya_plain($message);$topics=motor_nastya_topics();
     $direct = motor_nastya_mentioned($text);
-    if (preg_match('~^\s*\[b\]([^\[]+)\[/b\]\s*,~iu',$message,$to) && !motor_nastya_mentioned(motor_nastya_plain($to[1]))) return null;
-    $general = (bool)preg_match('~(*UCP)\b(?:всем привет|привет всем|всем пока|всем добр\w*|хочу общения)\b~u',$text);
-    $continuing = ($context['at'] ?? 0) + $settings['context_seconds'] >= $now;
-    if (!$direct && !$general && !($settings['bot_mode']==='conversation' && $continuing)) return null;
+    if (preg_match('~^\s*\[b\]([^\[]+)\[/b\]\s*,~iu',$message,$to)) {
+        $recipient=motor_nastya_plain($to[1]);
+        if (!motor_nastya_mentioned($recipient) && !motor_nastya_starter($recipient)) return null;
+    }
+    $general = (bool)preg_match('~(*UCP)\b(?:всем привет|привет всем|всем пока|всем счастливо|всем удачи|всем добр\w*|хочу общения)\b~u',$text);
+    $continuing = !empty($context['at']) && $context['at'] + $settings['context_seconds'] >= $now;
+    $starter = motor_nastya_starter($text);
+    if (!$direct && !$general && !$starter && !($settings['bot_mode']==='conversation' && $continuing)) return null;
     if (($context['at'] ?? 0) + $settings['bot_cooldown'] > $now) return null;
-    $topics = motor_nastya_topics(); $intent = 'fallback'; $answers = [];
-    foreach ($topics as $key=>[$pattern,$choices]) {
-        if ($pattern !== '' && preg_match('~(*UCP)'.$pattern.'~u',$text)) { $intent=$key; $answers=$choices; break; }
+    $intent=motor_nastya_intent($text,$topics);$answers=$topics[$intent][1];
+    if ($continuing && in_array($context['topic']??'',['greeting','wellbeing','wellbeing_activity','wellbeing_reply'],true)) {
+        if (in_array($intent,['positive','thanks','fallback'],true) && preg_match('~(*UCP)\b(?:хорошо|нормально|отлично|неплохо|супер|потихоньку|все в порядке)\b~u',$text)) $intent='wellbeing_reply';
+        if ($intent==='fallback' && preg_match('~(*UCP)\b(?:не очень|так себе)\b~u',$text)) $intent='sadness';
+        if (preg_match('~(*UCP)^(?:а )?(?:у тебя|ты)[?!. ]*$~u',$text)) $intent='wellbeing';
+        $answers=$topics[$intent][1];
     }
     // Custom phrases supplement conversation; identity remains explicit.
     if ($intent !== 'identity') foreach ($settings['custom_rules'] as $rule) {
@@ -281,7 +334,9 @@ function motor_nastya_reply(string $message, array &$context, array $settings, i
         $previous=$context['topic'] ?? '';
         if (isset($topics[$previous]) && !in_array($previous,['identity','goodbye','fallback'],true)) { $intent=$previous;$answers=$topics[$previous][1]; }
     }
-    $answer=motor_nastya_choose($answers ?: $topics['fallback'][1],$context);
+    $answer=motor_nastya_choose($answers,$context);
+    $hello=motor_nastya_greeting($text);
+    if ($hello!=='' && !in_array($intent,['greeting','goodbye'],true) && motor_nastya_greeting(motor_nastya_plain($answer))==='') $answer=$hello.' '.$answer;
     $context['at']=$intent==='goodbye' ? 0 : $now;
     $context['topic']=$intent;
     return $answer;

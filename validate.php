@@ -70,3 +70,13 @@ if (motor_nastya_reply('да', $chatContext, $chatSettings, 10001) === null || $
 if (motor_nastya_reply('[b]Другой[/b], привет', $chatContext, $chatSettings, 10002) !== null) throw new RuntimeException('Conversation recipient');
 foreach (['chat.css','chat.js'] as $asset) if (!is_file($root.'/assets/lesika/'.$asset)) throw new RuntimeException('Missing chat asset');
 echo 'PASS: native Nastya Unicode topics, conversational context, recipient isolation and chat assets'.PHP_EOL;
+
+$chatContext = [];
+$helloReply = motor_nastya_reply('Привет, как дела?', $chatContext, $chatSettings, 10000);
+if ($helloReply === null || $chatContext['topic'] !== 'wellbeing' || !str_starts_with($helloReply, 'Привет! ')) throw new RuntimeException('Greeting must not hide the question');
+motor_nastya_reply('Хорошо, спасибо', $chatContext, $chatSettings, 10001);
+if ($chatContext['topic'] !== 'wellbeing_reply' || count(motor_nastya_legacy_topics()) !== 24) throw new RuntimeException('Legacy topics or small-talk continuation');
+$chatContext = [];
+motor_nastya_reply('Привет, как дела и что делаешь?', $chatContext, $chatSettings, 10000);
+if ($chatContext['topic'] !== 'wellbeing_activity') throw new RuntimeException('Combined small-talk question');
+echo 'PASS: restored 24 legacy Nastya categories, greeting/question priority and small-talk follow-up'.PHP_EOL;
