@@ -35,6 +35,11 @@ try{
  for(const f of fixtures.filter(f=>!f.url.includes('showimg'))){
   await page.setViewportSize({width:320,height:568});await load(f);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),f.url);
+  if(f.url==='/mpanel/gallery-settings.php'){
+   const watermark=page.getByLabel('Текст водяного знака',{exact:true});assert.equal(await watermark.inputValue(),'Лесика — сайт.ру');assert.equal(await watermark.getAttribute('maxlength'),'60');
+   await watermark.fill('Мой город — фотографии');assert.equal(await watermark.inputValue(),'Мой город — фотографии');assert.ok(await page.locator('#watermark-help').isVisible());
+   await page.screenshot({path:join(dir,'watermark-settings-mobile.png'),fullPage:true});
+  }
   for(const b of await page.locator('button:visible,input[type=submit]:visible,select:visible,input[type=file]:visible,.gallery-actions a:visible').all()){
    const r=await b.boundingBox();assert.ok(r.height>=43&&r.width>=43,JSON.stringify({url:f.url,r}));
   }

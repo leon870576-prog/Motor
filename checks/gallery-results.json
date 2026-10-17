@@ -1,12 +1,14 @@
 {
   "php": "8.4",
-  "requests": 267,
+  "requests": 294,
   "passed": [
     "one source of gallery settings; bounds, format allowlist, CSRF, stale settings, old panel link",
+    "watermark name: legacy fallback without migration, plain UTF-8 text, escaped form value, rejected arrays/control characters and length",
     "real 3+ MB, 4000×3000 upload; original unchanged, 960×720 preview, profile, HEAD/download and no-store",
     "JPG/JPEG/PNG/GIF/WebP validated, decoded and served without changing original bytes",
     "malformed/spoofed/oversized uploads, path traversal, arrays, orphans, CSRF and member privilege escalation denied",
     "admin settings synchronize upload form, allowed formats, limits, viewer and cache; existing originals remain readable",
+    "legacy watermark enable/disable changes existing preview bytes; custom name persists and changes cache key; original unchanged (Cyrillic drawing: native build gate)",
     "all four staff roles edit/hide/restore; admin-only settings; hidden photos inaccessible in lists, profile, comments, original and preview to guests/owner",
     "stale bulk/comment edits rejected; delete confirmation and CSRF required; exact comment removed",
     "12 warm themes share responsive gallery and viewer; upload/comment/edit/settings fixtures captured",

@@ -53,6 +53,11 @@ function motor_gallery_validate_settings(array $input): array {
     $formats=$input['formats'] ?? [];
     if (!is_array($formats) || count($formats)>5 || !$formats || count(array_filter($formats,'is_string'))!==count($formats) || array_diff($formats,['jpg','jpeg','png','gif','webp'])) throw new RuntimeException('Выберите допустимые форматы фотографий.',400);
     $out['formats']=array_values(array_unique($formats));
+    $text=$input['watermark_text'] ?? 'WapMotor';
+    if (!is_string($text) || strlen($text)>240 || !mb_check_encoding($text,'UTF-8')) throw new RuntimeException('Текст водяного знака: от 1 до 60 символов в одну строку.',400);
+    $text=trim($text);
+    if ($text==='' || mb_strlen($text,'UTF-8')>60 || preg_match('/\p{C}/u',$text)) throw new RuntimeException('Текст водяного знака: от 1 до 60 символов в одну строку.',400);
+    $out['watermark_text']=$text;
     return $out;
 }
 function motor_gallery_version(string $row): void { echo '<input type="hidden" name="record_version" value="'.hash('sha256',$row).'">'; }
@@ -81,6 +86,32 @@ function motor_gallery_image_info(string $path, array $settings): array {
     if ($w<1 || $h<1 || max($w,$h)>$settings['max_side'] || $w*$h>$settings['max_mp']*1000000) throw new RuntimeException('Фото превышает лимит размеров: '.$settings['max_side'].' px по стороне и '.$settings['max_mp'].' Мп.',400);
     return $info;
 }
+function motor_gallery_watermark(GdImage $dst,string $text): void {
+    $width=imagesx($dst);$height=imagesy($dst);
+    // Keep the established artwork until the administrator changes its name.
+    if ($text==='WapMotor') {
+        $mark=@imagecreatefromgif(BASEDIR.'images/img/copyright.gif');
+        if (!$mark) throw new RuntimeException('Не удалось прочитать подпись сайта.',500);
+        try {imagecopy($dst,$mark,max(0,$width-imagesx($mark)),max(0,$height-imagesy($mark)),0,0,min($width,imagesx($mark)),min($height,imagesy($mark)));}
+        finally {imagedestroy($mark);}
+        return;
+    }
+    $font='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf';
+    if (!is_file($font) || !function_exists('imagettftext')) throw new RuntimeException('Недоступен шрифт водяного знака.',500);
+    $size=max(10,min(18,$width/50));$box=imagettfbbox($size,0,$font,$text);
+    if (!$box) throw new RuntimeException('Не удалось измерить водяной знак.',500);
+    $left=min($box[0],$box[2],$box[4],$box[6]);$top=min($box[1],$box[3],$box[5],$box[7]);
+    $w=max($box[0],$box[2],$box[4],$box[6])-$left+12;$h=max($box[1],$box[3],$box[5],$box[7])-$top+12;
+    $mark=imagecreatetruecolor($w,$h);
+    try {
+        imagealphablending($mark,false);imagesavealpha($mark,true);imagefill($mark,0,0,imagecolorallocatealpha($mark,0,0,0,55));imagealphablending($mark,true);
+        if (!imagettftext($mark,$size,0,6-$left,6-$top,imagecolorallocate($mark,255,255,255),$font,$text)) throw new RuntimeException('Не удалось нарисовать водяной знак.',500);
+        $margin=max(0,min(8,(int)floor(min($width,$height)/10)));
+        $scale=min(1,($width-2*$margin)/$w,($height-2*$margin)/$h);
+        $tw=max(1,(int)floor($w*$scale));$th=max(1,(int)floor($h*$scale));
+        imagecopyresampled($dst,$mark,$width-$margin-$tw,$height-$margin-$th,0,0,$tw,$th,$w,$h);
+    } finally {imagedestroy($mark);}
+}
 function motor_gallery_preview(string $source, string $destination, array $settings): void {
     $info=motor_gallery_image_info($source,$settings);
     $budget=motor_media_ini_bytes(ini_get('memory_limit'));
@@ -106,12 +137,7 @@ function motor_gallery_preview(string $source, string $destination, array $setti
         try {
             imagefill($dst,0,0,imagecolorallocate($dst,255,255,255));
             imagecopyresampled($dst,$img,0,0,0,0,$width,$height,imagesx($img),imagesy($img));
-            if ($settings['watermark']) {
-                $mark=@imagecreatefromgif(BASEDIR.'images/img/copyright.gif');
-                if (!$mark) throw new RuntimeException('Не удалось прочитать подпись сайта.',500);
-                try {imagecopy($dst,$mark,max(0,$width-imagesx($mark)),max(0,$height-imagesy($mark)),0,0,min($width,imagesx($mark)),min($height,imagesy($mark)));}
-                finally {imagedestroy($mark);}
-            }
+            if ($settings['watermark']) motor_gallery_watermark($dst,$settings['watermark_text'] ?? 'WapMotor');
             if (!imagejpeg($dst,$destination,$settings['quality'])) throw new RuntimeException('Не удалось сохранить предпросмотр.',500);
         } finally { imagedestroy($dst); }
     } finally { imagedestroy($img); }
@@ -120,7 +146,7 @@ function motor_gallery_preview(string $source, string $destination, array $setti
 function motor_gallery_cache_path(string $id,array $settings): string {
     $dir=DATADIR.'datagallery/previews';
     if (!is_dir($dir) && !mkdir($dir,0700,true) && !is_dir($dir)) throw new RuntimeException('Не удалось создать каталог предпросмотра.',500);
-    return $dir.'/'.$id.'.'.hash('sha256',json_encode(['v2',$settings['preview_px'],$settings['quality'],$settings['watermark']])).'.jpg';
+    return $dir.'/'.$id.'.'.hash('sha256',json_encode(['v3',$settings['preview_px'],$settings['quality'],$settings['watermark'],$settings['watermark']?($settings['watermark_text'] ?? 'WapMotor'):''])).'.jpg';
 }
 function motor_gallery_upload(array $settings): string {
     $f=$_FILES['file'] ?? null;

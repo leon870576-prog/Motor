@@ -5,6 +5,9 @@ RUN apt-get update \
  && docker-php-ext-install -j2 gd mbstring zip exif \
  && a2enmod rewrite headers \
  && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends fonts-dejavu-core \
+ && rm -rf /var/lib/apt/lists/*
 ADD motor-source.tar.gz /var/www/html/
 ADD motor-code.tar.gz /var/www/html/
 COPY code-update/ /tmp/motor-update/code-update/

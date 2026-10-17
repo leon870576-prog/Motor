@@ -47,7 +47,8 @@ let uid;
 async function login(role){await req('/input.php?action=exit');await req('/input.php',{login:role===null?'MotorTestAdmin':'Role'+role,pass:password});uid=token(await req('/pages/themes.php'));}
 await login(null);
 let settingsPage=await req('/mpanel/gallery-settings.php');assert.equal(settingsPage.httpStatusCode,200);
-let settings={max_mb:20,max_side:8000,max_mp:24,preview_px:960,quality:82,per_page:6,comments_page:10,comments_max:500,zoom:1,watermark:0,formats:['jpg','jpeg','png','gif','webp']};
+assert.ok(settingsPage.text.includes('name="watermark_text"'));assert.ok(settingsPage.text.includes('value="WapMotor"'));
+let settings={max_mb:20,max_side:8000,max_mp:24,preview_px:960,quality:82,per_page:6,comments_page:10,comments_max:500,zoom:1,watermark:0,watermark_text:'WapMotor',formats:['jpg','jpeg','png','gif','webp']};
 async function saveSettings(changes={},extra={}){
  const next={...settings,...changes},r=await req('/mpanel/gallery-settings.php'),body={uid,record_version:version(r)};
  for(const[key,val]of Object.entries(next)){if(Array.isArray(val))val.forEach((v,i)=>body[`formats[${i}]`]=v);else body[key]=String(val);}
@@ -57,10 +58,19 @@ assert.equal((await saveSettings()).httpStatusCode,200);const settingsRaw=php.re
 assert.equal((await saveSettings({max_mb:33})).httpStatusCode,400);assert.equal((await saveSettings({formats:['php']})).httpStatusCode,400);
 assert.equal((await saveSettings({}, {'formats[0][0]':'jpg'})).httpStatusCode,400);
 assert.equal((await saveSettings({max_mp:25})).httpStatusCode,400);assert.equal((await saveSettings({}, {uid:'wrong'})).httpStatusCode,403);
+for(const watermark_text of ['', 'Я'.repeat(61), 'Две\nстроки','Нуль\0символ','Скрытый\u202eтекст'])assert.equal((await saveSettings({watermark_text})).httpStatusCode,400);
+assert.equal((await saveSettings({}, {'watermark_text[0]':'array'})).httpStatusCode,400);
 assert.equal(php.readFileAsText('/www/local/gallery-settings.json'),settingsRaw);
 assert.equal((await saveSettings({}, {record_version:'old'})).httpStatusCode,409);
 assert.ok(!(await req('/mpanel/setting.php?action=setfour')).text.includes('name="set38"'));
 pass('one source of gallery settings; bounds, format allowlist, CSRF, stale settings, old panel link');
+const legacy=JSON.parse(settingsRaw);delete legacy.watermark_text;const legacyRaw=JSON.stringify(legacy);php.writeFile('/www/local/gallery-settings.json',legacyRaw);
+assert.ok((await req('/mpanel/gallery-settings.php')).text.includes('value="WapMotor"'));assert.equal(php.readFileAsText('/www/local/gallery-settings.json'),legacyRaw);
+const markup='<img src=x onerror=alert(1)> "Знак"';{
+ const r=await saveSettings({watermark_text:markup});assert.equal(r.httpStatusCode,200);assert.ok(!r.text.includes('<img src=x'));assert.ok(r.text.includes('&lt;img src=x onerror=alert(1)&gt; &quot;Знак&quot;'));
+}
+assert.equal((await saveSettings({watermark_text:'WapMotor'})).httpStatusCode,200);
+pass('watermark name: legacy fallback without migration, plain UTF-8 text, escaped form value, rejected arrays/control characters and length');
 await run("$im=imagecreatetruecolor(4000,3000);imagefilledrectangle($im,0,0,1999,1499,imagecolorallocate($im,180,70,40));imagefilledrectangle($im,2000,0,3999,1499,imagecolorallocate($im,60,130,80));imagefilledrectangle($im,0,1500,1999,2999,imagecolorallocate($im,80,100,190));imagefilledrectangle($im,2000,1500,3999,2999,imagecolorallocate($im,230,180,80));imagejpeg($im,'/tmp/large.jpg',92);imagedestroy($im);$im=imagecreatetruecolor(32,16);imagepng($im,'/tmp/small.png');imagewebp($im,'/tmp/small.webp');imagegif($im,'/tmp/small.gif');imagedestroy($im);");
 const big=Buffer.from(php.readFileAsBuffer('/tmp/large.jpg'));
 // Include harmless trailing padding to exercise a multi-megabyte mobile upload.
@@ -112,6 +122,17 @@ r=await req(preview(id));assert.equal(r.httpStatusCode,200);php.writeFile('/tmp/
 const cacheList=await run("echo json_encode(glob('/www/local/datagallery/previews/"+id+".*.jpg')); ");assert.equal(JSON.parse(cacheList.text).length,1);
 assert.equal((await saveSettings({max_mb:20,max_side:8000,max_mp:24,preview_px:960,zoom:1,formats:['jpg','jpeg','png','gif','webp']})).httpStatusCode,200);
 pass('admin settings synchronize upload form, allowed formats, limits, viewer and cache; existing originals remain readable');
+const unmarked=Buffer.from((await req(preview(id))).bytes);
+assert.equal((await saveSettings({watermark:1,watermark_text:'WapMotor'})).httpStatusCode,200);
+const marked=Buffer.from((await req(preview(id))).bytes);assert.notEqual(hash(marked),hash(unmarked));
+assert.equal(JSON.parse((await run("echo json_encode(glob('/www/local/datagallery/previews/"+id+".*.jpg')); ")).text).length,1);
+assert.equal(hash((await req(full(id))).bytes),hash(large));
+assert.equal((await saveSettings({watermark:0})).httpStatusCode,200);assert.equal(hash((await req(preview(id))).bytes),hash(unmarked));
+assert.equal((await saveSettings({watermark:0,watermark_text:'Лесика — сайт.ру'})).httpStatusCode,200);
+// The WASM GD build exposes TTF functions but its actual renderer is a stub.
+// Real Cyrillic drawing, renamed bytes and tiny-image bounds are required by gallery-native.php in Docker.
+const keys=JSON.parse((await run("define('DATADIR','/www/local/');define('BASEDIR','/www/');require '/www/includes/gallery.php';$s=motor_gallery_settings();$s['watermark']=1;$a=motor_gallery_cache_path('"+id+"',$s);$s['watermark_text']='Другое название';echo json_encode([$a,motor_gallery_cache_path('"+id+"',$s)]); ")).text);assert.notEqual(keys[0],keys[1]);
+pass('legacy watermark enable/disable changes existing preview bytes; custom name persists and changes cache key; original unchanged (Cyrillic drawing: native build gate)');
 async function batch(ids,command,extra={}){
  const page=await req('/mpanel/gallery.php');const body={uid,record_version:version(page),command,...extra};ids.forEach((id,i)=>body[`photos[${i}]`]=id);return req('/mpanel/gallery.php?action=batch',body);
 }
@@ -151,6 +172,7 @@ let z=await run("$p=glob('/www/local/databackup/*.zip');$z=new ZipArchive();$z->
 assert.ok(backup.entries.includes('gallery-settings.json'));assert.ok(backup.entries.includes('datagallery/'+id));assert.ok(backup.entries.includes('datagallery/'+id+'.dat'));assert.ok(backup.entries.some(x=>x.startsWith('datagallery/previews/')));assert.ok(backup.entries.includes('datagallery/gallery-audit.jsonl'));
 php.unlink('/www/local/datagallery/'+id);php.unlink('/www/local/gallery-settings.json');
 assert.equal((await req('/mpanel/backup.php?action=unzip&filearc='+backup.name+'&uid='+uid)).httpStatusCode,302);assert.equal(hash(php.readFileAsBuffer('/www/local/datagallery/'+id)),hash(large));assert.ok(php.fileExists('/www/local/gallery-settings.json'));assert.equal(rows().find(x=>x.split('|')[6]===allIds[1]).split('|')[3],'hidden');
+assert.equal(JSON.parse(php.readFileAsText('/www/local/gallery-settings.json')).watermark_text,'Лесика — сайт.ру');
 pass('actual backup/restore preserves originals, previews, comments, hidden state, settings and audit');
 assert.equal((await batch([id,allIds[2]],'delete',{confirm_delete:'1'})).httpStatusCode,302);assert.ok(!motorExists(id));assert.ok(!motorExists(allIds[2]));assert.ok(!php.fileExists('/www/local/datagallery/'+id+'.dat'));assert.equal(php.readFileAsText('/www/local/profil/Role0.prof').split(':||:')[72],'');assert.equal((await req(full(id))).httpStatusCode,404);assert.equal((await req(full(allIds[3]))).httpStatusCode,200);
 assert.deepEqual(JSON.parse((await run("echo json_encode(glob('/www/local/datagallery/previews/"+id+".*')); ")).text),[]);

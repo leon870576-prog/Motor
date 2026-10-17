@@ -59,6 +59,19 @@ try {
     $marked=file_get_contents($temp.'/marked.jpg');
     $quant=function($bytes){$pos=strpos($bytes,"\xff\xdb");demand($pos!==false,'Missing JPEG quality table');return substr($bytes,$pos,unpack('n',substr($bytes,$pos+2,2))[1]+2);};
     demand($marked!==$without && $quant($marked)===$quant($without),'Watermark must preserve selected JPEG quality');
+    demand(is_file('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf') && function_exists('imagettftext'),'Cyrillic watermark font must be installed');
+    $settings['watermark_text']='Лесика — сайт.ру';
+    motor_gallery_preview($temp.'/large.jpg',$temp.'/named.jpg',$settings);$named=file_get_contents($temp.'/named.jpg');
+    demand($named!==$marked && $quant($named)===$quant($without),'Custom Cyrillic name must change watermark without changing JPEG quality');
+    $settings['watermark_text']='ЖЖЖЖЖЖ — сайт.ру';motor_gallery_preview($temp.'/large.jpg',$temp.'/renamed.jpg',$settings);
+    demand(file_get_contents($temp.'/renamed.jpg')!==$named,'Different Cyrillic letters must render differently');
+    $settings['watermark_text']=str_repeat('Ш',60);
+    foreach ([[1,1],[32,16],[320,200]] as [$w,$h]) {
+        $small=imagecreatetruecolor($w,$h);imagepng($small,$temp.'/tiny.png');imagedestroy($small);$original=file_get_contents($temp.'/tiny.png');
+        motor_gallery_preview($temp.'/tiny.png',$temp.'/tiny-preview.jpg',$settings);
+        demand(array_slice(getimagesize($temp.'/tiny-preview.jpg'),0,2)===[$w,$h] && file_get_contents($temp.'/tiny.png')===$original,'Long watermark fits tiny previews without changing original');
+    }
+    echo "PASS: custom Cyrillic watermark text, distinct glyphs, unchanged JPEG quality and tiny-photo bounds\n";
     echo "PASS: native gallery JPEG/PNG/GIF/WebP preview; 12MP scaling; all 8 EXIF orientations; watermark quality; originals unchanged\n";
 } finally {
     foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($temp,FilesystemIterator::SKIP_DOTS),RecursiveIteratorIterator::CHILD_FIRST) as $file) {
