@@ -1,0 +1,15 @@
+{
+  "browser": "153.0.8010.0",
+  "layouts": 96,
+  "themes": 12,
+  "textScale": [
+    100,
+    200
+  ],
+  "roundMarkers": true,
+  "todayClickable": true,
+  "keyboard": true,
+  "errors": [],
+  "unexpectedPosts": 0,
+  "physicalDevices": false
+}

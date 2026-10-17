@@ -71,8 +71,8 @@
     {
       "accept": "gzip;q=0, *;q=0.5",
       "encoding": "deflate",
-      "bytes": 2746,
-      "decodedBytes": 17776
+      "bytes": 2745,
+      "decodedBytes": 17775
     },
     {
       "accept": "notgzip",

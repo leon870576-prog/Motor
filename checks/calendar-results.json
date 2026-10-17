@@ -1,0 +1,9 @@
+{
+  "php": "8.4",
+  "renderCases": 9,
+  "httpRequests": 6,
+  "todayLinked": true,
+  "dateBoundaries": true,
+  "malformedDataSafe": true,
+  "sourceUnchanged": true
+}

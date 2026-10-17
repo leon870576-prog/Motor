@@ -1081,8 +1081,8 @@
   },
   {
     "path": "includes/calendar.php",
-    "bytes": 2142,
-    "sha256": "a938cd602c39780fc5252e7b7ebef57a869fe4fca72368730e395e37b1681717"
+    "bytes": 2376,
+    "sha256": "bc0337d4cd2e7065049b5060aa4ea1ea1dccc7cd61bd2ce1e33428254904f489"
   },
   {
     "path": "includes/chat.php",
@@ -1162,7 +1162,7 @@
   {
     "path": "includes/lesika/head.php",
     "bytes": 3625,
-    "sha256": "c7617a26f157db0d128d56af22e62f7c0ff5fb13bdccb7d2b8b5f7f6c1500953"
+    "sha256": "e48253f64d2f639668e1865e8e48253143919b70ce3ba58cd89dd18a3b003a50"
   },
   {
     "path": "includes/lesika/home.php",

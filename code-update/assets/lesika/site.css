@@ -50,3 +50,17 @@ img.motor-avatar { display:inline-block; width:var(--avatar-size,56px); height:a
 
 .legacy-action{display:inline-block;margin:0 .25rem .25rem 0;max-width:100%}
 .legacy-action button{white-space:normal}
+
+/* News dates keep a visible ring, including today, in every theme. */
+.legacy-content .news-calendar{display:table;width:100%;max-width:24rem;table-layout:fixed;margin:12px auto;overflow:visible}
+.news-calendar caption{padding:6px 0;color:var(--ink)}
+.news-calendar th,.news-calendar td{padding:2px 0;text-align:center;vertical-align:middle}
+.news-calendar th{font-size:.875em;color:var(--muted)}
+.news-calendar .calendar-day{container-type:inline-size;display:block;width:100%;min-height:44px;min-width:0;padding:5px 0;color:var(--ink)}
+.news-calendar .calendar-day-number{display:grid;place-items:center;width:min(2.125em,100cqw);height:min(2.125em,100cqw);aspect-ratio:1;margin:0 auto;line-height:1;border:2px solid transparent;border-radius:50%}
+.news-calendar .calendar-weekend .calendar-day{color:var(--accent)}
+.news-calendar .calendar-has-news{color:var(--accent);font-weight:700}
+.news-calendar .calendar-has-news .calendar-day-number{border-color:currentColor}
+.news-calendar .calendar-has-news:hover{text-decoration:none}
+.news-calendar .calendar-has-news:hover .calendar-day-number{background:var(--wash)}
+.news-calendar .calendar-today .calendar-day-number{font-weight:700;background:var(--wash);text-decoration:underline;text-underline-offset:.15em}
