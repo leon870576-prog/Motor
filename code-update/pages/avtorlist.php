@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -22,58 +22,9 @@ echo '<img src="../images/img/partners.gif" alt="image" /> <b>Рейтинг а�
 ############################################################################################
 ##                                       Запись в кэш                                     ##
 ############################################################################################
-$filtime = is_file(DATADIR."datatmp/avtorlist.dat") ? filemtime(DATADIR."datatmp/avtorlist.dat") : 0;
-$user_count = counter_string(DATADIR."datatmp/avtorlist.dat");
-
-$filtime = $filtime+(3600*$config['avtorlistcache']);
-
-if(SITETIME>$filtime || $user_count<100){
-
-$array_users = array();
-$globusers = glob(DATADIR."profil/*.prof");
-foreach ($globusers as $filename) {
-$array_users[] = basename($filename);
-}
-
-if (count($array_users)>0){
-
-$dat_log = array();
-$dat_reg = array();
-$dat_avtoritet = array();
-$dat_plus = array();
-$dat_minus = array();
-
-foreach ($array_users as $userval){
-$tex = file_get_contents(DATADIR."profil/$userval");
-$data = explode(":||:",$tex);
-
-
-$dat_log[]=$data[0];
-$dat_reg[]=$data[6];
-$dat_avtoritet[]=$data[49];
-$dat_plus[]=$data[50];
-$dat_minus[]=$data[51];
-}
-
-
-arsort($dat_avtoritet);
-$dat_top = array();
-$gg = 0;
-
-foreach($dat_avtoritet as $key=>$value){ $gg++;
-$dat_top[]='|'.$gg.'|'.$dat_log[$key].'|'.$dat_avtoritet[$key].'|'.$dat_plus[$key].'|'.$dat_minus[$key].'|'.$dat_reg[$key].'|';
-}
-
-$text = implode("\r\n",$dat_top);
-
-write_files(DATADIR."datatmp/avtorlist.dat", "$text\r\n", 1, 0666);
-}}
-
-############################################################################################
-##                                      Вывод из кэша                                     ##
-############################################################################################
-if (file_exists(DATADIR."datatmp/avtorlist.dat")){
-$file = file(DATADIR."datatmp/avtorlist.dat");
+$profiles=motor_info_profiles();uasort($profiles,fn($a,$b)=>(int)$b[49]<=>(int)$a[49] ?: strcmp($a[0],$b[0]));
+$file=[];$rank=0;foreach($profiles as $d){$rank++;$file[]='|'.$rank.'|'.$d[0].'|'.(int)$d[49].'|'.(int)$d[50].'|'.(int)$d[51].'|'.(int)$d[6].'|';}
+if(true){
 $total = count($file);
 
 if ($total>0){
@@ -82,14 +33,14 @@ if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['avtorlist']){ $end = $total; }
 else {$end = $start + $config['avtorlist']; }
 for ($i = $start; $i < $end; $i++){
-	
+
 $data = explode("|",$file[$i]);
 
 echo '<div class="b">'.(int)$data[1].'. <img src="../images/img/chel.gif" alt="image" /> ';
 
 if ($uz==$data[2]){
 echo '<b><big><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($data[2]).'</span></a></big></b> (Авторитет: '.(int)$data[3].')</div>';
-} else {	
+} else {
 echo '<b><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> (Авторитет: '.(int)$data[3].')</div>';
 }
 
@@ -110,13 +61,13 @@ echo '<input name="uz" value="'.$log.'" />';
 echo '<input type="submit" value="Искать" /></form><hr />';
 
 } else {
-	
+
 $string = search_string(DATADIR."datatmp/avtorlist.dat", $uz, 2);
 if ($string) {
 
 $stranica = floor(($string[1] - 1) / $config['avtorlist']) * $config['avtorlist'];
 
-if ($start!=$stranica){ 
+if ($start!=$stranica){
 header ("Location: avtorlist.php?start=$stranica&uz=$uz&".SID);  exit;
 }
 

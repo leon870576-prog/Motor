@@ -26,11 +26,13 @@ COPY auth.php /opt/motor-auth.php
 COPY migrate.php /opt/motor-migrate.php
 COPY validate.php /opt/motor-validate.php
 COPY checks/gallery-native.php /opt/motor-gallery-native.php
+COPY checks/informers-native.php /opt/motor-informers-native.php
 COPY MIGRATION.json /opt/motor-migration.json
 COPY migrate-themes.php /opt/motor-migrate-themes.php
 RUN chmod 755 /usr/local/bin/motor-entrypoint \
  && php /opt/motor-validate.php \
  && php /opt/motor-gallery-native.php \
+ && php /opt/motor-informers-native.php \
  && php -l /opt/motor-migrate.php \
  && php -l /opt/motor-migrate-themes.php \
  && a2dismod mpm_event mpm_worker \

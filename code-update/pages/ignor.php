@@ -8,29 +8,29 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
 include_once "../themes/".$config['themes']."/index.php";
 
-if (isset($_GET['start'])) {$start = (int)$_GET['start'];} else {$start = 0;} 
+if (isset($_GET['start'])) {$start = (int)$_GET['start'];} else {$start = 0;}
 if (isset($_GET['action'])) {$action = check($_GET['action']);} else {$action = "";}
 
-echo '<img src="../images/img/partners.gif" alt="image" /> <b>Игнор-лист</b><br /><br />';	
+echo '<img src="../images/img/partners.gif" alt="image" /> <b>Игнор-лист</b><br /><br />';
 
 if (is_user()){
-	
+
 ############################################################################################
 ##                                    Главная страница                                    ##
-############################################################################################	
+############################################################################################
 $total=0;
 if($action==""){
-	
+
 if (file_exists(DATADIR."dataignor/$log.dat")){
 $file = file(DATADIR."dataignor/$log.dat");
 $file = array_reverse($file);
-$total = count($file);    
+$total = count($file);
 
 if ($total>0){
 
@@ -56,20 +56,20 @@ echo '<br /><input type="submit" value="Удалить выбранное" /></f
 page_jumpnavigation('ignor.php?', $config['ignorlist'], $start, $total);
 page_strnavigation('ignor.php?', $config['ignorlist'], $start, $total);
 
-} else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Игнор-лист пуст!</b><br />';}	
+} else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Игнор-лист пуст!</b><br />';}
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Игнор-лист пуст!</b><br />';}
 
 echo '<hr /><form method="post" action="ignor.php?action=add&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">';
 echo 'Логин юзера:<br /><input name="uz" />';
 echo '<input value="Добавить" type="submit" /></form>';
 
-if ($total>1){echo '<br /><img src="../images/img/error.gif" alt="image" /> <a href="ignor.php?action=prodel&amp;'.SID.'">Очистить список</a>';}	
+if ($total>1){echo '<br /><img src="../images/img/error.gif" alt="image" /> <a href="ignor.php?action=prodel&amp;'.SID.'">Очистить список</a>';}
 }
 
 ############################################################################################
 ##                                 Дабавление пользователей                               ##
 ############################################################################################
-if($action=="add"){ 
+if($action=="add"){
 
 $uid = check($_GET['uid']);
 if (isset($_POST['uz'])) {$uz = check($_POST['uz']);} elseif (isset($_GET['uz'])){$uz = check($_GET['uz']);} else {$uz = "";}
@@ -95,15 +95,15 @@ $filesize = filesize(DATADIR.'privat/'.$uz.'.priv');
 $pers = round((($filesize / 1024) * 100) / $config['limitsmail']);
 if ($pers < 99){
 
-$text = no_br($log.'|Пользователь '.nickname($log).' добавил вас в свой игнор-лист|'.SITETIME.'|'); 
+$text = no_br($log.'|Пользователь '.nickname($log).' добавил вас в свой игнор-лист|'.SITETIME.'|');
 
 write_files(DATADIR.'privat/'.$uz.'.priv', "$text\r\n");
 
 $uzdata = reading_profil($uz);
-change_profil($uz, array(10=>$uzdata[10]+1));
+increment_profil($uz,[10=>1]);
 
 }}}
-	
+
 change_profil($log, array(74=>SITETIME+300));
 
 header ("Location: ignor.php?start=$start&isset=ignor_add&".SID); exit;
@@ -131,7 +131,7 @@ if ($uid==$_SESSION['token']){
 if ($del!==""){
 
 delete_lines(DATADIR."dataignor/$log.dat", $del);
-header ("Location: ignor.php?start=$start&isset=ignor_del&".SID); exit; 
+header ("Location: ignor.php?start=$start&isset=ignor_del&".SID); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка удаления из игнор-листа!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
@@ -144,8 +144,8 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="ignor.php?
 ############################################################################################
 if ($action=="prodel") {
 echo 'Вы уверены что хотите удалить всех пользователе из игнора?<br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="ignor.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да, уверен!</a></b><br />';	
-	
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="ignor.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да, уверен!</a></b><br />';
+
 echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="ignor.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 

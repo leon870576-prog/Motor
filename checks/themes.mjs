@@ -25,8 +25,9 @@ try {
   assert.deepEqual(JSON.parse(lint.text).errors, []);
   console.log('PHP 8.4 syntax:', lint.text);
   // Reproduce the live failure: the first hour/day rollover with no history files.
-  php.writeFile('/www/local/datacounter/hits.dat', '00|3|8|99|2|');
-  php.writeFile('/www/local/datacounter/host.dat', '00|2|5|99|1|');
+  const previousBucket=Math.floor(Date.now()/1000)-90000;
+  php.writeFile('/www/local/datacounter/hits.dat', `00|3|8|99|2|${previousBucket}|`);
+  php.writeFile('/www/local/datacounter/host.dat', `00|2|5|99|1|${previousBucket}|`);
   for (const name of ['24_hits.dat','31_hits.dat','24_host.dat','31_host.dat']) {
     const path = '/www/local/datacounter/' + name;
     if (php.fileExists(path)) php.unlink(path);

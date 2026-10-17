@@ -123,7 +123,7 @@ $_SESSION['log'] = $unlog;
 $_SESSION['par'] = $unpar;
 $_SESSION['my_ip'] = $my_ip;
 
-change_profil($unlog, array(11=>$checkdata[11]+1, 14=>$ip, 44=>SITETIME));
+increment_profil($unlog,[11=>1],[14=>$ip,44=>SITETIME]);
 
 }}}}}}
 
@@ -147,7 +147,7 @@ ob_start('ob_processing');
 ############################################################################################
 if (isset($_SESSION['log']) && isset($_SESSION['par']) && preg_match('|^[a-z0-9\-]+$|i',$_SESSION['log'])){
 if (file_exists(DATADIR.'profil/'.$_SESSION['log'].'.prof')){
-$userprof = file_get_contents(DATADIR.'profil/'.$_SESSION['log'].'.prof');
+$userprof = motor_info_read(DATADIR.'profil/'.$_SESSION['log'].'.prof');
 $udata = explode(':||:', $userprof);
 
 if ($udata[0]==$_SESSION['log'] && $udata[1]==md5(md5($_SESSION['par'])) && !empty($udata[25])){
@@ -191,6 +191,7 @@ header ('Location: '.$config['home'].'/'.$request_uri); exit();
 
 if (!defined('MOTOR_CHAT_POLL') || ($_SESSION['chat_presence_at']??0)+60<=SITETIME) {
 $_SESSION['chat_presence_at']=SITETIME;
+if (defined('MOTOR_CHAT_POLL')) motor_info_presence();
 if (strstr($php_self, basename(ADMINDIR))){
 //------------------------ Запись текущей страницы для админов -----------------------------//
 $adm_log = no_br('|'.$brow.'|'.$ip.'|'.$log.'|'.$request_uri.'|'.$http_referer.'|'.SITETIME.'|');

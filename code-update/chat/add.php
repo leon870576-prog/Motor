@@ -50,8 +50,7 @@ try {
             if ($reply!==null) { motor_chat_append($rows,check(nickname($log).', '.$reply),'Настюха','Бот','',SITETIME);$state['users'][$log]=$context; }
         }
         motor_chat_trim($rows,$state,$settings,SITETIME);
-        $current=reading_profil($log);
-        change_profil($log,[14=>$ip,12=>$current[12]+1,36=>$current[36]+1,41=>$current[41]+1]);
+        increment_profil($log,[12=>1,36=>1,41=>1],[14=>$ip]);
         return true;
     });
 } catch (RuntimeException $e) { chat_add_error($e->getMessage(),in_array($e->getCode(),[409,429],true)?$e->getCode():503); }

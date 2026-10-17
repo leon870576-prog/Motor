@@ -1,0 +1,15 @@
+{
+  "runtime": "PHP 8.4 WASM",
+  "requests": 48,
+  "passed": [
+    "personal chat count +1, bot excluded, duplicate/invalid sends unchanged, profile and leaderboard, clear retains cumulative contribution, polling does not add hits",
+    "real guestbook, forum topic/reply and news-comment contributions; forum topics and posts are distinct",
+    "counts repair themselves after deletion/empty history, expired ads excluded, legacy absent modules preserved, duplicate categories and path traversal ignored",
+    "gallery photo/comment informers exclude missing images; actual gallery comment updates personal count",
+    "registered/admin/banned/pending/blacklist/vote counts; stale leaderboard ignored; profile deltas preserve intervening increments and unrelated changes",
+    "private-message notification +1 on delivery, invalid send unchanged, visible to recipient and cleared after opening inbox",
+    "contact/ignore and mailbox totals ignore blank lines; cash, bank, health and stamina informers match their sources",
+    "online counts preserve two accounts behind one IP, deduplicate accounts/guests and drop expired records",
+    "full-date rollover, two-hour gap, stale archive exclusion, zero-increment hosts, statistic pages and all three GIF informers"
+  ]
+}

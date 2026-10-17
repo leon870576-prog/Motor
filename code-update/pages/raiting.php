@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -28,15 +28,15 @@ if (preg_match('|^[a-z0-9_\-]+$|i',$uz)){
 if (file_exists(DATADIR."profil/$uz.prof")){
 if ($udata[48]<SITETIME){
 if ($udata[36]>=150){
-if ($log!=$uz){	
+if ($log!=$uz){
 
-$ratstr = search_string(DATADIR."dataraiting/$log.dat", $uz, 0);	
-if (empty($ratstr)){	
-	
-$uz_prof = file_get_contents(DATADIR."profil/$uz.prof"); 
-$uz_udata = explode(":||:",$uz_prof);	
-if ($uz_udata[36]>=150){	
-	
+$ratstr = search_string(DATADIR."dataraiting/$log.dat", $uz, 0);
+if (empty($ratstr)){
+
+$uz_prof = file_get_contents(DATADIR."profil/$uz.prof");
+$uz_udata = explode(":||:",$uz_prof);
+if ($uz_udata[36]>=150){
+
 ############################################################################################
 ##                                Увеличение авторитета                                   ##
 ############################################################################################
@@ -53,7 +53,7 @@ delete_lines(DATADIR."dataraiting/$log.dat",array(0,1));
 
 
 $uzdata = reading_profil($uz);
-change_profil($uz, array(49=>$uzdata[49]+1, 50=>$uzdata[50]+1));
+increment_profil($uz,[49=>1,50=>1]);
 
 //------------------------------Уведомление по привату------------------------//
 if ($config['notificraiting']==1){
@@ -62,8 +62,8 @@ $filesize = filesize(DATADIR.'privat/'.$uz.'.priv');
 $pers = round((($filesize / 1024) * 100) / $config['limitsmail']);
 if ($pers < 100){
 
-change_profil($uz, array(10=>$uzdata[10]+1));
-$text = no_br($log.'|<img src="../images/img/plus.gif" alt="Плюс" /> Пользователь '.nickname($log).' поставил вам плюс|'.SITETIME.'|'); 
+increment_profil($uz,[10=>1]);
+$text = no_br($log.'|<img src="../images/img/plus.gif" alt="Плюс" /> Пользователь '.nickname($log).' поставил вам плюс|'.SITETIME.'|');
 
 write_files(DATADIR.'privat/'.$uz.'.priv', "$text\r\n");
 }}
@@ -93,7 +93,7 @@ delete_lines(DATADIR."dataraiting/$log.dat",array(0,1));
 }
 
 $uzdata = reading_profil($uz);
-change_profil($uz, array(49=>$uzdata[49]-1, 51=>$uzdata[51]+1));
+increment_profil($uz,[49=>-1,51=>1]);
 
 //------------------------------Уведомление по привату------------------------//
 if ($config['notificraiting']==1){
@@ -102,8 +102,8 @@ $filesize = filesize(DATADIR.'privat/'.$uz.'.priv');
 $pers = round((($filesize / 1024) * 100) / $config['limitsmail']);
 if ($pers < 100){
 
-change_profil($uz, array(10=>$uzdata[10]+1));
-$text = no_br($log.'|<img src="../images/img/minus.gif" alt="Минус" /> Пользователь '.nickname($log).' поставил вам минус|'.SITETIME.'|'); 
+increment_profil($uz,[10=>1]);
+$text = no_br($log.'|<img src="../images/img/minus.gif" alt="Минус" /> Пользователь '.nickname($log).' поставил вам минус|'.SITETIME.'|');
 
 write_files(DATADIR.'privat/'.$uz.'.priv', "$text\r\n");
 }}

@@ -14,6 +14,8 @@ if (!defined('BASEDIR')) {
 	exit;
 }
 
+require_once __DIR__.'/informers.php';
+
 // --------------------------- Функция перевода секунд во время -----------------------------//
 function maketime($string) {
 	if ($string < 3600) {
@@ -978,7 +980,7 @@ function user_many($login) {
 	$bank_summ = 0;
 
 	if (file_exists(DATADIR."profil/$login.prof")) {
-		$text = file_get_contents(DATADIR."profil/$login.prof");
+		$text = motor_info_read(DATADIR."profil/$login.prof");
 		$data = explode(":||:", $text);
 		$prof_summ = (int)$data[41];
 	}
@@ -1005,12 +1007,12 @@ function user_bankmany($login) {
 
 // --------------- Функция подсчета писем у юзера ---------------//
 function user_mail($login) {
-	$all_privat = counter_string(DATADIR."privat/$login.priv");
+	$all_privat = count(motor_info_lines(DATADIR."privat/$login.priv"));
 
 	$new_privat = 0;
 
 	if (file_exists(DATADIR."profil/$login.prof")) {
-		$text = file_get_contents(DATADIR."profil/$login.prof");
+		$text = motor_info_read(DATADIR."profil/$login.prof");
 		$data = explode(":||:", $text);
 		$new_privat = (int)$data[10];
 	}
@@ -1023,7 +1025,7 @@ function user_health($login) {
 	$health = 0;
 
 	if (file_exists(DATADIR."profil/$login.prof")) {
-		$text = file_get_contents(DATADIR."profil/$login.prof");
+		$text = motor_info_read(DATADIR."profil/$login.prof");
 		$data = explode(":||:", $text);
 		$health = (int)$data[56].'%';
 	}
@@ -1036,7 +1038,7 @@ function user_stamina($login) {
 	$stamina = 0;
 
 	if (file_exists(DATADIR."profil/$login.prof")) {
-		$text = file_get_contents(DATADIR."profil/$login.prof");
+		$text = motor_info_read(DATADIR."profil/$login.prof");
 		$data = explode(":||:", $text);
 		$stamina = (int)$data[57].'%';
 	}
@@ -1061,7 +1063,7 @@ function user_avatars($login, $size = 56) {
     if ($login == $config['guestsuser']) return motor_avatar_image('images/avators/guest.gif', $size);
     $path = 'images/avators/noavatar.gif';
     if (is_string($login) && preg_match('/^[a-z0-9_-]{1,30}$/Di', $login) && file_exists(DATADIR."profil/$login.prof")) {
-        $data = explode(':||:', file_get_contents(DATADIR."profil/$login.prof"));
+        $data = explode(':||:', motor_info_read(DATADIR."profil/$login.prof"));
         if (!empty($data[43])) $path = $data[43];
     }
     return motor_avatar_image($path, $size);
@@ -1197,37 +1199,29 @@ function user_ststuses($balls) {
 
 // --------------- Функция подсчета человек в контакт-листе ---------------//
 function user_kontakt($login) {
-	return counter_string(DATADIR."datakontakt/$login.dat");
+	return count(motor_info_lines(DATADIR."datakontakt/$login.dat"));
 }
 
 // --------------- Функция подсчета человек в игнор-листе ---------------//
 function user_ignor($login) {
-	return counter_string(DATADIR."dataignor/$login.dat");
+	return count(motor_info_lines(DATADIR."dataignor/$login.dat"));
 }
 
 // --------------- Функция вывода количества зарегистрированных ---------------//
-function stats_users() {
-	return counter_string(DATADIR.'datatmp/userlist.dat');
-}
+function stats_users() { return count(motor_info_profiles()); }
 
 // --------------- Функция вывода количества админов и модеров --------------------//
-function stats_admins() {
-	return counter_string(DATADIR.'datatmp/adminlist.dat');
-}
+function stats_admins() { return count(array_filter(motor_info_profiles(),fn($d)=>(int)$d[7]>=101 && (int)$d[7]<=105)); }
 
 // --------------- Функция вывода количества забаненных --------------------//
-function stats_banned() {
-	return counter_string(DATADIR.'datatmp/banlist.dat');
-}
+function stats_banned() { return count(array_filter(motor_info_profiles(),fn($d)=>!empty($d[37]) && (int)$d[38]>SITETIME)); }
 
 // ------------ Функция вывода количества ожидающих регистрации -----------//
-function stats_reglist() {
-	return counter_string(DATADIR.'datatmp/reglist.dat');
-}
+function stats_reglist() { return count(array_filter(motor_info_profiles(),fn($d)=>!empty($d[46]))); }
 
 // --------------- Функция вывода количества забаненных IP --------------------//
 function stats_ipbanned() {
-	return counter_string(DATADIR.'ban.dat');
+	return count(motor_info_lines(DATADIR.'ban.dat'));
 }
 
 // --------------- Функция вывода количества фотографий --------------------//
@@ -1238,32 +1232,32 @@ function stats_gallery() {
 
 // --------------- Функция вывода количества новостей--------------------//
 function stats_allnews() {
-	return counter_string(DATADIR.'news.dat');
+	return count(motor_info_lines(DATADIR.'news.dat'));
 }
 
 // ---------- Функция вывода количества запрещенных логинов ------------//
 function stats_blacklogin() {
-	return counter_string(DATADIR.'blacklogin.dat');
+	return count(motor_info_lines(DATADIR.'blacklogin.dat'));
 }
 
 // ------------ Функция вывода количества запрещенных e-mail------------//
 function stats_blackmail() {
-	return counter_string(DATADIR.'blackmail.dat');
+	return count(motor_info_lines(DATADIR.'blackmail.dat'));
 }
 
 // --------------- Функция вывода количества заголовков ----------------//
 function stats_headlines() {
-	return counter_string(DATADIR.'headlines.dat');
+	return count(motor_info_lines(DATADIR.'headlines.dat'));
 }
 
 // --------------- Функция вывода количества заголовков ----------------//
 function stats_navigation() {
-	return counter_string(DATADIR.'navigation.dat');
+	return count(motor_info_lines(DATADIR.'navigation.dat'));
 }
 
 // --------------- Функция вывода количества заголовков ----------------//
 function stats_antimat() {
-	return counter_string(DATADIR.'antimat.dat');
+	return count(motor_info_lines(DATADIR.'antimat.dat'));
 }
 
 // ----------- Функция вывода даты последнего сканирования -------------//
@@ -1398,7 +1392,7 @@ function check_string($string) {
 // ---------- Функция определение должности юзера ---------//
 function user_title($login) {
 	if (file_exists(DATADIR."profil/$login.prof")) {
-		$text = file_get_contents(DATADIR."profil/$login.prof");
+		$text = motor_info_read(DATADIR."profil/$login.prof");
 
 		$data = explode(":||:", $text);
 		if ($data[7] >= 101 && $data[7] <= 105) {
@@ -1672,65 +1666,24 @@ function site_title($string) {
 
 // --------------------- Функция подсчета статистики ------------------------//
 function statistics($number, $clear = false) {
-	/*
-	0 - Сообщений в гостевой
-	1 - Тем в форуме
-	2 - Сообщений в форуме
-	3 - Комментарий в новостях
-	4 - Сообщений в админ-чате
-	5 - Комментарий в загрузках
-	6 - Комментарий в библиотеке
-	7 - Комментарий в галерее
-	8 - Сообщений в чате
-	*/
-
-	if (isset($number)) {
-		$number = (int)$number;
-
-		$file = file_get_contents(DATADIR."local.dat");
-		$u = explode("|", $file);
-
-		if ($clear === false) {
-			$u[$number]++;
-		} else {
-			$u[$number] = $clear;
-		}
-
-		$data = $u[0].'|'.$u[1].'|'.$u[2].'|'.$u[3].'|'.$u[4].'|'.$u[5].'|'.$u[6].'|'.$u[7].'|'.$u[8].'|'.$u[9].'|'.$u[10].'|';
-
-		if ($data != "" && $u[$number] !== "") {
-			file_put_contents(DATADIR."local.dat", $data, LOCK_EX);
-			unset($number);
-		}
-	}
+    $number=(int)$number;
+    if ($number<0 || $number>10) return;
+    $fp=fopen(DATADIR.'local.dat','c+b');
+    if (!$fp) throw new RuntimeException('Не удалось обновить статистику.');
+    try {
+        if (!flock($fp,LOCK_EX)) throw new RuntimeException('Не удалось заблокировать статистику.');
+        $d=array_pad(explode('|',stream_get_contents($fp)),11,0);
+        $d[$number]=$clear===false?max(0,(int)$d[$number])+1:max(0,(int)$clear);
+        $text=implode('|',array_slice($d,0,11)).'|';rewind($fp);
+        if(fwrite($fp,$text)!==strlen($text) || !ftruncate($fp,strlen($text)) || !fflush($fp)) throw new RuntimeException('Не удалось сохранить статистику.');
+    } finally {flock($fp,LOCK_UN);fclose($fp);}
 }
 
 // --------------------- Функция вывода статистики ------------------------//
-function stats($number) {
-	if (isset($number)) {
-		$file = file_get_contents(DATADIR."local.dat");
-		$data = explode("|", $file);
-		return (int)$data[$number];
-	}
-}
+function stats($number) { return motor_info_count((int)$number); }
 
 // --------------------- Функция вывода статистики форума ------------------------//
-function stats_forum() {
-	$allthem = 0;
-	$allpost = 0;
-
-	if (file_exists(DATADIR."dataforum/mainforum.dat")) {
-		$file = file(DATADIR."dataforum/mainforum.dat");
-
-		foreach ($file as $val) {
-			$data = explode('|', $val);
-
-			$allthem += $data[2];
-			$allpost += $data[3];
-		}
-	}
-	return $allthem.'/'.$allpost;
-}
+function stats_forum() { return implode('/',motor_info_forum()); }
 
 // --------------------- Функция шифровки Email-адреса ------------------------//
 function crypt_mail($mail) {
@@ -1780,48 +1733,20 @@ function intar($string) {
 
 // ------------------- Функция подсчета голосований --------------------//
 function stats_votes() {
-	$sum = 0;
-	if (file_exists(DATADIR."datavotes/result.dat")) {
-		$vresult = file(DATADIR."datavotes/result.dat");
-		$vr = explode("|", $vresult[0]);
-		if ($vresult) {
-			$sum = array_sum($vr);
-		}
-	}
-	return (int)$sum;
+    $d=explode('|',motor_info_read(DATADIR.'datavotes/result.dat'));
+    return array_sum(array_map(fn($v)=>max(0,(int)$v),$d));
 }
 
 // ------------------- Функция подсчета объявлений --------------------//
-function stats_board() {
-	$itogoboards = 0;
-	if (file_exists(DATADIR."databoard/database.dat")) {
-		$file = file(DATADIR."databoard/database.dat");
-		foreach($file as $bval) {
-			$dtb = explode("|", $bval);
-			if (file_exists(DATADIR."databoard/$dtb[2].dat")) {
-				$total = counter_string(DATADIR."databoard/$dtb[2].dat");
-				$itogoboards += $total;
-			}
-		}
-	}
-	return (int)$itogoboards;
-}
+function stats_board() { return motor_info_board(); }
 
 // ------------------- Функция показа даты последней новости --------------------//
 function stats_news() {
-	$file = file(DATADIR."news.dat");
-	$data = explode("|", end($file));
-
-	if (isset($data[3])) {
-		$newdate = date_fixed($data[3], "d.m.y");
-		if ($newdate == 'Сегодня') {
-			$newdate = '<span style="color:#ff0000">Сегодня</span>';
-		}
-	} else {
-		$newdate = 0;
-	}
-
-	return $newdate;
+    $latest=0;
+    foreach(motor_info_lines(DATADIR.'news.dat') as $row){$d=explode('|',$row);if(motor_info_id($d[5]??null) && ctype_digit($d[3]??''))$latest=max($latest,(int)$d[3]);}
+    if(!$latest)return 0;
+    $date=date_fixed($latest,'d.m.y');
+    return $date==='Сегодня'?'<span style="color:#ff0000">Сегодня</span>':$date;
 }
 
 // ------------------- Функция вывода последних новостей --------------------//
@@ -1975,31 +1900,7 @@ function change_setting($str) {
 // ------------------------- Функция записи в профиль  ------------------------//
 function change_profil($login, $str) {
 	if(!is_string($login) || !preg_match('/^[a-z0-9_-]{1,20}$/Di',$login)) {http_response_code(400);exit('Неверный пользователь.');}
-	global $config;
-
-	if (file_exists(DATADIR."profil/$login.prof")) {
-		$file = file_get_contents(DATADIR."profil/$login.prof");
-		$data = explode(':||:', $file);
-
-		$text = "";
-		for ($u = 0; $u < $config['userprofkey']; $u++) {
-			if (isset($str[$u])) {
-				$data[$u] = $str[$u];
-			}
-			$text .= ($data[$u] ?? '').':||:';
-		}
-
-		if ($data[0] != "" && $data[1] != "" && $data[4] != "" && $text != "") {
-			$fp = fopen(DATADIR."profil/$login.prof", "a+");
-			flock($fp, LOCK_EX);
-			ftruncate($fp, 0);
-			fputs($fp, $text);
-			fflush($fp);
-			flock($fp, LOCK_UN);
-			fclose($fp);
-			unset($text);
-		}
-	}
+	motor_profile_update($login,$str);
 }
 
 // ------------------------- Функция чтения из профиля  ------------------------//
@@ -2008,7 +1909,7 @@ function reading_profil($login) {
 	$arrdata = array();
 
 	if (file_exists(DATADIR."profil/$login.prof")) {
-		$file = file_get_contents(DATADIR."profil/$login.prof");
+		$file = motor_info_read(DATADIR."profil/$login.prof");
 		if ($file != "") {
 			$arrdata = explode(':||:', $file);
 		}
@@ -2021,7 +1922,7 @@ function reading_profil($login) {
 function is_user() {
 	if ($_SESSION['log'] != "" && $_SESSION['par'] != "") {
 		if (file_exists(DATADIR.'profil/'.$_SESSION['log'].'.prof')) {
-			$file = file_get_contents(DATADIR.'profil/'.$_SESSION['log'].'.prof');
+			$file = motor_info_read(DATADIR.'profil/'.$_SESSION['log'].'.prof');
 			$data = explode(':||:', $file);
 
 			if ($_SESSION['log'] == $data[0] && md5(md5($_SESSION['par'])) == $data[1]) {

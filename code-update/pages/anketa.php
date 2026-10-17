@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -21,7 +21,7 @@ echo '<div class="b"><img src="../images/img/partners.gif" alt="image" /> <b>А�
 
 if (preg_match('|^[a-z0-9\-]+$|i',$uz)){
 if (file_exists(DATADIR."profil/$uz.prof")){
-$text = file_get_contents(DATADIR."profil/$uz.prof"); 
+$text = motor_info_read(DATADIR."profil/$uz.prof");
 $uzdata = explode(":||:",$text);
 
 if ($uzdata[46]==1) {echo '<b><span style="color:#ff0000">Внимание, аккаунт требует подтверждение регистрации!</span></b><br />';}
@@ -44,7 +44,7 @@ echo 'Находится: '.user_visit($uz,1).'<br />';
 if ($uzdata[40]==""){echo 'Cтатус: <span style="color:#ff0000"><b>'.user_ststuses($uzdata[36]).'</b></span><br />';
 } else {echo 'Cтатус: <span style="color:#ff0000"><b>'.$uzdata[40].'</b></span><br />';}
 
-echo 'Пол: '; 
+echo 'Пол: ';
 if($uzdata[15]=="N"){echo 'Не указан<br />';}
 elseif($uzdata[15]=="M"){echo 'Мужской <br />';} else {echo 'Женский<br />';}
 
@@ -57,7 +57,7 @@ if ($uzdata[16]!="") {echo 'Рост: '.(int)$uzdata[16].' см.<br />';}
 if ($uzdata[17]!="") {echo 'Вес: '.(int)$uzdata[17].' кг.<br />';}
 if ($uzdata[19]!="") {echo '<img src="http://web.icq.com/whitepages/online?icq='.(int)$uzdata[19].'&amp;img=5" alt="image" /> ICQ: '.(int)$uzdata[19].' <br />';}
 
-echo 'Всего посeщений: '.(int)$uzdata[11].'<br />';
+echo 'Входов в аккаунт: '.(int)$uzdata[11].'<br />';
 echo 'Сообщений на форуме: '.(int)$uzdata[8].'<br />';
 echo 'Сообщений в гостевой: '.(int)$uzdata[9].'<br />';
 echo 'Сообщений в чате: '.(int)$uzdata[12].'<br />';
@@ -67,8 +67,8 @@ echo 'Число нарушений: '.(int)$uzdata[64].' <br />';
 echo 'Авторитет: '.(int)$uzdata[49].' (+'.(int)$uzdata[50].'/-'.(int)$uzdata[51].')<br />';
 
 if (is_user()){
-if ($log!=$uz){	
-echo '[ <a href="raiting.php?uz='.$uz.'&amp;action=plus&amp;uid='.$_SESSION['token'].'&amp;'.SID.'"><img src="../images/img/plus.gif" alt="image" /><span style="color:#0099cc"> Плюс</span></a> / '; 
+if ($log!=$uz){
+echo '[ <a href="raiting.php?uz='.$uz.'&amp;action=plus&amp;uid='.$_SESSION['token'].'&amp;'.SID.'"><img src="../images/img/plus.gif" alt="image" /><span style="color:#0099cc"> Плюс</span></a> / ';
 echo '<a href="raiting.php?uz='.$uz.'&amp;action=minus&amp;uid='.$_SESSION['token'].'&amp;'.SID.'"><span style="color:#ff0000">Минус</span> <img src="../images/img/minus.gif" alt="image" /></a> ]<br />';
 }}
 
@@ -82,11 +82,11 @@ if ($uzdata[13]!="") {echo 'Браузер: '.$uzdata[13].' <br />';}
 echo 'Рассылка новостей: ';
 if ($uzdata[34]==1) {echo 'Подписан<br />';}else {echo 'Не подписан<br />';}
 echo 'Используемый скин: '.$uzdata[20].'<br />';
-if ($uzdata[6]!="") {echo 'Дата регистрации: '.date_fixed($uzdata[6],'j F Y').'<br />';} 
-echo 'Последняя авторизация: '.date_fixed($uzdata[44]).'<br />'; 
+if ($uzdata[6]!="") {echo 'Дата регистрации: '.date_fixed($uzdata[6],'j F Y').'<br />';}
+echo 'Последняя авторизация: '.date_fixed($uzdata[44]).'<br />';
 
 if (file_exists(DATADIR."datalife/$uz.dat")){
-$lifefiles = file_get_contents(DATADIR."datalife/$uz.dat"); 
+$lifefiles = file_get_contents(DATADIR."datalife/$uz.dat");
 $lifestrs = explode("|",$lifefiles);
 echo 'Провел на сайте: '.makestime($lifestrs[1]).'<br />';
 }

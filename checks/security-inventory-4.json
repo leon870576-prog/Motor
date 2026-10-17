@@ -1,18 +1,23 @@
 [
   {
+    "path": "pages/anketa.php",
+    "bytes": 9899,
+    "sha256": "a771c2c93b5db95c2bc9b10f68ab75c20162f31d2c5338f326d91050e9f2acc0"
+  },
+  {
     "path": "pages/avators.php",
     "bytes": 14837,
     "sha256": "d70ae6b6e09be1b1b323fd2a3e9d7857853725d91282c5faedfbcc28db36b0ce"
   },
   {
     "path": "pages/avtorlist.php",
-    "bytes": 5721,
-    "sha256": "4511df75ed22f65dcd52946eff7e86e504c71ddba75e27d2eac04c277dfde1d9"
+    "bytes": 4466,
+    "sha256": "e2da8daefe8f99326fb865f839f086069bc29583afa57e531acca9b2eea772c3"
   },
   {
     "path": "pages/ban.php",
-    "bytes": 6665,
-    "sha256": "7a8b40546c4d089bfa798e192ffe33590c6fc638f4053b4247e906e01e4ac192"
+    "bytes": 6532,
+    "sha256": "6a82207e73cf1a5a2295f3e24e6a497847f937f2a330459baea09a4d68fb085a"
   },
   {
     "path": "pages/banip.php",
@@ -26,8 +31,8 @@
   },
   {
     "path": "pages/counter.php",
-    "bytes": 9714,
-    "sha256": "4156af569e2faf74b2d4dc1a47c2de5c27be777fb0f6c6647d0c8ec151049ca0"
+    "bytes": 4273,
+    "sha256": "61cbd9406dd4725ac1452fb65b88b604b1137d8870bb0efd65858fde7663b9d2"
   },
   {
     "path": "pages/error.php",
@@ -41,8 +46,8 @@
   },
   {
     "path": "pages/ignor.php",
-    "bytes": 9275,
-    "sha256": "54da8c84ee8c9941ca4d76bc38167676c8ea68f946f4c09b67c92662d01d508c"
+    "bytes": 9243,
+    "sha256": "2df3739a2f28f11dee4b4cf31ebfc878fc1944bbdd843e60e577a3e4c1b99360"
   },
   {
     "path": "pages/index.php",
@@ -56,13 +61,13 @@
   },
   {
     "path": "pages/kontakt.php",
-    "bytes": 9356,
-    "sha256": "85877be89437e1845b7a1fed0540e81e224f555657aa9c395271bbdd951c2b86"
+    "bytes": 9323,
+    "sha256": "686f47e52ade001c54e4a76db7a541753660a662fee4424e6044aa90f65ce70e"
   },
   {
     "path": "pages/lifelist.php",
-    "bytes": 5359,
-    "sha256": "46211e457c58413b2611ea4e51564c38e9a37b01096f5f6ff11e7602d8b48555"
+    "bytes": 4347,
+    "sha256": "979f1f0d3ad4fbc118b3c49bcb73af0a19ebc42b0e6a4468a93652aa04ea8c29"
   },
   {
     "path": "pages/link.php",
@@ -86,13 +91,13 @@
   },
   {
     "path": "pages/online.php",
-    "bytes": 4055,
-    "sha256": "673c519b8edbddcde917dc30e9ce28b36138b8e79c14555da4d15240f25b5e0a"
+    "bytes": 3977,
+    "sha256": "569688100f3765b4c16758ac04d4eb5765215ca223c6f6a4450e282a1b1dca1a"
   },
   {
     "path": "pages/onlinewho.php",
-    "bytes": 6019,
-    "sha256": "bc0e7701a00042d1b334fad026f005a924d81b8e02ac96d1779891f743e60009"
+    "bytes": 5282,
+    "sha256": "0703ed6a48dcd81153985f1db1d7f4011008a8fcf9ac15b0ae17304265347628"
   },
   {
     "path": "pages/pravila.php",
@@ -101,8 +106,8 @@
   },
   {
     "path": "pages/privat.php",
-    "bytes": 15208,
-    "sha256": "0bb4bce9c2a3586a082278e81a2c7a815dbcefee9fe449ad50003b3abf6052bb"
+    "bytes": 14895,
+    "sha256": "6c81b7c9065965c8f0f6e2d0a0a29129dd79c8f301f93768be76c7de7d48c91c"
   },
   {
     "path": "pages/profil.php",
@@ -111,13 +116,13 @@
   },
   {
     "path": "pages/raiting.php",
-    "bytes": 7025,
-    "sha256": "2fbd4902c7f19ad9e4b08c29d8442e45997d16d68515bc11f20c7f1b85827efd"
+    "bytes": 6930,
+    "sha256": "233bfbe5392be8f5b589b52278590a96238111c712f22ddc4372847848223e15"
   },
   {
     "path": "pages/raitinglist.php",
-    "bytes": 5632,
-    "sha256": "d41b29ed8659aa42767ce5299330374232e3013cf6bb54fb5254b097d1ed73b7"
+    "bytes": 4449,
+    "sha256": "cfe97835dd7b3dfce66f4f14b9578cab45b1045eb914f1c87dfb14b92ad508cf"
   },
   {
     "path": "pages/razban.php",
@@ -161,8 +166,8 @@
   },
   {
     "path": "pages/statistik.php",
-    "bytes": 2905,
-    "sha256": "71167497fb92e9d3623a9ca28effcf74d670ca0dd36f2d0893f7b2c1c4cccc74"
+    "bytes": 2804,
+    "sha256": "43b071583c98cdf12c3865c808d99bb57143730ab6e470c938e0b3932d21fc36"
   },
   {
     "path": "pages/statusfaq.php",
@@ -191,8 +196,8 @@
   },
   {
     "path": "pages/userlist.php",
-    "bytes": 6201,
-    "sha256": "3238d7350b2be04ffe60c8c3ffc07920bf417fc1fbbe838214055f5fb46cbe40"
+    "bytes": 4650,
+    "sha256": "cd9f44f9db3da90798f077d7afec5513bbb1c789eb49a53137916f29d66caf48"
   },
   {
     "path": "pages/who.php",
@@ -366,8 +371,8 @@
   },
   {
     "path": "votes/vote.php",
-    "bytes": 4191,
-    "sha256": "c240b66f436dd34379fe6a13df209b361e04bf95ea4e448eae03d133a38c2be8"
+    "bytes": 4218,
+    "sha256": "1bba3a235b7fb06eda279aba186453656dd92e4fecc13f3fae433a797ca3426b"
   },
   {
     "path": "wap/index.php",

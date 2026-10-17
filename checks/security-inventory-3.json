@@ -1116,8 +1116,8 @@
   },
   {
     "path": "includes/counters.php",
-    "bytes": 8186,
-    "sha256": "d466f89b5d69fe2161ea58561db40e8030e66f247a0186e9dbff202e8795382d"
+    "bytes": 2267,
+    "sha256": "d706f6c4675948f1000fa257f6e05e613889336ec4e0a20382e0c20ed81805a7"
   },
   {
     "path": "includes/form_security.php",
@@ -1126,8 +1126,8 @@
   },
   {
     "path": "includes/functions.php",
-    "bytes": 71528,
-    "sha256": "c6a010ebc2cba41d7c32262dbb0ff499a0b3af368e9314b9fe07a5b34b8ffa43"
+    "bytes": 70368,
+    "sha256": "dce46c4eaea1cef83fa605ab8b17c749ef372bee7715e741f84d5dfad7b27be9"
   },
   {
     "path": "includes/gallery.php",
@@ -1141,13 +1141,18 @@
   },
   {
     "path": "includes/header.php",
-    "bytes": 14850,
-    "sha256": "71be96b18bd3db157ffea3e598a4dd8efadff05bb741671b46df77911ba8a28d"
+    "bytes": 14885,
+    "sha256": "29512c057b1d7ce083ca9a7666abb1cf4a86eccf17111b5945176a19a47368ae"
   },
   {
     "path": "includes/info.php",
     "bytes": 2417,
     "sha256": "2a9b164b74b2264ae7f31b8951489cb0e6b761ff42acbac5087ce6a1998ce558"
+  },
+  {
+    "path": "includes/informers.php",
+    "bytes": 11261,
+    "sha256": "71bdd5e17c990096197ba3954dd82e52275431ccddd586bf6ff97a6ac88d9378"
   },
   {
     "path": "includes/isset.php",
@@ -1206,8 +1211,8 @@
   },
   {
     "path": "includes/onliner.php",
-    "bytes": 1282,
-    "sha256": "f2234cd684477f2d97fba577aeebde98944b213a7b9e0662c31d97f0366e8b6f"
+    "bytes": 1270,
+    "sha256": "61619170894d026e023bd2eb417e56bf0d99bec02af44b75d3691c8b5da4480b"
   },
   {
     "path": "includes/pclzip.php",
@@ -1266,8 +1271,8 @@
   },
   {
     "path": "input.php",
-    "bytes": 3871,
-    "sha256": "92765374c85f819816d0bb072b8e22c66c65b65e2b6a8ad12957a60a9be55fca"
+    "bytes": 3849,
+    "sha256": "adf3ddec7a188327a702a6aafa3c0e15a46b9b593fc40028a83276afc9566973"
   },
   {
     "path": "mail/index.php",
@@ -1361,8 +1366,8 @@
   },
   {
     "path": "mpanel/forum.php",
-    "bytes": 38730,
-    "sha256": "b5db4ee878a06bc1f52a313f32b3a62f00378b09c09819c06f00e73267cc46d9"
+    "bytes": 38797,
+    "sha256": "a37db298568580014dbc29efc92b1e90e215ef17f6a67f3b811ea3f37f66d4e1"
   },
   {
     "path": "mpanel/gallery-settings.php",
@@ -1476,8 +1481,8 @@
   },
   {
     "path": "news/komm.php",
-    "bytes": 8303,
-    "sha256": "605447b541901877fc7031f05725a2f71d0d9bff25650381665e5662727697c7"
+    "bytes": 8257,
+    "sha256": "ba23bfdc60969462ae73f1670c0144cf707b55c83b44bd3110dc8c518a75389a"
   },
   {
     "path": "news/rss.php",
@@ -1493,10 +1498,5 @@
     "path": "pages/adminlist.php",
     "bytes": 4353,
     "sha256": "cb0b3f0b4e0075f3eae1e884b8f6b491dfaf10821263f56b26cd06f3d73fd487"
-  },
-  {
-    "path": "pages/anketa.php",
-    "bytes": 9906,
-    "sha256": "cbef1758a8e552c3b806e6dce13ec6240e71f26234fa09c16693be33d4e0e228"
   }
 ]

@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once '../includes/start.php';
 require_once '../includes/functions.php';
 require_once '../includes/header.php';
@@ -53,7 +53,7 @@ try {
         karantin($udata[6], 'Location: index.php?action=komm&gid='.$gid.'&isset=karantin');
         $comments[]=no_br(antimat(check($msg)),'<br />').'||'.SITETIME.'|'.$log.'|';
         motor_media_atomic($commentsPath,implode("\n",array_slice($comments,-$settings['comments_max']))."\n");
-        statistics(7);change_profil($log,[14=>$ip,33=>$udata[33]+1,36=>$udata[36]+1,41=>$udata[41]+1]);
+        statistics(7);increment_profil($log,[33=>1,36=>1,41=>1],[14=>$ip]);
         header('Location: index.php?action=komm&gid='.$gid);exit;
     }
     if ($action==='del') {

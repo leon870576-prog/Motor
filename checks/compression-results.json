@@ -24,7 +24,7 @@
       "accept": "gzip",
       "encoding": "gzip",
       "bytes": 2757,
-      "decodedBytes": 17774
+      "decodedBytes": 17775
     },
     {
       "accept": "deflate",
@@ -35,8 +35,8 @@
     {
       "accept": "gzip, deflate",
       "encoding": "gzip",
-      "bytes": 2758,
-      "decodedBytes": 17775
+      "bytes": 2757,
+      "decodedBytes": 17774
     },
     {
       "accept": "GZIP",
@@ -53,13 +53,13 @@
     {
       "accept": "gzip;q=0, deflate;q=0.8",
       "encoding": "deflate",
-      "bytes": 2745,
+      "bytes": 2746,
       "decodedBytes": 17775
     },
     {
       "accept": "gzip;q=0.2, deflate;q=0.9",
       "encoding": "deflate",
-      "bytes": 2745,
+      "bytes": 2746,
       "decodedBytes": 17775
     },
     {

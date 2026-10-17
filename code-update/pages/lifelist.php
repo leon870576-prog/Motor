@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -22,50 +22,9 @@ echo '<img src="../images/img/partners.gif" alt="image" /> <b>Рейтинг д�
 ############################################################################################
 ##                                       Запись в кэш                                     ##
 ############################################################################################
-$filtime = is_file(DATADIR."datatmp/lifelist.dat") ? filemtime(DATADIR."datatmp/lifelist.dat") : 0;
-$user_count = counter_string(DATADIR."datatmp/lifelist.dat");
-
-$filtime = $filtime+(3600*$config['lifelistcache']);
-
-if(SITETIME>$filtime || $user_count<100){
-
-$array_users = array();
-$globusers = glob(DATADIR."datalife/*.dat");
-foreach ($globusers as $filename) {
-$array_users[] = basename($filename);
-}
-
-if (count($array_users)>0){
-
-$dat_life = array();
-$dat_login = array();
-
-foreach ($array_users as $userval){
-$tex = file_get_contents(DATADIR."datalife/$userval");
-$data = explode("|",$tex);
-
-$dat_life[]=(int)$data[1];
-$dat_login[]=check($data[2]);
-}
-
-arsort($dat_life);
-$dat_top = array();
-$gg = 0;
-
-foreach($dat_life as $key=>$value){ $gg++;
-$dat_top[] = '|'.$gg.'|'.$dat_login[$key].'|'.$dat_life[$key].'|';	
-}
-
-$text = implode("\r\n",$dat_top);
-
-write_files(DATADIR."datatmp/lifelist.dat", "$text\r\n", 1, 0666);
-}}
-
-############################################################################################
-##                                      Вывод из кэша                                     ##
-############################################################################################
-if (file_exists(DATADIR."datatmp/lifelist.dat")){
-$file = file(DATADIR."datatmp/lifelist.dat");
+$values=[];foreach(motor_info_profiles() as $login=>$d){$life=explode('|',motor_info_read(DATADIR.'datalife/'.$login.'.dat'));$values[$login]=max(0,(int)($life[1]??0));}
+arsort($values);$file=[];$rank=0;foreach($values as $login=>$seconds){$rank++;$file[]='|'.$rank.'|'.$login.'|'.$seconds.'|';}
+if(true){
 $total = count($file);
 
 if ($total>0){
@@ -74,14 +33,14 @@ if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['lifelist']){ $end = $total; }
 else {$end = $start + $config['lifelist']; }
 for ($i = $start; $i < $end; $i++){
-	
+
 $data = explode("|",$file[$i]);
 
 echo '<div class="b">'.$data[1].'. <img src="../images/img/chel.gif" alt="image" /> ';
 
 if ($uz==$data[2]){
 echo '<b><big><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($data[2]).'</span></a></big></b> ';
-} else {	
+} else {
 echo '<b><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ';
 }
 
@@ -103,13 +62,13 @@ echo '<input name="uz" value="'.$log.'" />';
 echo '<input type="submit" value="Искать" /></form><hr />';
 
 } else {
-	
+
 $string = search_string(DATADIR."datatmp/lifelist.dat", $uz, 2);
 if ($string) {
 
 $stranica = floor(($string[1] - 1) / $config['lifelist']) * $config['lifelist'];
 
-if ($start!=$stranica){ 
+if ($start!=$stranica){
 header ("Location: lifelist.php?start=$stranica&uz=$uz&".SID); exit;
 }
 

@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 263,
-    "sha256": "5a96275736869a0e5bb5d9d7b00a8cb4cad356be58932f10308decc5b3c24aa9"
+    "bytes": 259,
+    "sha256": "5f8cde4b22117905b2c6c93465a9eef0c737a4e1a208a2792476c7509deea1d2"
   },
   {
     "path": "assets/lesika/chat.css",
@@ -106,8 +106,8 @@
   },
   {
     "path": "book/add.php",
-    "bytes": 4267,
-    "sha256": "dbbb35fcd87618ff32722d023ae2fc5aec082fc4a1fe151e217f5ddaad7ce92c"
+    "bytes": 4135,
+    "sha256": "45a1963ab7e66610f626a0e2a159fdc30541ba8e533c94adf0bd476dad147a1c"
   },
   {
     "path": "book/index.php",
@@ -116,8 +116,8 @@
   },
   {
     "path": "chat/add.php",
-    "bytes": 5034,
-    "sha256": "e08ccdd22724d6f53d1357625fe7fcc4907076227ac0ed1ad850ecdba9468490"
+    "bytes": 4961,
+    "sha256": "3dd5ea5c2c9550cd9a889135288f29422300ed1b7d79a8012325cf9a8c99cbdc"
   },
   {
     "path": "chat/index.php",
@@ -141,18 +141,18 @@
   },
   {
     "path": "forum/forum.php",
-    "bytes": 10859,
-    "sha256": "bef8be4be8eb93ff7277c8fdd5a5aeafa5e6761622b586a132b5f22f793761c1"
+    "bytes": 10823,
+    "sha256": "2e49ef8757b819f2e85772908bc6b7cda89b16b5ece5de18e46c53dfdd006d15"
   },
   {
     "path": "forum/index.php",
-    "bytes": 2700,
-    "sha256": "c4b2f3bf0c1017dd1374a1169b021024d6a76a564ccd9605bd2928edf2f00847"
+    "bytes": 2767,
+    "sha256": "150226ce10f915ad9f95801b8a9150a20d8cbbf4cd6fd42051b4e75a800a79e2"
   },
   {
     "path": "forum/topic.php",
-    "bytes": 10480,
-    "sha256": "71cfff39d28b46c1d7a267f5f601f5f8f37202c389b3d441e8c595c2fa0e9d8b"
+    "bytes": 10444,
+    "sha256": "95387686fac0d6fd5bba0000d53f4fbb8375dedce26b140123460450e27ec3be"
   },
   {
     "path": "gallery/avators.php",
@@ -161,18 +161,18 @@
   },
   {
     "path": "gallery/count.php",
-    "bytes": 1879,
-    "sha256": "3e14e6ec71ff9e0ad86b5daea1c1d4ed43c6f44328bb86e3ecd1c25c7ffbcce1"
+    "bytes": 1596,
+    "sha256": "77eb45a38989348af5b6031f0bd61c2f41ed7f89d97c050b20750b187a6ecd44"
   },
   {
     "path": "gallery/count24.php",
-    "bytes": 3702,
-    "sha256": "373d437d10aebaabda3a3615b2028e2c514896f7ecfc0bd615823a14b06c3ed3"
+    "bytes": 2458,
+    "sha256": "7106eb68ec07b27542ebfe69f6249696e188c5365ebb63ee3f4e86e138342bd0"
   },
   {
     "path": "gallery/count31.php",
-    "bytes": 3684,
-    "sha256": "770fdf76f95ab801cc806c32fc938f8716637002c7266faa7f7ee19b34ad615d"
+    "bytes": 2458,
+    "sha256": "b3d65588a961748c4acc29bad9d0f45dd2c78c25436ebffecc3047d38b8bd775"
   },
   {
     "path": "gallery/fullsize.php",
@@ -186,8 +186,8 @@
   },
   {
     "path": "gallery/index.php",
-    "bytes": 9460,
-    "sha256": "a3fc5a8803971446f0ce217323e2ff68b5a934c7a874633c4dc06fc98f8076c7"
+    "bytes": 9431,
+    "sha256": "affcca21915a451bc3ecaa654e73dc72741dce07fa6f4b7911f7964af0fa57ba"
   },
   {
     "path": "gallery/level.php",
