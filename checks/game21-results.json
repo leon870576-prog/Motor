@@ -1,0 +1,13 @@
+{
+  "runtime": "PHP 8.4 WASM",
+  "requests": 64,
+  "passed": [
+    "guest, CSRF, cross-site, GET mutation, array injection, invalid commands and bet bounds rejected without changing game or balance",
+    "start charges once; random deck has 36 unique cards; duplicate request and refresh do not re-deal or charge",
+    "hidden dealer/deck not leaked; hit draws exactly one unique card; active round cannot be replaced; reveal settles once",
+    "21 beats two aces; two aces beat ordinary hands; ties including 21 go to banker; bust loses; banker takes multiple cards to 17; payout and statistics once",
+    "all original card values; 500 shuffled decks; zero balance/disabled betting; an existing round can finish when admin changes limit",
+    "old stake refund is idempotent; chat/profile writes preserve game state; unknown slot data fails closed; profile traversal rejected",
+    "no-JavaScript POST/303 fallback; relogin resumes own round; another account has separate state"
+  ]
+}

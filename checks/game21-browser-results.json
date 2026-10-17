@@ -1,0 +1,14 @@
+{
+  "browser": "153.0.8010.0",
+  "layouts": 192,
+  "themes": 12,
+  "scenarios": [
+    "ready/playing/result/empty across 12 themes and 320–1440px: full cards, no overflow, 44px+ controls, 16px+ input",
+    "quick bet, client validation, start/hit/stand without document reload, dealer hidden until reveal",
+    "lost connection preserves hand and permits safe retry; rapid double tap sends one request",
+    "reduced motion, rules toggle and long hands on 320px",
+    "JavaScript disabled: normal bet form remains usable, inert quick buttons hidden"
+  ],
+  "errors": [],
+  "physicalDevices": false
+}

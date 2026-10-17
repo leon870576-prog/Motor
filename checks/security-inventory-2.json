@@ -1,5 +1,15 @@
 [
   {
+    "path": "images/avators2/124.gif",
+    "bytes": 13458,
+    "sha256": "d36824616385c493118d7f9216065ec2321bce24d311f99c8141010c57df2e4a"
+  },
+  {
+    "path": "images/avators2/125.gif",
+    "bytes": 14992,
+    "sha256": "f3ccfab89084148c2a543185ae5d4a6dba97f50c3b9f5bc5cb7878557f76ecc8"
+  },
+  {
     "path": "images/avators2/126.gif",
     "bytes": 17622,
     "sha256": "a811fd252ccfcb3f475ee863310d610b33a4c6772ffe99a0b5c6174b1deffd0c"
@@ -1488,15 +1498,5 @@
     "path": "images/img/key.gif",
     "bytes": 273,
     "sha256": "14e63aa10fa2ba8d9e51168bea45abee0f55457b66f3814f7e66dc66f7f95dd5"
-  },
-  {
-    "path": "images/img/lock.gif",
-    "bytes": 307,
-    "sha256": "20fcc910fde5ccd7b0e724675990bd12ff9e1b5f6fb3a84c34949ed8cea57cdb"
-  },
-  {
-    "path": "images/img/logo-default.gif",
-    "bytes": 514,
-    "sha256": "45d66db03621aae43665e3098befc40f9adec8f4391797352b0b21084265ce44"
   }
 ]

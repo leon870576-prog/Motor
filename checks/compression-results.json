@@ -23,7 +23,7 @@
     {
       "accept": "gzip",
       "encoding": "gzip",
-      "bytes": 2757,
+      "bytes": 2758,
       "decodedBytes": 17775
     },
     {
@@ -35,8 +35,8 @@
     {
       "accept": "gzip, deflate",
       "encoding": "gzip",
-      "bytes": 2757,
-      "decodedBytes": 17774
+      "bytes": 2758,
+      "decodedBytes": 17775
     },
     {
       "accept": "GZIP",

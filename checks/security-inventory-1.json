@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 259,
-    "sha256": "5f8cde4b22117905b2c6c93465a9eef0c737a4e1a208a2792476c7509deea1d2"
+    "bytes": 256,
+    "sha256": "0789a1a459103eef3d919579edde28da2f9cccc6bc9c26f55d3a9c6aa61d7099"
   },
   {
     "path": "assets/lesika/chat.css",
@@ -48,6 +48,16 @@
     "path": "assets/lesika/gallery.js",
     "bytes": 8320,
     "sha256": "b6d732e9fc5118f9b89a2f22dcb1ebcd9cc5ae12d84a039dcbcb732f855b92f4"
+  },
+  {
+    "path": "assets/lesika/game21.css",
+    "bytes": 7414,
+    "sha256": "d44fac811ee6087b331f7c48081b09f27692538086caa842adecfe100a9f8cf0"
+  },
+  {
+    "path": "assets/lesika/game21.js",
+    "bytes": 3728,
+    "sha256": "d1fb62437359edac6f19b3f3c10aed276492517145c46e062cfcec02c2e31af4"
   },
   {
     "path": "assets/lesika/leaf.svg",
@@ -206,8 +216,8 @@
   },
   {
     "path": "games/21.php",
-    "bytes": 10803,
-    "sha256": "57f8c168b7efb7575bfc98402a64fb9c3fa8f95fc98427fa30b5cb881c43afaf"
+    "bytes": 4993,
+    "sha256": "fe0f0d352edc87e6ca78560b5898a433e8904f0371f854ab699a70e0bb18b73a"
   },
   {
     "path": "games/bandit.php",
@@ -1488,15 +1498,5 @@
     "path": "images/avators2/123.gif",
     "bytes": 13157,
     "sha256": "b70793021ff3e864a7e0ba5ad51ca4aea3b1e45a75149345bbc0ee9d0cf9889e"
-  },
-  {
-    "path": "images/avators2/124.gif",
-    "bytes": 13458,
-    "sha256": "d36824616385c493118d7f9216065ec2321bce24d311f99c8141010c57df2e4a"
-  },
-  {
-    "path": "images/avators2/125.gif",
-    "bytes": 14992,
-    "sha256": "f3ccfab89084148c2a543185ae5d4a6dba97f50c3b9f5bc5cb7878557f76ecc8"
   }
 ]

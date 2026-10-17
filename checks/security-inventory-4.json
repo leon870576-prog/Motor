@@ -1,5 +1,25 @@
 [
   {
+    "path": "news/komm.php",
+    "bytes": 8257,
+    "sha256": "ba23bfdc60969462ae73f1670c0144cf707b55c83b44bd3110dc8c518a75389a"
+  },
+  {
+    "path": "news/rss.php",
+    "bytes": 2241,
+    "sha256": "3f62ffad1d35f131ff03364ad3666fd30bc8fb6800f71ee235542ed6e8183187"
+  },
+  {
+    "path": "pages/account.php",
+    "bytes": 6956,
+    "sha256": "016e449d5681cd72302eff7805641f96a2cd95dd7fdc725cf27fa1972408f3f8"
+  },
+  {
+    "path": "pages/adminlist.php",
+    "bytes": 4353,
+    "sha256": "cb0b3f0b4e0075f3eae1e884b8f6b491dfaf10821263f56b26cd06f3d73fd487"
+  },
+  {
     "path": "pages/anketa.php",
     "bytes": 9899,
     "sha256": "a771c2c93b5db95c2bc9b10f68ab75c20162f31d2c5338f326d91050e9f2acc0"

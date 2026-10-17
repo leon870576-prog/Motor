@@ -34,8 +34,7 @@ function motor_request_guard(): void {
     }
     if($route==='input.php' && $action==='exit' && $method==='GET')return;
     if((in_array($action,motor_request_actions()[$route]??[],true) || ($route==='games/hi.php' && isset($_GET['newgame']))) && $method!=='POST') {
-        // The legacy card game redirects here immediately after an authorized bet.
-        if(!($route==='games/21.php' && $action==='game' && $valid))motor_request_reject(403,'Для этого действия отправьте форму на сайте.');
+        motor_request_reject(403,'Для этого действия отправьте форму на сайте.');
     }
 }
 function motor_request_html(string $html): string {

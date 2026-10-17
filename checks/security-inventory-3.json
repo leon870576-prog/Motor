@@ -1,5 +1,15 @@
 [
   {
+    "path": "images/img/lock.gif",
+    "bytes": 307,
+    "sha256": "20fcc910fde5ccd7b0e724675990bd12ff9e1b5f6fb3a84c34949ed8cea57cdb"
+  },
+  {
+    "path": "images/img/logo-default.gif",
+    "bytes": 514,
+    "sha256": "45d66db03621aae43665e3098befc40f9adec8f4391797352b0b21084265ce44"
+  },
+  {
     "path": "images/img/logo.png",
     "bytes": 4753,
     "sha256": "09ccf9672f44e47c6d89116660a9428f3ce570fb2320117ba18697be64e27ff9"
@@ -1135,6 +1145,16 @@
     "sha256": "86cf74fd5f045ddf4521dd600a3c15f8eb856c42017ac0e8375b11580b8fdfad"
   },
   {
+    "path": "includes/game21-view.php",
+    "bytes": 6936,
+    "sha256": "0cd2506582d72f5333288b97753c8a9e6809acc2a6b85f9b35b9be34bdc07aa2"
+  },
+  {
+    "path": "includes/game21.php",
+    "bytes": 7314,
+    "sha256": "c03dc6b18ccb2123e0f695fc41f716542a5ea5ad7bc18a0c165362019a6e59ad"
+  },
+  {
     "path": "includes/gzip_foot.php",
     "bytes": 2126,
     "sha256": "25b0721a03f994291a9622aac490899e4ad37e5d00b05def70d9f4e5d079a622"
@@ -1241,8 +1261,8 @@
   },
   {
     "path": "includes/request-security.php",
-    "bytes": 5902,
-    "sha256": "c5d04c5da61a19d9951dfc363e5e6fccfab78e73665637ab5392efca51634f23"
+    "bytes": 5758,
+    "sha256": "4d9e1e5bd568ee5d7b4cc899ba482d7f51b8201984ceccfa20f0e6d82876ac98"
   },
   {
     "path": "includes/skin.php",
@@ -1478,25 +1498,5 @@
     "path": "news/index.php",
     "bytes": 2388,
     "sha256": "4dbed6a43bd34d6e32352e00900dec1d80b576c58c9bce344be65ebb93d36283"
-  },
-  {
-    "path": "news/komm.php",
-    "bytes": 8257,
-    "sha256": "ba23bfdc60969462ae73f1670c0144cf707b55c83b44bd3110dc8c518a75389a"
-  },
-  {
-    "path": "news/rss.php",
-    "bytes": 2241,
-    "sha256": "3f62ffad1d35f131ff03364ad3666fd30bc8fb6800f71ee235542ed6e8183187"
-  },
-  {
-    "path": "pages/account.php",
-    "bytes": 6956,
-    "sha256": "016e449d5681cd72302eff7805641f96a2cd95dd7fdc725cf27fa1972408f3f8"
-  },
-  {
-    "path": "pages/adminlist.php",
-    "bytes": 4353,
-    "sha256": "cb0b3f0b4e0075f3eae1e884b8f6b491dfaf10821263f56b26cd06f3d73fd487"
   }
 ]
