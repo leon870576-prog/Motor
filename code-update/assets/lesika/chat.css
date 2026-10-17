@@ -1,0 +1,16 @@
+.chat-livebar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:52px;margin:8px 0;color:var(--muted);font-size:.875rem}
+.chat-livebar [hidden]{display:none}
+.chat-new,.chat-livebar button{min-height:44px;padding:8px 12px;max-width:100%;border:1px solid var(--line);border-radius:8px;background:var(--wash);color:var(--accent)}
+.chat-feed{overflow-anchor:none}
+.chat-message{min-width:0}
+.chat-message .b{display:flex;flex-wrap:wrap;align-items:center;gap:5px 8px}
+.chat-message .b small{width:100%;margin:0}
+.chat-message .b .motor-avatar{margin:0 4px 0 0}
+.chat-bot-label{font-size:.75rem;padding:2px 7px;border:1px solid var(--line);border-radius:12px;color:var(--muted)}
+.chat-composer{margin:16px 0;scroll-margin-top:90px}
+.chat-send-status{min-height:1.6em;margin:8px 0 0;font-size:.875rem;color:var(--muted)}
+.chat-settings label{display:block;margin:12px 0 4px;font-weight:700}
+.chat-settings input:not([type=submit]),.chat-settings select,.chat-settings textarea{max-width:100%;width:100%}
+.chat-settings fieldset{margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:9px;min-width:0}
+.chat-settings small{display:block;line-height:1.5}
+.chat-settings-error{padding:12px;border:1px solid var(--accent);border-radius:8px}

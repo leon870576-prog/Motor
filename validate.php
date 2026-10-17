@@ -59,3 +59,14 @@ foreach ($compressionCases as $accept=>$expected) if (motor_compression_encoding
 $compressionSample = str_repeat('Сжатие HTML без потери данных 😊 ', 200);
 if (gzdecode(compress_output_gzip($compressionSample)) !== $compressionSample || gzuncompress(compress_output_deflate($compressionSample)) !== $compressionSample) throw new RuntimeException('Compression roundtrip');
 echo 'PASS: native gzip and HTTP deflate/zlib roundtrip; encoding preferences, refusals and identity'.PHP_EOL;
+
+require_once $root.'/includes/nastya.php';
+$chatSettings = ['bot_enabled'=>1,'bot_mode'=>'conversation','bot_cooldown'=>0,'context_seconds'=>180,'custom_rules'=>[]];
+$chatContext = [];
+if (count(motor_nastya_topics()) < 30) throw new RuntimeException('Incomplete conversation catalogue');
+foreach (motor_nastya_topics() as [$pattern,$answers]) if (($pattern !== '' && preg_match('~(*UCP)'.$pattern.'~u','') === false) || count($answers) < 3) throw new RuntimeException('Invalid conversation topic');
+if (motor_nastya_reply('Настя, что слушаешь из музыки?', $chatContext, $chatSettings, 10000) === null || $chatContext['topic'] !== 'music') throw new RuntimeException('Conversation intent');
+if (motor_nastya_reply('да', $chatContext, $chatSettings, 10001) === null || $chatContext['topic'] !== 'music') throw new RuntimeException('Conversation context');
+if (motor_nastya_reply('[b]Другой[/b], привет', $chatContext, $chatSettings, 10002) !== null) throw new RuntimeException('Conversation recipient');
+foreach (['chat.css','chat.js'] as $asset) if (!is_file($root.'/assets/lesika/'.$asset)) throw new RuntimeException('Missing chat asset');
+echo 'PASS: native Nastya Unicode topics, conversational context, recipient isolation and chat assets'.PHP_EOL;

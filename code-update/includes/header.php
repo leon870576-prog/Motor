@@ -30,7 +30,7 @@ motor_start_compression(!empty($config['gzip']));
 ############################################################################################
 ##                                 Счетчик запросов                                       ##
 ############################################################################################
-if (!in_array(basename($_SERVER['SCRIPT_NAME'] ?? ''), ['attachment.php','resize.php','fullsize.php'], true)) {
+if (!defined('MOTOR_CHAT_POLL') && !in_array(basename($_SERVER['SCRIPT_NAME'] ?? ''), ['attachment.php','resize.php','fullsize.php'], true)) {
 $dosfiles = glob(DATADIR.'datados/*.dat');
 foreach ($dosfiles as $filename) {
 $file_array_filemtime = filemtime($filename);
@@ -185,6 +185,8 @@ session_destroy();
 header ('Location: '.$config['home'].'/'.$request_uri); exit();
 }}
 
+if (!defined('MOTOR_CHAT_POLL') || ($_SESSION['chat_presence_at']??0)+60<=SITETIME) {
+$_SESSION['chat_presence_at']=SITETIME;
 if (strstr($php_self, basename(ADMINDIR))){
 //------------------------ Запись текущей страницы для админов -----------------------------//
 $adm_log = no_br('|'.$brow.'|'.$ip.'|'.$log.'|'.$request_uri.'|'.$http_referer.'|'.SITETIME.'|');
@@ -236,6 +238,7 @@ $tlife = no_br(SITETIME.'|0|'.$log.'|'.$php_self.'|'.$ip.'|');
 write_files(DATADIR.'datalife/'.$log.'.dat', $tlife, 1, 0666);
 }
 //--------------------------------------------------------------//
+} // Polls refresh presence at most once a minute; permissions are checked every time.
 } else {$_SESSION['log']=''; $_SESSION['par']=''; $log='';}
 } else {$_SESSION['log']=''; $_SESSION['par']=''; $log='';}
 } else {$_SESSION['log']=''; $_SESSION['par']=''; $log='';}
@@ -276,7 +279,7 @@ $header_title = '';
 ############################################################################################
 ##                                      Кто-откуда                                        ##
 ############################################################################################
-if ($http_referer!='Не определено'){
+if (!defined('MOTOR_CHAT_POLL') && $http_referer!='Не определено'){
 
 $checkref = check_string($http_referer);
 

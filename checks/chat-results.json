@@ -1,0 +1,20 @@
+{
+  "runtime": "PHP 8.4 WASM",
+  "requests": 103,
+  "dialog": {
+    "assertions": 127,
+    "topics": 37,
+    "variants": 171
+  },
+  "passed": [
+    "admin settings, legacy links, bounds, custom phrases, CSRF and stale-save protection",
+    "127 conversation checks; 37 topics and 171 answers",
+    "human + Nastya in one response, idempotent retry, conflict recovery, rejected inputs, unchanged 204 and compressed JSON",
+    "member/guest access, author path validation, stored markup, metadata privacy and POST authorization",
+    "scheduled joke and quiz, read-only guest refresh, no duplicate ticks, correct answer, timeout wait and welcome limit",
+    "moderation: POST + CSRF, stale edit/delete, valid edit/delete, safe clearing and quiz reset",
+    "actual backup and restore preserve chat settings and bot context",
+    "15 repeated authenticated polls remain valid with DOS protection enabled; real browser fixtures captured",
+    "polling still obeys user bans and site closure"
+  ]
+}

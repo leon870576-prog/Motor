@@ -146,7 +146,7 @@ for(const theme of Object.keys(JSON.parse(readFileSync(join(root,'includes/lesik
 for(const url of ['/gallery/index.php','/mpanel/gallery.php','/mpanel/gallery-settings.php','/mpanel/gallery.php?action=edit&gid='+id])capture(await req(url),url,'admin');
 pass('12 warm themes share responsive gallery and viewer; upload/comment/edit/settings fixtures captured');
 // Actual backup and restore of gallery metadata, original, comments, preview and settings.
-r=await req('/mpanel/backup.php?action=newbackup',{files:'1','dirarc[0]':'../local/datagallery'});assert.equal(r.httpStatusCode,302);
+r=await req('/mpanel/backup.php?action=newbackup',{uid,files:'1','dirarc[0]':'../local/datagallery'});assert.equal(r.httpStatusCode,302);
 let z=await run("$p=glob('/www/local/databackup/*.zip');$z=new ZipArchive();$z->open(end($p));$n=[];for($i=0;$i<$z->numFiles;$i++)$n[]=$z->getNameIndex($i);echo json_encode(['name'=>basename(end($p)),'entries'=>$n]);$z->close();");const backup=JSON.parse(z.text);
 assert.ok(backup.entries.includes('gallery-settings.json'));assert.ok(backup.entries.includes('datagallery/'+id));assert.ok(backup.entries.includes('datagallery/'+id+'.dat'));assert.ok(backup.entries.some(x=>x.startsWith('datagallery/previews/')));assert.ok(backup.entries.includes('datagallery/gallery-audit.jsonl'));
 php.unlink('/www/local/datagallery/'+id);php.unlink('/www/local/gallery-settings.json');

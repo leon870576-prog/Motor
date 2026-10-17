@@ -15,6 +15,7 @@ try {
  const context=await browser.newContext({viewport:{width:320,height:780},isMobile:true,hasTouch:true});
  await context.route('**/*',async route=>{
   const request=route.request(),url=new URL(request.url());
+  if(new URL(route.request().url()).pathname==='/chat/updates.php')return route.fulfill({status:204,body:''});
   if(request.method()!=='GET'){report.unexpectedPosts++;return route.abort();}
   if(url.pathname.endsWith('.php'))return route.fulfill({contentType:'text/html; charset=utf-8',body:readFileSync(join(checks,fixture.directory,fixture.file))});
   const file=resolve(root,'.'+decodeURIComponent(url.pathname));

@@ -17,8 +17,8 @@
     {
       "accept": "identity",
       "encoding": "identity",
-      "bytes": 17749,
-      "decodedBytes": 17749
+      "bytes": 17750,
+      "decodedBytes": 17750
     },
     {
       "accept": "gzip",
@@ -29,14 +29,14 @@
     {
       "accept": "deflate",
       "encoding": "deflate",
-      "bytes": 2739,
-      "decodedBytes": 17774
+      "bytes": 2738,
+      "decodedBytes": 17773
     },
     {
       "accept": "gzip, deflate",
       "encoding": "gzip",
-      "bytes": 2751,
-      "decodedBytes": 17774
+      "bytes": 2750,
+      "decodedBytes": 17773
     },
     {
       "accept": "GZIP",

@@ -24,6 +24,7 @@ try {
  let fixture=fixtures[0],posts=0;
  await context.route('**/*',async route=>{
   const request=route.request(),url=new URL(request.url());
+  if(new URL(route.request().url()).pathname==='/chat/updates.php')return route.fulfill({status:204,body:''});
   if(request.method()==='POST'){posts++;return route.fulfill({status:200,contentType:'text/plain',body:'Captured test submission'});}
   if(url.pathname.endsWith('.php'))return route.fulfill({status:200,contentType:'text/html; charset=utf-8',body:readFileSync(join(fixtureDir,fixture.file))});
   const p=resolve(root,'.'+decodeURIComponent(url.pathname));

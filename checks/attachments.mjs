@@ -207,7 +207,7 @@ for(const skin of ['lesika_dvor','lesika_gazeta','lesika_gostinaya','lesika_soln
 pass('closed-topic permissions and attachment rendering in all seven warm themes');
 
 // Existing backup must include settings, manifests and binaries.
-r=await req('/mpanel/backup.php?action=newbackup',{files:'1','dirarc[0]':'../local/attachments','dirarc[1]':'../local/dataforum'});assert.equal(r.httpStatusCode,302);
+r=await req('/mpanel/backup.php?action=newbackup',{uid,files:'1','dirarc[0]':'../local/attachments','dirarc[1]':'../local/dataforum'});assert.equal(r.httpStatusCode,302);
 r=await php.run({code:"<?php $paths=glob('/www/local/databackup/*.zip');$z=new ZipArchive();$z->open(end($paths));$names=[];for($i=0;$i<$z->numFiles;$i++)$names[]=$z->getNameIndex($i);echo json_encode($names);$z->close();"});assert.equal(r.errors,'');
 const archived=JSON.parse(r.text);assert.ok(archived.includes('attachment-settings.json'));assert.ok(archived.some(x=>x.includes('/manifest.json')));assert.ok(archived.some(x=>x.endsWith('.blob')));assert.ok(archived.includes('dataforum/'+fid+'-'+topic+'.dat'));
 pass('backup contains attachment settings, manifests, binaries and forum records');

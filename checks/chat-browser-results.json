@@ -1,0 +1,231 @@
+{
+  "browser": "153.0.8010.0",
+  "layouts": [
+    {
+      "width": 320,
+      "theme": "lesika_dvor",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_gazeta",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_gostinaya",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_solnce",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_vecher",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_albom",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_uyut",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_web_terrace",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_web_press",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_web_garden",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_web_coffee",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 320,
+      "theme": "lesika_web_evening",
+      "composerShift": 0.109375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_dvor",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_gazeta",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_gostinaya",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_solnce",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_vecher",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_albom",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_uyut",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_web_terrace",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_web_press",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_web_garden",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_web_coffee",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 390,
+      "theme": "lesika_web_evening",
+      "composerShift": -0.484375,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_dvor",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_gazeta",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_gostinaya",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_solnce",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_vecher",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_albom",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_uyut",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_web_terrace",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_web_press",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_web_garden",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_web_coffee",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    },
+    {
+      "width": 1440,
+      "theme": "lesika_web_evening",
+      "composerShift": 0.21875,
+      "documentRequests": 1
+    }
+  ],
+  "scenarios": [
+    "36 layouts: twelve themes, 320/390/1440px, draft/focus/selection/scroll preserved, avatars fully visible",
+    "visible reading position preserved while new messages arrive",
+    "actual 3-second timer, unchanged 204 keeps nodes, external bot reply, edits and empty chat",
+    "AJAX send, CSRF fields, duplicate click, draft typed during send, normal clear, failure keeps draft, 409 changes retry ID",
+    "history page stays stable; own send switches to latest messages without reload",
+    "hidden/offline pause, visibility/reconnection resume, one request in flight, admin disable stops timers"
+  ],
+  "errors": [],
+  "physicalDevices": false
+}
