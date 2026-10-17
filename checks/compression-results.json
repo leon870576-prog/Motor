@@ -1,0 +1,106 @@
+{
+  "php": "8.4",
+  "requests": 36,
+  "cases": [
+    {
+      "accept": "(absent)",
+      "encoding": "identity",
+      "bytes": 17750,
+      "decodedBytes": 17750
+    },
+    {
+      "accept": "",
+      "encoding": "identity",
+      "bytes": 17750,
+      "decodedBytes": 17750
+    },
+    {
+      "accept": "identity",
+      "encoding": "identity",
+      "bytes": 17749,
+      "decodedBytes": 17749
+    },
+    {
+      "accept": "gzip",
+      "encoding": "gzip",
+      "bytes": 2751,
+      "decodedBytes": 17774
+    },
+    {
+      "accept": "deflate",
+      "encoding": "deflate",
+      "bytes": 2739,
+      "decodedBytes": 17774
+    },
+    {
+      "accept": "gzip, deflate",
+      "encoding": "gzip",
+      "bytes": 2751,
+      "decodedBytes": 17774
+    },
+    {
+      "accept": "GZIP",
+      "encoding": "gzip",
+      "bytes": 2751,
+      "decodedBytes": 17774
+    },
+    {
+      "accept": "gzip;q=0, deflate;q=0",
+      "encoding": "identity",
+      "bytes": 17750,
+      "decodedBytes": 17750
+    },
+    {
+      "accept": "gzip;q=0, deflate;q=0.8",
+      "encoding": "deflate",
+      "bytes": 2739,
+      "decodedBytes": 17774
+    },
+    {
+      "accept": "gzip;q=0.2, deflate;q=0.9",
+      "encoding": "deflate",
+      "bytes": 2739,
+      "decodedBytes": 17774
+    },
+    {
+      "accept": "gzip;q=0.4, identity;q=1",
+      "encoding": "identity",
+      "bytes": 17750,
+      "decodedBytes": 17750
+    },
+    {
+      "accept": "gzip;q=0, *;q=0.5",
+      "encoding": "deflate",
+      "bytes": 2739,
+      "decodedBytes": 17774
+    },
+    {
+      "accept": "notgzip",
+      "encoding": "identity",
+      "bytes": 17750,
+      "decodedBytes": 17750
+    },
+    {
+      "accept": "gzip;q=bogus",
+      "encoding": "identity",
+      "bytes": 17750,
+      "decodedBytes": 17750
+    },
+    {
+      "accept": "gzip;q=0,gzip;q=1",
+      "encoding": "identity",
+      "bytes": 17750,
+      "decodedBytes": 17750
+    },
+    {
+      "accept": "*;q=0, identity;q=1",
+      "encoding": "identity",
+      "bytes": 17750,
+      "decodedBytes": 17750
+    }
+  ],
+  "deflate_zlib_roundtrip": true,
+  "no_double_encoding": true,
+  "csrf_preserved": true,
+  "admin_off_switch": true
+}

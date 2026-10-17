@@ -52,3 +52,10 @@ foreach (['mag','bot','shut'] as $name) {
     if (!$size || $size[0] !== 256 || $size[1] !== 256 || $size[2] !== IMAGETYPE_GIF) throw new RuntimeException('Invalid chat avatar asset');
 }
 echo 'PASS: all 3 generated chat avatars at 256px with original filenames'.PHP_EOL;
+
+require_once $root.'/includes/compression.php';
+$compressionCases = ['gzip'=>'gzip', 'deflate'=>'deflate', 'GZIP'=>'gzip', 'gzip;q=0,deflate;q=0'=>'identity', 'gzip;q=0.2,deflate;q=0.8'=>'deflate', 'gzip;q=0,*;q=1'=>'deflate', 'identity;q=1,gzip;q=0.5'=>'identity', '*;q=0'=>'', 'notgzip'=>'identity', ''=>'identity'];
+foreach ($compressionCases as $accept=>$expected) if (motor_compression_encoding($accept) !== $expected) throw new RuntimeException('Compression negotiation: '.$accept);
+$compressionSample = str_repeat('Сжатие HTML без потери данных 😊 ', 200);
+if (gzdecode(compress_output_gzip($compressionSample)) !== $compressionSample || gzuncompress(compress_output_deflate($compressionSample)) !== $compressionSample) throw new RuntimeException('Compression roundtrip');
+echo 'PASS: native gzip and HTTP deflate/zlib roundtrip; encoding preferences, refusals and identity'.PHP_EOL;

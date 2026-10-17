@@ -1384,13 +1384,7 @@ function user_visit($login, $where = "") {
 }
 
 // --------------- Функции сжатия страниц ---------------//
-function compress_output_gzip($output) {
-	return gzencode($output, 5);
-}
-
-function compress_output_deflate($output) {
-	return gzdeflate($output, 5);
-}
+require_once __DIR__.'/compression.php';
 
 // ---------- Функция обработки строк данных и ссылок ---------//
 function check_string($string) {

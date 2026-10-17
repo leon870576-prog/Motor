@@ -81,6 +81,10 @@ assert.equal((await req(videoURL,undefined,{range:'bytes=999999-'})).httpStatusC
 assert.equal((await req(videoURL,undefined,{range:'bytes=0-1,3-4'})).httpStatusCode,416);
 r=await req(videoURL,undefined,{},'HEAD');assert.equal(r.bytes.length,0);assert.equal(Number(r.headers['content-length'][0]),mp4.length);
 r=await req(textURL);assert.ok(r.headers['content-disposition'][0].startsWith('attachment;'));assert.ok(r.headers['content-disposition'][0].includes("filename*=UTF-8''"));
+for(const encoding of ['gzip','deflate']) {
+ r=await req(imageURL,undefined,{'accept-encoding':encoding});assert.equal(r.headers['content-encoding'],undefined);assert.deepEqual(Buffer.from(r.bytes),gif);
+ r=await req(videoURL,undefined,{'accept-encoding':encoding,range:'bytes=0-15'});assert.equal(r.httpStatusCode,206);assert.equal(r.headers['content-encoding'],undefined);assert.deepEqual(Buffer.from(r.bytes),mp4.subarray(0,16));
+}
 assert.equal((await req('/attachment.php?section=news&parent=999999&file='+news.files[0].id)).httpStatusCode,404);
 assert.equal((await req('/attachment.php?section=forum&parent='+newsId+'&file='+news.files[0].id)).httpStatusCode,404);
 pass('real multipart photos/video/documents; byte-exact downloads, Unicode names, video seek/HEAD/416');

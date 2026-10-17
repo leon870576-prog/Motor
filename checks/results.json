@@ -1,6 +1,6 @@
 {
   "php": "8.4",
-  "requests": 148,
+  "requests": 152,
   "passed": [
     "admin-only settings, CSRF, format allowlist and atomic validation",
     "real multipart photos/video/documents; byte-exact downloads, Unicode names, video seek/HEAD/416",
