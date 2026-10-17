@@ -102,13 +102,13 @@ if (!strstr($php_self, 'pages/banip.php')){header ('Location: '.$config['home'].
 ############################################################################################
 if ($config['cookies']==1){
 if (empty($_SESSION['log']) && empty($_SESSION['par'])) {
-if (isset($_COOKIE['cooklog']) && isset($_COOKIE['cookpar']) && preg_match('|^[a-z0-9_\-]+$|i',$_COOKIE['cooklog'])){
+if (isset($_COOKIE['cooklog']) && isset($_COOKIE['cookpar']) && is_string($_COOKIE['cooklog']) && is_string($_COOKIE['cookpar']) && preg_match('|^[a-z0-9_\-]+$|i',$_COOKIE['cooklog'])){
 if ($config['keypass']!=""){
 
 $unlog = xoft_decode($_COOKIE['cooklog'],$config['keypass']);
 $unpar = xoft_decode($_COOKIE['cookpar'],$config['keypass']);
 
-if (file_exists(DATADIR.'profil/'.$unlog.'.prof')){
+if (preg_match('/^[a-z0-9-]{3,20}$/Di',$unlog) && file_exists(DATADIR.'profil/'.$unlog.'.prof')){
 $checkfiles = file_get_contents(DATADIR.'profil/'.$unlog.'.prof');
 $checkdata = explode(':||:', $checkfiles);
 
@@ -117,6 +117,8 @@ if ($unlog==$checkdata[0] && md5(md5($unpar))==$checkdata[1] && !empty($checkdat
 $pr_ip = explode('.', $ip_addr);
 $my_ip = $pr_ip[0].$pr_ip[1].$pr_ip[2];
 
+session_regenerate_id(true);
+$_SESSION['token']=bin2hex(random_bytes(32));
 $_SESSION['log'] = $unlog;
 $_SESSION['par'] = $unpar;
 $_SESSION['my_ip'] = $my_ip;
@@ -136,6 +138,8 @@ if (empty($_SESSION['currs'])) {$_SESSION['currs'] = SITETIME;}
 if (empty($_SESSION['token']) || !is_string($_SESSION['token']) || strlen($_SESSION['token']) !== 64) {$_SESSION['token'] = bin2hex(random_bytes(32));}
 if (empty($_SESSION['protect'])) {$_SESSION['protect'] = mt_rand(1000,9999);}
 $_SESSION['timeon'] = maketime(SITETIME - $_SESSION['currs']);
+require_once __DIR__.'/request-security.php';
+motor_request_guard();
 ob_start('ob_processing');
 
 ############################################################################################

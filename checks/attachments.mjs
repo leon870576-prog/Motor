@@ -17,6 +17,7 @@ copy(root,'/www');
 await setPhpIniEntries(php,{upload_max_filesize:'32M',post_max_size:'64M',max_file_uploads:'20',allow_url_fopen:'0',sendmail_path:'/bin/false'});
 const handler=new PHPRequestHandler({php,documentRoot:'/www',absoluteUrl:'https://motor.test'});
 async function req(url,body,headers={},method){
+ if(url==='/input.php?action=exit' && !body){const form=await req('/pages/themes.php');const token=form.text.match(/name="uid" value="([^"]+)"/);assert.ok(token,'logout form token');body={uid:token[1]};}
  php.chdir('/www'+dirname(new URL(url,'https://motor.test').pathname));
  // Build a byte-correct multipart body: runtime's helper counts Unicode characters as bytes.
  if(body && !(body instanceof Uint8Array) && typeof body==='object'){
@@ -186,7 +187,7 @@ await req('/input.php',{login:'MotorTestAdmin',pass:password});uid=await token()
 let adminEdit='/mpanel/forum.php?act=editpost&fid='+fid+'&id='+topic+'&post=1';edit=await req(adminEdit);version=edit.text.match(/name="record_version" value="([^"]+)"/)[1];
 r=await req('/mpanel/forum.php?act=changepost&fid='+fid+'&id='+topic+'&post=1&uid='+uid,{author:'MediaAuthor',msg:'Ответ изменён модератором',record_version:version,'attachments[0]':upload('moderated','дополнение.txt')});assert.equal(r.httpStatusCode,302);assert.equal(manifest('forum',replyParent).files.length,2);
 edit=await req(adminEdit);let fresh=edit.text.match(/name="record_version" value="([^"]+)"/)[1];assert.equal((await req('/mpanel/forum.php?act=changepost&fid='+fid+'&id='+topic+'&post=1&uid=bad',{author:'MediaAuthor',msg:'CSRF must fail',record_version:fresh})).httpStatusCode,403);
-assert.equal((await req('/mpanel/forum.php?act=changepost&fid='+fid+'&id='+topic+'&post=1&uid=bad',{author:'MediaAuthor',msg:'CSRF must fail',record_version:version})).httpStatusCode,409); // stale version rejected first
+assert.equal((await req('/mpanel/forum.php?act=changepost&fid='+fid+'&id='+topic+'&post=1&uid=bad',{author:'MediaAuthor',msg:'CSRF must fail',record_version:version})).httpStatusCode,403); // global CSRF guard rejects the request before reading record versions
 r=await req('/mpanel/forum.php?act=delpost&fid='+fid+'&id='+topic+'&uid='+uid,{'del[0]':'0'});assert.equal(r.httpStatusCode,302);assert.ok(!php.fileExists('/www/local/attachments/forum/'+parent));assert.equal((await req(replyURL)).httpStatusCode,200);
 // Append original Motor-format post (no UUID); editing upgrades only that row.
 php.writeFile('/www/local/'+postPath,php.readFileAsText('/www/local/'+postPath)+`${topic}|${fid}|MediaAuthor|Старое сообщение без файлов|test|${Math.floor(Date.now()/1000)}|\r\n`);
@@ -214,7 +215,7 @@ pass('backup contains attachment settings, manifests, binaries and forum records
 // Restore a missing uploaded binary from the existing engine's backup UI.
 r=await php.run({code:"<?php $p=glob('/www/local/databackup/*.zip');echo basename(end($p));"});const backupName=r.text;
 const restoreFile='/www/local/attachments/forum/'+replyParent+'/'+reply.files[0].id+'.blob';const restoreBytes=php.readFileAsBuffer(restoreFile);php.unlink(restoreFile);
-r=await req('/mpanel/backup.php?action=unzip&filearc='+backupName+'&uid='+uid);assert.equal(r.httpStatusCode,302);assert.deepEqual(php.readFileAsBuffer(restoreFile),restoreBytes);assert.equal((await req(replyURL)).httpStatusCode,200);
+r=await req('/mpanel/backup.php?action=unzip&filearc='+backupName,{uid});assert.equal(r.httpStatusCode,302);assert.deepEqual(php.readFileAsBuffer(restoreFile),restoreBytes);assert.equal((await req(replyURL)).httpStatusCode,200);
 pass('backup restore recovers a deleted attachment with its exact original bytes');
 
 

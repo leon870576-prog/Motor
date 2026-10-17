@@ -1,0 +1,19 @@
+{
+  "php": "8.4",
+  "requests": 420,
+  "smokeRoutes": 111,
+  "smokeRequests": 333,
+  "passed": [
+    "login rotates session ID and CSRF token; remembered cookies Secure/HttpOnly/SameSite; GET credentials rejected",
+    "default-route smoke: 333 requests across guest, member and administrator",
+    "PHP 8 admin source preview no longer calls count on a string",
+    "cross-site POST, missing/invalid CSRF, old GET mutations and array injection denied; old forms/buttons receive tokens",
+    "legitimate votes and bank forms still execute",
+    "archive traversal and symlinks rejected before writes; restore preserves existing data; restore requires POST",
+    "encoded reply-name XSS escaped; pyramid deletion and logout require POST",
+    "password-recovery tokens random, stored hashed, bound to expiration; forged and legacy predictable tokens rejected",
+    "actual recovery GET leaves password unchanged; POST+CSRF changes it once and invalidates the link",
+    "disabled mail reports failure without changing password, recovery token or cooldown"
+  ],
+  "inventoriedFiles": 975
+}

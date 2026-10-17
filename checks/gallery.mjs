@@ -18,6 +18,7 @@ copy(root,'/www');
 await setPhpIniEntries(php,{upload_max_filesize:'32M',post_max_size:'64M',memory_limit:'256M',allow_url_fopen:'0',sendmail_path:'/bin/false'});
 const handler=new PHPRequestHandler({php,documentRoot:'/www',absoluteUrl:'https://motor.test'});
 async function req(url,body,headers={},method){
+ if(url==='/input.php?action=exit' && !body){const form=await req('/pages/themes.php');const token=form.text.match(/name="uid" value="([^"]+)"/);assert.ok(token,'logout form token');body={uid:token[1]};}
  php.chdir('/www'+dirname(new URL(url,'https://motor.test').pathname));
  if(body && !(body instanceof Uint8Array) && typeof body==='object'){
   const boundary='MotorTest'+randomBytes(12).toString('hex'),chunks=[];
@@ -171,7 +172,7 @@ r=await req('/mpanel/backup.php?action=newbackup',{uid,files:'1','dirarc[0]':'..
 let z=await run("$p=glob('/www/local/databackup/*.zip');$z=new ZipArchive();$z->open(end($p));$n=[];for($i=0;$i<$z->numFiles;$i++)$n[]=$z->getNameIndex($i);echo json_encode(['name'=>basename(end($p)),'entries'=>$n]);$z->close();");const backup=JSON.parse(z.text);
 assert.ok(backup.entries.includes('gallery-settings.json'));assert.ok(backup.entries.includes('datagallery/'+id));assert.ok(backup.entries.includes('datagallery/'+id+'.dat'));assert.ok(backup.entries.some(x=>x.startsWith('datagallery/previews/')));assert.ok(backup.entries.includes('datagallery/gallery-audit.jsonl'));
 php.unlink('/www/local/datagallery/'+id);php.unlink('/www/local/gallery-settings.json');
-assert.equal((await req('/mpanel/backup.php?action=unzip&filearc='+backup.name+'&uid='+uid)).httpStatusCode,302);assert.equal(hash(php.readFileAsBuffer('/www/local/datagallery/'+id)),hash(large));assert.ok(php.fileExists('/www/local/gallery-settings.json'));assert.equal(rows().find(x=>x.split('|')[6]===allIds[1]).split('|')[3],'hidden');
+assert.equal((await req('/mpanel/backup.php?action=unzip&filearc='+backup.name,{uid})).httpStatusCode,302);assert.equal(hash(php.readFileAsBuffer('/www/local/datagallery/'+id)),hash(large));assert.ok(php.fileExists('/www/local/gallery-settings.json'));assert.equal(rows().find(x=>x.split('|')[6]===allIds[1]).split('|')[3],'hidden');
 assert.equal(JSON.parse(php.readFileAsText('/www/local/gallery-settings.json')).watermark_text,'Лесика — сайт.ру');
 pass('actual backup/restore preserves originals, previews, comments, hidden state, settings and audit');
 assert.equal((await batch([id,allIds[2]],'delete',{confirm_delete:'1'})).httpStatusCode,302);assert.ok(!motorExists(id));assert.ok(!motorExists(allIds[2]));assert.ok(!php.fileExists('/www/local/datagallery/'+id+'.dat'));assert.equal(php.readFileAsText('/www/local/profil/Role0.prof').split(':||:')[72],'');assert.equal((await req(full(id))).httpStatusCode,404);assert.equal((await req(full(allIds[3]))).httpStatusCode,200);

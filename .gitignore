@@ -13,3 +13,6 @@ checks/avatar-layout-fixtures/
 checks/scroll-fixtures/
 checks/chat-fixtures/
 checks/*.log
+
+checks/board-fixtures/
+checks/security-fixtures/

@@ -59,6 +59,7 @@ function date_fixed($timestamp, $format = "d.m.y / H:i") {
 
 // ------------------- Функция полного удаления юзера --------------------//
 function delete_users($users) {
+	if(!is_string($users)||!preg_match('/^[a-z0-9_-]{1,20}$/Di',$users)){http_response_code(400);exit('Неверный пользователь.');}
 	$string = search_string(DATADIR."bank.dat", $users, 1);
 	if ($string) {
 		delete_lines(DATADIR."bank.dat", $string['line']);
@@ -834,13 +835,13 @@ function xoft_decode($string, $key) {
 // ------------------ Функция генерирования паролей --------------------//
 function generate_password($length = "") {
 	if (empty($length)) {
-		$length = mt_rand(10, 12);
+		$length = random_int(10, 12);
 	}
 	$salt = str_split('aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789');
 
 	$makepass = "";
 	for ($i = 0; $i < $length; $i++) {
-		$makepass .= $salt[array_rand($salt)];
+		$makepass .= $salt[random_int(0,count($salt)-1)];
 	}
 	return $makepass;
 }
@@ -1551,7 +1552,8 @@ function addmail($mail, $subject, $messages, $sendermail="", $sendername="") {
 	$adds .= "X-Mailer: PHP v.".phpversion()."\n";
 	$adds .= "Date: ".date("r")."\n";
 
-	return mail($mail, $subject, $messages, $adds);
+	if(str_contains((string)ini_get('sendmail_path'),'/bin/false'))return false;
+	return @mail($mail, $subject, $messages, $adds);
 }
 
 // ----------------------- Постраничная навигация (Переходы) ------------------------//
@@ -1972,6 +1974,7 @@ function change_setting($str) {
 
 // ------------------------- Функция записи в профиль  ------------------------//
 function change_profil($login, $str) {
+	if(!is_string($login) || !preg_match('/^[a-z0-9_-]{1,20}$/Di',$login)) {http_response_code(400);exit('Неверный пользователь.');}
 	global $config;
 
 	if (file_exists(DATADIR."profil/$login.prof")) {
@@ -2001,6 +2004,7 @@ function change_profil($login, $str) {
 
 // ------------------------- Функция чтения из профиля  ------------------------//
 function reading_profil($login) {
+	if(!is_string($login) || !preg_match('/^[a-z0-9_-]{1,20}$/Di',$login)) {http_response_code(400);exit('Неверный пользователь.');}
 	$arrdata = array();
 
 	if (file_exists(DATADIR."profil/$login.prof")) {
@@ -2077,6 +2081,7 @@ function ob_processing($str) {
 	}
 	$str = str_replace('%KEYWORDS%', $config['keywords'], $str);
 	$str = str_replace('%DESCRIPTION%', $config['description'], $str);
+	if(function_exists('motor_request_html'))$str=motor_request_html($str);
 	return $str;
 }
 

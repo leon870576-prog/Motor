@@ -70,7 +70,7 @@ $vv = explode("|", $vfiles);
 $string = search_string(DATADIR."datavotes/users.dat", $log, 1);
 
 if (empty($string)){
-if ($golos>0 && $vv[$golos]!==""){
+if ($golos>0 && isset($vv[$golos]) && $vv[$golos]!==""){
 
 $vresult = file_get_contents(DATADIR."datavotes/result.dat");
 $vu = explode("|",$vresult);

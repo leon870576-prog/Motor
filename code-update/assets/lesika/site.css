@@ -47,3 +47,6 @@ img.motor-avatar { display:inline-block; width:var(--avatar-size,56px); height:a
 /* Reserve media space before lazy loads; browser chrome must not resize posts. */
 .attachment>a { display:block; width:100%; padding:0; min-width:0; min-height:0; }
 .attachment video { aspect-ratio:16/9; }
+
+.legacy-action{display:inline-block;margin:0 .25rem .25rem 0;max-width:100%}
+.legacy-action button{white-space:normal}

@@ -80,3 +80,14 @@ $chatContext = [];
 motor_nastya_reply('Привет, как дела и что делаешь?', $chatContext, $chatSettings, 10000);
 if ($chatContext['topic'] !== 'wellbeing_activity') throw new RuntimeException('Combined small-talk question');
 echo 'PASS: restored 24 legacy Nastya categories, greeting/question priority and small-talk follow-up'.PHP_EOL;
+
+require_once $root.'/includes/recovery.php';
+[$resetToken,$resetStored]=motor_recovery_issue(1000);
+if(strlen($resetToken)!==64 || str_contains($resetStored,$resetToken) || !motor_recovery_valid($resetStored,$resetToken,1001) || motor_recovery_valid($resetStored,$resetToken,44201) || motor_recovery_valid('legacy',$resetToken,1001))throw new RuntimeException('Recovery security regression');
+require_once $root.'/includes/request-security.php';
+$_SERVER['SCRIPT_NAME']='/games/kosti.php';$_SESSION=['token'=>str_repeat('a',64)];
+$secureForm=motor_request_html('<a data-motor-action href="kosti.php?action=go">Играть</a><form method="post" action="test.php"><input name="msg"></form>');
+if(substr_count($secureForm,'name="uid"')!==2 || str_contains($secureForm,'<a href="kosti.php?action=go"'))throw new RuntimeException('Legacy CSRF rendering regression');
+echo 'PASS: native random recovery tokens, expiry and POST protection for legacy forms/actions'.PHP_EOL;
+
+if(str_contains(motor_request_html('<a href="kosti.php?action=go">Untrusted</a>'),'<form'))throw new RuntimeException('Untrusted links must not receive CSRF tokens');

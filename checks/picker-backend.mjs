@@ -17,6 +17,7 @@ copy(root,'/www');
 await setPhpIniEntries(php,{upload_max_filesize:'32M',post_max_size:'64M',max_file_uploads:'20',allow_url_fopen:'0',sendmail_path:'/bin/false'});
 const handler=new PHPRequestHandler({php,documentRoot:'/www',absoluteUrl:'https://motor.test'});
 async function req(url,body,headers={},method){
+ if(url==='/input.php?action=exit' && !body){const form=await req('/pages/themes.php');const token=form.text.match(/name="uid" value="([^"]+)"/);assert.ok(token,'logout form token');body={uid:token[1]};}
  php.chdir('/www'+dirname(new URL(url,'https://motor.test').pathname));
  // Build a byte-correct multipart body: runtime's helper counts Unicode characters as bytes.
  if(body && !(body instanceof Uint8Array) && typeof body==='object'){

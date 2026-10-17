@@ -1,6 +1,6 @@
 {
   "php": "8.4",
-  "requests": 294,
+  "requests": 319,
   "passed": [
     "one source of gallery settings; bounds, format allowlist, CSRF, stale settings, old panel link",
     "watermark name: legacy fallback without migration, plain UTF-8 text, escaped form value, rejected arrays/control characters and length",

@@ -14,6 +14,7 @@ try{
 copy(root,'/www');await setPhpIniEntries(php,{allow_url_fopen:'0',sendmail_path:'/bin/false'});
 const handler=new PHPRequestHandler({php,documentRoot:'/www',absoluteUrl:'https://motor.test'});
 async function req(url,body,headers={},method){
+ if(url==='/input.php?action=exit' && !body){const form=await req('/pages/themes.php');const token=form.text.match(/name="uid" value="([^"]+)"/);assert.ok(token,'logout form token');body={uid:token[1]};}
  php.chdir('/www'+dirname(new URL(url,'https://motor.test').pathname));
  if(body){body=new TextEncoder().encode(new URLSearchParams(body).toString());headers={...headers,'content-type':'application/x-www-form-urlencoded'};}
  const r=await handler.request({url,method:method||(body?'POST':'GET'),...(body?{body}:{}),headers});requests++;assert.equal(r.errors,'',url);assert.equal(r.exitCode,0,url);return r;
@@ -155,7 +156,7 @@ for(const body of [{uid,files:'1',dirarc:'text'},{uid,files:'1','dirarc[0]':'/ww
 assert.equal((await req('/mpanel/backup.php?action=newbackup',{uid,files:'1'})).httpStatusCode,302);
 let archive=await php.run({code:`<?php $p=glob('/www/local/databackup/*.zip');$z=new ZipArchive();$z->open(end($p));$names=[];for($i=0;$i<$z->numFiles;$i++)$names[]=$z->getNameIndex($i);echo json_encode(['name'=>basename(end($p)),'entries'=>$names]);$z->close();`});assert.equal(archive.errors,'');const backup=JSON.parse(archive.text);assert.ok(backup.entries.includes('chat-settings.json'));assert.ok(backup.entries.includes('chat-state.json'));
 php.unlink(local('chat-settings.json'));php.unlink(local('chat-state.json'));
-assert.equal((await req('/mpanel/backup.php?action=unzip&filearc='+backup.name+'&uid='+uid)).httpStatusCode,302);assert.equal(read('chat-settings.json'),backupSettings);assert.equal(read('chat-state.json'),backupState);
+assert.equal((await req('/mpanel/backup.php?action=unzip&filearc='+backup.name,{uid})).httpStatusCode,302);assert.equal(read('chat-settings.json'),backupSettings);assert.equal(read('chat-state.json'),backupState);
 pass('actual backup and restore preserve chat settings and bot context');
 // Repeated polls must bypass the old DOS page counter while normal authorization remains.
 cfg=read('config.dat').split('|');cfg[57]='1';write('config.dat',cfg.join('|'));

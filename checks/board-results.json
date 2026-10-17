@@ -1,0 +1,14 @@
+{
+  "php": "8.4",
+  "requests": 129,
+  "passed": [
+    "admin settings: count 0–5, size/resolution/format bounds, CSRF and stale versions",
+    "five photos, first-photo listing, JPEG preview/original/Range; sixth photo, spoofing, corruption and malformed fields rejected",
+    "owner/staff authorization, replacement and thumbnail cleanup, stale photo-only edit blocked",
+    "all moderator roles; disabling new uploads retains old photos and allows text edits",
+    "legacy records and blank-line indexes survive editing without data migration",
+    "stable IDs and stale-list protection; deleted/expired ads deny originals and thumbnails and remove files",
+    "category deletion removes advertisements and photos; additions to deleted category blocked"
+  ],
+  "fixtures": 6
+}

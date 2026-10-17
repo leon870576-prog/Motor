@@ -1,6 +1,6 @@
 {
   "php": "8.4",
-  "requests": 165,
+  "requests": 171,
   "fixtures": 28,
   "passed": [
     "121 valid GIFs, picker, limits, admin rules, Unicode, legacy paths, edit roundtrip, safe URL/code handling",

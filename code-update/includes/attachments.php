@@ -33,6 +33,8 @@ function motor_media_settings() {
             }
         }
     }
+    require_once __DIR__.'/board-settings.php';
+    $settings['board'] = motor_board_settings();
     return $settings;
 }
 function motor_media_ini_bytes($value) {
@@ -43,8 +45,9 @@ function motor_media_ini_bytes($value) {
 function motor_media_cap() { return min(32, max(1, (int)floor(motor_media_ini_bytes(ini_get('upload_max_filesize')) / 1048576))); }
 function motor_media_uuid() { return bin2hex(random_bytes(16)); }
 function motor_media_valid_parent($section, $parent) {
+    if (!is_string($section) || (!is_string($parent) && !is_int($parent))) return false;
     return ($section === 'news' && preg_match('/^[0-9]{1,18}$/D', (string)$parent)) ||
-        ($section === 'forum' && preg_match('/^[a-f0-9]{32}$/D', (string)$parent));
+        (in_array($section, ['forum','board'], true) && preg_match('/^[a-f0-9]{32}$/D', (string)$parent));
 }
 function motor_media_dir($section, $parent) {
     if (!motor_media_valid_parent($section, $parent)) throw new RuntimeException('Неверная запись для вложений.');
@@ -125,7 +128,14 @@ function motor_media_uploads($section) {
         if ($kind === 'photo') {
             $image = @getimagesize($tmp);
             if (!$image || ($image['mime'] ?? '') !== $mime || $detected !== $mime) throw new RuntimeException('Содержимое файла не соответствует формату изображения.');
-            if ($image[0] > $settings['image_px'] || $image[1] > $settings['image_px'] || $image[0] * $image[1] > 40000000) throw new RuntimeException('Изображение слишком большое по количеству пикселей.');
+            if ($image[0] < 1 || $image[1] < 1 || $image[0] > $settings['image_px'] || $image[1] > $settings['image_px'] || $image[0] * $image[1] > 40000000) throw new RuntimeException('Изображение слишком большое по количеству пикселей.');
+            $budget = motor_media_ini_bytes(ini_get('memory_limit'));
+            $need = memory_get_usage(true) + $image[0]*$image[1]*8 + 24*1048576;
+            if ($budget > 0 && $need > $budget*.9) throw new RuntimeException('Недостаточно памяти для проверки фото. Уменьшите его разрешение.');
+            $loader = ['image/jpeg'=>'imagecreatefromjpeg','image/png'=>'imagecreatefrompng','image/gif'=>'imagecreatefromgif','image/webp'=>'imagecreatefromwebp'][$mime];
+            $decoded = function_exists($loader) ? @$loader($tmp) : false;
+            if (!$decoded) throw new RuntimeException('Изображение повреждено или не может быть прочитано.');
+            imagedestroy($decoded);
         } elseif ($kind === 'video') {
             if ($detected !== $mime) throw new RuntimeException('Содержимое файла не соответствует формату видео.');
         } elseif (in_array($ext, ['txt','csv'], true)) {
@@ -151,7 +161,7 @@ function motor_media_save_record($section, $parent, $context, $path, $line, $tex
         motor_media_lock();
         $old = motor_media_manifest($section, $parent); $kept = []; $removed = [];
         $remove = $_POST['remove_attachments'] ?? [];
-        if (!is_array($remove)) throw new RuntimeException('Неверный список удаляемых файлов.');
+        if (!is_array($remove) || count($remove)>10 || count(array_filter($remove,fn($id)=>is_string($id) && preg_match('/^[a-f0-9]{32}$/D',$id)))!==count($remove)) throw new RuntimeException('Неверный список удаляемых файлов.');
         foreach ($old['files'] as $file) {
             if (in_array($file['id'], $remove, true)) $removed[] = $file; else $kept[] = $file;
         }
@@ -180,7 +190,7 @@ function motor_media_save_record($section, $parent, $context, $path, $line, $tex
             if ($before !== null) motor_media_atomic($path, $before); elseif (is_file($path)) unlink($path);
             throw $e;
         }
-        foreach ($removed as $file) { $target = $dir.'/'.$file['id'].'.blob'; if (is_file($target)) unlink($target); }
+        foreach ($removed as $file) { foreach (glob($dir.'/'.$file['id'].'.*') as $target) if (is_file($target) || is_link($target)) unlink($target); }
     } catch (Throwable $e) { motor_media_stop($e->getMessage()); }
 }
 function motor_media_delete($section, $parent) {
@@ -226,7 +236,7 @@ function motor_media_render($section, $parent, $limit=0) {
         echo '<figure class="attachment">';
         if ($f['kind'] === 'photo') {
             [$imageWidth, $imageHeight] = motor_media_image_size($section, $parent, $f['id']);
-            echo '<a href="'.$url.'" target="_blank" rel="noopener"><img src="'.$url.'" width="'.$imageWidth.'" height="'.$imageHeight.'" alt="'.$name.'" loading="lazy" decoding="async" /></a>';
+            echo '<a href="'.$url.'" target="_blank" rel="noopener"><img src="'.$url.($section==='board'?'&amp;preview=1':'').'" width="'.$imageWidth.'" height="'.$imageHeight.'" alt="'.$name.'" loading="lazy" decoding="async" /></a>';
         }
         if ($f['kind'] === 'video') echo '<video controls playsinline preload="none" width="1600" height="900" src="'.$url.'">Ваш браузер не поддерживает это видео.</video>';
         echo '<figcaption><a href="'.motor_media_url($section, $parent, $f['id'], true).'">Скачать: '.$name.'</a> <small>('.round($f['size']/1024, 1).' КБ)</small></figcaption></figure>';
@@ -235,14 +245,15 @@ function motor_media_render($section, $parent, $limit=0) {
 }
 function motor_media_form($section, $parent='') {
     $s = motor_media_settings()[$section];
-    echo '<fieldset class="attachment-picker"><legend>Фото, видео и файлы</legend>';
+    echo '<fieldset class="attachment-picker"><legend>'.($section==='board'?'Фотографии объявления':'Фото, видео и файлы').'</legend>';
     foreach (motor_media_manifest($section, $parent)['files'] as $file) {
         echo '<label class="attachment-remove"><input type="checkbox" name="remove_attachments[]" value="'.$file['id'].'" /> Удалить: '.motor_media_escape($file['name']).'</label>';
     }
-    echo '<p>До '.$s['count'].' вложений на запись. Фото — '.$s['photo_mb'].' МБ, видео — '.$s['video_mb'].' МБ, файлы — '.$s['file_mb'].' МБ каждое. Фото до '.$s['image_px'].' px по стороне.</p>';
+    if ($section==='board') echo '<p>До '.$s['count'].' фотографий на объявление, до '.$s['photo_mb'].' МБ каждая и '.$s['image_px'].' px по стороне.</p>';
+    else echo '<p>До '.$s['count'].' вложений на запись. Фото — '.$s['photo_mb'].' МБ, видео — '.$s['video_mb'].' МБ, файлы — '.$s['file_mb'].' МБ каждое. Фото до '.$s['image_px'].' px по стороне.</p>';
     if ($s['count'] > 0 && $s['formats']) {
         echo '<label>Выбрать вложения<input type="file" name="attachments[]" multiple accept=".'.implode(',.', $s['formats']).'" /></label>';
-        echo '<small>Форматы: '.motor_media_escape(strtoupper(implode(', ', $s['formats']))).'. Общая отправка — до '.motor_media_escape(ini_get('post_max_size')).'. Для видео рекомендуется MP4 (H.264/AAC).</small>';
+        echo '<small>Форматы: '.motor_media_escape(strtoupper(implode(', ', $s['formats']))).'. Общая отправка — до '.motor_media_escape(ini_get('post_max_size')).'.'.($section==='board'?'':' Для видео рекомендуется MP4 (H.264/AAC).').'</small>';
     } else echo '<p>Добавление новых вложений отключено администратором.</p>';
     echo '</fieldset>';
 }

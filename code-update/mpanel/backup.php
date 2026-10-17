@@ -55,7 +55,7 @@ foreach($array_timebackup as $key=>$value){
 echo '<div class="b">';
 echo '<img src="../images/img/zip.gif" alt="image" /> <b><a href="backup.php?action=view&amp;filearc='.$array_backup[$key].'&amp;'.SID.'">'.$array_backup[$key].'</a></b> ('.formatsize($array_sizebackup[$key]).')</div>';
 echo '<div><a href="backup.php?action=prounzip&amp;filearc='.$array_backup[$key].'&amp;'.SID.'">Восстановить</a> | ';
-echo '<a href="backup.php?action=del&amp;filearc='.$array_backup[$key].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Удалить</a></div>';
+echo '<form method="post" action="backup.php?action=del&amp;filearc='.motor_media_escape($array_backup[$key]).'">';motor_form_token();echo '<button type="submit">Удалить архив</button></form></div>';
 }
 
 echo '<br />Всего архивов: <b>'.(int)$totalarc.'</b><br />';
@@ -122,6 +122,7 @@ $nam_backup = 'backup_'.$datetime.'.zip';
 
 if ($files==1){
 $globfiles = glob(DATADIR."*.dat");
+if (is_file(DATADIR.'board-settings.json')) $globfiles[] = DATADIR.'board-settings.json';
 if (is_file(DATADIR.'gallery-settings.json')) $globfiles[] = DATADIR.'gallery-settings.json';
 if (is_file(DATADIR.'attachment-settings.json')) $globfiles[] = DATADIR.'attachment-settings.json';
 foreach (['chat-settings.json','chat-state.json'] as $chatFile) if (is_file(DATADIR.$chatFile)) $globfiles[] = DATADIR.$chatFile;
@@ -149,6 +150,7 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php
 ##                                    Удаление архивов                                    ##
 ############################################################################################
 if ($action == "del"){
+if(!motor_media_csrf())motor_media_stop('Используйте форму удаления.',403);
 
 $uid = check($_GET['uid']);
 $filearc = check($_GET['filearc']);
@@ -182,7 +184,7 @@ if ($filearc!=""){
 
 echo 'Вы подтверждаете, что хотите восстановить бэкап сайта '.$filearc.'?<br />';
 echo '<img src="../images/img/reload.gif" alt="image" /> ';
-echo '<b><a href="backup.php?action=unzip&amp;filearc='.$filearc.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да, подтверждаю!</a></b><br />';
+echo '<form method="post" action="backup.php?action=unzip&amp;filearc='.$filearc.'">';motor_form_token();echo '<button type="submit">Восстановить отсутствующие файлы</button></form>';
 
 echo '<br />Восстановление архива не заменяет существующие файлы, а восстанавливает те, которые были случайно удалены<br />';
 
@@ -195,6 +197,7 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="backup.php
 ##                                     Востановления архива                               ##
 ############################################################################################
 if ($action == "unzip"){
+if(!motor_media_csrf())motor_media_stop('Используйте форму восстановления.',403);
 motor_media_lock();
 
 $uid = check($_GET['uid']);
@@ -205,9 +208,9 @@ if ($filearc!=""){
 if (preg_match('|^[a-z0-9_\.\-]+$|i', $filearc)){
 if (file_exists(DATADIR."databackup/$filearc")){
 
-$archive = new PclZip(DATADIR.'databackup/'.$filearc);
-
-if($archive->extract(PCLZIP_OPT_PATH, DATADIR, PCLZIP_OPT_SET_CHMOD, 0777)){
+require_once '../includes/backup-security.php';
+try {motor_backup_restore(DATADIR.'databackup/'.$filearc);$restored=true;}catch(Throwable $e){motor_media_stop($e->getMessage(),400);}
+if($restored){
 
 header ("Location: backup.php?isset=mp_restorebackup&".SID); exit;
 
@@ -241,7 +244,7 @@ $total = count($list);
 if ($total>0){
 
 foreach($list as $value){
-$zfilename[] = $value['filename'];
+$zfilename[] = motor_media_escape($value['filename']);
 $zfilesize[] = $value['size'];
 $zfolder[] = $value['folder'];
 }

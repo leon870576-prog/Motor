@@ -5,98 +5,98 @@
     {
       "accept": "(absent)",
       "encoding": "identity",
-      "bytes": 17750,
-      "decodedBytes": 17750
+      "bytes": 17752,
+      "decodedBytes": 17752
     },
     {
       "accept": "",
       "encoding": "identity",
-      "bytes": 17750,
-      "decodedBytes": 17750
+      "bytes": 17752,
+      "decodedBytes": 17752
     },
     {
       "accept": "identity",
       "encoding": "identity",
-      "bytes": 17750,
-      "decodedBytes": 17750
+      "bytes": 17752,
+      "decodedBytes": 17752
     },
     {
       "accept": "gzip",
       "encoding": "gzip",
-      "bytes": 2751,
-      "decodedBytes": 17774
+      "bytes": 2758,
+      "decodedBytes": 17776
     },
     {
       "accept": "deflate",
       "encoding": "deflate",
-      "bytes": 2739,
-      "decodedBytes": 17774
+      "bytes": 2746,
+      "decodedBytes": 17776
     },
     {
       "accept": "gzip, deflate",
       "encoding": "gzip",
-      "bytes": 2751,
-      "decodedBytes": 17774
+      "bytes": 2758,
+      "decodedBytes": 17776
     },
     {
       "accept": "GZIP",
       "encoding": "gzip",
-      "bytes": 2751,
-      "decodedBytes": 17774
+      "bytes": 2758,
+      "decodedBytes": 17776
     },
     {
       "accept": "gzip;q=0, deflate;q=0",
       "encoding": "identity",
-      "bytes": 17750,
-      "decodedBytes": 17750
+      "bytes": 17752,
+      "decodedBytes": 17752
     },
     {
       "accept": "gzip;q=0, deflate;q=0.8",
       "encoding": "deflate",
-      "bytes": 2739,
-      "decodedBytes": 17774
+      "bytes": 2746,
+      "decodedBytes": 17776
     },
     {
       "accept": "gzip;q=0.2, deflate;q=0.9",
       "encoding": "deflate",
-      "bytes": 2739,
-      "decodedBytes": 17774
+      "bytes": 2746,
+      "decodedBytes": 17776
     },
     {
       "accept": "gzip;q=0.4, identity;q=1",
       "encoding": "identity",
-      "bytes": 17750,
-      "decodedBytes": 17750
+      "bytes": 17752,
+      "decodedBytes": 17752
     },
     {
       "accept": "gzip;q=0, *;q=0.5",
       "encoding": "deflate",
-      "bytes": 2739,
-      "decodedBytes": 17774
+      "bytes": 2746,
+      "decodedBytes": 17776
     },
     {
       "accept": "notgzip",
       "encoding": "identity",
-      "bytes": 17750,
-      "decodedBytes": 17750
+      "bytes": 17752,
+      "decodedBytes": 17752
     },
     {
       "accept": "gzip;q=bogus",
       "encoding": "identity",
-      "bytes": 17750,
-      "decodedBytes": 17750
+      "bytes": 17752,
+      "decodedBytes": 17752
     },
     {
       "accept": "gzip;q=0,gzip;q=1",
       "encoding": "identity",
-      "bytes": 17750,
-      "decodedBytes": 17750
+      "bytes": 17752,
+      "decodedBytes": 17752
     },
     {
       "accept": "*;q=0, identity;q=1",
       "encoding": "identity",
-      "bytes": 17750,
-      "decodedBytes": 17750
+      "bytes": 17752,
+      "decodedBytes": 17752
     }
   ],
   "deflate_zlib_roundtrip": true,
