@@ -13,9 +13,19 @@ function motor_smile_catalog() {
 }
 
 function motor_smile_image($group, $name) {
+    static $sizes = [];
+    $key = $group.'/'.$name;
+    if (!isset($sizes[$key]) && isset(motor_smile_catalog()[$group][$name])) {
+        $image = @getimagesize(__DIR__.'/../images/'.$key.'.gif');
+        if ($image && $image[0] > 0 && $image[1] > 0) {
+            $scale = min(1, 96/$image[0], 48/$image[1]);
+            $sizes[$key] = [max(1, (int)round($image[0]*$scale)), max(1, (int)round($image[1]*$scale))];
+        }
+    }
+    [$width, $height] = $sizes[$key] ?? [20, 20];
     $src = htmlspecialchars(BASEDIR.'images/'.$group.'/'.rawurlencode($name).'.gif', ENT_QUOTES, 'UTF-8');
     $alt = htmlspecialchars(':'.$name, ENT_QUOTES, 'UTF-8');
-    return '<img class="motor-smile" src="'.$src.'" alt="'.$alt.'" />';
+    return '<img class="motor-smile" src="'.$src.'" width="'.$width.'" height="'.$height.'" style="--smile-width:'.$width.'px;--smile-height:'.$height.'px" alt="'.$alt.'" />';
 }
 
 // Only recognised bundled GIFs are treated as smiles; other images are untouched.

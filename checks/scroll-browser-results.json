@@ -1,0 +1,296 @@
+{
+  "browser": "153.0.8010.0",
+  "layouts": [
+    {
+      "theme": "lesika_dvor",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_gazeta",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_gostinaya",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_solnce",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_vecher",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_albom",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_uyut",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_terrace",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_press",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_garden",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_coffee",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_dvor",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_gazeta",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_gostinaya",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_solnce",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_vecher",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_albom",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_uyut",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_terrace",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_press",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_garden",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_coffee",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_evening",
+      "width": 390,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_dvor",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_gazeta",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_gostinaya",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_solnce",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_vecher",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_albom",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_uyut",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_terrace",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_press",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_garden",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_coffee",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    },
+    {
+      "theme": "lesika_web_evening",
+      "width": 1440,
+      "coldLoadHeightDelta": 0,
+      "coldLoadScrollDelta": 0,
+      "documentRequests": 1,
+      "toolbarRootWrites": 0
+    }
+  ],
+  "jsErrors": [],
+  "unintendedPosts": 0,
+  "physical_devices": false
+}

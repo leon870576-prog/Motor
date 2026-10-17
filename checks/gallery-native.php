@@ -15,11 +15,17 @@ try {
     foreach ([[0,0,149,99],[150,0,299,99],[0,100,149,199],[150,100,299,199]] as $i=>$rect) imagefilledrectangle($im,...array_merge($rect,[imagecolorallocate($im,...$rgb[$i])]));
     imagejpeg($im,$temp.'/base.jpg',95);
     $base=file_get_contents($temp.'/base.jpg');
+    $parent=str_repeat('a',32);$mediaDir=$temp.'/attachments/forum/'.$parent;
+    mkdir($mediaDir,0700,true);
     $maps=[1=>[0,1,2,3],2=>[1,0,3,2],3=>[3,2,1,0],4=>[2,3,0,1],5=>[0,2,1,3],6=>[2,0,3,1],7=>[3,1,2,0],8=>[1,3,0,2]];
     foreach ($maps as $orientation=>$map) {
         $exif="Exif\0\0II\x2a\0".pack('V',8).pack('v',1).pack('vvV',0x0112,3,1).pack('v',$orientation)."\0\0".pack('V',0);
         $jpeg=substr($base,0,2)."\xff\xe1".pack('n',strlen($exif)+2).$exif.substr($base,2);
         file_put_contents($temp.'/oriented.jpg',$jpeg);
+        $mediaId=str_pad((string)$orientation,32,'0',STR_PAD_LEFT);
+        file_put_contents($mediaDir.'/'.$mediaId.'.blob',$jpeg);
+        demand(motor_media_image_size('forum',$parent,$mediaId)===($orientation>=5?[200,300]:[300,200]),'Attachment EXIF dimensions');
+        demand(file_get_contents($mediaDir.'/'.$mediaId.'.blob')===$jpeg,'Attachment original was modified');
         motor_gallery_preview($temp.'/oriented.jpg',$temp.'/preview.jpg',$settings);
         demand(file_get_contents($temp.'/oriented.jpg')===$jpeg,'Original was modified');
         $out=imagecreatefromjpeg($temp.'/preview.jpg');$w=imagesx($out);$h=imagesy($out);
@@ -36,6 +42,14 @@ try {
         demand(getimagesize($temp.'/preview.jpg')[2]===IMAGETYPE_JPEG,'Native '.$ext.' preview');
     }
     imagedestroy($im);
+    $wideId=str_repeat('b',32);$wide=imagecreatetruecolor(12000,10);imagepng($wide,$mediaDir.'/'.$wideId.'.blob');imagedestroy($wide);
+    demand(motor_media_image_size('forum',$parent,$wideId)===[12000,10],'Allowed 12000px attachment');
+    demand(motor_media_image_size('forum','../',$wideId)===[4,3],'Invalid attachment parent rejected');
+    demand(motor_media_image_size('forum',$parent,'../base.jpg')===[4,3],'Invalid attachment file rejected');
+    demand(motor_media_image_size('forum',$parent,str_repeat('c',32))===[4,3],'Missing attachment fallback');
+    $linkId=str_repeat('d',32);symlink($temp.'/base.jpg',$mediaDir.'/'.$linkId.'.blob');
+    demand(motor_media_image_size('forum',$parent,$linkId)===[4,3],'Symlink attachment rejected');
+    echo "PASS: attachment dimensions; all 8 EXIF orientations; 12000px originals; invalid paths, missing files and symlinks; originals unchanged\n";
     $im=imagecreatetruecolor(4000,3000);imagejpeg($im,$temp.'/large.jpg');imagedestroy($im);
     motor_gallery_preview($temp.'/large.jpg',$temp.'/preview.jpg',$settings);
     $info=getimagesize($temp.'/preview.jpg');demand($info[0]===960 && $info[1]===720,'Native 12MP scaling');
@@ -46,4 +60,9 @@ try {
     $quant=function($bytes){$pos=strpos($bytes,"\xff\xdb");demand($pos!==false,'Missing JPEG quality table');return substr($bytes,$pos,unpack('n',substr($bytes,$pos+2,2))[1]+2);};
     demand($marked!==$without && $quant($marked)===$quant($without),'Watermark must preserve selected JPEG quality');
     echo "PASS: native gallery JPEG/PNG/GIF/WebP preview; 12MP scaling; all 8 EXIF orientations; watermark quality; originals unchanged\n";
-} finally {foreach (glob($temp.'/*') as $file) unlink($file);rmdir($temp);}
+} finally {
+    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($temp,FilesystemIterator::SKIP_DOTS),RecursiveIteratorIterator::CHILD_FIRST) as $file) {
+        $file->isDir() && !$file->isLink() ? rmdir($file->getPathname()) : unlink($file->getPathname());
+    }
+    rmdir($temp);
+}

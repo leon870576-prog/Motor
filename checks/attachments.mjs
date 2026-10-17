@@ -1,7 +1,7 @@
 import { PHP, PHPRequestHandler, setPhpIniEntries } from '@php-wasm/universal';
 import { loadNodeRuntime } from '@php-wasm/node';
 import { File } from 'node:buffer';
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomBytes, createHash } from 'node:crypto';
@@ -146,7 +146,9 @@ pass('independent per-section size/count/formats; invalid uploads never create a
 let profile=php.readFileAsText('/www/local/profil/MotorTestAdmin.prof').split(':||:');profile[0]='MediaAuthor';profile[1]=createHash('md5').update(createHash('md5').update(password).digest('hex')).digest('hex');profile[7]='0';profile[6]='1';profile[25]='1';php.writeFile('/www/local/profil/MediaAuthor.prof',profile.join(':||:'));
 await req('/input.php?action=exit');await req('/input.php',{login:'MediaAuthor',pass:password});uid=await token();
 assert.equal((await req('/mpanel/attachments.php')).httpStatusCode,403);
-r=await req('/forum/forum.php?act=create&fid='+fid+'&uid='+uid,{fid,title:'Тема с вложениями',msg:'Первое сообщение с фотографией','attachments[0]':upload(gif,'фото.gif')});if(r.httpStatusCode!==302)console.log(r.text.slice(-4000));assert.equal(r.httpStatusCode,302);
+await php.run({code:"<?php $im=imagecreatetruecolor(480,640);imagegif($im,'/tmp/portrait.gif');imagedestroy($im);"});
+const portrait=php.readFileAsBuffer('/tmp/portrait.gif');
+r=await req('/forum/forum.php?act=create&fid='+fid+'&uid='+uid,{fid,title:'Тема с вложениями',msg:'Первое сообщение с фотографией :hello','attachments[0]':upload(portrait,'фото.gif')});if(r.httpStatusCode!==302)console.log(r.text.slice(-4000));assert.equal(r.httpStatusCode,302);
 let topic=lines('dataforum/topic'+fid+'.dat').at(-1).split('|')[0],postPath='dataforum/'+fid+'-'+topic+'.dat';
 let parent=lines(postPath)[0].split('|')[6];assert.match(parent,/^[a-f0-9]{32}$/);let fm=manifest('forum',parent);assert.equal(fm.files.length,1);
 const forumImage=url('forum',parent,fm.files[0].id);
@@ -154,6 +156,16 @@ r=await req('/forum/topic.php?fid='+fid+'&id='+topic);assert.ok(r.text.includes(
 r=await req('/forum/topic.php?act=add&fid='+fid+'&id='+topic+'&uid='+uid,{msg:'Ответ с небольшим видео','attachments[0]':upload(mp4,'ответ.mp4')});assert.equal(r.httpStatusCode,302);
 let rows=lines(postPath);assert.equal(rows.length,2);assert.notEqual(rows[0].split('|')[6],rows[1].split('|')[6]);
 let replyParent=rows[1].split('|')[6],reply=manifest('forum',replyParent),replyURL=url('forum',replyParent,reply.files[0].id);
+// Capture actual PHP markup with unloaded media for the scrolling regression.
+r=await req('/forum/topic.php?fid='+fid+'&id='+topic);
+assert.match(r.text,/<img[^>]+width="480" height="640"[^>]+loading="lazy"/);
+assert.match(r.text,/<video[^>]+width="1600" height="900"/);
+assert.match(r.text,/<img class="motor-smile"[^>]+width="\d+" height="\d+"/);
+const scrollFixtures=new URL('./scroll-fixtures/',import.meta.url);mkdirSync(scrollFixtures,{recursive:true});
+writeFileSync(new URL('topic.html',scrollFixtures),r.text);
+writeFileSync(new URL('photo.gif',scrollFixtures),portrait);
+writeFileSync(new URL('media.json',scrollFixtures),JSON.stringify({photo:forumImage,video:replyURL}));
+pass('forum photo, video and smile reserve dimensions before media loads');
 let editURL='/forum/edit.php?fid='+fid+'&id='+topic+'&post=0';edit=await req(editURL);version=edit.text.match(/name="record_version" value="([^"]+)"/)[1];
 r=await req(editURL,{uid,record_version:version,msg:'Первое сообщение обновлено','remove_attachments[0]':fm.files[0].id,'attachments[0]':upload('Hello text','описание.txt')});assert.equal(r.httpStatusCode,302);assert.equal((await req(forumImage)).httpStatusCode,404);assert.equal((await req(replyURL)).httpStatusCode,200);assert.equal(lines(postPath)[0].split('|')[6],parent);
 assert.equal((await req(editURL,{uid:'bad',record_version:version,msg:'Нельзя изменить'})).httpStatusCode,403);

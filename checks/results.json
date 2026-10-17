@@ -1,6 +1,6 @@
 {
   "php": "8.4",
-  "requests": 147,
+  "requests": 148,
   "passed": [
     "admin-only settings, CSRF, format allowlist and atomic validation",
     "real multipart photos/video/documents; byte-exact downloads, Unicode names, video seek/HEAD/416",
@@ -9,6 +9,7 @@
     "image dimension limit, failed replacement rollback and oversized request handling",
     "all 16 advertised extensions accept valid files and download byte-for-byte unchanged",
     "independent per-section size/count/formats; invalid uploads never create an empty forum topic",
+    "forum photo, video and smile reserve dimensions before media loads",
     "member creates topic/reply, edits own attachments; stable message IDs and rejected CSRF",
     "guest/non-owner restrictions; media obeys public access and site closure",
     "moderator edit, old-record compatibility, deletion shifts rows without shifting attachments",

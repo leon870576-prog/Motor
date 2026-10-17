@@ -83,8 +83,10 @@ try{
  // Simulate the VisualViewport signals used by Android/iOS keyboards and pinch zoom.
  const login=fixtures.find(f=>f.url==='/pages/login.php');await load(login);await page.locator('input[name="login"]').focus();
  await page.evaluate(()=>{Object.defineProperty(visualViewport,'height',{configurable:true,value:innerHeight-300});visualViewport.dispatchEvent(new Event('resize'));});
+ await page.waitForFunction(()=>document.body.hasAttribute('data-keyboard-open'));
  assert.equal(await page.locator('body').getAttribute('data-keyboard-open'),'');assert.equal(await page.locator('.bottom-nav').isVisible(),false);
  await page.evaluate(()=>{Object.defineProperty(visualViewport,'scale',{configurable:true,value:2});visualViewport.dispatchEvent(new Event('resize'));});
+ await page.waitForFunction(()=>!document.body.hasAttribute('data-keyboard-open'));
  assert.equal(await page.locator('body').getAttribute('data-keyboard-open'),null);
  pass('simulated visual viewport: navigation yields space to keyboard, pinch zoom does not hide it');
  assert.deepEqual(results.jsErrors,[]);assert.equal(posts,0);results.unintendedPosts=posts;

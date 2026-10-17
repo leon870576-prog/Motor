@@ -10,9 +10,9 @@ echo '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="vie
 echo '<title>%TITLE%</title><meta name="keywords" content="%KEYWORDS%"><meta name="description" content="%DESCRIPTION%">';
 echo '<meta name="theme-color" content="'.lesika_escape($lesikaTheme['colors']['--surface']).'">';
 echo '<link rel="icon" href="'.BASEDIR.'assets/lesika/leaf.svg" type="image/svg+xml">';
-echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/palettes.css?v=touch1"><link rel="stylesheet" href="'.BASEDIR.'assets/lesika/site.css?v=avatars3">';
-echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/responsive.css?v=touch1">';
-echo '<script src="'.BASEDIR.'assets/lesika/touch.js?v=touch1" defer></script>';
+echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/palettes.css?v=touch1"><link rel="stylesheet" href="'.BASEDIR.'assets/lesika/site.css?v=scroll1">';
+echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/responsive.css?v=scroll1">';
+echo '<script src="'.BASEDIR.'assets/lesika/touch.js?v=scroll1" defer></script>';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/gallery.css?v=gallery1"><script src="'.BASEDIR.'assets/lesika/gallery.js?v=gallery1" defer></script>';
 echo '<link rel="alternate" type="application/rss+xml" title="Новости Лесики" href="'.BASEDIR.'news/rss.php">';
 echo '</head><body data-theme="'.$config['themes'].'"><div class="site-shell">';
