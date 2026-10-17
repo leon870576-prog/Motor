@@ -74,11 +74,13 @@ assert.equal(r.errors,'');assert.equal(r.exitCode,0);const catalogue=JSON.parse(
 const emoji='😊 👨‍👩‍👧‍👦 👍🏽';
 const message='Проверка смайлов [b]Тест[/b] [url=https://example.test/path?a=1&b=2]Сайт[/url] :) :hello '+emoji;
 const views=[];
+const avatarMessages=new Map();
 async function rendered(url,marker='Проверка смайлов',code=':hello'){
  const result=await req(url);assert.ok(result.text.includes('<b>Тест</b>'),url+' BB render');assert.ok(result.text.includes('href="https://example.test/path?a=1&amp;b=2"'),url+' safe HTTPS');assert.equal(result.httpStatusCode,200,url);assert.ok(result.text.includes(marker),url+' message');assert.ok(result.text.includes(emoji),url+' emoji');assert.ok(result.text.includes('class="motor-smile"'),url+' smile');assert.ok(result.text.includes('alt="'+code+'"'),url+' expected smile');
  for(const m of result.text.matchAll(/<img class="motor-smile" src="([^"]+)"/g)){
   const asset=decodeURIComponent(new URL(m[1].replaceAll('&amp;','&'),'https://motor.test'+url).pathname);assert.ok(php.fileExists('/www'+asset),url+' missing asset '+asset);
  }
+ if(result.text.includes('class="motor-avatar"'))avatarMessages.set(url,result.text);
  views.push(url);return result;
 }
 // Publish news and edit it through the actual form; the home feed uses the same record.
@@ -183,5 +185,8 @@ pass('guest access, no admin catalogue leakage, and clickable standalone smile c
 // File editors and passwords never become smile controls.
 const raw=readFileSync(join(root,'mpanel/files.php'),'utf8');assert.ok(!raw.includes('data-smile-picker'));
 writeFileSync(new URL('manifest.json',fixturesDir),JSON.stringify(fixtures,null,2));
+const avatarDir=new URL('./avatar-layout-fixtures/',import.meta.url);mkdirSync(avatarDir,{recursive:true});
+const avatarManifest=[];for(const [url,html] of avatarMessages){const file=avatarManifest.length+'.html';writeFileSync(new URL(file,avatarDir),html);avatarManifest.push({url,file});}
+writeFileSync(new URL('manifest.json',avatarDir),JSON.stringify(avatarManifest));
 writeFileSync(new URL('./tags-backend-results.json',import.meta.url),JSON.stringify({php:'8.4',requests,fixtures:fixtures.length,passed,fields:JSON.parse(readFileSync(new URL('./field-map.json',import.meta.url)))},null,2));console.log(JSON.stringify({requests,fixtures:fixtures.length,groups:passed.length}));
 }finally{php.exit()}

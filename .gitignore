@@ -9,4 +9,5 @@ checks/gallery-fixtures/
 
 checks/avatar-fixtures/
 checks/security-fixture.json
+checks/avatar-layout-fixtures/
 checks/*.log

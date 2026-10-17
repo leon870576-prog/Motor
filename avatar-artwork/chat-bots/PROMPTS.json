@@ -1,0 +1,36 @@
+{
+  "generator": "Built-in ImageGen",
+  "release": "2026-10-17-avatar-layout-r1",
+  "assets": [
+    {
+      "name": "mag",
+      "prompt": "Use case: stylized-concept. Asset type: a square avatar image for the Russian community website Lesika, shown at 56px or 96px. Premium polished friendly 2D digital illustration with clean shapes, softly shaded face, clear expressive eyes and simple silhouette. Entire head, hair or hat, shoulders fit comfortably inside the square with at least 12 percent background margin on ALL sides; nothing cropped at edges. Warm neutral plain background, centered bust portrait. No lettering, text, numbers, logos, watermark, frames, circular crop or multiple panels. Generate exactly one square avatar. Subject: the mini-chat character Wunder-kinder, an amiable clever young male wizard in a deep blue pointed hat, small golden star decoration, round glasses and a navy cape; bright curious smile.",
+      "filename": "mag.gif",
+      "dimensions": [
+        256,
+        256
+      ],
+      "preparation": "Full-frame resize and GIF encoding; no crop."
+    },
+    {
+      "name": "bot",
+      "prompt": "Use case: stylized-concept. Asset type: a square avatar image for the Russian community website Lesika, shown at 56px or 96px. Premium polished friendly 2D digital illustration with clean shapes, softly shaded face, clear expressive eyes and simple silhouette. Entire head, hair or hat, shoulders fit comfortably inside the square with at least 12 percent background margin on ALL sides; nothing cropped at edges. Warm neutral plain background, centered bust portrait. No lettering, text, numbers, logos, watermark, frames, circular crop or multiple panels. Generate exactly one square avatar. Subject: the mini-chat character Nastyukha, a friendly young adult woman with chestnut shoulder-length hair, gentle smile, warm terracotta sweater; natural personable expression.",
+      "filename": "bot.gif",
+      "dimensions": [
+        256,
+        256
+      ],
+      "preparation": "Full-frame resize and GIF encoding; no crop."
+    },
+    {
+      "name": "shut",
+      "prompt": "Use case: stylized-concept. Asset type: a square avatar image for the Russian community website Lesika, shown at 56px or 96px. Premium polished friendly 2D digital illustration with clean shapes, softly shaded face, clear expressive eyes and simple silhouette. Entire head, hair or hat, shoulders fit comfortably inside the square with at least 12 percent background margin on ALL sides; nothing cropped at edges. Warm neutral plain background, centered bust portrait. No lettering, text, numbers, logos, watermark, frames, circular crop or multiple panels. Generate exactly one square avatar. Subject: the mini-chat character Veselchak, a cheerful friendly male jester, wearing a tasteful teal and ochre jester hat with small bells; lively open smile, approachable and not scary.",
+      "filename": "shut.gif",
+      "dimensions": [
+        256,
+        256
+      ],
+      "preparation": "Full-frame resize and GIF encoding; no crop."
+    }
+  ]
+}

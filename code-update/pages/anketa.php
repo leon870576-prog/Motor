@@ -31,7 +31,7 @@ if ($uzdata[37]==1 && $uzdata[38]>SITETIME) {echo '<b><span style="color:#ff0000
 echo 'До окончания бана осталось '.formattime($uzdata[38]-SITETIME).'<br />';
 echo 'Причина: '.$uzdata[39].'<br />';}
 
-echo 'Аватар: '.user_avatars($uz).'<br />';
+echo 'Аватар: '.user_avatars($uz, 96).'<br />';
 
 require_once '../includes/gallery.php';
 if(motor_gallery_valid_id($uzdata[72]) && motor_gallery_visible(motor_gallery_find($uzdata[72])) && is_file(DATADIR.'datagallery/'.$uzdata[72])){

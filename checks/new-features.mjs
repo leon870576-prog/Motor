@@ -70,8 +70,16 @@ ar=await req('/pages/avators.php?action=addbuy',{uid,av:'1.gif'});assert.ok(ar.t
 const paid=php.readFileAsText('/www/local/profil/MotorTestAdmin.prof');assert.equal(paid.split(':||:')[43],'images/avators2/1.gif');assert.ok(Number(paid.split(':||:')[41])<100000);
 await req('/pages/avators.php?action=addbuy',{uid,av:'1.gif'});assert.equal(php.readFileAsText('/www/local/profil/MotorTestAdmin.prof'),paid);
 const avatarFixtures=[];mkdirSync(new URL('./avatar-fixtures/',import.meta.url),{recursive:true});
-for(const [i,path] of ['/pages/avators.php','/pages/avators.php?action=buy','/pages/profil.php','/pages/anketa.php?uz=MotorTestAdmin'].entries()) {
+// Isolated records exercise all three chat characters, including the old spelling.
+config=php.readFileAsText('/www/local/config.dat').split('|');
+for(const name of ['shutnik','magnik','botnik']){const match=readFileSync(join(root,'includes/start.php'),'utf8').match(new RegExp("\\$config\\['"+name+"'\\] = \\$con_data\\[(\\d+)\\]"));assert.ok(match);config[Number(match[1])]='0';}
+php.writeFile('/www/local/config.dat',config.join('|'));
+const stamp=Math.floor(Date.now()/1000),authors=['Вундер-киндер','Настюха','Весельчак','Весальчак','MotorTestAdmin'];
+php.writeFile('/www/local/chat.dat',authors.map(name=>`Проверка аватара :)|${name}||${stamp}|Test|127.0.0.1|0|0||`).join('\r\n')+'\r\n');
+for(const dir of ['datakontakt','dataignor'])php.writeFile('/www/local/'+dir+'/MotorTestAdmin.dat',`|MotorTestAdmin|${stamp}|\r\n`);
+for(const [i,path] of ['/pages/avators.php','/pages/avators.php?action=buy','/pages/profil.php','/pages/anketa.php?uz=MotorTestAdmin','/chat/index.php','/mpanel/chat.php','/pages/kontakt.php','/pages/ignor.php'].entries()) {
  ar=await req(path);assert.equal(ar.httpStatusCode,200);writeFileSync(new URL('./avatar-fixtures/'+i+'.html',import.meta.url),ar.text);avatarFixtures.push({url:path,file:i+'.html'});
+ if(path.includes('/chat'))for(const name of ['mag','bot','shut'])assert.ok(ar.text.includes('class="motor-avatar" src="../images/img/'+name+'.gif?v=avatars3"'),path+' bot '+name);
 }
 writeFileSync(new URL('./avatar-fixtures/manifest.json',import.meta.url),JSON.stringify(avatarFixtures));
 pass('avatar selection/purchase, duplicate charge prevention, CSRF, GET rejection, invalid types/paths, malformed upload and array-safe image serving');
@@ -92,6 +100,12 @@ foreach(['https://сайт.ру','https://пример.рф/страница?а=
     ok(str_contains(bb_code('[url='.$address.']Сайт[/url]'),'href="'.htmlspecialchars($address,ENT_QUOTES,'UTF-8').'"'),'normalised picker URL rendered: '.$address);
 }
 ok(!str_contains(motor_avatar_image('images/avators/1.gif" onerror="x'), 'onerror'),'avatar attribute injection');
+foreach(['Вундер-киндер'=>'mag','Настюха'=>'bot','Весельчак'=>'shut','Весальчак'=>'shut'] as $author=>$asset) {
+    ok(str_contains(user_avatars($author),'images/img/'.$asset.'.gif?v=avatars3'),'bot mapping');
+    $sz=getimagesize('/www/images/img/'.$asset.'.gif');ok($sz[0]===256 && $sz[1]===256 && $sz[2]===IMAGETYPE_GIF,'chat avatar dimensions');
+}
+foreach(['images/img/../mag.gif','images/img/other.gif','images/img/mag.gif" onerror="x','https://example.test/mag.gif'] as $path)ok(str_contains(motor_avatar_image($path),'images/avators/noavatar.gif'),'bot path allowlist');
+ok(str_contains(motor_avatar_image('images/img/mag.gif','56px;background:red'),'--avatar-size:56px'),'numeric size only');
 $n=0;foreach(['/www/images/avators/','/www/images/avators2/'] as $dir)foreach(glob($dir.'*.gif') as $f){$sz=getimagesize($f);ok($sz[0]===128 && $sz[1]===128 && $sz[2]===IMAGETYPE_GIF,'avatar dimensions');$n++;}ok($n===402,'all avatar names');
 echo json_encode(['avatars'=>$n,'security_outputs'=>$out,'cases'=>count($cases)],JSON_UNESCAPED_UNICODE);
 `});assert.equal(security.errors,'');assert.equal(security.exitCode,0);const data=JSON.parse(security.text);writeFileSync(new URL('./security-fixture.json',import.meta.url),JSON.stringify(data));

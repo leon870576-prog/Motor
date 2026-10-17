@@ -9,7 +9,7 @@ cd "$(dirname "$0")"
 sha256sum -c CODE_UPDATE_SHA256
 avatar_tmp=$(mktemp -d)
 trap 'rm -rf "$avatar_tmp"' EXIT HUP INT TERM
-mkdir -p "$avatar_tmp/images/avators" "$avatar_tmp/images/avators2"
+mkdir -p "$avatar_tmp/images/avators" "$avatar_tmp/images/avators2" "$avatar_tmp/images/img"
 for collection in avators avators2; do
     if [ -L "$target/images" ] || [ -L "$target/images/$collection" ]; then
         echo 'Refusing a symlink image destination' >&2
@@ -26,9 +26,16 @@ for collection in avators avators2; do
         base64 -d "$source" > "$avatar_tmp/images/$collection/$name"
     done
 done
+if [ -L "$target/images/img" ]; then
+    echo 'Refusing a symlink bot image destination' >&2
+    exit 1
+fi
+for name in mag bot shut; do
+    base64 -d "avatar-artwork/chat-bots/$name.gif.base64" > "$avatar_tmp/images/img/$name.gif"
+done
 cp avatar-artwork/SHA256SUMS "$avatar_tmp/SHA256SUMS"
 (cd "$avatar_tmp" && sha256sum -c SHA256SUMS)
 cp -R code-update/. "$target/"
 mkdir -p "$target/images"
 cp -R "$avatar_tmp/images/." "$target/images/"
-echo 'Code update and 402 original avatar filenames verified and installed.'
+echo 'Code update, 402 catalogue avatars and 3 chat avatars verified and installed.'

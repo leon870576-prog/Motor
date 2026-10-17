@@ -1046,21 +1046,24 @@ function user_stamina($login) {
 // --------------- Функция вывода аватара пользователя ---------------//
 function motor_avatar_image($path, $size = 56) {
     $valid = is_string($path) && (preg_match('~^images/avators2?/(?:[1-9][0-9]{0,2}|guest|noavatar)\.gif$~D', $path) ||
+        preg_match('~^images/img/(?:mag|bot|shut)\.gif$~D', $path) ||
         preg_match('~^gallery/avators\.php\?uz=[a-z0-9_-]{1,30}$~Di', $path));
     if (!$valid) $path = 'images/avators/noavatar.gif';
-    $url = BASEDIR.$path.(str_contains($path, '?') ? '&' : '?').'v=avatars2';
+    $url = BASEDIR.$path.(str_contains($path, '?') ? '&' : '?').'v=avatars3';
     $size = max(32, min(128, (int)$size));
-    return '<img class="motor-avatar" src="'.htmlspecialchars($url, ENT_QUOTES, 'UTF-8').'" width="'.$size.'" height="'.$size.'" alt="Аватар" loading="lazy" decoding="async" /> ';
+    return '<img class="motor-avatar" src="'.htmlspecialchars($url, ENT_QUOTES, 'UTF-8').'" width="'.$size.'" height="'.$size.'" style="--avatar-size:'.$size.'px" alt="Аватар" loading="lazy" decoding="async" /> ';
 }
-function user_avatars($login) {
+function user_avatars($login, $size = 56) {
     global $config;
-    if ($login == $config['guestsuser']) return motor_avatar_image('images/avators/guest.gif');
+    $bots = ['Вундер-киндер'=>'mag', 'Настюха'=>'bot', 'Весельчак'=>'shut', 'Весальчак'=>'shut'];
+    if (is_string($login) && isset($bots[$login])) return motor_avatar_image('images/img/'.$bots[$login].'.gif', $size);
+    if ($login == $config['guestsuser']) return motor_avatar_image('images/avators/guest.gif', $size);
     $path = 'images/avators/noavatar.gif';
     if (is_string($login) && preg_match('/^[a-z0-9_-]{1,30}$/Di', $login) && file_exists(DATADIR."profil/$login.prof")) {
         $data = explode(':||:', file_get_contents(DATADIR."profil/$login.prof"));
         if (!empty($data[43])) $path = $data[43];
     }
-    return motor_avatar_image($path);
+    return motor_avatar_image($path, $size);
 }
 
 // --------------- Функция подсчета карт в игре ---------------//

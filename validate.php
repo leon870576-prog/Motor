@@ -47,3 +47,8 @@ foreach (['avators','avators2'] as $folder) foreach (glob($root.'/images/'.$fold
 }
 if ($avatarCount !== 402 || !is_file($root.'/assets/lesika/tag-picker.js')) throw new RuntimeException('Incomplete editor/avatar assets');
 echo 'PASS: native safe BBCode renderer, HTTPS links and '.$avatarCount.' avatars at 128px'.PHP_EOL;
+foreach (['mag','bot','shut'] as $name) {
+    $size = getimagesize($root.'/images/img/'.$name.'.gif');
+    if (!$size || $size[0] !== 256 || $size[1] !== 256 || $size[2] !== IMAGETYPE_GIF) throw new RuntimeException('Invalid chat avatar asset');
+}
+echo 'PASS: all 3 generated chat avatars at 256px with original filenames'.PHP_EOL;

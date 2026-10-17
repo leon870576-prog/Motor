@@ -1,5 +1,5 @@
 {
-  "requests": 38,
+  "requests": 42,
   "passed": [
     "avatar selection/purchase, duplicate charge prevention, CSRF, GET rejection, invalid types/paths, malformed upload and array-safe image serving",
     "all 402 GIF avatars, strict renderer tag allowlist, nesting, literal code, HTTP(S) validation, XSS escaping and legacy smile cleanup"

@@ -99,7 +99,7 @@ try {
   await page.route('**/*.php*',route=>route.fulfill({status:200,contentType:'text/html; charset=utf-8',body:source}));
   await page.goto('https://motor.test'+f.url,{waitUntil:'networkidle'});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),f.url);
-  for(const im of await page.locator('img.motor-avatar').all()) {await im.scrollIntoViewIfNeeded();await im.evaluate(e=>e.decode());assert.equal(await im.evaluate(e=>e.naturalWidth),128);}
+  for(const im of await page.locator('img.motor-avatar').all()) {await im.scrollIntoViewIfNeeded();await im.evaluate(e=>e.decode());assert.equal(await im.evaluate(e=>e.naturalWidth),/images\/img\/(mag|bot|shut)\.gif/.test(await im.getAttribute('src'))?256:128);}
   await page.unroute('**/*.php*');
  }
  const security=JSON.parse(readFileSync(new URL('./security-fixture.json',import.meta.url)));
