@@ -40,6 +40,12 @@ async function setup(width=390,theme='lesika_dvor',file='before.html'){
 const frame=page=>page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
 const refresh=page=>page.evaluate(()=>document.querySelector('[data-chat-refresh]').click());
 const revision=(page,r)=>page.waitForFunction(r=>document.querySelector('#chat-live').dataset.revision===r,r);
+const atSent=(page,id)=>page.waitForFunction(id=>{
+ const e=document.getElementById('chat-message-'+id);
+ return e && document.activeElement===e && Math.abs(e.getBoundingClientRect().top-90)<=1 && document.querySelector('[data-chat-new]').hidden;
+},id,{timeout:5000}).then(()=>frame(page)).catch(async error=>{
+ console.error('send scroll',await page.evaluate(id=>{const e=document.getElementById('chat-message-'+id);return {width:innerWidth,motion:matchMedia('(prefers-reduced-motion: reduce)').matches,top:e?.getBoundingClientRect().top,scroll:scrollY,focus:document.activeElement?.id,buttonHidden:document.querySelector('[data-chat-new]').hidden,status:document.querySelector('[data-chat-send-status]').textContent,margin:e&&getComputedStyle(e).scrollMarginTop};},id));throw error;
+});
 try{
  for(const width of [320,390,1440])for(const theme of themes){
   const {page,state,context}=await setup(width,theme);
@@ -66,6 +72,25 @@ try{
   }finally{await context.close();}
  }
  results.scenarios.push('visible reading position preserved while new messages arrive');
+ // Target the human's saved ID, although the immediately following bot reply is first.
+ for(const width of [320,390,1440])for(const reducedMotion of ['reduce','no-preference']){
+  const {page,state,context}=await setup(width);try{
+   await page.emulateMedia({reducedMotion});assert.equal(sent.ids[1],sent.sent_message_id);assert.notEqual(sent.ids[0],sent.sent_message_id);
+   await page.locator('#chat-message').fill('Настя, расскажи о кино');await page.locator('[data-chat-form] [type=submit]').click();await atSent(page,sent.sent_message_id);
+   assert.equal(await page.locator('#chat-message').inputValue(),'');assert.equal(state.docs,1);assert.equal(state.posts,1);
+   const target=page.locator('#chat-message-'+sent.sent_message_id),top=(await target.boundingBox()).y;
+   state.reply=edited;await refresh(page);await revision(page,edited.revision);await frame(page);same(top,(await target.boundingBox()).y,'position after send and background edit');
+  }finally{await context.close();}
+ }
+ results.scenarios.push('own sent message visible below header, not bot reply: 320/390/1440px, smooth and reduced motion; later polling preserves position');
+ {
+  const {page,state,context}=await setup();try{
+   state.reply=sent;await refresh(page);await revision(page,sent.revision);
+   state.send={...sent,saved:false};await page.locator('#chat-message').fill('Повтор после потерянного ответа');await page.locator('[data-chat-form] [type=submit]').click();await atSent(page,sent.sent_message_id);
+   assert.equal(state.posts,1);assert.equal(state.docs,1);
+  }finally{await context.close();}
+ }
+ results.scenarios.push('idempotent retry scrolls to own message even when revision is already current');
  // Real timer and unchanged revision keep existing nodes, no reload.
  {
   const {page,state,context}=await setup();try{
@@ -84,9 +109,10 @@ try{
    const input=page.locator('#chat-message');await input.fill('Настя, сообщение для отправки');state.gate=new Promise(r=>release=r);
    await page.locator('[data-chat-form] [type=submit]').click();await page.waitForFunction(()=>document.querySelector('[type=submit]').disabled);
    await page.evaluate(()=>document.querySelector('[data-chat-form]').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
-   await input.fill('Следующий черновик');release();state.gate=null;await revision(page,sent.revision);assert.equal(state.posts,1);assert.equal(await input.inputValue(),'Следующий черновик');assert.equal(state.docs,1);
-   state.send={...edited,message_id:'b'.repeat(32)};await page.locator('[data-chat-form] [type=submit]').click();await revision(page,edited.revision);assert.equal(await input.inputValue(),'');assert.equal(await page.locator('[name=message_id]').inputValue(),'b'.repeat(32));
-   await input.fill('Несохранённый новый текст');state.code=503;state.send={error:'Временная ошибка'};await page.locator('[data-chat-form] [type=submit]').click();await page.waitForFunction(()=>document.querySelector('[data-chat-send-status]').textContent==='Временная ошибка');assert.equal(await input.inputValue(),'Несохранённый новый текст');
+   await input.fill('Следующий черновик');release();state.gate=null;await revision(page,sent.revision);await atSent(page,sent.sent_message_id);assert.equal(state.posts,1);assert.equal(await input.inputValue(),'Следующий черновик');assert.equal(state.docs,1);
+   state.send={...edited,sent_message_id:sent.sent_message_id,message_id:'b'.repeat(32)};await page.locator('[data-chat-form] [type=submit]').click();await revision(page,edited.revision);await atSent(page,sent.sent_message_id);assert.equal(await input.inputValue(),'');assert.equal(await page.locator('[name=message_id]').inputValue(),'b'.repeat(32));
+   await input.fill('Несохранённый новый текст');await input.evaluate(e=>e.scrollIntoView({block:'center'}));await frame(page);const failedScroll=await page.evaluate(()=>scrollY);
+   state.code=503;state.send={error:'Временная ошибка'};await page.evaluate(()=>document.querySelector('[data-chat-form]').requestSubmit());await page.waitForFunction(()=>document.querySelector('[data-chat-send-status]').textContent==='Временная ошибка');await frame(page);assert.equal(await input.inputValue(),'Несохранённый новый текст');same(failedScroll,await page.evaluate(()=>scrollY),'failure must not scroll');
    state.code=409;state.send={error:'Повторите новый текст',message_id:'c'.repeat(32)};await page.locator('[data-chat-form] [type=submit]').click();await page.waitForFunction(()=>document.querySelector('[name=message_id]').value==='c'.repeat(32));assert.equal(await input.inputValue(),'Несохранённый новый текст');
   }finally{release?.();await context.close();}
  }
@@ -94,7 +120,7 @@ try{
  {
   const {page,state,context}=await setup(390,'lesika_dvor','history.html');try{
    const old=await page.locator('#chat-feed').innerHTML();state.reply=fresh;await page.waitForTimeout(3200);assert.equal(await page.locator('#chat-feed').innerHTML(),old);assert.ok(await page.locator('[data-chat-new]').isVisible());
-   await page.locator('#chat-message').fill('Настя, отвечаю из истории');await page.locator('[data-chat-form] [type=submit]').click();await revision(page,sent.revision);assert.ok((await page.locator('#chat-feed').innerText()).includes('Настюха'));assert.equal(await page.locator('#chat-live').getAttribute('data-start'),'0');assert.equal(state.docs,1);
+   await page.locator('#chat-message').fill('Настя, отвечаю из истории');await page.locator('[data-chat-form] [type=submit]').click();await revision(page,sent.revision);await atSent(page,sent.sent_message_id);assert.ok((await page.locator('#chat-feed').innerText()).includes('Настюха'));assert.equal(await page.locator('#chat-live').getAttribute('data-start'),'0');assert.equal(state.docs,1);
   }finally{await context.close();}
  }
  results.scenarios.push('history page stays stable; own send switches to latest messages without reload');

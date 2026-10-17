@@ -221,6 +221,8 @@
   "scenarios": [
     "36 layouts: twelve themes, 320/390/1440px, draft/focus/selection/scroll preserved, avatars fully visible",
     "visible reading position preserved while new messages arrive",
+    "own sent message visible below header, not bot reply: 320/390/1440px, smooth and reduced motion; later polling preserves position",
+    "idempotent retry scrolls to own message even when revision is already current",
     "actual 3-second timer, unchanged 204 keeps nodes, external bot reply, edits and empty chat",
     "AJAX send, CSRF fields, duplicate click, draft typed during send, normal clear, failure keeps draft, 409 changes retry ID",
     "history page stays stable; own send switches to latest messages without reload",

@@ -22,7 +22,7 @@ if (($_SERVER['REQUEST_METHOD']??'')==='POST') {
 }
 include '../themes/'.$config['themes'].'/index.php';
 show_title('chat.gif','Настройки мини-чата');
-echo '<link rel="stylesheet" href="../assets/lesika/chat.css?v=chat1">';
+echo '<link rel="stylesheet" href="../assets/lesika/chat.css?v=chat2">';
 if ($error!=='') echo '<p class="chat-settings-error" role="alert">'.motor_chat_escape($error).'</p>';
 echo '<form class="chat-settings" method="post">';motor_form_token();
 echo '<input type="hidden" name="version" value="'.motor_chat_settings_version().'">';

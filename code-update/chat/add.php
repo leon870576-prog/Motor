@@ -55,5 +55,5 @@ try {
         return true;
     });
 } catch (RuntimeException $e) { chat_add_error($e->getMessage(),in_array($e->getCode(),[409,429],true)?$e->getCode():503); }
-if ($ajax) motor_chat_json(motor_chat_snapshot($settings)+['message_id'=>bin2hex(random_bytes(16)),'saved'=>$saved]);
-header('Location: index.php?isset=addon');exit;
+if ($ajax) motor_chat_json(motor_chat_snapshot($settings)+['message_id'=>bin2hex(random_bytes(16)),'sent_message_id'=>$id,'saved'=>$saved]);
+header('Location: index.php?isset=addon#chat-message-'.$id);exit;

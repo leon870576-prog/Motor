@@ -11,6 +11,13 @@
  let timer=0,busy=false,sending=false,controller=null,failures=0,epoch=0,stopped=false;
  const text=s=>{if(status.textContent!==s)status.textContent=s;};
  function schedule(){clearTimeout(timer);if(enabled&&!stopped&&!document.hidden&&navigator.onLine)timer=setTimeout(poll,Math.min(30000,interval*2**Math.min(failures,4)));}
+ function showSent(id){
+  if(!/^[a-f0-9]{32}$/.test(id))return;
+  const message=feed.querySelector(`[data-chat-id="${id}"]`);if(!message)return;
+  newButton.hidden=true;
+  message.focus({preventScroll:true});
+  requestAnimationFrame(()=>message.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}));
+ }
  function apply(data){
   if(!data || !/^[a-f0-9]{64}$/.test(data.revision) || typeof data.html!=='string' || !Array.isArray(data.ids))throw new Error('Неверный ответ чата');
   enabled=Boolean(data.enabled);interval=Math.max(2000,Math.min(30000,Number(data.interval)*1000||3000));
@@ -80,6 +87,7 @@
    if(textarea.value===value)textarea.value='';
    if(/^[a-f0-9]{32}$/.test(data.message_id))form.elements.message_id.value=data.message_id;
    sendStatus.textContent='Сообщение добавлено';failures=0;
+   showSent(data.sent_message_id||body.get('message_id'));
   }catch(error){sendStatus.textContent=error.name==='AbortError'?'Ответ задерживается. Текст остался в поле — можно повторить отправку.':error.message;}
   finally{clearTimeout(timeout);sending=false;button.disabled=false;schedule();}
  });

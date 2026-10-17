@@ -21,7 +21,7 @@ $snapshot=motor_chat_snapshot($settings,$start);
 $imja=isset($_GET['imja']) && is_string($_GET['imja'])?'[b]'.safe_decode($_GET['imja']).'[/b], ':'';
 include '../themes/'.$config['themes'].'/index.php';
 show_title('partners.gif','Мини-чат');
-echo '<link rel="stylesheet" href="../assets/lesika/chat.css?v=chat1">';
+echo '<link rel="stylesheet" href="../assets/lesika/chat.css?v=chat2">';
 echo '<a class="touch-link" href="#form">Написать</a> / <a class="touch-link" href="index.php" data-chat-refresh>Обновить</a>';
 if (is_admin([101,102,103,105])) echo ' / <a class="touch-link" href="../mpanel/chat.php">Управление</a>';
 if (is_admin([101])) echo ' / <a class="touch-link" href="../mpanel/chat-settings.php">Настройки чата</a>';
@@ -38,5 +38,5 @@ if (is_user()) {
 } else { show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо'); }
 echo '<p><a class="touch-link" href="../pages/pravila.php">Правила</a> / <a class="touch-link" href="../pages/smiles.php">Смайлы</a> / <a class="touch-link" href="../pages/tegi.php">Теги</a></p>';
 echo '<a class="touch-link" href="../index.php">На главную</a>';
-echo '<script src="../assets/lesika/chat.js?v=chat1" defer></script>';
+echo '<script src="../assets/lesika/chat.js?v=chat2" defer></script>';
 include '../themes/'.$config['themes'].'/foot.php';

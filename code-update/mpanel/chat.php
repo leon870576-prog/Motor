@@ -48,7 +48,7 @@ $total=count($rows);if($start>=$total)$start=0;
 $version=hash('sha256',implode("\n",$rows));
 include '../themes/'.$config['themes'].'/index.php';
 show_title('chat.gif','Управление мини-чатом');
-echo '<link rel="stylesheet" href="../assets/lesika/chat.css?v=chat1">';
+echo '<link rel="stylesheet" href="../assets/lesika/chat.css?v=chat2">';
 if ($error!=='')echo '<p role="alert">'.motor_chat_escape($error).'</p>';
 echo '<a class="touch-link" href="chat.php">Обновить список</a> / <a class="touch-link" href="../chat/index.php">Открыть чат</a>';
 if(is_admin([101]))echo ' / <a class="touch-link" href="chat-settings.php">Настройки чата и ботов</a>';

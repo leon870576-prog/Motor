@@ -132,7 +132,7 @@ function motor_chat_render_row(string $row,int $index): string {
     $valid=$bot || (bool)preg_match('/^[a-z0-9-]{3,20}$/Di',$author);
     $name=$valid?nickname($author):'Участник';
     $id=motor_chat_record_id($row,$index);
-    $html='<article class="chat-message" data-chat-id="'.$id.'"><div class="b">';
+    $html='<article class="chat-message" id="chat-message-'.$id.'" data-chat-id="'.$id.'" tabindex="-1"><div class="b">';
     $html.=$valid?user_avatars($author):motor_avatar_image('images/avators/guest.gif');
     $html.='<b><a class="touch-link chat-reply" data-chat-reply="'.motor_chat_escape($name).'" href="index.php?imja='.safe_encode($name).'#form">'.motor_chat_escape($name).'</a></b> ';
     $html.=$bot?'<span class="chat-bot-label">бот</span>':($valid?user_online($author):'');

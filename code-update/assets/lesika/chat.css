@@ -2,7 +2,7 @@
 .chat-livebar [hidden]{display:none}
 .chat-new,.chat-livebar button{min-height:44px;padding:8px 12px;max-width:100%;border:1px solid var(--line);border-radius:8px;background:var(--wash);color:var(--accent)}
 .chat-feed{overflow-anchor:none}
-.chat-message{min-width:0}
+.chat-message{min-width:0;scroll-margin-top:10px}
 .chat-message .b{display:flex;flex-wrap:wrap;align-items:center;gap:5px 8px}
 .chat-message .b small{width:100%;margin:0}
 .chat-message .b .motor-avatar{margin:0 4px 0 0}
