@@ -39,7 +39,7 @@ try{
  const cfg=php.readFileAsText('/www/local/config.dat').split('|');for(const i of [3,29,57])cfg[i]='0';cfg[85]='1';php.writeFile('/www/local/config.dat',cfg.join('|'));
  const current=await php.run({code:'<?php echo time();'}),now=+current.text;
  php.writeFile('/www/local/news.dat',`Сегодня|Текст||${now}|CalendarAdmin|1|\n`);
- let r=await req('/index.php');assert.equal(r.httpStatusCode,200);assert.match(r.text,/calendar-today calendar-has-news/);assert.match(r.text,/site\.css\?v=calendar1/);writeFileSync(new URL('home.html',fixtures),r.text);
+ let r=await req('/index.php');assert.equal(r.httpStatusCode,200);assert.match(r.text,/calendar-today calendar-has-news/);assert.match(r.text,/site\.css\?v=[a-z0-9]+/);writeFileSync(new URL('home.html',fixtures),r.text);
  r=await req('/news/komm.php?id=1');assert.equal(r.httpStatusCode,200);assert.ok(r.text.includes('Сегодня'));
  r=await req('/index.php?month=%22%3E%3Cscript%3Ealert(1)%3C/script%3E&year[]=2024');assert.equal(r.httpStatusCode,302);assert.ok(r.headers.location[0].includes('isset=403'));assert.ok(!r.text.includes('<script>alert(1)</script>'));
  console.log('PASS actual homepage integration, news destination and malformed query rejection');

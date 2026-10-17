@@ -136,7 +136,7 @@ if (substr($config['servername'], 0, 4)=='wap.'){$config['servername'] = preg_re
 if (empty($_SESSION['counton'])) {$_SESSION['counton'] = 0;}
 if (empty($_SESSION['currs'])) {$_SESSION['currs'] = SITETIME;}
 if (empty($_SESSION['token']) || !is_string($_SESSION['token']) || strlen($_SESSION['token']) !== 64) {$_SESSION['token'] = bin2hex(random_bytes(32));}
-if (empty($_SESSION['protect'])) {$_SESSION['protect'] = mt_rand(1000,9999);}
+if (empty($_SESSION['protect'])) {$_SESSION['protect'] = random_int(1000,9999);}
 $_SESSION['timeon'] = maketime(SITETIME - $_SESSION['currs']);
 require_once __DIR__.'/request-security.php';
 motor_request_guard();

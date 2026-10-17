@@ -64,3 +64,5 @@ img.motor-avatar { display:inline-block; width:var(--avatar-size,56px); height:a
 .news-calendar .calendar-has-news:hover{text-decoration:none}
 .news-calendar .calendar-has-news:hover .calendar-day-number{background:var(--wash)}
 .news-calendar .calendar-today .calendar-day-number{font-weight:700;background:var(--wash);text-decoration:underline;text-underline-offset:.15em}
+
+.legacy-content img.captcha-image{display:block;width:252px;max-width:100%;height:auto;aspect-ratio:21/8;object-fit:contain;margin:8px 0 12px;background:#fff;border-radius:8px}

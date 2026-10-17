@@ -91,3 +91,22 @@ if(substr_count($secureForm,'name="uid"')!==2 || str_contains($secureForm,'<a hr
 echo 'PASS: native random recovery tokens, expiry and POST protection for legacy forms/actions'.PHP_EOL;
 
 if(str_contains(motor_request_html('<a href="kosti.php?action=go">Untrusted</a>'),'<form'))throw new RuntimeException('Untrusted links must not receive CSRF tokens');
+
+require_once $root.'/includes/captcha.php';
+if (!is_readable('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf')) throw new RuntimeException('Missing CAPTCHA font');
+foreach (['1234','9876','1000','8888'] as $captchaCode) foreach ([false,true] as $captchaNoise) {
+    $captchaImage = motor_captcha_image($captchaCode, $captchaNoise);
+    if (imagesx($captchaImage) !== 504 || imagesy($captchaImage) !== 192) throw new RuntimeException('CAPTCHA dimensions');
+    for ($digit = 0; $digit < 4; $digit++) {
+        $dark = 0; $top = 192; $bottom = 0;
+        for ($y = 0; $y < 192; $y++) for ($x = $digit * 126; $x < ($digit + 1) * 126; $x++) {
+            $pixel = imagecolorat($captchaImage, $x, $y);
+            if ((($pixel >> 16) & 255) < 110 && (($pixel >> 8) & 255) < 110 && ($pixel & 255) < 110) {
+                $dark++; $top = min($top, $y); $bottom = max($bottom, $y);
+            }
+        }
+        if ($dark < 600 || $top < 12 || $bottom > 179 || $bottom - $top < 65) throw new RuntimeException('CAPTCHA glyph missing, too small or clipped');
+    }
+    imagedestroy($captchaImage);
+}
+echo 'PASS: native large CAPTCHA, 504x192 pixels, four FreeType digits, readable bounds with/without noise'.PHP_EOL;

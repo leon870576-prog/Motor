@@ -1,5 +1,10 @@
 [
   {
+    "path": "pages/avators.php",
+    "bytes": 14837,
+    "sha256": "d70ae6b6e09be1b1b323fd2a3e9d7857853725d91282c5faedfbcc28db36b0ce"
+  },
+  {
     "path": "pages/avtorlist.php",
     "bytes": 5721,
     "sha256": "4511df75ed22f65dcd52946eff7e86e504c71ddba75e27d2eac04c277dfde1d9"
@@ -126,13 +131,13 @@
   },
   {
     "path": "pages/registration.php",
-    "bytes": 4288,
-    "sha256": "a337ea5649bbe7a4ede9c2ed61e2f409978022ca20368eba72d9b8baf6baf7d6"
+    "bytes": 4430,
+    "sha256": "0c53e090f37085bf6054266c7c66b7f0508f55cb815408560c84db40bb89f0a5"
   },
   {
     "path": "pages/reguser.php",
-    "bytes": 15971,
-    "sha256": "c565230e423bb3a2ff5a2e98cf932925256acc4880e03eed7937e78549af96ed"
+    "bytes": 14921,
+    "sha256": "6d0551718171ef6355d88bf703bd01124de41016eedd0c6083a0f408c4475e27"
   },
   {
     "path": "pages/searchuser.php",

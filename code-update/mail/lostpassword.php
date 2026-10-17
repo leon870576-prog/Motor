@@ -39,11 +39,11 @@ echo 'Логин:<br />';
 echo '<input name="uz" type="text" maxlength="20" value="'.$cookname.'" /><br />';
 echo 'Проверочный код: ';
 if ($config['protectimg']==1){
-echo '<img src="'.BASEDIR.'gallery/protect.php?'.SID.'" alt="" /><br />';
+echo '<img class="captcha-image" src="'.BASEDIR.'gallery/protect.php?v=captcha1&amp;'.SID.'" width="252" height="96" alt="Проверочный код: четыре цифры" /><br />';
 } else {
 echo '<b>'.$_SESSION['protect'].'</b><br />';
 }
-echo '<input name="provkod" maxlength="6" /><br /><br />';
+echo '<input name="provkod" inputmode="numeric" autocomplete="off" aria-label="Проверочный код" maxlength="6" /><br /><br />';
 echo '<input value="Получить пароль" type="submit" /></form><hr />';
 
 }

@@ -1,0 +1,19 @@
+{
+  "php": "8.4",
+  "requests": 24,
+  "forms": 4,
+  "image": [
+    504,
+    192
+  ],
+  "display": [
+    252,
+    96
+  ],
+  "sessionIsolation": true,
+  "noStore": true,
+  "wrongCodesRejected": true,
+  "validRegistration": true,
+  "registrationPasswordDisclosure": false,
+  "nativeFont": "checked by Docker build"
+}

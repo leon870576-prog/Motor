@@ -18,3 +18,5 @@ checks/board-fixtures/
 checks/security-fixtures/
 
 checks/calendar-fixtures/
+
+checks/captcha-fixtures/

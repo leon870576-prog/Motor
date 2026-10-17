@@ -27,7 +27,7 @@
   {
     "path": "_health.php",
     "bytes": 263,
-    "sha256": "2e1e4bfe0da30233f9e4df86ed0cb07dd2de1e2d92dc6b9bba82e8a49cf3b0d1"
+    "sha256": "5a96275736869a0e5bb5d9d7b00a8cb4cad356be58932f10308decc5b3c24aa9"
   },
   {
     "path": "assets/lesika/chat.css",
@@ -66,8 +66,8 @@
   },
   {
     "path": "assets/lesika/site.css",
-    "bytes": 19631,
-    "sha256": "552318c6a6634821cc1d9486def1c57b39d5e5db868762a5895e5374ea2849f2"
+    "bytes": 19809,
+    "sha256": "636433ee8f4e10d05dbb7c3e95d483ff1c214eb16e1a1d31e96e604b151bcdca"
   },
   {
     "path": "assets/lesika/smile-picker.js",
@@ -111,8 +111,8 @@
   },
   {
     "path": "book/index.php",
-    "bytes": 4243,
-    "sha256": "fa3c607fcec8f129766eddb542780d0636b32cbe0ea30b750ea06e898efd0c19"
+    "bytes": 4346,
+    "sha256": "45e0bee4d39546478244e05faf23bcd0e77cadcd3542ea1f3a6e78c748f0bd02"
   },
   {
     "path": "chat/add.php",
@@ -196,8 +196,8 @@
   },
   {
     "path": "gallery/protect.php",
-    "bytes": 2091,
-    "sha256": "ec46e9c4c2abd57bb7045bdd6f3244272824c486f86c9d672c14243346ac51c3"
+    "bytes": 874,
+    "sha256": "fdc756fe35355d5339a729caff879571b804a27815df3d27f73013eaa36a36b4"
   },
   {
     "path": "gallery/resize.php",

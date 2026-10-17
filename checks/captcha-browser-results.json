@@ -1,0 +1,18 @@
+{
+  "browser": "153.0.8010.0",
+  "forms": 4,
+  "themes": 12,
+  "layouts": 384,
+  "image": [
+    504,
+    192
+  ],
+  "display": [
+    252,
+    96
+  ],
+  "numericKeyboard": true,
+  "errors": [],
+  "unexpectedPosts": 0,
+  "physicalDevices": false
+}
