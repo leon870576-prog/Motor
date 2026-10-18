@@ -27,7 +27,17 @@
   {
     "path": "_health.php",
     "bytes": 256,
-    "sha256": "0789a1a459103eef3d919579edde28da2f9cccc6bc9c26f55d3a9c6aa61d7099"
+    "sha256": "de5a0960b97f227d13cc5914555dfdaa076c699ad343e9d097dc356f886be6e5"
+  },
+  {
+    "path": "assets/lesika/arcade.css",
+    "bytes": 5089,
+    "sha256": "d5944dfb7ba4fb50fd91819bdff704bbe4574ed197bc9632f598cf6d74e0fe84"
+  },
+  {
+    "path": "assets/lesika/arcade.js",
+    "bytes": 3162,
+    "sha256": "69d0a0c6338b4a79a210e077a585292f43eea399204b5b271160c7f852093998"
   },
   {
     "path": "assets/lesika/chat.css",
@@ -216,13 +226,13 @@
   },
   {
     "path": "games/21.php",
-    "bytes": 4993,
-    "sha256": "fe0f0d352edc87e6ca78560b5898a433e8904f0371f854ab699a70e0bb18b73a"
+    "bytes": 5601,
+    "sha256": "d8a55305b50524a3d89d4cf93f44b2e05fe349e463b573a2a7eefcb1e3569327"
   },
   {
     "path": "games/bandit.php",
-    "bytes": 15399,
-    "sha256": "1b8760226c385fefacd47c4ac5b4a485557601a2360a84ff2773c058f49d0bfc"
+    "bytes": 84,
+    "sha256": "34094ea7c8c5d4f5b88e517fba8e29904560543d38f48dd31d70ab95134e8b78"
   },
   {
     "path": "games/bank.php",
@@ -246,8 +256,8 @@
   },
   {
     "path": "games/kosti.php",
-    "bytes": 4974,
-    "sha256": "dde0e81c4e3b0ea3f7d5d31dab9dfded10815d692432a934bc0c677345c8484c"
+    "bytes": 83,
+    "sha256": "fed0d398161794186431359a1c5dd99efa3f7b1892c52d664e352301004b9628"
   },
   {
     "path": "games/kredit.php",
@@ -271,8 +281,8 @@
   },
   {
     "path": "games/naperstki.php",
-    "bytes": 6247,
-    "sha256": "3db9ec1fe6f81aaa414a1f91c97411d805b1f2f8bfd5d38fbc24dfe977ff3b12"
+    "bytes": 87,
+    "sha256": "5ca26eb5897d686e222f97476e14dd16120ddad61359fd9fa84b407fdb57885a"
   },
   {
     "path": "games/perevod.php",
@@ -1488,15 +1498,5 @@
     "path": "images/avators2/121.gif",
     "bytes": 13875,
     "sha256": "74e4d34ef9c1afe16b4a8572a3fd50ad47d688bd77cdcc291185e94b860fab87"
-  },
-  {
-    "path": "images/avators2/122.gif",
-    "bytes": 14561,
-    "sha256": "4098b9fc3fb2df795a59029ee4fff860e323f666e63c613e8912cbe9f17b90e9"
-  },
-  {
-    "path": "images/avators2/123.gif",
-    "bytes": 13157,
-    "sha256": "b70793021ff3e864a7e0ba5ad51ca4aea3b1e45a75149345bbc0ee9d0cf9889e"
   }
 ]

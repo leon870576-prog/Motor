@@ -1,6 +1,6 @@
 {
   "scope": "Assembled application; local seed/user data excluded",
-  "files": 981,
+  "files": 988,
   "parts": [
     "security-inventory-1.json",
     "security-inventory-2.json",

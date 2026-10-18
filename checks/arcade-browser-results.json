@@ -1,0 +1,14 @@
+{
+  "browser": "153.0.8010.0",
+  "layouts": 624,
+  "themes": 12,
+  "scenarios": [
+    "three games × four states × twelve themes × 320/390/768/1440px: no page overflow, 44px controls, legible SVG symbols",
+    "admin settings across all themes, separate mode/percent/cost fields and numeric bounds",
+    "actual UI submit data, keyboard cup choice, server results and next-cup view without reload or extra charge",
+    "network failure preserves state and retry; double tap sends once; expired session explained separately from lost connection",
+    "reduced motion; full payout table scrolls inside its own region on a narrow screen"
+  ],
+  "errors": [],
+  "physicalDevices": false
+}

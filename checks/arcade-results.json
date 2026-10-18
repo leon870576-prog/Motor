@@ -1,0 +1,12 @@
+{
+  "runtime": "PHP 8.4 WASM",
+  "requests": 153,
+  "passed": [
+    "four independent settings, random default without migration, 0–100 integer bounds, cost bounds, CSRF/Origin/array validation, stale save rejected, admin link",
+    "three real game paths: correct balance arithmetic, durable result, POST-only, CSRF/Origin, strict cup choice, duplicate and refresh unchanged, read-only new-cup view",
+    "changed price requires a fresh form; no game with insufficient balance",
+    "0% and 100% applied by all four engines; 21 stand/hit outcomes agree with cards, no repeats, active policy frozen across admin changes, hidden target/deck never exposed",
+    "300 complete controlled 21 hands; all eight slot symbols across eight lines with exact payouts; exhaustive 1296 fair-dice outcomes: 575 losses / 146 ties / 575 wins",
+    "profile updates preserve both game fields, unknown stored data fails closed, backup path works, no-JavaScript POST/303, other account isolated and admin settings forbidden"
+  ]
+}

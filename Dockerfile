@@ -28,6 +28,7 @@ COPY validate.php /opt/motor-validate.php
 COPY checks/gallery-native.php /opt/motor-gallery-native.php
 COPY checks/informers-native.php /opt/motor-informers-native.php
 COPY checks/game21-native.php /opt/motor-game21-native.php
+COPY checks/arcade-native.php /opt/motor-arcade-native.php
 COPY MIGRATION.json /opt/motor-migration.json
 COPY migrate-themes.php /opt/motor-migrate-themes.php
 RUN chmod 755 /usr/local/bin/motor-entrypoint \
@@ -35,6 +36,7 @@ RUN chmod 755 /usr/local/bin/motor-entrypoint \
  && php /opt/motor-gallery-native.php \
  && php /opt/motor-informers-native.php \
  && php /opt/motor-game21-native.php \
+ && php /opt/motor-arcade-native.php \
  && php -l /opt/motor-migrate.php \
  && php -l /opt/motor-migrate-themes.php \
  && a2dismod mpm_event mpm_worker \

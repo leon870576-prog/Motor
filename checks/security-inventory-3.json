@@ -1,5 +1,15 @@
 [
   {
+    "path": "images/img/ignor.gif",
+    "bytes": 409,
+    "sha256": "62da137e86bd23213152c3e55f1216355f421353c84605833fb93e5f84e04422"
+  },
+  {
+    "path": "images/img/key.gif",
+    "bytes": 273,
+    "sha256": "14e63aa10fa2ba8d9e51168bea45abee0f55457b66f3814f7e66dc66f7f95dd5"
+  },
+  {
     "path": "images/img/lock.gif",
     "bytes": 307,
     "sha256": "20fcc910fde5ccd7b0e724675990bd12ff9e1b5f6fb3a84c34949ed8cea57cdb"
@@ -1065,6 +1075,26 @@
     "sha256": "63d687eb50a82f2c475f5b4f6103506f5a4b80c86bc9ce04d8ba65d0e4de0f8d"
   },
   {
+    "path": "includes/arcade-page.php",
+    "bytes": 6004,
+    "sha256": "f05b94edc34a52ff86bea4579e589c2cfd6a6bfd83f5de72fed14da814df4361"
+  },
+  {
+    "path": "includes/arcade-settings.php",
+    "bytes": 3829,
+    "sha256": "b5748e3a95a5bb2ddb0594fc35d96efa88b31cf018a869bede9d230902e2d821"
+  },
+  {
+    "path": "includes/arcade-view.php",
+    "bytes": 11390,
+    "sha256": "8512f84aa8ab7a5821d550b010c65aee891f4995bc8f3b27ada77cdfc2486bb9"
+  },
+  {
+    "path": "includes/arcade.php",
+    "bytes": 7902,
+    "sha256": "f973ea4915068dc04023708b6ba8468ff33feeb5d7cc39fa8d6cf77bbc0767d1"
+  },
+  {
     "path": "includes/attachments.php",
     "bytes": 19235,
     "sha256": "b0966331645d0818199ee37f66cc9378d5d1a08152b22522a90d83d26d9ab850"
@@ -1146,13 +1176,13 @@
   },
   {
     "path": "includes/game21-view.php",
-    "bytes": 6936,
-    "sha256": "0cd2506582d72f5333288b97753c8a9e6809acc2a6b85f9b35b9be34bdc07aa2"
+    "bytes": 7493,
+    "sha256": "e4697b7d18c00786513c9fc47fea054461a5c55b3d9403bd2f7fc7df1390edbb"
   },
   {
     "path": "includes/game21.php",
-    "bytes": 7314,
-    "sha256": "c03dc6b18ccb2123e0f695fc41f716542a5ea5ad7bc18a0c165362019a6e59ad"
+    "bytes": 9697,
+    "sha256": "3cd9e8bda8c50859fa402135094a6bb8e42722cd48d9169733ef547c60ab3c98"
   },
   {
     "path": "includes/gzip_foot.php",
@@ -1320,14 +1350,19 @@
     "sha256": "e69fa8c1da8f206bc72ac9c877060d2ad83c75a428014b80aabe95cc2b809e82"
   },
   {
+    "path": "mpanel/arcade-settings.php",
+    "bytes": 4964,
+    "sha256": "cbacd848ed103697e9dfebe0280f90a7ccd3b9f6af59560d350319c1d5d71a29"
+  },
+  {
     "path": "mpanel/attachments.php",
     "bytes": 4942,
     "sha256": "6c6e67a4b5b458511066ab72151e73cc762db48416f45abc327ca10b67e3d221"
   },
   {
     "path": "mpanel/backup.php",
-    "bytes": 14609,
-    "sha256": "b038b0cbd0509680b03e8b28f353a1c7b04b6c2ef369366e605dee067a26cd94"
+    "bytes": 14632,
+    "sha256": "631707b34f8a2155e3c90966e090b3db84e3df4af663df04b30bb49ec9a94157"
   },
   {
     "path": "mpanel/ban.php",
@@ -1406,8 +1441,8 @@
   },
   {
     "path": "mpanel/index.php",
-    "bytes": 9172,
-    "sha256": "4106d9fbdc509633633305809efe64e594227045d05c2668998f5bdd3064d6bd"
+    "bytes": 9286,
+    "sha256": "fea4ff1f5f09248d1989be5311b0a19c01a74cf1ef6021eb4b8c39ea1ba66540"
   },
   {
     "path": "mpanel/license.php",
@@ -1463,40 +1498,5 @@
     "path": "mpanel/status.php",
     "bytes": 6553,
     "sha256": "799b9cd141c034202a7a4debf69fd8cada58b4b6b764672d44b1236b7026321f"
-  },
-  {
-    "path": "mpanel/subscribe.php",
-    "bytes": 6020,
-    "sha256": "8b8e0e65bbc60e5100f134617726e5394c03306c6e10a02a201883873109c6ce"
-  },
-  {
-    "path": "mpanel/systems.php",
-    "bytes": 5186,
-    "sha256": "161336fe62d23bd4543b72663403606d48c83f2154c855cb8af8df71d4cfebd9"
-  },
-  {
-    "path": "mpanel/users.php",
-    "bytes": 13368,
-    "sha256": "02dca4245c42a9b33d5aa3c916d54a4daa50a0e9f53a2d7271e864f39a7e67b3"
-  },
-  {
-    "path": "mpanel/votes.php",
-    "bytes": 15532,
-    "sha256": "2de9d285d541e492568c1c5f2e8f18ffcb470a99a18674c303762230d2f872e6"
-  },
-  {
-    "path": "mpanel/welcome.php",
-    "bytes": 3055,
-    "sha256": "54a76eb75b549b0bf137c786655121cb072ef1a9268487ff91d496cfb6ac481e"
-  },
-  {
-    "path": "mpanel/zaban.php",
-    "bytes": 12530,
-    "sha256": "f0d9f3cbf2423691e959268beec539ac8bfaded651eeaedc292bfae1d443e85b"
-  },
-  {
-    "path": "news/index.php",
-    "bytes": 2388,
-    "sha256": "4dbed6a43bd34d6e32352e00900dec1d80b576c58c9bce344be65ebb93d36283"
   }
 ]

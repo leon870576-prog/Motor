@@ -22,8 +22,8 @@ try {
  let r=await req('/games/21.php',null,{accept:'application/json'});assert.equal(r.httpStatusCode,401);
  await req('/input.php',{login:'CardAdmin',pass:password});setProfile(41,'1000');setProfile(99,'');
  r=await req('/games/21.php');assert.equal(r.httpStatusCode,200);save('ready.html',r.text);
- const uid=r.text.match(/name="uid" value="([^"]+)"/)[1];
- async function act(command,revision,bet,headers={}){return req('/games/21.php',{uid,command,revision,...(bet!==undefined?{bet}:{} )},{accept:'application/json',...headers});}
+ const uid=r.text.match(/name="uid" value="([^"]+)"/)[1], rulesRevision=r.text.match(/name="rules_revision" value="([^"]+)"/)[1];
+ async function act(command,revision,bet,headers={}){return req('/games/21.php',{uid,command,revision,rules_revision:rulesRevision,...(bet!==undefined?{bet}:{} )},{accept:'application/json',...headers});}
  const initial=profile()[41];
  for(const body of [{command:'start',revision:'0',bet:'10'},{uid:'bad',command:'start',revision:'0',bet:'10'},{uid,command:'start',revision:'0','bet[0]':'10'}]){r=await req('/games/21.php',body);assert.ok([400,403].includes(r.httpStatusCode));}
  for(const headers of [{Origin:'https://attacker.test'},{'Sec-Fetch-Site':'cross-site'}])assert.equal((await act('start','0','10',headers)).httpStatusCode,403);
@@ -67,7 +67,7 @@ try {
  assert.equal(await pure('try{motor21_apply("../evil","start","0","1",100);echo "false";}catch(InvalidArgumentException $e){echo "true";}'),true);
  pass('old stake refund is idempotent; chat/profile writes preserve game state; unknown slot data fails closed; profile traversal rejected');
  // Ordinary HTML POST remains playable with JavaScript disabled (POST/redirect/GET).
- setProfile(99,'');setProfile(41,'100');r=await req('/games/21.php',{uid,command:'start',revision:'0',bet:'1'});assert.equal(r.httpStatusCode,303);assert.equal(r.headers.location[0],'21.php#g21');assert.equal((await req('/games/21.php')).httpStatusCode,200);
+ setProfile(99,'');setProfile(41,'100');r=await req('/games/21.php',{uid,command:'start',revision:'0',rules_revision:rulesRevision,bet:'1'});assert.equal(r.httpStatusCode,303);assert.equal(r.headers.location[0],'21.php#g21');assert.equal((await req('/games/21.php')).httpStatusCode,200);
  // A second login resumes the same account round; a different account cannot see it.
  const saved=profile()[99];await req('/input.php?action=exit',{uid});await req('/input.php',{login:'CardAdmin',pass:password});r=await req('/games/21.php');assert.ok(r.text.includes(state().revision));assert.equal(profile()[99],saved);
  let other=profile();other[0]='CardMember';other[7]='0';other[99]='';write('profil/CardMember.prof',other.join(':||:'));const newUid=r.text.match(/name="uid" value="([^"]+)"/)[1];await req('/input.php?action=exit',{uid:newUid});await req('/input.php',{login:'CardMember',pass:password});r=await req('/games/21.php');assert.ok(r.text.includes('data-revision="0"'));assert.ok(!r.text.includes(state().revision));

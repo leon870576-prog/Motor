@@ -1,5 +1,40 @@
 [
   {
+    "path": "mpanel/subscribe.php",
+    "bytes": 6020,
+    "sha256": "8b8e0e65bbc60e5100f134617726e5394c03306c6e10a02a201883873109c6ce"
+  },
+  {
+    "path": "mpanel/systems.php",
+    "bytes": 5186,
+    "sha256": "161336fe62d23bd4543b72663403606d48c83f2154c855cb8af8df71d4cfebd9"
+  },
+  {
+    "path": "mpanel/users.php",
+    "bytes": 13368,
+    "sha256": "02dca4245c42a9b33d5aa3c916d54a4daa50a0e9f53a2d7271e864f39a7e67b3"
+  },
+  {
+    "path": "mpanel/votes.php",
+    "bytes": 15532,
+    "sha256": "2de9d285d541e492568c1c5f2e8f18ffcb470a99a18674c303762230d2f872e6"
+  },
+  {
+    "path": "mpanel/welcome.php",
+    "bytes": 3055,
+    "sha256": "54a76eb75b549b0bf137c786655121cb072ef1a9268487ff91d496cfb6ac481e"
+  },
+  {
+    "path": "mpanel/zaban.php",
+    "bytes": 12530,
+    "sha256": "f0d9f3cbf2423691e959268beec539ac8bfaded651eeaedc292bfae1d443e85b"
+  },
+  {
+    "path": "news/index.php",
+    "bytes": 2388,
+    "sha256": "4dbed6a43bd34d6e32352e00900dec1d80b576c58c9bce344be65ebb93d36283"
+  },
+  {
     "path": "news/komm.php",
     "bytes": 8257,
     "sha256": "ba23bfdc60969462ae73f1670c0144cf707b55c83b44bd3110dc8c518a75389a"

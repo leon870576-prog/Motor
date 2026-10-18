@@ -68,6 +68,7 @@ echo '<img src="../images/img/act.gif" alt="image" /> <a href="navigation.php?'.
 
 if (is_admin(array(101))){
 echo '--------------------------<br />';
+echo '<a href="arcade-settings.php">Игры: вероятность выигрыша и ставки</a><br />';
 echo '<img src="../images/img/act.gif" alt="image" /> <a href="setting.php?'.SID.'">Настройки системы</a><br />';
 echo '<img src="../images/img/act.gif" alt="image" /> <a href="backup.php?'.SID.'">Backup-панель</a><br />';
 echo '<img src="../images/img/act.gif" alt="image" /> <a href="delusers.php?'.SID.'">Чистка юзеров</a><br />';

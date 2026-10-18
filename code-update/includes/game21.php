@@ -1,6 +1,8 @@
 <?php
 if (!defined('BASEDIR')) { http_response_code(403); exit; }
 
+require_once __DIR__.'/arcade-settings.php';
+
 // Profile slot 99 was unused. Keep the round and its balance change in ONE locked
 // profile record; all existing profile writers preserve this slot under the same lock.
 function motor21_empty(): array {
@@ -14,6 +16,8 @@ function motor21_decode(string $raw): array {
     $g=$s['game']??null;
     if ($g!==null) {
         if (!is_array($g) || !in_array($g['status']??null,['playing','won','lost'],true) || !is_int($g['bet']??null) || $g['bet']<1 || $g['bet']>999999999) throw new RuntimeException('Повреждена сохранённая партия.');
+        if(isset($g['target_win']) && !is_bool($g['target_win']))throw new RuntimeException('Повреждён режим раздачи.');
+        if(isset($g['policy']) && (!is_array($g['policy']) || !in_array($g['policy']['mode']??null,['random','percent'],true) || !is_int($g['policy']['percent']??null) || $g['policy']['percent']<0 || $g['policy']['percent']>100))throw new RuntimeException('Повреждён режим раздачи.');
         $all=[];
         foreach (['player','dealer','deck'] as $key) {
             if (!is_array($g[$key]??null)) throw new RuntimeException('Повреждена колода.');
@@ -42,10 +46,36 @@ function motor21_deck(): array {
     for ($i=35;$i>0;$i--) { $j=random_int(0,$i);[$deck[$i],$deck[$j]]=[$deck[$j],$deck[$i]]; }
     return $deck;
 }
+// In the disclosed configured mode, pick the outcome before the deal and keep
+// the cards consistent with it. Natural mode retains its unmodified shuffled deck.
+function motor21_controlled_dealer(array &$g): void {
+    $pool=array_merge($g['dealer'],$g['deck']);
+    for($i=count($pool)-1;$i>0;$i--){$j=random_int(0,$i);[$pool[$i],$pool[$j]]=[$pool[$j],$pool[$i]];}
+    $chosen=null;
+    foreach($pool as $a)foreach($pool as $b){
+        if($a===$b)continue;$sum=motor21_score([$a,$b]);
+        if(!$g['target_win'] && $sum===21){$chosen=[$a,$b];break 2;}
+        if($g['target_win'] && $sum<17)foreach($pool as $c){
+            if($c!==$a && $c!==$b && $sum+motor21_score([$c])>21){$chosen=[$a,$b,$c];break 3;}
+        }
+    }
+    if($chosen===null)throw new RuntimeException('Не удалось завершить раздачу.');
+    $g['dealer']=$chosen;$g['deck']=array_values(array_diff($pool,$chosen));
+}
+function motor21_hit(array &$s): int {
+    $g=&$s['game'];
+    if(($g['target_win']??null)===true){
+        $safe=[];foreach($g['deck'] as $index=>$card)if(motor21_rank(array_merge($g['player'],[$card]))>0)$safe[]=$index;
+        if(!$safe)return motor21_finish($s);
+        $index=$safe[random_int(0,count($safe)-1)];$g['player'][]=$g['deck'][$index];unset($g['deck'][$index]);$g['deck']=array_values($g['deck']);
+    }else $g['player'][]=array_pop($g['deck']);
+    return motor21_auto($s);
+}
 function motor21_finish(array &$s): int {
     $g=&$s['game'];
     if ($g['status']!=='playing') return 0;
-    if (motor21_rank($g['player'])!==0) {
+    if (isset($g['target_win'])) motor21_controlled_dealer($g);
+    elseif (motor21_rank($g['player'])!==0) {
         while (motor21_score($g['dealer'])<17 && $g['deck']) $g['dealer'][]=array_pop($g['deck']);
     }
     $win=motor21_rank($g['player'])>motor21_rank($g['dealer']);
@@ -68,7 +98,7 @@ function motor21_snapshot(string $login): array {
     if (($d[0]??'')!==$login) throw new RuntimeException('Профиль не найден.');
     return ['state'=>motor21_decode((string)($d[99]??'')),'balance'=>max(0,(int)($d[41]??0))];
 }
-function motor21_apply(string $login,string $command,string $revision,string $bet,int $max,?array $legacy=null): array {
+function motor21_apply(string $login,string $command,string $revision,string $bet,int $max,?array $legacy=null,?string $rulesRevision=null): array {
     if (!preg_match('/^[a-z0-9_-]{1,20}$/Di',$login)) throw new InvalidArgumentException('Неверный пользователь.');
     if (!in_array($command,['start','hit','stand','restore'],true)) throw new InvalidArgumentException('Неизвестное действие.');
     $path=DATADIR.'profil/'.$login.'.prof';
@@ -90,12 +120,16 @@ function motor21_apply(string $login,string $command,string $revision,string $be
         } elseif ($command==='start') {
             if ($active) return $reply(409,'Сначала завершите текущую партию.');
             if (!preg_match('/^[1-9][0-9]{0,8}$/D',$bet) || (int)$bet>$max || (int)$bet>$balance) return $reply(400,'Введите ставку в пределах лимита и доступного баланса.');
+            $settings=motor_arcade_settings();
+            if($rulesRevision!==null && !hash_equals(motor_arcade_version($settings),$rulesRevision))return $reply(409,'Условия игры изменились. Проверьте режим перед новой ставкой.');
+            $policy=$settings['21'];$target=motor_arcade_target($policy);
             $deck=motor21_deck();$player=[array_pop($deck),array_pop($deck)];$dealer=[array_pop($deck),array_pop($deck)];
-            $s['game']=['bet'=>(int)$bet,'status'=>'playing','player'=>$player,'dealer'=>$dealer,'deck'=>$deck];
+            $s['game']=['bet'=>(int)$bet,'status'=>'playing','player'=>$player,'dealer'=>$dealer,'deck'=>$deck,'policy'=>$policy];
+            if($target!==null)$s['game']['target_win']=$target;
             $balance-=(int)$bet;$balance+=motor21_auto($s);
         } else {
             if (!$active) return $reply(409,'Партия уже завершена. Можно сыграть ещё.');
-            if ($command==='hit') { $s['game']['player'][]=array_pop($s['game']['deck']);$balance+=motor21_auto($s); }
+            if ($command==='hit') $balance+=motor21_hit($s);
             else $balance+=motor21_finish($s);
         }
         if (!is_int($balance) || $balance<0) throw new RuntimeException('Баланс вне допустимого диапазона.');

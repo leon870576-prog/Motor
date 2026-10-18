@@ -12,8 +12,9 @@ $logged=is_user() && !empty($log);$error='';$snapshot=null;$message='';$status=2
 $max=max(0,min(999999999,(int)$config['ochkostavka']));
 if ($logged) {
     try {
+        motor_arcade_settings();
         if ($method==='POST') {
-            $result=motor21_apply($log,(string)($_POST['command']??''),(string)($_POST['revision']??''),(string)($_POST['bet']??''),$max,motor21_legacy());
+            $result=motor21_apply($log,(string)($_POST['command']??''),(string)($_POST['revision']??''),(string)($_POST['bet']??''),$max,motor21_legacy(),(string)($_POST['rules_revision']??''));
             $snapshot=$result;$message=$result['message'];$status=$result['code'];
             if (($_POST['command']??'')==='restore' && $status===200) motor21_forget_legacy();
             if (!$ajax && $status===200) {$_SESSION['game21_notice']=$message;header('Location: 21.php#g21',true,303);exit;}
@@ -33,7 +34,7 @@ if ($ajax) {
 http_response_code($status);
 include '../themes/'.$config['themes'].'/index.php';
 ?>
-<link rel="stylesheet" href="../assets/lesika/game21.css?v=21r1">
+<link rel="stylesheet" href="../assets/lesika/game21.css?v=arcade1">
 <section class="g21" id="g21" aria-labelledby="g21-title">
   <header class="g21-header"><div><span class="g21-kicker">КАРТОЧНЫЙ КЛУБ</span><h1 id="g21-title">Двадцать одно<span aria-hidden="true">.</span></h1></div><span class="g21-emblem" aria-hidden="true">21</span></header>
   <p class="g21-intro">Ваш ход. Ваша удача.</p>
@@ -44,10 +45,11 @@ include '../themes/'.$config['themes'].'/index.php';
     <div class="g21-values"><span>6–10 <b>по номиналу</b></span><span>Валет <b>2</b></span><span>Дама <b>3</b></span><span>Король <b>4</b></span><span>Туз <b>11</b></span></div>
     <p>Каждый получает две карты. Нажмите «Взять карту» или «Открыться». Банкир добирает до 17 очков. При 20, 21, двух тузах или переборе вскрытие происходит автоматически.</p>
     <p>21 сильнее двух тузов (22), а два туза сильнее остальных комбинаций. Другой перебор означает проигрыш. При равенстве побеждает банкир. При победе на баланс возвращаются две ставки, включая вашу; при проигрыше теряется одна ставка.</p>
+    <p>В режиме заданного процента исход выбирается перед раздачей, а карты подбираются под него. В выигрышной раздаче добор не приводит к перебору. Процент означает шанс каждой новой партии, а не точное число побед в короткой серии. Случайный режим использует обычную перемешанную колоду.</p>
     <p>Партия сохраняется: можно вернуться к ней после закрытия страницы. Одновременно у аккаунта одна партия. Счётчик побед ведётся с обновления игры.</p>
   </details>
-  <?php if($logged&&is_admin([101])):?><a class="g21-admin" href="../mpanel/setting.php?action=seteleven">Настроить лимит ставки</a><?php endif;?>
+  <?php if($logged&&is_admin([101])):?><a class="g21-admin" href="../mpanel/arcade-settings.php">Настройки игр и вероятности</a><?php endif;?>
 </section>
-<script src="../assets/lesika/game21.js?v=21r1" defer></script>
+<script src="../assets/lesika/game21.js?v=arcade1" defer></script>
 <p><a href="../pages/index.php?action=arkada">← Другие игры</a></p>
 <?php include '../themes/'.$config['themes'].'/foot.php'; ?>
