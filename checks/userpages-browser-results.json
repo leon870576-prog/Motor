@@ -1,0 +1,12 @@
+{
+  "browser": "153.0.8010.0",
+  "layouts": 256,
+  "themes": 12,
+  "fixtureTypes": 7,
+  "formsPreserved": true,
+  "photoZoom": true,
+  "tagAndSmilePickers": true,
+  "confirmedPost": true,
+  "errors": [],
+  "physicalDevices": false
+}

@@ -15,6 +15,7 @@ echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/responsive.css?v=scr
 echo '<script src="'.BASEDIR.'assets/lesika/touch.js?v=scroll1" defer></script>';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/gallery.css?v=gallery1"><script src="'.BASEDIR.'assets/lesika/gallery.js?v=gallery1" defer></script>';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/compact.css?v=compact1">';
+if ($php_self==='pages/userpage.php') echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/userpages.css?v=userpages1">';
 echo '<link rel="alternate" type="application/rss+xml" title="Новости Лесики" href="'.BASEDIR.'news/rss.php">';
 echo '</head><body data-theme="'.$config['themes'].'"><div class="site-shell">';
 echo '<a class="skip-link" href="#main-content">К содержимому</a><header class="site-header" id="up">';
@@ -24,6 +25,7 @@ echo '<details class="site-menu"><summary class="icon-button" aria-label="Мен
 foreach (['index.php'=>'Главная', 'news/index.php'=>'Новости сайта', 'forum/index.php'=>'Форум', 'book/index.php'=>'Гостевая', 'chat/index.php'=>'Мини-чат', 'gallery/index.php'=>'Фотогалерея', 'board/index.php'=>'Объявления', 'pages/userlist.php'=>'Жители', 'pages/themes.php'=>'Оформление'] as $href => $title) {
     echo '<a href="'.BASEDIR.$href.'">'.$title.lesika_icon('arrow').'</a>';
 }
+if (!empty($log)) echo '<a href="'.BASEDIR.'pages/userpage.php">Моя страница'.lesika_icon('user').'</a>';
 if (is_admin(array(101,102,103,105))) echo '<a href="'.ADMINDIR.'index.php">Админ-панель'.lesika_icon('arrow').'</a>';
 echo '</nav></details></div></header>';
 lesika_desktop_navigation($php_self);

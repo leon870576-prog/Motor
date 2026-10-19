@@ -1,0 +1,92 @@
+{
+  "php": "8.4",
+  "requests": 203,
+  "passed": [
+    "explicit page creation, links from menu/profile, live authority, no private profile fields; GET/CSRF/Origin/types/lengths/stale settings protected",
+    "owner-only news, review author editing, per-record revisions, duplicate submit, cooldown, shared photo comments and hidden-photo boundaries",
+    "news create/edit/delete, public/private page, closed guestbook, escaped HTML/BBCode, deleted-post replay remains idempotent",
+    "moderation roles 101/102/103/105, owner/author delete, private edit forms, independent pagination and guest read-only access",
+    "100-news/500-review limits preserve existing records; banned and quarantined users cannot post",
+    "corrupt JSON and symlink refused without data loss; authority unchanged; personal-page data included in backup and safe restore"
+  ],
+  "fixtures": [
+    {
+      "file": "create.html",
+      "url": "/pages/userpage.php",
+      "role": "owner",
+      "name": "create"
+    },
+    {
+      "file": "photos-owner.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=photos",
+      "role": "owner",
+      "name": "photos-owner"
+    },
+    {
+      "file": "guestbook-author.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook",
+      "role": "visitor",
+      "name": "guestbook-author"
+    },
+    {
+      "file": "edit-review.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook&edit=b521c3144511cd87022fc65c7f3b9e8e",
+      "role": "visitor",
+      "name": "edit-review"
+    },
+    {
+      "file": "news-owner.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=news",
+      "role": "owner",
+      "name": "news-owner"
+    },
+    {
+      "file": "edit-news.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=news&edit=9aa45d01b198491a36c2a362f04ebe7b",
+      "role": "owner",
+      "name": "edit-news"
+    },
+    {
+      "file": "settings.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=settings",
+      "role": "owner",
+      "name": "settings"
+    },
+    {
+      "file": "moderation.html",
+      "url": "/pages/userpage.php?uz=PageOwner",
+      "role": "moderator",
+      "name": "moderation"
+    },
+    {
+      "file": "overview-owner.html",
+      "url": "/pages/userpage.php?uz=PageOwner",
+      "role": "owner",
+      "name": "overview-owner"
+    },
+    {
+      "file": "photos-owner-full.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=photos",
+      "role": "owner",
+      "name": "photos-owner-full"
+    },
+    {
+      "file": "news-page2.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=news&page=2",
+      "role": "owner",
+      "name": "news-page2"
+    },
+    {
+      "file": "guestbook-page2.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook&page=2",
+      "role": "owner",
+      "name": "guestbook-page2"
+    },
+    {
+      "file": "overview-guest.html",
+      "url": "/pages/userpage.php?uz=PageOwner",
+      "role": "guest",
+      "name": "overview-guest"
+    }
+  ]
+}

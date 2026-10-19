@@ -19,6 +19,7 @@ if (isset($_GET['action'])) {$action = check($_GET['action']);} else {$action = 
 echo '<img src="../images/img/profiles.gif" alt="image" /> <b>Мой профиль</b><br /><br />';
 
 if (is_user()){
+echo '<p><a class="touch-link" href="userpage.php">Моя страница: фотографии, новости и отзывы</a></p>';
 
 ############################################################################################
 ##                                 Главная страница                                       ##

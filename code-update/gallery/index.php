@@ -47,6 +47,12 @@ try {
         $comments=$commentsRaw===''?[]:array_values(array_filter(explode("\n",str_replace("\r",'',$commentsRaw)),fn($v)=>$v!==''));
     }
     if ($action==='addkomm') {
+        $returnPage=$_POST['return_page']??'';
+        if ($returnPage!=='') {
+            require_once '../includes/userpages.php';
+            if (!motor_userpage_login($returnPage) || $returnPage!==($photo['data'][2]??'')) throw new RuntimeException('Некорректная страница возврата.',400);
+            motor_userpage_profile($returnPage);
+        }
         $msg=trim($_POST['msg']);
         if (mb_strlen($msg)<1 || mb_strlen($msg)>2000) throw new RuntimeException('Комментарий должен содержать от 1 до 2000 символов.',400);
         antiflood('Location: index.php?action=komm&gid='.$gid.'&isset=antiflood');
@@ -54,6 +60,7 @@ try {
         $comments[]=no_br(antimat(check($msg)),'<br />').'||'.SITETIME.'|'.$log.'|';
         motor_media_atomic($commentsPath,implode("\n",array_slice($comments,-$settings['comments_max']))."\n");
         statistics(7);increment_profil($log,[33=>1,36=>1,41=>1],[14=>$ip]);
+        if ($returnPage!=='') {header('Location: '.motor_userpage_url($returnPage,['tab'=>'photos']).'#photo-'.rawurlencode($gid),true,303);exit;}
         header('Location: index.php?action=komm&gid='.$gid);exit;
     }
     if ($action==='del') {

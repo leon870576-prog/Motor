@@ -23,6 +23,7 @@ if (preg_match('|^[a-z0-9\-]+$|i',$uz)){
 if (file_exists(DATADIR."profil/$uz.prof")){
 $text = motor_info_read(DATADIR."profil/$uz.prof");
 $uzdata = explode(":||:",$text);
+echo '<p><a class="touch-link" href="userpage.php?uz='.rawurlencode($uz).'">Личная страница: фото, новости и отзывы</a></p>';
 
 if ($uzdata[46]==1) {echo '<b><span style="color:#ff0000">Внимание, аккаунт требует подтверждение регистрации!</span></b><br />';}
 

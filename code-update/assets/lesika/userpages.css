@@ -1,0 +1,30 @@
+.userpage{--up-gap:16px;--up-pad:16px;min-width:0;overflow-wrap:anywhere}
+.userpage h1,.userpage h2,.userpage h3,.userpage h4,.userpage p{margin:0 0 .65em}
+.userpage h1{font-size:1.65rem;line-height:1.2}.userpage h2{font-size:1.3rem}.userpage h3{font-size:1.1rem}.userpage h4{font-size:1em}
+.up-hero{display:flex;gap:var(--up-gap);align-items:center;padding:var(--up-pad);background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:12px}
+.up-avatar{flex:0 0 96px}.up-avatar img{display:block}.up-identity{min-width:0}.up-kicker,.up-meta{color:var(--muted);font-size:.875em}
+.up-authority{font-size:1em}.up-authority strong{color:var(--accent);font-size:1.4em}.up-authority span{white-space:nowrap}
+.up-actions,.up-heading{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.up-heading{justify-content:space-between;margin-bottom:10px}.up-heading h2{margin:0}
+.up-actions>form{margin:0}.up-actions{margin:8px 0}.up-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+.up-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none}
+.up-tabs a[aria-current=page]{background:var(--accent);color:var(--on-accent);font-weight:700}
+.up-panel,.up-record{padding:var(--up-pad);border:1px solid var(--line);background:var(--surface);border-radius:12px;margin-bottom:var(--up-gap);min-width:0}
+.up-section{margin:20px 0}.up-text{line-height:1.55;overflow-wrap:anywhere;min-width:0}.up-text>*{max-width:100%}
+.up-notice{padding:12px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;background:var(--surface);margin:12px 0}
+.up-form{display:grid;gap:10px;min-width:0;margin:10px 0}.up-form label{display:grid;gap:4px;min-width:0}.up-form input:not([type=hidden]),.up-form textarea,.up-form select{width:100%;max-width:100%;box-sizing:border-box;margin:0}.up-form button{justify-self:start}
+.userpage details>summary{min-height:44px;display:flex;align-items:center;cursor:pointer;padding:8px 10px;border-radius:8px;gap:8px;border:1px solid var(--line)}
+.userpage details>summary::before{content:'+';font-weight:700}.userpage details[open]>summary::before{content:'−'}
+.up-delete{max-width:100%}.up-delete[open]{flex-basis:100%}.up-delete p{margin-top:8px}
+.up-photo-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--up-gap);align-items:start}.up-photo-grid .up-record{margin:0}
+.up-photo-link{display:block;width:100%;height:240px;overflow:hidden;border-radius:10px;background:var(--bg);margin:8px 0}
+.legacy-content .up-photo-link img{display:block;width:100%;height:100%;max-height:100%;object-fit:contain;max-width:100%}
+.up-photo-comment{border-top:1px solid var(--line);padding:8px 0}.up-photo-comment .up-meta{margin-bottom:4px}
+.up-comment-form{margin-top:8px}
+@media(min-width:700px){.up-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.up-photo-link{height:280px}}
+@media(max-width:360px){.up-hero{gap:10px;padding:10px}.userpage h1{font-size:1.35rem}.up-tabs a{padding:6px 10px}.up-photo-link{height:210px}}
+body:is([data-theme=lesika_dvor],[data-theme=lesika_vecher],[data-theme=lesika_web_press],[data-theme=lesika_web_evening]) .userpage{--up-gap:10px;--up-pad:10px}
+body:is([data-theme=lesika_dvor],[data-theme=lesika_vecher],[data-theme=lesika_web_press],[data-theme=lesika_web_evening]) .userpage h1{font-size:1.375rem}
+body:is([data-theme=lesika_dvor],[data-theme=lesika_vecher],[data-theme=lesika_web_press],[data-theme=lesika_web_evening]) .up-text{line-height:1.4}
+body:is([data-theme=lesika_dvor],[data-theme=lesika_vecher],[data-theme=lesika_web_press],[data-theme=lesika_web_evening]) .up-section{margin:14px 0}
+body:is([data-theme=lesika_dvor],[data-theme=lesika_vecher],[data-theme=lesika_web_press],[data-theme=lesika_web_evening]) .up-tabs{margin:10px 0;gap:4px}
+@media(min-width:900px) and (hover:hover) and (pointer:fine){body:is([data-theme=lesika_dvor],[data-theme=lesika_vecher],[data-theme=lesika_web_press],[data-theme=lesika_web_evening]) .up-tabs a,body:is([data-theme=lesika_dvor],[data-theme=lesika_vecher],[data-theme=lesika_web_press],[data-theme=lesika_web_evening]) .userpage details>summary{min-height:36px;padding:5px 10px}}
