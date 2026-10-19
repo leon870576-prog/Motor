@@ -1231,8 +1231,8 @@
   },
   {
     "path": "includes/lesika/head.php",
-    "bytes": 3948,
-    "sha256": "8b021dcc29a94fdd93f2bca057555aa80bd335df0004a63e741486bc751f1970"
+    "bytes": 4026,
+    "sha256": "011e80df06567985d59f105cdbc2b1c6f7f167c8685c9c831f2ba1724a1bacf3"
   },
   {
     "path": "includes/lesika/home.php",
@@ -1306,8 +1306,8 @@
   },
   {
     "path": "includes/reputation.php",
-    "bytes": 8256,
-    "sha256": "774d674f3a11feed6d1af30b959dba70a523e226f00d7bb7cf38530a50bee262"
+    "bytes": 12343,
+    "sha256": "3d01b217acc57ddff59e5951234b9314ea703b6bdcb44648ff138f447239ea3c"
   },
   {
     "path": "includes/request-security.php",
@@ -1351,8 +1351,8 @@
   },
   {
     "path": "includes/wallet.php",
-    "bytes": 16321,
-    "sha256": "d68c721e0e16e61daa6fb2265519e5ec67ac23547a575f9205b851ce00291daa"
+    "bytes": 16350,
+    "sha256": "4b8d538c23e0dccf7ab2134809e0a7fcbffa4cb47d8ebc94ca2fdf03968549c5"
   },
   {
     "path": "index.php",

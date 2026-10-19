@@ -52,7 +52,7 @@ const settingsRaw=php.readFileAsText('/www/local/points-settings.json');assert.e
 const dir=new URL('./points-fixtures/',import.meta.url);mkdirSync(dir,{recursive:true});writeFileSync(new URL('admin.html',dir),(await req(admin)).text);
 pass('ten settings: defaults, main-admin-only access, CSRF/Origin/type/range/order validation, stale save and read-only GET/HEAD');
 set('PageOwner',{36:6,41:1000,48:0,49:0,50:0,51:0,96:'',65:'МойНик',75:0});set('PageOther',{36:0,41:100,49:0,50:0,51:0,96:''});
-await login('PageOwner');r=await req('/pages/userpage.php?uz=PageOther');assert.ok(r.text.includes('от 7 баллов'));assert.equal((await req('/pages/raiting.php?uz=PageOther',{uid,vote:'plus'})).httpStatusCode,403);set('PageOwner',{36:7});assert.equal((await req('/pages/raiting.php?uz=PageOther',{uid,vote:'plus'})).httpStatusCode,303);assert.equal(profile('PageOther')[49],'1');
+await login('PageOwner');r=await req('/pages/userpage.php?uz=PageOther');assert.ok(r.text.includes('от 7 баллов'));assert.equal((await req('/pages/raiting.php?uz=PageOther',{uid,vote:'plus',revision:'none'})).httpStatusCode,403);set('PageOwner',{36:7});assert.equal((await req('/pages/raiting.php?uz=PageOther',{uid,vote:'plus',revision:'none'})).httpStatusCode,303);assert.equal(profile('PageOther')[49],'1');
 const transfer='/games/perevod.php';r=await req(transfer);assert.match(r.text,/не менее 8 баллов/);let revision=field(r,'revision');const send=(extra={},headers={})=>req(transfer+'?action=go',{uid,uz:'PageOther',gold:'25',revision,...extra},headers);
 assert.equal((await send()).httpStatusCode,403);set('PageOwner',{36:8});
 const before=profile('PageOwner')[41];for(const gold of ['-1','0','1.1','1e2','01','1000000001','abc'])assert.equal((await send({gold})).httpStatusCode,400);

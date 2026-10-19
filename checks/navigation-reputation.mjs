@@ -45,7 +45,8 @@ await login('PageAdmin');r=await req('/input.php',{login:'PageAdmin',pass:passwo
 for(const url of ['/pages/userlist.php','/pages/avtorlist.php','/pages/online.php','/pages/adminlist.php','/mpanel/adminlist.php']){r=await req(url);assert.equal(r.httpStatusCode,200);assert.ok(!/href="[^\"]*anketa\.php/.test(r.text),url);}
 for(const url of [base,'/pages/userpage.php','/pages/userpage.php?uz=PageGuest']){r=await req(url);assert.equal(r.httpStatusCode,200);order(r.text);assert.match(r.text,/href="\.\.\/pages\/index.php\?action=menu" aria-label="Моё меню"/);}
 r=await req('/pages/anketa.php?view=details&uz=PageOwner');assert.equal(r.httpStatusCode,200);assert.ok(r.text.includes('Анкета PageOwner'));assert.ok(!r.text.includes('action=plus&amp;uid='));
-const target='/pages/raiting.php?uz=PageOwner',vote=(extra={},url=target,headers={},method)=>req(url,{uid,vote:'plus',...extra},headers,method);
+const target='/pages/raiting.php?uz=PageOwner',vote=(extra={},url=target,headers={},method)=>req(url,{uid,vote:'plus',revision:'none',...extra},headers,method);
+const revision=r=>{const m=r.text.match(/name="revision" value="(none|[a-f0-9]{32})"/);assert.ok(m,'vote revision is present');return m[1];};
 const counts=()=>[48,49,50,51].map(i=>profile('PageOwner')[i]).join(',');const initial=counts();
 for(const action of ['plus','minus'])for(const method of ['GET','HEAD'])assert.equal((await req(target+'&action='+action+'&uid='+uid,undefined,{},method)).httpStatusCode,403);
 assert.equal((await req(target)).httpStatusCode,200);assert.equal(counts(),initial);
@@ -58,13 +59,32 @@ assert.equal((await vote({},target,{},'PUT')).httpStatusCode,405);assert.equal(c
 pass('personal pages and old bookmarks, header button opens My menu, login opens personal page, questionnaire access, News→Photos→Reviews, read-only GET/HEAD and CSRF/Origin/method/type guards');
 r=await vote();assert.equal(r.httpStatusCode,303,r.text.match(/role="alert">([^<]+)/)?.[1]);assert.equal(r.headers.location[0],'userpage.php?uz=PageOwner&voted=1');assert.equal(profile('PageOwner')[49],'1');assert.equal(profile('PageOwner')[50],'1');assert.equal(profile('PageOwner')[36],'0');
 const mail=php.readFileAsText('/www/local/privat/PageOwner.priv');assert.equal(mail.split('повысил ваш авторитет').length-1,1);const unread=profile('PageOwner')[10];
-assert.equal((await vote()).httpStatusCode,429);assert.equal((await vote({},'/pages/raiting.php?uz=PageGuest')).httpStatusCode,429);
+assert.equal((await vote()).httpStatusCode,303);assert.equal((await vote({},'/pages/raiting.php?uz=PageGuest')).httpStatusCode,429);
 assert.equal(php.readFileAsText('/www/local/privat/PageOwner.priv'),mail);assert.equal(profile('PageOwner')[10],unread);
-set('PageAdmin',{48:0});assert.equal((await vote()).httpStatusCode,409);assert.equal(profile('PageOwner')[49],'1');
+const cooldown=profile('PageAdmin')[48],unrelated=[33,36,41,96,97,98,99].map(i=>profile('PageOwner')[i]);
+const voteFixtures=new URL('./userpages-fixtures/',import.meta.url);mkdirSync(voteFixtures,{recursive:true});
+r=await req(base);let plusRevision=revision(r);writeFileSync(new URL('reputation-plus.html',voteFixtures),r.text);
+assert.equal((await vote({vote:'minus',revision:'none'})).httpStatusCode,409,'old form cannot undo a newer vote');
+for(const bad of ['', 'x', '<script>', 'a'.repeat(31)])assert.equal((await vote({vote:'minus',revision:bad})).httpStatusCode,400);
+assert.equal((await req(target,{uid,vote:'minus'})).httpStatusCode,400,'revision required');
+assert.equal((await vote({vote:'minus',revision:plusRevision,uid:'bad'})).httpStatusCode,403);
+assert.equal((await vote({vote:'minus',revision:plusRevision},target,{Origin:'https://evil.test'})).httpStatusCode,403);
+assert.equal((await vote({vote:'minus',revision:plusRevision})).headers.location[0],'userpage.php?uz=PageOwner&voted=changed');
+assert.deepEqual([49,50,51].map(i=>profile('PageOwner')[i]),['-1','0','1']);assert.equal(profile('PageAdmin')[48],cooldown);
+assert.deepEqual([33,36,41,96,97,98,99].map(i=>profile('PageOwner')[i]),unrelated);
+const editMail=php.readFileAsText('/www/local/privat/PageOwner.priv'),editUnread=profile('PageOwner')[10];assert.match(editMail,/изменил оценку вашего авторитета с \+1 на −1/);
+assert.equal((await vote({vote:'minus',revision:plusRevision})).httpStatusCode,303);assert.equal(php.readFileAsText('/www/local/privat/PageOwner.priv'),editMail);assert.equal(profile('PageOwner')[10],editUnread);
+assert.equal((await vote()).httpStatusCode,409,'late retry must not restore the first plus');
+let minusRevision=revision(await req(target));assert.notEqual(minusRevision,plusRevision);
+for(const url of [base,'/pages/anketa.php?view=details&uz=PageOwner',target]){r=await req(url);assert.match(r.text,/Ваша оценка: <strong>−1/);assert.match(r.text,/value="minus"[^>]*disabled/);assert.equal(revision(r),minusRevision);if(url===base)writeFileSync(new URL('reputation-minus.html',voteFixtures),r.text);}
+assert.equal((await vote({revision:minusRevision})).httpStatusCode,303);assert.deepEqual([49,50,51].map(i=>profile('PageOwner')[i]),['1','1','0']);assert.equal(profile('PageAdmin')[48],cooldown);
+assert.equal((await vote({vote:'minus',revision:plusRevision})).httpStatusCode,409,'revision protects against an ABA round trip');
+assert.equal((await vote({},'/pages/raiting.php?uz=PageGuest')).httpStatusCode,429,'edits do not clear new-recipient cooldown');
+set('PageAdmin',{48:0});assert.equal((await vote()).httpStatusCode,303);assert.equal(profile('PageOwner')[49],'1');
 await login('PageGuest');assert.equal((await vote({vote:'minus'})).httpStatusCode,303);assert.deepEqual([49,50,51].map(i=>profile('PageOwner')[i]),['0','1','1']);
 await login('PageOwner');assert.equal((await vote({},'/pages/raiting.php?uz=PageOther')).httpStatusCode,403);
 await logout();assert.equal((await vote()).httpStatusCode,403);
-pass('newbie recipient with zero activity receives ±1; self-votes, guests, unqualified voters, repeated target and 3-hour cooldown blocked');
+pass('newbie receives ±1; +1→−1 and reverse update total and both counters, same-vote retries are inert, stale/ABA forms blocked, edit CSRF preserved, cooldown only for new recipients');
 await login('PageOther');set('PageOther',{37:1,38:Math.floor(Date.now()/1000)+86400});assert.equal((await vote()).httpStatusCode,302);assert.equal(profile('PageOwner')[49],'0');set('PageOther',{37:0});
 const helper="define('BASEDIR','/www/');define('DATADIR','/www/local/');require '/www/includes/functions.php';require '/www/includes/reputation.php';$config=['karantin'=>0,'regkeys'=>1];";
 const helperVote="try {motor_reputation_vote('PageOther','PageOwner','plus',2000000000,'"+profile('PageOther')[1]+"');echo 'BAD';}catch(Throwable $e){echo $e->getCode();}";
@@ -79,9 +99,17 @@ set('PageOwner',{29:'<img src=x onerror=alert(1)>',2:'<svg onload=alert(1)>',13:
 r=await req('/pages/anketa.php?view=details&uz=PageOwner');assert.ok(!r.text.includes('<img src=x'));assert.ok(!r.text.includes('<svg onload'));assert.ok(!r.text.includes('<script>alert'));assert.ok(!r.text.includes('href="javascript:'));
 assert.equal((await vote()).httpStatusCode,303);assert.equal(profile('PageOwner')[49],'1');
 pass('ban, registration confirmation/quarantine, credential recheck, symlink/corrupt-history/profile refusals and escaped legacy questionnaire fields');
-// Bound the compatible recent-recipient history without changing user profile formats.
-const bounded=await run(helper+"$p=explode(':||:',file_get_contents('/www/local/profil/PageOther.prof'));$p[48]='0';file_put_contents('/www/local/profil/PageOther.prof',implode(':||:',$p));file_put_contents('/www/local/dataraiting/PageOther.dat','');for($i=0;$i<21;$i++){$q=$p;$q[0]='Bound'.$i;$q[36]='0';$q[49]=$q[50]=$q[51]='0';file_put_contents('/www/local/profil/Bound'.$i.'.prof',implode(':||:',$q));motor_reputation_vote('PageOther','Bound'.$i,'plus',2000000000+$i*10801,$p[1]);}$rows=file('/www/local/dataraiting/PageOther.dat',FILE_IGNORE_NEW_LINES);echo count($rows).':'.$rows[0];");assert.equal(bounded,'20:Bound1|+|');
-pass('one notification per accepted vote and bounded compatible history of 20 recipients');
+// Retain votes beyond 20 recipients; migrate known legacy rows without recounting old totals.
+const retained=await run(helper+"$p=explode(':||:',file_get_contents('/www/local/profil/PageOther.prof'));$p[48]='0';file_put_contents('/www/local/profil/PageOther.prof',implode(':||:',$p));file_put_contents('/www/local/dataraiting/PageOther.dat','');for($i=0;$i<21;$i++){$q=$p;$q[0]='Bound'.$i;$q[36]='0';$q[49]=$q[50]=$q[51]='0';file_put_contents('/www/local/profil/Bound'.$i.'.prof',implode(':||:',$q));motor_reputation_vote('PageOther','Bound'.$i,'plus',2000000000+$i*10801,$p[1]);}motor_reputation_vote('PageOther','Bound0','minus',2000000000+20*10801,$p[1]);$rows=motor_reputation_read('PageOther');$q=explode(':||:',file_get_contents('/www/local/profil/Bound0.prof'));echo count($rows).':'.$rows['Bound0']['sign'].':'.implode(',',array_slice($q,49,3));");assert.equal(retained,'21:-1:-1,0,1');
+set('PageOther',{48:2100000000});set('PageOwner',{49:17,50:21,51:4});php.writeFile('/www/local/dataraiting/PageOther.dat','PageOwner|+|\r\n');
+let legacyRevision=revision(await req(base));assert.equal((await vote({vote:'minus',revision:legacyRevision})).httpStatusCode,303);assert.deepEqual([49,50,51].map(i=>profile('PageOwner')[i]),['15','20','5']);
+minusRevision=revision(await req(base));const stableHistory=php.readFileAsText('/www/local/dataraiting/PageOther.dat');
+set('PageOwner',{51:0});assert.equal((await vote({revision:minusRevision})).httpStatusCode,503);assert.equal(profile('PageOwner')[49],'15');assert.equal(php.readFileAsText('/www/local/dataraiting/PageOther.dat'),stableHistory);set('PageOwner',{51:5});
+set('PageOther',{36:0});assert.equal((await vote({revision:minusRevision})).httpStatusCode,403,'editing still requires configured activity');set('PageOther',{36:200});
+assert.equal((await vote({revision:minusRevision})).httpStatusCode,303);assert.deepEqual([49,50,51].map(i=>profile('PageOwner')[i]),['17','21','4']);
+for(const invalid of ['PageOwner|+|\nPageOwner|-|\n','PageOwner|+|invalid|\n','x'.repeat(2097153)]){php.writeFile('/www/local/dataraiting/PageOther.dat',invalid);assert.equal((await vote()).httpStatusCode,503);assert.equal(profile('PageOwner')[49],'17');}
+php.writeFile('/www/local/dataraiting/PageOther.dat',stableHistory);set('PageOwner',{49:15,50:20,51:5});
+pass('one notification per real change, all three forms show current vote, legacy history keeps baseline, >20 recipients retained, corrupt/oversized history and negative counters rejected');
 // Every remaining direct questionnaire URL must explicitly request its details view.
 function scan(dir){for(const e of readdirSync(dir,{withFileTypes:true})){const p=join(dir,e.name);if(e.isDirectory()&&e.name!=='local')scan(p);else if(e.isFile()&&e.name.endsWith('.php')){const text=readFileSync(p,'utf8');for(const m of text.matchAll(/href="[^\"]*anketa\.php([^\"]*)/g))assert.ok(m[1].includes('view=details'),p+' '+m[0]);}}}scan(root);
 writeFileSync(new URL('./navigation-reputation-results.json',import.meta.url),JSON.stringify({php:'8.4 WASM',requests,passed,concurrency:'mandatory native Docker gate'},null,2));console.log('SUCCESS',requests,'HTTP requests');

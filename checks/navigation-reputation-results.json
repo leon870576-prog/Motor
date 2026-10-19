@@ -1,11 +1,11 @@
 {
   "php": "8.4 WASM",
-  "requests": 62,
+  "requests": 90,
   "passed": [
     "personal pages and old bookmarks, header button opens My menu, login opens personal page, questionnaire access, News→Photos→Reviews, read-only GET/HEAD and CSRF/Origin/method/type guards",
-    "newbie recipient with zero activity receives ±1; self-votes, guests, unqualified voters, repeated target and 3-hour cooldown blocked",
+    "newbie receives ±1; +1→−1 and reverse update total and both counters, same-vote retries are inert, stale/ABA forms blocked, edit CSRF preserved, cooldown only for new recipients",
     "ban, registration confirmation/quarantine, credential recheck, symlink/corrupt-history/profile refusals and escaped legacy questionnaire fields",
-    "one notification per accepted vote and bounded compatible history of 20 recipients"
+    "one notification per real change, all three forms show current vote, legacy history keeps baseline, >20 recipients retained, corrupt/oversized history and negative counters rejected"
   ],
   "concurrency": "mandatory native Docker gate"
 }

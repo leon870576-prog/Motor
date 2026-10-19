@@ -48,14 +48,25 @@ try{
  await load(fixtures.find(f=>f.name==='moderation'));
  const reputation=page.locator('form.reputation-form');assert.equal(await reputation.getAttribute('method'),'post');
  allowedPost=true;await reputation.getByRole('button',{name:'Повысить авторитет пользователя',exact:true}).click();await page.waitForURL('**/pages/raiting.php?uz=PageOwner');allowedPost=false;
- assert.equal(posts.length,2);const voted=new URLSearchParams(posts[1].body);assert.equal(voted.get('vote'),'plus');assert.match(voted.get('uid'),/^[a-f0-9]{64}$/);
+ assert.equal(posts.length,2);const voted=new URLSearchParams(posts[1].body);assert.equal(voted.get('vote'),'plus');assert.match(voted.get('uid'),/^[a-f0-9]{64}$/);assert.equal(voted.get('revision'),'none');
  await load(fixtures.find(f=>f.name==='comments-reader'));
  const comment=page.locator('.up-form[action*="comment_add"]');await comment.locator('textarea').fill('Комментарий из браузера');
  allowedPost=true;await comment.getByRole('button',{name:'Отправить комментарий',exact:true}).click();await page.waitForURL('**/*action=comment_add');allowedPost=false;
  assert.equal(posts.length,3);const sentComment=new URLSearchParams(posts[2].body);assert.equal(sentComment.get('msg'),'Комментарий из браузера');assert.match(sentComment.get('post'),/^[a-f0-9]{32}$/);assert.match(sentComment.get('id'),/^[a-f0-9]{32}$/);assert.match(sentComment.get('uid'),/^[a-f0-9]{64}$/);
  theme='lesika_web_evening';await load(fixtures.find(f=>f.name==='overview-owner'),1440);await page.screenshot({path:join(dir,'userpage-desktop.png'),fullPage:true,animations:'disabled'});
  for(theme of ['lesika_dvor','lesika_vecher','lesika_web_press','lesika_web_evening']){await load(fixtures.find(f=>f.name==='overview-owner'),320);await page.evaluate(()=>document.documentElement.style.fontSize='200%');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'200% text: '+theme);layouts++;}
- assert.deepEqual(errors,[]);assert.ok(posts.every(p=>p.allowed));
- writeFileSync(new URL('./userpages-browser-results.json',import.meta.url),JSON.stringify({browser:browser.version(),layouts,themes:12,fixtureTypes:chosen.length,formsPreserved:true,photoZoom:true,tagAndSmilePickers:true,confirmedPost:true,reputationPost:true,newsCommentPost:true,photoCommentsLinkOnly:true,sectionOrder:true,questionnaireLink:true,errors,physicalDevices:false},null,2));
+ for(const sign of ['plus','minus']){
+  const opposite=sign==='plus'?'minus':'plus',f={file:'reputation-'+sign+'.html',url:'/pages/userpage.php?uz=PageOwner'};
+  for(theme of Object.keys(themes))for(const width of [320,768,1440]){
+   await load(f,width);const voteForm=page.locator('form.reputation-form');
+   assert.equal(await voteForm.locator('button[value="'+sign+'"]').isDisabled(),true);assert.equal(await voteForm.locator('button[value="'+opposite+'"]').isEnabled(),true);
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'vote controls overflow '+theme);layouts++;
+  }
+  const expected=await page.locator('form.reputation-form input[name="revision"]').inputValue();
+  allowedPost=true;await page.locator('form.reputation-form button[value="'+opposite+'"]').click();await page.waitForURL('**/pages/raiting.php?uz=PageOwner');allowedPost=false;
+  const sent=new URLSearchParams(posts.at(-1).body);assert.equal(sent.get('vote'),opposite);assert.equal(sent.get('revision'),expected);assert.match(expected,/^[a-f0-9]{32}$/);assert.match(sent.get('uid'),/^[a-f0-9]{64}$/);
+ }
+ assert.equal(posts.length,5);assert.deepEqual(errors,[]);assert.ok(posts.every(p=>p.allowed));
+ writeFileSync(new URL('./userpages-browser-results.json',import.meta.url),JSON.stringify({browser:browser.version(),layouts,themes:12,fixtureTypes:chosen.length+2,formsPreserved:true,photoZoom:true,tagAndSmilePickers:true,confirmedPost:true,reputationPost:true,reputationEditing:true,newsCommentPost:true,photoCommentsLinkOnly:true,sectionOrder:true,questionnaireLink:true,errors,physicalDevices:false},null,2));
  console.log('SUCCESS',layouts,'layouts; 12 themes; form integrity, photo viewer, tags/smiles, delete confirmation, POST submission and 200% zoom');
 }finally{await browser.close()}

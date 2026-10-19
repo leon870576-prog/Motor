@@ -13,9 +13,12 @@ try {
     if (($_SERVER['REQUEST_METHOD']??'')==='POST') {
         motor_form_guard([]);
         $vote=$_POST['vote']??$_GET['action']??'';
-        motor_reputation_vote($log,$owner,$vote,SITETIME,md5(md5($_SESSION['par'])));
-        try {motor_reputation_notify($log,$owner,$vote,SITETIME);} catch (Throwable $ignored) {error_log('Reputation notification could not be delivered.');}
-        header('Location: userpage.php?uz='.rawurlencode($owner).'&voted=1',true,303);exit;
+        $result=motor_reputation_vote($log,$owner,$vote,SITETIME,md5(md5($_SESSION['par'])),$_POST['revision']??'');
+        if ($result['changed']) {
+            try {motor_reputation_notify($log,$owner,$vote,SITETIME,$result['previous']);} catch (Throwable $ignored) {error_log('Reputation notification could not be delivered.');}
+        }
+        $status=!$result['changed']?'same':($result['previous']===0?'1':'changed');
+        header('Location: userpage.php?uz='.rawurlencode($owner).'&voted='.$status,true,303);exit;
     }
     echo '<p>Выберите, как изменить авторитет пользователя.</p>';motor_reputation_form($owner);
 } catch (Throwable $e) {

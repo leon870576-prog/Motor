@@ -119,6 +119,8 @@ try {
         if (!$data['published'] && $data['created']) echo '<p class="up-notice">Страница не опубликована. Её видят только владелец и администрация.</p>';
         if (($_GET['saved']??'')==='1') echo '<p class="up-notice" role="status">Изменения сохранены.</p>';
         if (($_GET['voted']??'')==='1') echo '<p class="up-notice" role="status">Ваш голос учтён.</p>';
+        if (($_GET['voted']??'')==='changed') echo '<p class="up-notice" role="status">Ваша оценка изменена. Авторитет пересчитан.</p>';
+        if (($_GET['voted']??'')==='same') echo '<p class="up-notice" role="status">Эта оценка уже учтена.</p>';
         if (!$data['created']) echo '<p class="up-notice">'.($self?'Страница ещё не оформлена. <a href="'.up_link($owner,['tab'=>'settings']).'">Создать свою страницу</a>':'Пользователь пока не оформил свою страницу.').'</p>';
         if ($tab!=='settings') {
             echo '<nav class="up-tabs" aria-label="Разделы личной страницы">';
