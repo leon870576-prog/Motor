@@ -31,6 +31,7 @@ COPY checks/game21-native.php /opt/motor-game21-native.php
 COPY checks/arcade-native.php /opt/motor-arcade-native.php
 COPY checks/userpages-native.php /opt/motor-userpages-native.php
 COPY checks/reputation-native.php /opt/motor-reputation-native.php
+COPY checks/userpage-comments-native.php /opt/motor-userpage-comments-native.php
 COPY MIGRATION.json /opt/motor-migration.json
 COPY migrate-themes.php /opt/motor-migrate-themes.php
 RUN chmod 755 /usr/local/bin/motor-entrypoint \
@@ -41,6 +42,7 @@ RUN chmod 755 /usr/local/bin/motor-entrypoint \
  && php /opt/motor-arcade-native.php \
  && php /opt/motor-userpages-native.php \
  && php /opt/motor-reputation-native.php \
+ && php /opt/motor-userpage-comments-native.php \
  && php -l /opt/motor-migrate.php \
  && php -l /opt/motor-migrate-themes.php \
  && a2dismod mpm_event mpm_worker \

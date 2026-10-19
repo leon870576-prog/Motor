@@ -49,7 +49,8 @@ function motor_info_count(int $number): int {
             if (!motor_info_id($id) || isset($seen[$id])) continue;
             $seen[$id]=true;$total+=count(motor_info_lines(DATADIR.'datakomm/'.$id.'.dat'));
         }
-        return $total;
+        require_once __DIR__.'/userpages.php';
+        return $total+motor_userpage_public_comment_count();
     }
     if ($number===7) {
         require_once __DIR__.'/gallery.php';

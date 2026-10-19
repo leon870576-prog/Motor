@@ -1,0 +1,9 @@
+{
+  "php": "8.4 WASM",
+  "requests": 118,
+  "passed": [
+    "legacy news, comment links/counters, guest read-only, POST/CSRF/Origin/types/lengths, idempotent retry, cooldown, profile and global totals, recoverable profile synchronization",
+    "author-only editing, owner/staff deletion, stale revisions, private pages, deleted-comment retry, escaped XSS/BBCode, cumulative author total retained after deletion",
+    "independent pagination, limits, unknown profile state preserved, quarantine, news editing preserves comments, news deletion removes discussion and visible counts"
+  ]
+}

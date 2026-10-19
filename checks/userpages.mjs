@@ -65,7 +65,7 @@ php.writeFile('/www/local/datagallery/fotobase.dat',[
  'Скрытая подпись|Скрытый кадр|PageOwner|hidden|1750000001|two|'+hidden+'|',
  'Чужая подпись|Чужое фото|PageOther||1750000002|three|'+other+'|'].join('\n')+'\n');
 php.writeFile('/www/local/datagallery/'+photo+'.dat','Отличный снимок!||1750000010|PageGuest|\nСпасибо за прогулку 😊||1750000020|PageOther|\n');
-r=await req(base+'&tab=photos');assert.ok(r.text.includes(photo));assert.ok(!r.text.includes(hidden));assert.ok(!r.text.includes(other));assert.ok(r.text.includes('Отличный снимок'));assert.ok(r.text.includes('Спасибо за прогулку'));capture(r,base+'&tab=photos','owner','photos-owner');
+r=await req(base+'&tab=photos');assert.ok(r.text.includes(photo));assert.ok(!r.text.includes(hidden));assert.ok(!r.text.includes(other));assert.ok(!r.text.includes('Отличный снимок'));assert.ok(!r.text.includes('Спасибо за прогулку'));assert.ok(r.text.includes('Комментарии (2)'));assert.ok(!r.text.includes('up-comment-form'));capture(r,base+'&tab=photos','owner','photos-owner');
 await login('PageGuest');
 for(const a of ['save','news_add','news_edit','news_delete']){const bad=await action(a,{...settings,id:id(),msg:'Чужое',revision:'1'});assert.equal(bad.httpStatusCode,a==='news_delete'?404:403,a+' '+bad.text.match(/role="alert">([^<]+)/)?.[1]);}
 const note=id();cool();r=await action('guest_add',{id:note,msg:'Спасибо за интересную страницу! 😊'});assert.equal(r.httpStatusCode,303);assert.equal(state().guestbook.length,1);
@@ -85,7 +85,7 @@ for(const return_page of ['PageOther','https://evil.test/','../PageOwner'])asser
 assert.equal(php.readFileAsText(commentsPath),oldComments);
 r=await req('/gallery/index.php?action=addkomm&gid='+photo,{uid,msg:'Новый общий комментарий с личной страницы',return_page:'PageOwner'});assert.equal(r.httpStatusCode,303);assert.ok(r.headers.location[0].includes('pages/userpage.php?uz=PageOwner&tab=photos#photo-'));
 assert.ok((await req('/gallery/index.php?action=komm&gid='+photo)).text.includes('Новый общий комментарий'));
-assert.ok((await req(base+'&tab=photos')).text.includes('Новый общий комментарий'));
+assert.ok((await req(base+'&tab=photos')).text.includes('Комментарии (3)'));assert.ok(!(await req(base+'&tab=photos')).text.includes('Новый общий комментарий'));
 assert.equal((await req('/gallery/index.php?action=addkomm&gid='+hidden,{uid,msg:'Скрыто',return_page:'PageOwner'})).httpStatusCode,404);
 await login('PageOther');const saved=raw();
 assert.equal((await action('guest_edit',{id:note,revision:'2',msg:'Чужое исправление'})).httpStatusCode,403);

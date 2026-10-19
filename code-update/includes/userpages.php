@@ -2,6 +2,7 @@
 // Personal pages are separate from legacy profiles and the shared gallery.
 if (!defined('DATADIR')) { http_response_code(403); exit; }
 require_once __DIR__.'/gallery.php';
+require_once __DIR__.'/userpage-news-comments.php';
 
 function motor_userpage_login($value): bool {
     return is_string($value) && (bool)preg_match('/^[a-z0-9-]{3,20}$/Di', $value);
@@ -47,7 +48,8 @@ function motor_userpage_validate(array $d,string $owner): void {
             if ($kind==='news') motor_userpage_text_input($e['title']??null,1,100,true);
         }
     }
-    foreach ($d['recent'] as $e) if (!is_array($e) || !is_string($e['id']??null) || !preg_match('/^[a-f0-9]{32}$/D',$e['id']) || !motor_userpage_login($e['actor']??null) || !in_array($e['kind']??null,['news_add','guest_add'],true) || !is_string($e['hash']??null) || !preg_match('/^[a-f0-9]{64}$/D',$e['hash']) || !is_int($e['time']??null)) throw new RuntimeException('Данные страницы повреждены.',503);
+    motor_userpage_validate_comments($d);
+    foreach ($d['recent'] as $e) if (!is_array($e) || !is_string($e['id']??null) || !preg_match('/^[a-f0-9]{32}$/D',$e['id']) || !motor_userpage_login($e['actor']??null) || !in_array($e['kind']??null,['news_add','guest_add','comment_add'],true) || !is_string($e['hash']??null) || !preg_match('/^[a-f0-9]{64}$/D',$e['hash']) || !is_int($e['time']??null)) throw new RuntimeException('Данные страницы повреждены.',503);
 }
 function motor_userpage_read(string $owner): array {
     if (!motor_userpage_login($owner)) throw new RuntimeException('Пользователь не найден.',404);
@@ -62,7 +64,7 @@ function motor_userpage_read(string $owner): array {
     motor_userpage_validate($data,$owner);
     return $data;
 }
-function motor_userpage_mutate(string $owner,callable $update): array {
+function motor_userpage_mutate(string $owner,callable $update,?callable $afterSave=null): array {
     motor_userpage_profile($owner);
     $root=motor_userpage_root(true);$lockPath=$root.'/'.$owner.'.lock';
     if (is_link($lockPath) || (file_exists($lockPath) && !is_file($lockPath))) throw new RuntimeException('Хранилище страницы недоступно.',503);
@@ -77,6 +79,7 @@ function motor_userpage_mutate(string $owner,callable $update): array {
             if (strlen($json)>8*1048576) throw new RuntimeException('Хранилище страницы заполнено.',409);
             motor_media_atomic($root.'/'.$owner.'.json',$json."\n");
         }
+        if ($afterSave) $afterSave($next);
         return $next;
     } finally {flock($lock,LOCK_UN);fclose($lock);}
 }
@@ -91,10 +94,11 @@ function motor_userpage_apply(string $owner,string $actor,bool $staff,string $ac
     global $config;
     $profile=motor_userpage_profile($actor);
     if (!empty($profile[37]) || (!empty($config['regkeys']) && !empty($profile[46]))) throw new RuntimeException('Учётная запись не может публиковать записи.',403);
+    if (str_starts_with($action,'comment_')) return motor_userpage_comment_apply($owner,$actor,$staff,$action,$input,$now,$profile);
     $self=$actor===$owner;
     if (!in_array($action,['save','news_add','news_edit','news_delete','guest_add','guest_edit','guest_delete'],true)) throw new RuntimeException('Неизвестное действие.',400);
     if (($action==='save' || str_starts_with($action,'news_') && $action!=='news_delete') && !$self) throw new RuntimeException('Изменять страницу и новости может только её владелец.',403);
-    if (in_array($action,['news_add','guest_add'],true) && (int)($profile[6]??0)+(int)($config['karantin']??0)>$now) throw new RuntimeException('Публикация станет доступна после карантина нового аккаунта.',403);
+    if (in_array($action,['news_add','guest_add','comment_add'],true) && (int)($profile[6]??0)+(int)($config['karantin']??0)>$now) throw new RuntimeException('Публикация станет доступна после карантина нового аккаунта.',403);
     return motor_userpage_mutate($owner,function(array $data) use($owner,$actor,$staff,$self,$action,$input,$now,$config): array {
         if (!$data['published'] && !$self && !$staff) throw new RuntimeException('Страница пока не опубликована.',404);
         $id='';
@@ -112,7 +116,7 @@ function motor_userpage_apply(string $owner,string $actor,bool $staff,string $ac
             $id=motor_userpage_id($input['id']??null);
             $index=null;foreach ($data[$kind] as $i=>$e) if ($e['id']===$id) {$index=$i;break;}
             if (str_ends_with($action,'_add')) {
-                if ($kind==='guestbook' && !$data['guestbook_open']) throw new RuntimeException('Владелец закрыл гостевую книгу для новых отзывов.',403);
+                if ($kind==='guestbook' && !$data['guestbook_open']) throw new RuntimeException('Владелец закрыл новые отзывы.',403);
                 $text=motor_userpage_text_input($input['msg']??null,1,$kind==='news'?8000:2000);
                 $title=$kind==='news'?motor_userpage_text_input($input['title']??null,1,100,true):'';
                 $hash=hash('sha256',$title."\0".$text);

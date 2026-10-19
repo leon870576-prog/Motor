@@ -40,7 +40,7 @@ const base='/pages/userpage.php?uz=PageOwner';
 let r=await req('/pages/anketa.php?uz=PageOwner');assert.equal(r.httpStatusCode,302);assert.equal(r.headers.location[0],'userpage.php?uz=PageOwner');
 assert.equal((await req('/pages/anketa.php')).headers.location[0],'userpage.php');
 r=await req(base);assert.equal(r.httpStatusCode,200);assert.ok(r.text.includes('view=details&amp;uz=PageOwner'));assert.equal(php.fileExists('/www/local/userpages'),false);
-const order=html=>{const news=html.indexOf('<h2>Новости пользователя</h2>'),photo=html.indexOf('<h2>Фотографии</h2>'),reviews=html.indexOf('<h2>Отзывы · гостевая книга</h2>');assert.ok(news>0&&photo>news&&reviews>photo);};order(r.text);
+const order=html=>{const news=html.indexOf('<h2>Новости пользователя</h2>'),photo=html.indexOf('<h2>Фотографии</h2>'),reviews=html.indexOf('<h2>Отзывы</h2>');assert.ok(news>0&&photo>news&&reviews>photo);};order(r.text);
 await login('PageAdmin');r=await req('/input.php',{login:'PageAdmin',pass:password});assert.equal(r.headers.location[0],'pages/userpage.php');uid=await token();
 for(const url of ['/pages/userlist.php','/pages/avtorlist.php','/pages/online.php','/pages/adminlist.php','/mpanel/adminlist.php']){r=await req(url);assert.equal(r.httpStatusCode,200);assert.ok(!/href="[^\"]*anketa\.php/.test(r.text),url);}
 for(const url of [base,'/pages/userpage.php','/pages/userpage.php?uz=PageGuest']){r=await req(url);assert.equal(r.httpStatusCode,200);order(r.text);assert.match(r.text,/href="\.\.\/pages\/userpage.php" aria-label="Моя страница"/);}
