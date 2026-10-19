@@ -65,7 +65,7 @@ $num = $total - $i - 1;
 echo '<div class="b">';
 
 echo user_avatars($data[0]);
-echo '<b><a href="anketa.php?uz='.$data[0].'&amp;'.SID.'">'.nickname($data[0]).'</a></b> '.user_online($data[0]).' ('.date_fixed($data[2]).')<br />';
+echo '<b><a href="userpage.php?uz='.$data[0].'&amp;'.SID.'">'.nickname($data[0]).'</a></b> '.user_online($data[0]).' ('.date_fixed($data[2]).')<br />';
 echo '<input type="checkbox" name="del[]" value="'.$num.'" /> ';
 echo '<a href="privat.php?action=submit&amp;uz='.$data[0].'&amp;'.SID.'">Ответить</a> | ';
 echo '<a href="kontakt.php?action=add&amp;uz='.$data[0].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">В контакт</a> | ';
@@ -142,7 +142,7 @@ $data = explode("|",$file[$i]);
 
 echo '<div class="b">';
 echo user_avatars($data[0]);
-echo 'Получатель: <b><a href="anketa.php?uz='.$data[0].'&amp;'.SID.'">'.nickname($data[0]).'</a></b> ('.date_fixed($data[2]).')<br />';
+echo 'Получатель: <b><a href="userpage.php?uz='.$data[0].'&amp;'.SID.'">'.nickname($data[0]).'</a></b> ('.date_fixed($data[2]).')<br />';
 echo '<input type="checkbox" name="del[]" value="'.$num.'" /> ';
 echo '<a href="privat.php?action=submit&amp;uz='.$data[0].'&amp;'.SID.'">Написать еще</a></div>';
 

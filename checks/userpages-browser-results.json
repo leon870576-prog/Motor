@@ -1,12 +1,15 @@
 {
   "browser": "153.0.8010.0",
-  "layouts": 256,
+  "layouts": 292,
   "themes": 12,
-  "fixtureTypes": 7,
+  "fixtureTypes": 8,
   "formsPreserved": true,
   "photoZoom": true,
   "tagAndSmilePickers": true,
   "confirmedPost": true,
+  "reputationPost": true,
+  "sectionOrder": true,
+  "questionnaireLink": true,
   "errors": [],
   "physicalDevices": false
 }

@@ -74,7 +74,7 @@ case "index":
 					$data = explode("|", $file[$i]);
 
 					echo '<div class="b">';
-					echo user_avatars($data[2]).' <b><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ';
+					echo user_avatars($data[2]).' <b><a href="../pages/userpage.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ';
 					echo user_title($data[2]).user_online($data[2]);
 					echo ' <small>('.date_fixed($data[5]).')</small></div>';
 					echo '<div>'.bb_code($data[3]).'<br />';

@@ -179,7 +179,7 @@ function motor_gallery_card(array $photo, bool $detail=false): void {
     echo '<article class="gallery-card"><h2><a href="'.$url.'">'.motor_gallery_escape(motor_gallery_plain($d[1])).'</a></h2>';
     if ($hidden) echo '<p class="gallery-status">Скрыто модератором. Видно только администрации.</p>';
     echo '<a class="gallery-photo" href="'.($detail?BASEDIR.'gallery/fullsize.php?name='.rawurlencode($id):$url).'"'.($detail && $settings['zoom']?' data-gallery-zoom':'').' aria-label="Увеличить фото: '.motor_gallery_escape(motor_gallery_plain($d[1])).'"><img src="'.BASEDIR.'gallery/resize.php?name='.rawurlencode($id).'" alt="'.motor_gallery_escape(motor_gallery_plain($d[1])).'" loading="lazy" decoding="async"></a>';
-    echo '<div class="gallery-caption">'.motor_gallery_text($d[0]).'</div><p class="gallery-meta">Добавил: <a href="'.BASEDIR.'pages/anketa.php?uz='.rawurlencode($d[2]).'">'.nickname($d[2]).'</a> · '.date_fixed((int)$d[4]).'</p>';
+    echo '<div class="gallery-caption">'.motor_gallery_text($d[0]).'</div><p class="gallery-meta">Добавил: <a href="'.BASEDIR.'pages/userpage.php?uz='.rawurlencode($d[2]).'">'.nickname($d[2]).'</a> · '.date_fixed((int)$d[4]).'</p>';
     echo '<div class="gallery-actions"><a href="'.BASEDIR.'gallery/index.php?action=komm&amp;gid='.rawurlencode($id).'">Комментарии ('.counter_string(DATADIR.'datagallery/'.$id.'.dat').')</a>';
     if ($detail) echo '<a href="'.BASEDIR.'gallery/fullsize.php?name='.rawurlencode($id).'&amp;download=1">Скачать оригинал</a>';
     else echo '<a href="'.$url.'">Открыть фото</a>';

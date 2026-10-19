@@ -93,7 +93,7 @@ try {
     }
     console.log('PASS palette, selection and profile persistence:', id);
   }
-  for(const url of ['/mpanel/index.php','/mpanel/attachments.php','/mpanel/setting.php?action=setone','/pages/setting.php','/pages/index.php?action=menu','/pages/anketa.php?uz=MotorTestAdmin','/pages/userlist.php','/votes/index.php','/games/index.php','/pages/index.php?action=info']){const response=await request({url});assert.equal(response.httpStatusCode,200,url);capture(response,url,'admin','lesika_web_evening');}
+  for(const url of ['/mpanel/index.php','/mpanel/attachments.php','/mpanel/setting.php?action=setone','/pages/setting.php','/pages/index.php?action=menu','/pages/anketa.php?view=details&uz=MotorTestAdmin','/pages/userlist.php','/votes/index.php','/games/index.php','/pages/index.php?action=info']){const response=await request({url});assert.equal(response.httpStatusCode,200,url);capture(response,url,'admin','lesika_web_evening');}
   const personal = await request({url:'/pages/setting.php'});
   assert.ok(personal.text.includes('Тёплый двор'));
   assert.ok(!personal.text.includes('value="default"'));

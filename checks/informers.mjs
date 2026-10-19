@@ -28,7 +28,7 @@ write('chat-settings.json',JSON.stringify({auto_refresh:1,refresh_seconds:3,page
 write('chat.dat','');write('chat-state.json','{}');const before=profile().map(Number),id=randomBytes(16).toString('hex'),msg='Привет, как дела?';
 let r=await req('/chat/add.php',{uid,msg,message_id:id},{accept:'application/json'});assert.equal(r.httpStatusCode,200);assert.equal(JSON.parse(r.text).total,2);
 for(const n of [12,36,41])assert.equal(+profile()[n],before[n]+1);
-assert.ok((await req('/pages/anketa.php?uz=InfoAdmin')).text.includes('Сообщений в чате: '+(+profile()[12])+'<br'));
+assert.ok((await req('/pages/anketa.php?view=details&uz=InfoAdmin')).text.includes('Сообщений в чате: '+(+profile()[12])+'<br'));
 assert.ok((await req('/pages/userlist.php')).text.includes('Чат: '+(+profile()[12])+' |'));
 const counted=profile()[12];r=await req('/chat/add.php',{uid,msg,message_id:id},{accept:'application/json'});assert.equal(JSON.parse(r.text).saved,false);assert.equal(profile()[12],counted);
 for(const body of [{uid:'bad',msg,message_id:id},{uid,msg:'abc',message_id:randomBytes(16).toString('hex')},{uid,'msg[0]':'text'}]){r=await req('/chat/add.php',body,{accept:'application/json'});assert.ok([400,403].includes(r.httpStatusCode));assert.equal(profile()[12],counted);}

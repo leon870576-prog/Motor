@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
 require_once "../includes/header.php";
@@ -71,7 +71,7 @@ $data = explode(":||:",$tex);
 
 $data[19] = preg_replace('|[^0-9]|', '', $data[19]);
 
-$dat_top[] = '|'.$data[0].'|'.$data[65].'|'.$data[19].'|'.$data[14].'|';	
+$dat_top[] = '|'.$data[0].'|'.$data[65].'|'.$data[19].'|'.$data[14].'|';
 }
 
 $dat_top=implode("\r\n",$dat_top);
@@ -104,7 +104,7 @@ $string = search_string(DATADIR."datatmp/searchuser.dat", $uz, 1);
 if ($string){
 
 echo 'Пользователь с логином <b>'.$uz.'</b> найден!<br /><br />';
-echo '<img src="../images/img/chel.gif" alt="image" /> <a href="anketa.php?uz='.$uz.'&amp;'.SID.'">Перейти к анкете</a><br />';
+echo '<img src="../images/img/chel.gif" alt="image" /> <a href="userpage.php?uz='.$uz.'&amp;'.SID.'">Перейти на личную страницу</a><br />';
 
 echo '<img src="../images/img/chat.gif" alt="image" /> <a href="kontakt.php?action=add&amp;uz='.$uz.'&amp;'.SID.'">Добавить в контакт</a><br />';
 echo '<img src="../images/img/ignor.gif" alt="image" /> <a href="ignor.php?action=add&amp;uz='.$uz.'&amp;'.SID.'">Добавить в игнор</a><br />';
@@ -117,7 +117,7 @@ echo 'Пользователь с логином <b>'.$uz.'</b> не найде�
 
 foreach($uzlog as $v){
 if (stristr($v, $uz)){
-echo 'Возможно вы искали пользователя <b><a href="anketa.php?uz='.$v.'&amp;'.SID.'">'.$v.'</a></b><br />'; 
+echo 'Возможно вы искали пользователя <b><a href="userpage.php?uz='.$v.'&amp;'.SID.'">'.$v.'</a></b><br />';
 break;
 }}
 echo 'Попробуйте также поискать по нику<br />';
@@ -132,7 +132,7 @@ $string = search_string(DATADIR."datatmp/searchuser.dat", $uz, 2);
 if ($string){
 
 echo 'Пользователь с ником <b>'.$uz.' ('.$string[1].')</b> найден!<br /><br />';
-echo '<img src="../images/img/chel.gif" alt="image" /> <a href="anketa.php?uz='.$string[1].'&amp;'.SID.'">Перейти к анкете</a><br />';
+echo '<img src="../images/img/chel.gif" alt="image" /> <a href="userpage.php?uz='.$string[1].'&amp;'.SID.'">Перейти на личную страницу</a><br />';
 
 echo '<img src="../images/img/chat.gif" alt="image" /> <a href="kontakt.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в контакт</a><br />';
 echo '<img src="../images/img/ignor.gif" alt="image" /> <a href="ignor.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в игнор</a><br />';
@@ -145,7 +145,7 @@ echo 'Пользователь с ником <b>'.$uz.'</b> не найден!<b
 
 foreach($uznick as $k=>$v){
 if (strstr($v, $uz)){
-echo 'Возможно вы искали пользователя <b><a href="anketa.php?uz='.$uzlog[$k].'&amp;'.SID.'">'.$v.'</a></b><br />'; 
+echo 'Возможно вы искали пользователя <b><a href="userpage.php?uz='.$uzlog[$k].'&amp;'.SID.'">'.$v.'</a></b><br />';
 break;
 }}
 echo 'Попробуйте также поискать по логину<br />';
@@ -161,7 +161,7 @@ $string = search_string(DATADIR."datatmp/searchuser.dat", $uz, 3);
 if ($string){
 
 echo 'Пользователь с ICQ <b>'.$uz.' ('.$string[1].')</b> найден!<br /><br />';
-echo '<img src="../images/img/chel.gif" alt="image" /> <a href="anketa.php?uz='.$string[1].'&amp;'.SID.'">Перейти к анкете</a><br />';
+echo '<img src="../images/img/chel.gif" alt="image" /> <a href="userpage.php?uz='.$string[1].'&amp;'.SID.'">Перейти на личную страницу</a><br />';
 
 echo '<img src="../images/img/chat.gif" alt="image" /> <a href="kontakt.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в контакт</a><br />';
 echo '<img src="../images/img/ignor.gif" alt="image" /> <a href="ignor.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в игнор</a><br />';
@@ -180,7 +180,7 @@ $string = search_string(DATADIR."datatmp/searchuser.dat", $uz, 4);
 if ($string){
 
 echo 'Пользователь с IP <b>'.$uz.' ('.$string[1].')</b> найден!<br /><br />';
-echo '<img src="../images/img/chel.gif" alt="image" /> <a href="anketa.php?uz='.$string[1].'&amp;'.SID.'">Перейти к анкете</a><br />';
+echo '<img src="../images/img/chel.gif" alt="image" /> <a href="userpage.php?uz='.$string[1].'&amp;'.SID.'">Перейти на личную страницу</a><br />';
 
 echo '<img src="../images/img/chat.gif" alt="image" /> <a href="kontakt.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в контакт</a><br />';
 echo '<img src="../images/img/ignor.gif" alt="image" /> <a href="ignor.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в игнор</a><br />';

@@ -58,7 +58,7 @@ $_SESSION['my_ip'] = $my_ip;
 
 increment_profil($login,[11=>1],[14=>$ip,25=>1,44=>SITETIME]);
 
-header ("Location: index.php?".SID); exit;
+header ("Location: pages/userpage.php"); exit;
 }}}
 header ("Location: pages/login.php?isset=inputoff"); exit;
 }

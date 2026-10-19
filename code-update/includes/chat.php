@@ -134,7 +134,9 @@ function motor_chat_render_row(string $row,int $index): string {
     $id=motor_chat_record_id($row,$index);
     $html='<article class="chat-message" id="chat-message-'.$id.'" data-chat-id="'.$id.'" tabindex="-1"><div class="b">';
     $html.=$valid?user_avatars($author):motor_avatar_image('images/avators/guest.gif');
-    $html.='<b><a class="touch-link chat-reply" data-chat-reply="'.motor_chat_escape($name).'" href="index.php?imja='.safe_encode($name).'#form">'.motor_chat_escape($name).'</a></b> ';
+    if ($valid && !$bot) $html.='<b><a class="touch-link chat-author" href="'.BASEDIR.'pages/userpage.php?uz='.rawurlencode($author).'">'.motor_chat_escape($name).'</a></b> ';
+    else $html.='<b>'.motor_chat_escape($name).'</b> ';
+    $html.='<a class="touch-link chat-reply" data-chat-reply="'.motor_chat_escape($name).'" href="index.php?imja='.safe_encode($name).'#form">Ответить</a> ';
     $html.=$bot?'<span class="chat-bot-label">бот</span>':($valid?user_online($author):'');
     $html.=' <small>('.date_fixed((int)$data[3]).')</small></div><div>'.bb_code($data[0]);
     if (is_admin([101,102,103,105]) && !$bot) $html.='<br /><span class="data">('.motor_chat_escape($data[4]).', '.motor_chat_escape($data[5]).')</span>';

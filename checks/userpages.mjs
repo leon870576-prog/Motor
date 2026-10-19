@@ -39,9 +39,9 @@ function cool(){const s=state();s.recent.forEach(x=>x.time=1);saveState(s);}
 async function action(name,body={},owner='PageOwner',headers={}){return req('/pages/userpage.php?uz='+owner+'&action='+name,{uid,...body},headers);}
 function capture(r,url,role,name){const file=name+'.html';writeFileSync(new URL(file,fixtureDir),r.text);fixtures.push({file,url,role,name});}
 let r=await req('/pages/userpage.php');assert.equal(r.httpStatusCode,200);assert.ok(r.text.includes('создать свою страницу'));
-assert.equal((await req(base)).httpStatusCode,404);assert.equal(php.fileExists('/www/local/userpages'),false);
+assert.equal((await req(base)).httpStatusCode,200);assert.equal(php.fileExists('/www/local/userpages'),false);
 for(const q of ['uz=../PageOwner','uz[]=PageOwner','uz=NoSuchUser','uz=PageOwner%00','uz=']){const bad=await req('/pages/userpage.php?'+q);assert.ok([200,302,404].includes(bad.httpStatusCode),q+' status '+bad.httpStatusCode);if(bad.httpStatusCode===302)assert.ok(bad.headers.location[0].includes('isset=403'));}
-await login('PageOwner');r=await req('/pages/userpage.php');assert.ok(r.text.includes('Создать свою страницу'));capture(r,'/pages/userpage.php','owner','create');
+await login('PageOwner');r=await req('/pages/userpage.php');assert.ok(r.text.includes('Создать свою страницу'));r=await req('/pages/userpage.php?tab=settings');capture(r,'/pages/userpage.php?tab=settings','owner','create');
 for(const a of ['save','news_add','news_edit','news_delete','guest_add','guest_edit','guest_delete'])assert.equal((await req(base+'&action='+a+'&uid='+uid)).httpStatusCode,405);
 assert.equal(php.fileExists('/www/local/userpages'),false);
 const settings={revision:'0',title:'Дневник нашего города',about:'Фотографии, события и добрые соседи 😊',published:'1',guestbook_open:'1'};
@@ -52,7 +52,7 @@ assert.equal((await action('save',{...settings,'title[]':'bad',title:undefined})
 for(const extra of [{title:''},{title:'А'.repeat(101)},{about:'Я'.repeat(2001)},{published:'yes'},{guestbook_open:'2'},{title:'Две\nстроки'},{about:'Знак\u202e'}])assert.equal((await action('save',{...settings,...extra})).httpStatusCode,400);
 r=await action('save',settings);assert.equal(r.httpStatusCode,303);assert.equal(state().revision,1);
 const before=raw();assert.equal((await action('save',settings)).httpStatusCode,409);assert.equal(raw(),before);
-for(const url of ['/pages/index.php?action=menu','/pages/profil.php','/pages/anketa.php?uz=PageOwner'])assert.ok((await req(url)).text.includes('userpage.php'));
+for(const url of ['/pages/index.php?action=menu','/pages/profil.php','/pages/anketa.php?view=details&uz=PageOwner'])assert.ok((await req(url)).text.includes('userpage.php'));
 r=await req(base);assert.ok(r.text.includes('Авторитет: <strong>17</strong>'));assert.ok(r.text.includes('+21 / −4'));assert.ok(!r.text.includes('private-PageOwner@example.test'));assert.ok(!r.text.includes(template[1]));
 pass('explicit page creation, links from menu/profile, live authority, no private profile fields; GET/CSRF/Origin/types/lengths/stale settings protected');
 // Real shared gallery records: owner visible, owner hidden and another author.

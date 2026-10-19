@@ -39,9 +39,9 @@ $data = explode("|",$file[$i]);
 echo '<div class="b">'.$data[1].'. <img src="../images/img/chel.gif" alt="image" /> ';
 
 if ($uz==$data[2]){
-echo '<b><big><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($data[2]).'</span></a></big></b> ';
+echo '<b><big><a href="../pages/userpage.php?uz='.$data[2].'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($data[2]).'</span></a></big></b> ';
 } else {
-echo '<b><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ';
+echo '<b><a href="../pages/userpage.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ';
 }
 
 echo user_online($data[2]).'</div>';

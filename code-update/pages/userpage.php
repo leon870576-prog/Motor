@@ -3,6 +3,7 @@ require_once '../includes/start.php';
 require_once '../includes/functions.php';
 require_once '../includes/header.php';
 require_once '../includes/userpages.php';
+require_once '../includes/reputation.php';
 include '../themes/'.$config['themes'].'/index.php';
 
 function up_h($value): string {return motor_gallery_escape($value);}
@@ -90,22 +91,23 @@ try {
             header('Location: '.motor_userpage_url($owner,$query).($anchor!==''?'#'.$anchor:''),true,303);exit;
         }
         $data=motor_userpage_read($owner);
-        if (!$data['created'] && !$self) throw new RuntimeException('Пользователь ещё не создал свою страницу.',404);
-        if (!$data['published'] && !$self && !$staff) throw new RuntimeException('Страница пока не опубликована.',404);
+        if ($data['created'] && !$data['published'] && !$self && !$staff) throw new RuntimeException('Страница пока не опубликована.',404);
         if ($tab==='settings' && !$self) throw new RuntimeException('Настройки доступны только владельцу страницы.',403);
-        if (!$data['created']) $tab='settings';
         $photos=motor_userpage_photos($owner);
         $title=$data['title']!==''?$data['title']:'Страница '.$owner;
         echo '<header class="up-hero"><div class="up-avatar">'.user_avatars($owner,96).'</div><div class="up-identity"><p class="up-kicker">Личная страница</p><h1>'.up_h($title).'</h1><p>'.motor_userpage_label($owner).'</p><p class="up-authority">Авторитет: <strong>'.(int)($profile[49]??0).'</strong> <span>(+'.(int)($profile[50]??0).' / −'.(int)($profile[51]??0).')</span></p></div></header>';
-        echo '<div class="up-actions"><a class="touch-link" href="anketa.php?uz='.rawurlencode($owner).'">Анкета пользователя</a>';
+        if ($actor!=='' && !$self) motor_reputation_form($owner);
+        echo '<div class="up-actions"><a class="touch-link" href="anketa.php?view=details&amp;uz='.rawurlencode($owner).'">Анкета пользователя</a>';
         if ($self) echo '<a class="touch-link" href="index.php?action=menu">Моё меню</a><a class="touch-link" href="'.up_link($owner,['tab'=>'settings']).'">Настроить страницу</a>';
         elseif ($actor!=='') echo '<a class="touch-link" href="privat.php?action=submit&amp;uz='.rawurlencode($owner).'">Личное сообщение</a>';
         echo '</div>';
         if (!$data['published'] && $data['created']) echo '<p class="up-notice">Страница не опубликована. Её видят только владелец и администрация.</p>';
         if (($_GET['saved']??'')==='1') echo '<p class="up-notice" role="status">Изменения сохранены.</p>';
-        if ($data['created']) {
+        if (($_GET['voted']??'')==='1') echo '<p class="up-notice" role="status">Ваш голос учтён.</p>';
+        if (!$data['created']) echo '<p class="up-notice">'.($self?'Страница ещё не оформлена. <a href="'.up_link($owner,['tab'=>'settings']).'">Создать свою страницу</a>':'Пользователь пока не оформил свою страницу.').'</p>';
+        if ($tab!=='settings') {
             echo '<nav class="up-tabs" aria-label="Разделы личной страницы">';
-            foreach (['overview'=>'Обзор','photos'=>'Фото ('.count($photos).')','news'=>'Новости ('.count($data['news']).')','guestbook'=>'Гостевая ('.count($data['guestbook']).')'] as $key=>$label) echo '<a href="'.up_link($owner,['tab'=>$key]).'"'.($tab===$key?' aria-current="page"':'').'>'.$label.'</a>';
+            foreach (['overview'=>'Обзор','news'=>'Новости ('.count($data['news']).')','photos'=>'Фото ('.count($photos).')','guestbook'=>'Отзывы ('.count($data['guestbook']).')'] as $key=>$label) echo '<a href="'.up_link($owner,['tab'=>$key]).'"'.($tab===$key?' aria-current="page"':'').'>'.$label.'</a>';
             echo '</nav>';
         }
         if ($tab==='settings') {
@@ -130,6 +132,16 @@ try {
                 echo '<section class="up-panel"><h2>Редактировать '.($kind==='news'?'новость':'отзыв').'</h2>';up_editor($owner,$kind==='news'?'news':'guest',$editing);echo '</section>';
             }
             if ($tab==='overview' && $data['about']!=='') echo '<section class="up-panel"><h2>О странице</h2><div class="up-text">'.motor_userpage_render_text($data['about']).'</div></section>';
+            if (in_array($tab,['overview','news'],true)) {
+                echo '<section class="up-section"><div class="up-heading"><h2>Новости пользователя</h2><a class="touch-link" href="'.up_link($owner,['tab'=>'news']).'">Все новости ('.count($data['news']).')</a></div>';
+                if ($self && $data['created'] && !$editing) {echo '<details class="up-panel"><summary>Написать новость</summary>';up_editor($owner,'news');echo '</details>';}
+                $items=array_reverse($data['news']);$size=$tab==='overview'?3:5;$p=min($page,max(1,(int)ceil(count($items)/$size)));
+                if ($post!=='') {motor_userpage_id($post);$items=array_values(array_filter($items,fn($e)=>$e['id']===$post));if (!$items) throw new RuntimeException('Новость не найдена.',404);}
+                foreach ($post!==''?$items:array_slice($items,($p-1)*$size,$size) as $e) up_record($owner,'news',$e,$self,$staff,$actor);
+                if (!$items) echo '<p>Новостей пока нет.</p>';
+                if ($tab==='news' && $post==='') up_pager($owner,$tab,$p,count($items),$size);
+                echo '</section>';
+            }
             if (in_array($tab,['overview','photos'],true)) {
                 $size=$tab==='overview'?2:6;$p=min($page,max(1,(int)ceil(count($photos)/$size)));
                 echo '<section class="up-section"><div class="up-heading"><h2>Фотографии</h2><a class="touch-link" href="'.up_link($owner,['tab'=>'photos']).'">Все фото ('.count($photos).')</a></div>';
@@ -139,19 +151,10 @@ try {
                 if ($tab==='photos') up_pager($owner,$tab,$p,count($photos),$size);
                 echo '</section>';
             }
-            if (in_array($tab,['overview','news'],true)) {
-                echo '<section class="up-section"><div class="up-heading"><h2>Новости пользователя</h2><a class="touch-link" href="'.up_link($owner,['tab'=>'news']).'">Все новости ('.count($data['news']).')</a></div>';
-                if ($self && !$editing) {echo '<details class="up-panel"><summary>Написать новость</summary>';up_editor($owner,'news');echo '</details>';}
-                $items=array_reverse($data['news']);$size=$tab==='overview'?3:5;$p=min($page,max(1,(int)ceil(count($items)/$size)));
-                if ($post!=='') {motor_userpage_id($post);$items=array_values(array_filter($items,fn($e)=>$e['id']===$post));if (!$items) throw new RuntimeException('Новость не найдена.',404);}
-                foreach ($post!==''?$items:array_slice($items,($p-1)*$size,$size) as $e) up_record($owner,'news',$e,$self,$staff,$actor);
-                if (!$items) echo '<p>Новостей пока нет.</p>';
-                if ($tab==='news' && $post==='') up_pager($owner,$tab,$p,count($items),$size);
-                echo '</section>';
-            }
             if (in_array($tab,['overview','guestbook'],true)) {
-                echo '<section class="up-section"><div class="up-heading"><h2>Гостевая книга</h2><a class="touch-link" href="'.up_link($owner,['tab'=>'guestbook']).'">Все отзывы ('.count($data['guestbook']).')</a></div>';
-                if (!$data['guestbook_open']) echo '<p>Владелец закрыл гостевую книгу для новых отзывов.</p>';
+                echo '<section class="up-section"><div class="up-heading"><h2>Отзывы · гостевая книга</h2><a class="touch-link" href="'.up_link($owner,['tab'=>'guestbook']).'">Все отзывы ('.count($data['guestbook']).')</a></div>';
+                if (!$data['created']) echo '<p>Отзывы откроются, когда владелец оформит страницу.</p>';
+                elseif (!$data['guestbook_open']) echo '<p>Владелец закрыл гостевую книгу для новых отзывов.</p>';
                 elseif ($actor==='' ) show_login('Чтобы оставить отзыв, необходимо');
                 elseif (!$editing) up_editor($owner,'guest');
                 $size=$tab==='overview'?3:10;$p=min($page,max(1,(int)ceil(count($data['guestbook'])/$size)));
@@ -167,7 +170,7 @@ try {
     $message=$e instanceof RuntimeException?$e->getMessage():'Не удалось открыть страницу. Повторите попытку позже.';
     echo '<div class="up-notice" role="alert">'.up_h($message).'</div>';
     foreach (['title'=>'Заголовок','about'=>'О странице','msg'=>'Текст записи'] as $field=>$label) if (isset($_POST[$field]) && is_string($_POST[$field]) && strlen($_POST[$field])<=32000) echo '<label>'.$label.' — не сохранено<textarea readonly rows="4">'.up_h($_POST[$field]).'</textarea></label>';
-    if (isset($owner) && motor_userpage_login($owner)) echo '<p><a class="touch-link" href="'.up_link($owner).'">Вернуться к странице</a> · <a class="touch-link" href="anketa.php?uz='.rawurlencode($owner).'">Анкета пользователя</a></p>';
+    if (isset($owner) && motor_userpage_login($owner)) echo '<p><a class="touch-link" href="'.up_link($owner).'">Вернуться к странице</a> · <a class="touch-link" href="anketa.php?view=details&amp;uz='.rawurlencode($owner).'">Анкета пользователя</a></p>';
 }
 echo '</div>';
 include '../themes/'.$config['themes'].'/foot.php';

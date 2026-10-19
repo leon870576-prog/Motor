@@ -121,7 +121,7 @@ await rendered('/gallery/index.php');await rendered('/gallery/index.php?action=s
 assert.equal((await req('/gallery/index.php?action=addkomm&gid=smile-test.gif',{uid,msg:message})).httpStatusCode,302);await rendered('/gallery/index.php?action=komm&gid=smile-test.gif');pass('gallery descriptions, image detail, comments and moderation');
 php.writeFile('/www/local/databoard/database.dat','Тест|Тестовая рубрика|987|\r\n');
 r=await req('/board/add.php?action=add&id=987',{uid,zag:'Объявление смайлов',msg:message,days:'3'});assert.equal(r.httpStatusCode,302);const bid=lines('databoard/987.dat').at(-1).split('|')[5];
-await rendered('/board/index.php?action=board&id=987');await rendered('/board/index.php?action=view&id=987&bid='+bid);await rendered('/mpanel/board.php?action=board&id=987');await rendered('/pages/anketa.php?uz=SmileAuthor');pass('announcements list/detail/moderation and profile About me');
+await rendered('/board/index.php?action=board&id=987');await rendered('/board/index.php?action=view&id=987&bid='+bid);await rendered('/mpanel/board.php?action=board&id=987');await rendered('/pages/anketa.php?view=details&uz=SmileAuthor');pass('announcements list/detail/moderation and profile About me');
 // Private-message testing is restricted to temporary accounts in the in-memory site.
 r=await req('/pages/privat.php?action=send&uz=SmileAuthor&uid='+uid,{msg:message});assert.equal(r.httpStatusCode,302);await rendered('/pages/privat.php?action=output');
 await req('/input.php?action=exit');await req('/input.php',{login:'SmileAuthor',pass:password});uid=await token();await rendered('/pages/privat.php');pass('private messages, sent and received, with temporary accounts only');

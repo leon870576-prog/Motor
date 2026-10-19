@@ -1,6 +1,6 @@
 {
   "php": "8.4",
-  "requests": 203,
+  "requests": 204,
   "passed": [
     "explicit page creation, links from menu/profile, live authority, no private profile fields; GET/CSRF/Origin/types/lengths/stale settings protected",
     "owner-only news, review author editing, per-record revisions, duplicate submit, cooldown, shared photo comments and hidden-photo boundaries",
@@ -12,7 +12,7 @@
   "fixtures": [
     {
       "file": "create.html",
-      "url": "/pages/userpage.php",
+      "url": "/pages/userpage.php?tab=settings",
       "role": "owner",
       "name": "create"
     },
@@ -30,7 +30,7 @@
     },
     {
       "file": "edit-review.html",
-      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook&edit=b521c3144511cd87022fc65c7f3b9e8e",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook&edit=d2afa1755d5e5a5d823086a02f302208",
       "role": "visitor",
       "name": "edit-review"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file": "edit-news.html",
-      "url": "/pages/userpage.php?uz=PageOwner&tab=news&edit=9aa45d01b198491a36c2a362f04ebe7b",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=news&edit=a2fed38cf4a7f521c6f37c1e80d5d579",
       "role": "owner",
       "name": "edit-news"
     },

@@ -314,7 +314,7 @@
       "noOverflow": true
     },
     {
-      "url": "/pages/anketa.php?uz=MotorTestAdmin",
+      "url": "/pages/anketa.php?view=details&uz=MotorTestAdmin",
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,

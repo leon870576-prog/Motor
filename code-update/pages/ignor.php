@@ -44,7 +44,7 @@ for ($i = $start; $i < $end; $i++){
 $data = explode("|",$file[$i]);
 $num = $total - $i - 1;
 
-echo '<div class="b">'.user_avatars($data[1]).' '.($i+1).'. <b><a href="anketa.php?uz='.$data[1].'&amp;'.SID.'">'.nickname($data[1]).'</a></b> '.user_online($data[1]).'</div>';
+echo '<div class="b">'.user_avatars($data[1]).' '.($i+1).'. <b><a href="userpage.php?uz='.$data[1].'&amp;'.SID.'">'.nickname($data[1]).'</a></b> '.user_online($data[1]).'</div>';
 echo '<div>Дабавлен: '.date_fixed($data[2]).'<br />';
 echo '<input type="checkbox" name="del[]" value="'.$num.'" /> ';
 echo '<a href="privat.php?action=submit&amp;uz='.$data[1].'&amp;'.SID.'">Написать</a> | ';

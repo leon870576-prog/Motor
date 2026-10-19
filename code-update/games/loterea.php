@@ -153,7 +153,7 @@ for ($i=1;$i<$total;$i++){
 $user_dats = explode("|",$lotfiles[$i]);
 
 echo $i.'. <img src="../images/img/chel.gif" alt="image" /> ';
-echo '<b><a href="../pages/anketa.php?uz='.$user_dats[1].'&amp;'.SID.'">'.nickname($user_dats[1]).'</a></b> ';
+echo '<b><a href="../pages/userpage.php?uz='.$user_dats[1].'&amp;'.SID.'">'.nickname($user_dats[1]).'</a></b> ';
 echo '(Ставка: '.$user_dats[2].')<br />';
 }
 

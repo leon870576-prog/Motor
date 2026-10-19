@@ -59,7 +59,7 @@ echo '<small><span style="color:#cc00cc">('.$data[4].', '.$data[2].')</span></sm
 
 }else{
 
-echo '<hr /><img src="../images/img/chel.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$data[3].'&amp;'.SID.'">'.nickname($data[3]).'</a></b> (Время: '.$usertime.')<br />';
+echo '<hr /><img src="../images/img/chel.gif" alt="image" /> <b><a href="../pages/userpage.php?uz='.$data[3].'&amp;'.SID.'">'.nickname($data[3]).'</a></b> (Время: '.$usertime.')<br />';
 echo '<small><span style="color:#cc00cc">('.$data[4].', '.$data[2].')</span></small>';
 
 }
@@ -80,7 +80,7 @@ for ($i = $start; $i < $end; $i++){
 $data = explode("|",$regar[$i]);
 $usertime=date_fixed($data[1],'H:i:s');
 
-echo '<hr /><img src="../images/img/chel.gif" alt="image" /> <b><a href="../pages/anketa.php?uz='.$data[3].'&amp;'.SID.'">'.nickname($data[3]).'</a></b> (Время: '.$usertime.')<br />';
+echo '<hr /><img src="../images/img/chel.gif" alt="image" /> <b><a href="../pages/userpage.php?uz='.$data[3].'&amp;'.SID.'">'.nickname($data[3]).'</a></b> (Время: '.$usertime.')<br />';
 echo '<small><span style="color:#cc00cc">('.$data[4].', '.$data[2].')</span></small>';
 
 }

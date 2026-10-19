@@ -32,7 +32,7 @@ function motor_board_input(): array {
     return [no_br($title),no_br($message,'<br />')];
 }
 function motor_board_author(string $name): string {
-    return preg_match('/^[a-z0-9-]{3,20}$/Di',$name)?'<a href="'.BASEDIR.'pages/anketa.php?uz='.rawurlencode($name).'">'.motor_board_label(nickname($name)).'</a>':'Участник';
+    return preg_match('/^[a-z0-9-]{3,20}$/Di',$name)?'<a href="'.BASEDIR.'pages/userpage.php?uz='.rawurlencode($name).'">'.motor_board_label(nickname($name)).'</a>':'Участник';
 }
 function motor_board_card(array $d,bool $detail=false): void {
     global $log;$id=motor_board_number($d[6]);$bid=motor_board_number($d[5]);

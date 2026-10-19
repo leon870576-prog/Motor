@@ -4,7 +4,7 @@ require_once __DIR__.'/catalog.php';
 $config['themes'] = lesika_theme_id($config['themes']);
 $lesikaTheme = lesika_themes()[$config['themes']];
 $lesikaHome = ($php_self === 'index.php' && empty($_GET['p']));
-$lesikaAccount = !empty($log) ? 'pages/index.php?action=menu' : 'pages/login.php';
+$lesikaAccount = !empty($log) ? 'pages/userpage.php' : 'pages/login.php';
 header('Content-Type: text/html; charset=utf-8');
 echo '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">';
 echo '<title>%TITLE%</title><meta name="keywords" content="%KEYWORDS%"><meta name="description" content="%DESCRIPTION%">';

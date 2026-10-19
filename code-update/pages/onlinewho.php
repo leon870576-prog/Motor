@@ -62,9 +62,9 @@ echo '<br /><b>Пользователи на сайте:</b><br />';
 
 foreach($array_users as $key=>$value){
 if($key==0){
-echo '<b><a href="../pages/anketa.php?uz='.$value.'&amp;'.SID.'">'.nickname($value).'</a></b>';
+echo '<b><a href="../pages/userpage.php?uz='.$value.'&amp;'.SID.'">'.nickname($value).'</a></b>';
 }else{
-echo ', <b><a href="../pages/anketa.php?uz='.$value.'&amp;'.SID.'">'.nickname($value).'</a></b>';
+echo ', <b><a href="../pages/userpage.php?uz='.$value.'&amp;'.SID.'">'.nickname($value).'</a></b>';
 }
 }
 
@@ -79,9 +79,9 @@ echo 'Сегодня отмечают свой день рождения '.(int)
 foreach($arr_happy as $key=>$value){
 if ($value!==""){
 if ($key==0){
-echo '<b><a href="../pages/anketa.php?uz='.$value.'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($value).'</span></a></b>';
+echo '<b><a href="../pages/userpage.php?uz='.$value.'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($value).'</span></a></b>';
 } else {
-echo ', <b><a href="../pages/anketa.php?uz='.$value.'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($value).'</span></a></b>';
+echo ', <b><a href="../pages/userpage.php?uz='.$value.'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($value).'</span></a></b>';
 }}}
 
 } else {echo '<b>Именинников нет!</b><br />';}
@@ -98,9 +98,9 @@ echo 'Сегодня зарегистрировались на сайте '.(int
 foreach($arr_newuser as $key=>$value){
 if ($value!=""){
 if ($key==0){
-echo '<b><a href="../pages/anketa.php?uz='.check($value).'&amp;'.SID.'"><span style="color:#ff0000">'.check(nickname($value)).'</span></a></b>';
+echo '<b><a href="../pages/userpage.php?uz='.check($value).'&amp;'.SID.'"><span style="color:#ff0000">'.check(nickname($value)).'</span></a></b>';
 } else {
-echo ', <b><a href="../pages/anketa.php?uz='.check($value).'&amp;'.SID.'"><span style="color:#ff0000">'.check(nickname($value)).'</span></a></b>';
+echo ', <b><a href="../pages/userpage.php?uz='.check($value).'&amp;'.SID.'"><span style="color:#ff0000">'.check(nickname($value)).'</span></a></b>';
 }}}
 } else {echo '<b>Новичков нет!</b>';}
 

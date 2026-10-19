@@ -146,7 +146,7 @@ for(const role of [101,102,103,105]){
  assert.ok((await req(detail(id))).text.includes('Подпись '+role));assert.ok(!(await req(detail(id))).text.includes('<img src=x onerror=alert(1)>'));
  assert.equal((await req('/mpanel/gallery.php?action=addedit',{uid,gid:id,name:'stale',msg:'stale',record_version:old})).httpStatusCode,409);
  assert.equal((await batch([id],'hide')).httpStatusCode,302);assert.equal((await req(full(id))).httpStatusCode,200);
- await req('/input.php?action=exit');assert.equal((await req(full(id))).httpStatusCode,404);assert.equal((await req(preview(id))).httpStatusCode,404);assert.equal((await req(detail(id))).httpStatusCode,404);assert.equal((await req(comments(id))).httpStatusCode,404);assert.ok(!(await req('/gallery/index.php')).text.includes(id));assert.ok(!(await req('/pages/anketa.php?uz=Role0')).text.includes('gid='+id));
+ await req('/input.php?action=exit');assert.equal((await req(full(id))).httpStatusCode,404);assert.equal((await req(preview(id))).httpStatusCode,404);assert.equal((await req(detail(id))).httpStatusCode,404);assert.equal((await req(comments(id))).httpStatusCode,404);assert.ok(!(await req('/gallery/index.php')).text.includes(id));assert.ok(!(await req('/pages/anketa.php?view=details&uz=Role0')).text.includes('gid='+id));
  await login(0);assert.equal((await req(full(id))).httpStatusCode,404);assert.equal((await req('/gallery/index.php?action=addkomm&gid='+id,{uid,msg:'hidden'})).httpStatusCode,404);
  await login(role);assert.equal((await batch([id],'restore')).httpStatusCode,302);await req('/input.php?action=exit');assert.equal((await req(full(id))).httpStatusCode,200);
 }

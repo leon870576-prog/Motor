@@ -39,9 +39,9 @@ $data = explode("|",$file[$i]);
 echo '<div class="b">'.(int)$data[1].'. <img src="../images/img/chel.gif" alt="image" /> ';
 
 if ($uz==$data[2]){
-echo '<b><big><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($data[2]).'</span></a></big></b> (Авторитет: '.(int)$data[3].')</div>';
+echo '<b><big><a href="../pages/userpage.php?uz='.$data[2].'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($data[2]).'</span></a></big></b> (Авторитет: '.(int)$data[3].')</div>';
 } else {
-echo '<b><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> (Авторитет: '.(int)$data[3].')</div>';
+echo '<b><a href="../pages/userpage.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> (Авторитет: '.(int)$data[3].')</div>';
 }
 
 echo '<div>Плюсов: '.(int)$data[4].' | Минусов: '.(int)$data[5].'<br />Дата регистрации: '.date_fixed($data[6]).'</div>';

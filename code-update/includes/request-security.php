@@ -7,7 +7,7 @@ function motor_request_actions(): array {
         'games/hi.php'=>['hi'],'games/kosti.php'=>['go'],'games/naperstki.php'=>['go'],'games/bandit.php'=>['go'],
         'games/health.php'=>['operacia'],'games/stamina.php'=>['operacia'],'games/magazin.php'=>['shop'],
         'games/21.php'=>['ini','game'],'votes/vote.php'=>['vote'],'pages/nickname.php'=>[''],'pages/newpass.php'=>[''],
-        'pages/reguser.php'=>[''],'pages/key.php'=>['inkey'],'pages/link.php'=>['add'],'pages/razban.php'=>['go'],'pyramid/del.php'=>['','all'],'pyramid/admin.php'=>['settings','userset']];
+        'pages/raiting.php'=>['plus','minus'],'pages/reguser.php'=>[''],'pages/key.php'=>['inkey'],'pages/link.php'=>['add'],'pages/razban.php'=>['go'],'pyramid/del.php'=>['','all'],'pyramid/admin.php'=>['settings','userset']];
 }
 function motor_request_route(): string {return ltrim((string)($_SERVER['SCRIPT_NAME']??''),'/');}
 function motor_request_guard(): void {

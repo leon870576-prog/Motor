@@ -47,7 +47,7 @@ echo user_avatars($data[1]);
 if ($data[1]==$config['guestsuser']){
 echo '<b>'.$data[1].'</b> ';
 } else {
-echo '<b><a href="../pages/anketa.php?uz='.$data[1].'&amp;'.SID.'">'.nickname($data[1]).'</a></b> '.user_title($data[1]).user_online($data[1]).' ';
+echo '<b><a href="../pages/userpage.php?uz='.$data[1].'&amp;'.SID.'">'.nickname($data[1]).'</a></b> '.user_title($data[1]).user_online($data[1]).' ';
 }
 
 echo '<small>('.date_fixed($data[3]).')</small></div>';

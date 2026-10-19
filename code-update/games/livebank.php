@@ -77,9 +77,9 @@ $data = explode("|",$file[$i]);
 echo '<div class="b">'.$data[1].'. <img src="../images/img/chel.gif" alt="image" /> ';
 
 if ($uz==$data[2]){
-echo '<b><big><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($data[2]).'</span></a></big></b> ('.moneys($data[3]).')</div>';
+echo '<b><big><a href="../pages/userpage.php?uz='.$data[2].'&amp;'.SID.'"><span style="color:#ff0000">'.nickname($data[2]).'</span></a></big></b> ('.moneys($data[3]).')</div>';
 } else {
-echo '<b><a href="../pages/anketa.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ('.moneys($data[3]).')</div>';
+echo '<b><a href="../pages/userpage.php?uz='.$data[2].'&amp;'.SID.'">'.nickname($data[2]).'</a></b> ('.moneys($data[3]).')</div>';
 }
 
 echo '<div>Посл. операция: '.date_fixed($data[4]).'</div>';

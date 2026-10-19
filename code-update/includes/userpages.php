@@ -10,7 +10,7 @@ function motor_userpage_profile($owner): array {
     if (!motor_userpage_login($owner)) throw new RuntimeException('Пользователь не найден.',404);
     $dir=DATADIR.'profil';$path=$dir.'/'.$owner.'.prof';
     if (is_link($dir) || is_link($path) || !is_file($path)) throw new RuntimeException('Пользователь не найден.',404);
-    $raw=file_get_contents($path);$p=explode(':||:', $raw === false ? '' : $raw);
+    $raw=motor_info_read($path);$p=explode(':||:', $raw === false ? '' : $raw);
     // Field 25 is the legacy login flag, not an account-activation flag: pages stay visible offline.
     if (($p[0]??'')!==$owner) throw new RuntimeException('Пользователь не найден.',404);
     return $p;

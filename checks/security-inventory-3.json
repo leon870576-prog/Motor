@@ -1,5 +1,15 @@
 [
   {
+    "path": "images/img/grafic.gif",
+    "bytes": 175,
+    "sha256": "fa2be89a4abf316483f88957ee8e6cf5d74654d23c28375c898e555742228cae"
+  },
+  {
+    "path": "images/img/homepage.gif",
+    "bytes": 241,
+    "sha256": "a7a9e554413f0f236d0fb48fc539fabf1ec856ea8895b45b1335d18c36af6b03"
+  },
+  {
     "path": "images/img/ignor.gif",
     "bytes": 409,
     "sha256": "62da137e86bd23213152c3e55f1216355f421353c84605833fb93e5f84e04422"
@@ -1116,8 +1126,8 @@
   },
   {
     "path": "includes/board.php",
-    "bytes": 4544,
-    "sha256": "bc23b2306cbe6caffcb842cc71452bec56437b752ed4c703d94855b89f268956"
+    "bytes": 4546,
+    "sha256": "140a1eec6cbbf822dfc6d8b88ceb27cedb8a136abdf03c8815fbfe93e828a848"
   },
   {
     "path": "includes/calendar.php",
@@ -1131,8 +1141,8 @@
   },
   {
     "path": "includes/chat.php",
-    "bytes": 12319,
-    "sha256": "ded5308f6c4f8f4eca78c677a5c315d477befad4182412839db0c44998079c2d"
+    "bytes": 12532,
+    "sha256": "6bd296eea45ea29dd2fd947b8567788f1b75b5ca15760dfda9c5b2d7348ad208"
   },
   {
     "path": "includes/chat_bot.php",
@@ -1171,8 +1181,8 @@
   },
   {
     "path": "includes/gallery.php",
-    "bytes": 20606,
-    "sha256": "86cf74fd5f045ddf4521dd600a3c15f8eb856c42017ac0e8375b11580b8fdfad"
+    "bytes": 20608,
+    "sha256": "ab62f52f98e2a3f917147989e5157d7ce6b1d7b6bea1e58f7db87a783f7f5b4a"
   },
   {
     "path": "includes/game21-view.php",
@@ -1221,8 +1231,8 @@
   },
   {
     "path": "includes/lesika/head.php",
-    "bytes": 3624,
-    "sha256": "df85753302883a82e8d4754a2e327442b8b9f979d0d6247017219d88b56f0e7e"
+    "bytes": 3948,
+    "sha256": "8b021dcc29a94fdd93f2bca057555aa80bd335df0004a63e741486bc751f1970"
   },
   {
     "path": "includes/lesika/home.php",
@@ -1231,8 +1241,8 @@
   },
   {
     "path": "includes/lesika/themes.json",
-    "bytes": 7216,
-    "sha256": "0d5dac867c409b3c69b91e6f0d22650b80894eb341454bd010e83475236eeaea"
+    "bytes": 7636,
+    "sha256": "3439431fa3855241a6b0cb33c1ea584bc60caf65d5075c2d8f96e14da79f222e"
   },
   {
     "path": "includes/link.php",
@@ -1290,9 +1300,14 @@
     "sha256": "0ccf44ebc3ca9aeca861bb735fdade1166b6eec80c44d2c78fc83cb71219d222"
   },
   {
+    "path": "includes/reputation.php",
+    "bytes": 8167,
+    "sha256": "881dba96c6cecf6141e9b5df804cd9e4c1a8d18700d18612189b815c472b1e18"
+  },
+  {
     "path": "includes/request-security.php",
-    "bytes": 5758,
-    "sha256": "4d9e1e5bd568ee5d7b4cc899ba482d7f51b8201984ceccfa20f0e6d82876ac98"
+    "bytes": 5796,
+    "sha256": "83a5baece8db28336659f7f3d2408c56d0920b1c4e24248db4488052db4e3c53"
   },
   {
     "path": "includes/skin.php",
@@ -1315,14 +1330,19 @@
     "sha256": "0251cf69f4cbd72e0bc7ca80a190ffba264bc7a0c4ee54001c69255229fbe3dc"
   },
   {
+    "path": "includes/userpages.php",
+    "bytes": 15707,
+    "sha256": "fdfd57cfa7a8c96e8bed708c89a3b4fa464781d75d3fb0a7e3587a8b15f2e57f"
+  },
+  {
     "path": "index.php",
     "bytes": 2904,
     "sha256": "662691f1a452778065c85a49b1d013e7dc919c074c9a0376dda091a9e8488cd2"
   },
   {
     "path": "input.php",
-    "bytes": 3849,
-    "sha256": "adf3ddec7a188327a702a6aafa3c0e15a46b9b593fc40028a83276afc9566973"
+    "bytes": 3853,
+    "sha256": "f1f53c6d789d3cc0ceca70624f43ec087be404895ea8e9b76f5eebc1621593d2"
   },
   {
     "path": "mail/index.php",
@@ -1336,13 +1356,13 @@
   },
   {
     "path": "mpanel/adminchat.php",
-    "bytes": 7842,
-    "sha256": "9b762307f0969351dc4426df19dbf44304d3f0aff07e5ac574eb5a757aed6c0c"
+    "bytes": 7844,
+    "sha256": "104f303b3eaacb9062be83db6b8077591fc29582222643ff10f2b41bcde6f389"
   },
   {
     "path": "mpanel/adminlist.php",
-    "bytes": 3987,
-    "sha256": "cd1acc75467ac4521a1805b93eed19f5d363f4431eecd0980e78c3172c48f0b7"
+    "bytes": 3989,
+    "sha256": "e688ca7bffced31cea56c6da5bb1225737c45862763b2ff81025efe42ffcb557"
   },
   {
     "path": "mpanel/antimat.php",
@@ -1366,18 +1386,18 @@
   },
   {
     "path": "mpanel/ban.php",
-    "bytes": 7243,
-    "sha256": "e137310b84cd9d4085c9bb80be342b5a21cda83b79b981200f3df7890e96079f"
+    "bytes": 7245,
+    "sha256": "e0bc9823ec940976580e68c41bbbb3c33e6af6148ff604e99cce76910c8d2350"
   },
   {
     "path": "mpanel/banlist.php",
-    "bytes": 4852,
-    "sha256": "5fcf09a7c43211637c1ec2fd5ed792a643abec89359dc0415772d8e0d1308fdc"
+    "bytes": 4854,
+    "sha256": "5c2201075aa4fda985e0cfdaf212f35986ab4f9633c4f1ec33082dffde18ccf7"
   },
   {
     "path": "mpanel/blacklist.php",
-    "bytes": 10828,
-    "sha256": "9ff013d65eff6962039cc0159f5ae6afc01c934d905be3eea0f88cf0e06cd1f1"
+    "bytes": 10832,
+    "sha256": "d76b5226bc48d9e821b6ef66120f1260fbf5b3a5b0efd022e657aa89364b432b"
   },
   {
     "path": "mpanel/board-settings.php",
@@ -1391,8 +1411,8 @@
   },
   {
     "path": "mpanel/book.php",
-    "bytes": 15501,
-    "sha256": "a175be33cd366fbf304fe61ea247fa15c936e4d6fa4408a0bc031983af53184f"
+    "bytes": 15505,
+    "sha256": "6d2e9248b7eeeee53fe9b6d15b9526cd6a386514347f580eae97161d1f0f1c35"
   },
   {
     "path": "mpanel/chat-settings.php",
@@ -1411,8 +1431,8 @@
   },
   {
     "path": "mpanel/delusers.php",
-    "bytes": 6040,
-    "sha256": "313da6f01bec72acbaaefd4916ee0dc6a223b50d9abc30892ef8e70e78c2193a"
+    "bytes": 6044,
+    "sha256": "7dff4f53636cb6e11be7dfb4863293e25691b2a03f77c854b26da7217d473b41"
   },
   {
     "path": "mpanel/files.php",
@@ -1421,8 +1441,8 @@
   },
   {
     "path": "mpanel/forum.php",
-    "bytes": 38797,
-    "sha256": "a37db298568580014dbc29efc92b1e90e215ef17f6a67f3b811ea3f37f66d4e1"
+    "bytes": 38799,
+    "sha256": "2874944a72e459630be4a718eb1fd72b075db6e5c8a66bf0fa480b307fd5d9e7"
   },
   {
     "path": "mpanel/gallery-settings.php",
@@ -1451,8 +1471,8 @@
   },
   {
     "path": "mpanel/logadmin.php",
-    "bytes": 4083,
-    "sha256": "883543d5157883bc5ea68014bc31e2dda49efe022e674831b83f8e46629b38e3"
+    "bytes": 4085,
+    "sha256": "471871a24f88b9c6d1f6235e76b5958b9a5aa01d8c08806fef25774e2d79a8c4"
   },
   {
     "path": "mpanel/logfiles.php",
@@ -1476,27 +1496,7 @@
   },
   {
     "path": "mpanel/reglist.php",
-    "bytes": 7708,
-    "sha256": "a67316b2e7b539d3390cfbc4a9825d0faf3d9f69e821519a49720452ba1e9193"
-  },
-  {
-    "path": "mpanel/reklama.php",
-    "bytes": 10869,
-    "sha256": "7e47cae4ec744883c177ebe6fd8f7d46321d29f1db47dea973c89e6d07c5f055"
-  },
-  {
-    "path": "mpanel/setting.php",
-    "bytes": 52652,
-    "sha256": "b09a4044f3ca676808418cd61c5944bae49780771201025281c42b13b615e31d"
-  },
-  {
-    "path": "mpanel/siteinfo.php",
-    "bytes": 768,
-    "sha256": "4fb80309dbbaa9c254eccf8b4e9d3e3adfd973a8cb6595d43e0e3ce5d506e167"
-  },
-  {
-    "path": "mpanel/status.php",
-    "bytes": 6553,
-    "sha256": "799b9cd141c034202a7a4debf69fd8cada58b4b6b764672d44b1236b7026321f"
+    "bytes": 7710,
+    "sha256": "eec8e1a88622eaa2e8e1a507cd399e67dcc3b4a01c2715099b88020813a10993"
   }
 ]

@@ -77,7 +77,7 @@ php.writeFile('/www/local/config.dat',config.join('|'));
 const stamp=Math.floor(Date.now()/1000),authors=['Вундер-киндер','Настюха','Весельчак','Весальчак','MotorTestAdmin'];
 php.writeFile('/www/local/chat.dat',authors.map(name=>`Проверка аватара :)|${name}||${stamp}|Test|127.0.0.1|0|0||`).join('\r\n')+'\r\n');
 for(const dir of ['datakontakt','dataignor'])php.writeFile('/www/local/'+dir+'/MotorTestAdmin.dat',`|MotorTestAdmin|${stamp}|\r\n`);
-for(const [i,path] of ['/pages/avators.php','/pages/avators.php?action=buy','/pages/profil.php','/pages/anketa.php?uz=MotorTestAdmin','/chat/index.php','/mpanel/chat.php','/pages/kontakt.php','/pages/ignor.php'].entries()) {
+for(const [i,path] of ['/pages/avators.php','/pages/avators.php?action=buy','/pages/profil.php','/pages/anketa.php?view=details&uz=MotorTestAdmin','/chat/index.php','/mpanel/chat.php','/pages/kontakt.php','/pages/ignor.php'].entries()) {
  ar=await req(path);assert.equal(ar.httpStatusCode,200);writeFileSync(new URL('./avatar-fixtures/'+i+'.html',import.meta.url),ar.text);avatarFixtures.push({url:path,file:i+'.html'});
  if(path.includes('/chat'))for(const name of ['mag','bot','shut'])assert.ok(ar.text.includes('class="motor-avatar" src="../images/img/'+name+'.gif?v=avatars3"'),path+' bot '+name);
 }

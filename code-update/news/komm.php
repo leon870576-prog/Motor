@@ -63,7 +63,7 @@ if ($is_admin) {echo '<input type="checkbox" name="del[]" value="'.$num.'" /> ';
 
 echo user_avatars($data[4]);
 
-echo '<b><a href="../pages/anketa.php?uz='.$data[4].'&amp;'.SID.'"> '.nickname($data[4]).' </a></b> '.user_title($data[4]).user_online($data[4]);
+echo '<b><a href="../pages/userpage.php?uz='.$data[4].'&amp;'.SID.'"> '.nickname($data[4]).' </a></b> '.user_title($data[4]).user_online($data[4]);
 
 echo '<small> ('.date_fixed($data[3]).')</small></div>';
 

@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 256,
-    "sha256": "de5a0960b97f227d13cc5914555dfdaa076c699ad343e9d097dc356f886be6e5"
+    "bytes": 269,
+    "sha256": "5170f414303552f7dbb8ba164ca212364df370724d582813cae4c56e36db04d5"
   },
   {
     "path": "assets/lesika/arcade.css",
@@ -48,6 +48,11 @@
     "path": "assets/lesika/chat.js",
     "bytes": 8677,
     "sha256": "13e92d741a42cfcc04186f5e78daa37fdc37edb6a022da19fa2eab637d2b1cd7"
+  },
+  {
+    "path": "assets/lesika/compact.css",
+    "bytes": 30083,
+    "sha256": "580a07a6c303ba334c0463552f10b210f4db655aefab0097a4eb4bb0f1ae836e"
   },
   {
     "path": "assets/lesika/gallery.css",
@@ -105,6 +110,11 @@
     "sha256": "1d202ba0f62b28ab9e12c07acbe086a1d889000fa467d3dcb9379fb479721bba"
   },
   {
+    "path": "assets/lesika/userpages.css",
+    "bytes": 4265,
+    "sha256": "ebb815ba5692df709da5899d2d3ff4c6b2aba0a68fb799971750da0934d1ed00"
+  },
+  {
     "path": "attachment.php",
     "bytes": 5203,
     "sha256": "7df845288b5be228733776112252c550055fb61b4b11eb1a9e2a12211c671df6"
@@ -131,8 +141,8 @@
   },
   {
     "path": "book/index.php",
-    "bytes": 4346,
-    "sha256": "45e0bee4d39546478244e05faf23bcd0e77cadcd3542ea1f3a6e78c748f0bd02"
+    "bytes": 4348,
+    "sha256": "7f83a941dc2983021002e462520e487e5f2d3d02edcbd00243492db2e9bcf5d0"
   },
   {
     "path": "chat/add.php",
@@ -171,8 +181,8 @@
   },
   {
     "path": "forum/topic.php",
-    "bytes": 10444,
-    "sha256": "95387686fac0d6fd5bba0000d53f4fbb8375dedce26b140123460450e27ec3be"
+    "bytes": 10446,
+    "sha256": "c9b43d14634f2429d444637cccccc1b3ee802a9b15bf0a202be66546a95705a3"
   },
   {
     "path": "gallery/avators.php",
@@ -206,8 +216,8 @@
   },
   {
     "path": "gallery/index.php",
-    "bytes": 9431,
-    "sha256": "affcca21915a451bc3ecaa654e73dc72741dce07fa6f4b7911f7964af0fa57ba"
+    "bytes": 9958,
+    "sha256": "9df616b95fa0fc4badc00bca6556f20556c1660899f832b107805aa6c2fc68bd"
   },
   {
     "path": "gallery/level.php",
@@ -266,13 +276,13 @@
   },
   {
     "path": "games/livebank.php",
-    "bytes": 5466,
-    "sha256": "b67428d8944d59a0ce9c54b09bf6797a3ff18f203eae3b3fa618f04df95ac908"
+    "bytes": 5470,
+    "sha256": "432ed3011a196866c5fa9c2e3159bba5af1afc3067678cccb126ce819e350d99"
   },
   {
     "path": "games/loterea.php",
-    "bytes": 6974,
-    "sha256": "aa756aaafa967076e777b1e0764a5627b3294b365e38158d13f6f2012fb9320c"
+    "bytes": 6976,
+    "sha256": "3e3d343796a802e2d515bd88c264f5ad4dfbbd3f106078b4269e9fb58ce9ed7e"
   },
   {
     "path": "games/magazin.php",
@@ -1488,15 +1498,5 @@
     "path": "images/avators2/12.gif",
     "bytes": 14859,
     "sha256": "aabda12bca9585807e9df7746a49c1a3fb4c114da163222ea3974b87b2c373c8"
-  },
-  {
-    "path": "images/avators2/120.gif",
-    "bytes": 13224,
-    "sha256": "afb22170831db285dd2b6aa4f9858c6fb5f2b3331e69d4cf0842209415a594bf"
-  },
-  {
-    "path": "images/avators2/121.gif",
-    "bytes": 13875,
-    "sha256": "74e4d34ef9c1afe16b4a8572a3fd50ad47d688bd77cdcc291185e94b860fab87"
   }
 ]
