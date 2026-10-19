@@ -1,6 +1,6 @@
 {
   "runtime": "PHP 8.4 WASM",
-  "requests": 152,
+  "requests": 149,
   "passed": [
     "four independent settings, random default without migration, 0–100 integer bounds, cost bounds, CSRF/Origin/array validation, stale save rejected, admin link",
     "three real game paths: correct balance arithmetic, durable result, POST-only, CSRF/Origin, strict cup choice, duplicate and refresh unchanged, read-only new-cup view",

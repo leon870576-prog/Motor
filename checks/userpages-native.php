@@ -18,7 +18,7 @@ try {
     require $root.'/includes/functions.php';require $root.'/includes/userpages.php';
     $config=['floodstime'=>5,'karantin'=>0,'regkeys'=>0];
     foreach (['PageOwner','Writer0','Writer1','Writer2','Writer3','Writer4','Writer5'] as $name) {
-        $p=array_fill(0,100,'0');$p[0]=$name;$p[6]='1';$p[25]='1';$p[49]='17';
+        $p=array_fill(0,100,'0');$p[0]=$name;$p[1]='fixture';$p[4]='fixture@example.test';$p[6]='1';$p[25]='1';$p[49]='17';
         file_put_contents($dir.'/profil/'.$name.'.prof',implode(':||:',$p));
     }
     $profileHash=hash_file('sha256',$dir.'/profil/PageOwner.prof');
@@ -31,8 +31,9 @@ try {
     $data=motor_userpage_read('PageOwner');
     if (count($data['guestbook'])!==60 || $data['revision']!==61 || count(array_unique(array_column($data['guestbook'],'id')))!==60) throw new RuntimeException('Lost or duplicated concurrent reviews');
     if ($profileHash!==hash_file('sha256',$dir.'/profil/PageOwner.prof')) throw new RuntimeException('Profile/authority unexpectedly changed');
+    for($i=0;$i<6;$i++) {$p=explode(':||:',file_get_contents($dir.'/profil/Writer'.$i.'.prof'));foreach([33,36,41] as $field) if ((int)$p[$field]!==10) throw new RuntimeException('Review activity not synchronized');}
     foreach (glob($dir.'/worker-*.log') as $log) if (trim(file_get_contents($log))!=='') throw new RuntimeException('Userpage worker emitted a warning');
-    echo 'PASS: personal pages, six workers, 120 submissions, exactly 60 reviews, no lost updates or profile changes'.PHP_EOL;
+    echo 'PASS: personal pages, six workers, 120 submissions, exactly 60 reviews, exact review counts/points/coins, unchanged owner authority'.PHP_EOL;
 } finally {
     foreach ($processes as $p) if (is_resource($p)) {proc_terminate($p);proc_close($p);}
     foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir,FilesystemIterator::SKIP_DOTS),RecursiveIteratorIterator::CHILD_FIRST) as $f) {$f->isDir()?rmdir($f->getPathname()):unlink($f->getPathname());}rmdir($dir);

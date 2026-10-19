@@ -3,6 +3,7 @@
 if (!defined('DATADIR')) { http_response_code(403); exit; }
 require_once __DIR__.'/gallery.php';
 require_once __DIR__.'/userpage-news-comments.php';
+require_once __DIR__.'/userpage-activity.php';
 
 function motor_userpage_login($value): bool {
     return is_string($value) && (bool)preg_match('/^[a-z0-9-]{3,20}$/Di', $value);
@@ -96,11 +97,14 @@ function motor_userpage_apply(string $owner,string $actor,bool $staff,string $ac
     if (!empty($profile[37]) || (!empty($config['regkeys']) && !empty($profile[46]))) throw new RuntimeException('Учётная запись не может публиковать записи.',403);
     if (str_starts_with($action,'comment_')) return motor_userpage_comment_apply($owner,$actor,$staff,$action,$input,$now,$profile);
     $self=$actor===$owner;
+    if (str_starts_with($action,'guest_')) motor_userpage_activity_receipts($profile[97]??null);
     if (!in_array($action,['save','news_add','news_edit','news_delete','guest_add','guest_edit','guest_delete'],true)) throw new RuntimeException('Неизвестное действие.',400);
     if (($action==='save' || str_starts_with($action,'news_') && $action!=='news_delete') && !$self) throw new RuntimeException('Изменять страницу и новости может только её владелец.',403);
     if (in_array($action,['news_add','guest_add','comment_add'],true) && (int)($profile[6]??0)+(int)($config['karantin']??0)>$now) throw new RuntimeException('Публикация станет доступна после карантина нового аккаунта.',403);
     return motor_userpage_mutate($owner,function(array $data) use($owner,$actor,$staff,$self,$action,$input,$now,$config): array {
         if (!$data['published'] && !$self && !$staff) throw new RuntimeException('Страница пока не опубликована.',404);
+        $data=motor_userpage_activity_upgrade($data);
+        if (str_starts_with($action,'guest_')) motor_userpage_activity_sync($actor,$owner,$data['comment_totals'][$actor]??0,$data['review_totals'][$actor]??0);
         $id='';
         if ($action==='save') {
             motor_userpage_version($input['revision']??null,$data['revision']);
@@ -131,6 +135,7 @@ function motor_userpage_apply(string $owner,string $actor,bool $staff,string $ac
                 $entry=['id'=>$id,'author'=>$actor,'text'=>$text,'created'=>$now,'updated'=>$now,'revision'=>1];
                 if ($kind==='news') $entry['title']=$title;
                 $data[$kind][]=$entry;
+                if ($kind==='guestbook') $data['review_totals'][$actor]=($data['review_totals'][$actor]??0)+1;
                 $data['recent'][]=['id'=>$id,'actor'=>$actor,'kind'=>$action,'hash'=>$hash,'time'=>$now];
                 $data['recent']=array_slice($data['recent'],-128);
             } else {
@@ -150,6 +155,8 @@ function motor_userpage_apply(string $owner,string $actor,bool $staff,string $ac
         $data['created']=$data['created']?:$now;$data['updated']=$now;$data['revision']++;
         $data['audit'][]=['time'=>$now,'actor'=>$actor,'action'=>$action,'id'=>$id];$data['audit']=array_slice($data['audit'],-100);
         return $data;
+    },function(array $data) use($owner,$actor,$action): void {
+        if (str_starts_with($action,'guest_')) motor_userpage_activity_sync($actor,$owner,$data['comment_totals'][$actor]??0,$data['review_totals'][$actor]??0);
     });
 }
 function motor_userpage_url(string $owner,array $query=[]): string {

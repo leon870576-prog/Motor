@@ -41,8 +41,8 @@ r=await req('/book/add.php',{uid,msg:'Сообщение для проверки
 write('dataforum/mainforum.dat','1|Проверка|999|999|\r\n');write('dataforum/topic1.dat','');
 r=await req('/forum/forum.php?act=create',{uid,fid:'1',title:'Проверка счётчиков',msg:'Первое сообщение темы'});assert.equal(r.httpStatusCode,302,r.text);
 let tid=read('dataforum/topic1.dat').trim().split('|')[0];r=await req('/forum/topic.php?act=add&fid=1&id='+tid,{uid,msg:'Второе сообщение темы'});assert.equal(r.httpStatusCode,302,r.text);assert.equal(+profile()[8],beforePosts[8]+2);
-const now=Math.floor(Date.now()/1000);write('news.dat',`Новость|Текст||${now}|InfoAdmin|991|\r\n`);
-r=await req('/news/komm.php?action=add&id=991',{uid,msg:'Комментарий к новости'});assert.equal(r.httpStatusCode,302);assert.equal(+profile()[33],beforePosts[33]+1);
+const now=Math.floor(Date.now()/1000);const newsBefore=profile().map(Number);write('news.dat',`Новость|Текст||${now}|InfoAdmin|991|\r\n`);
+r=await req('/news/komm.php?action=add&id=991',{uid,msg:'Комментарий к новости'});assert.equal(r.httpStatusCode,302);for(const n of [33,36,41]) assert.equal(+profile()[n],newsBefore[n]+1);
 assert.deepEqual(await pure('echo json_encode([stats_forum(),stats(1),stats(2),stats(0),stats(3)]);'),['1/2',1,2,1,1]);
 page=await req('/pages/statistik.php');for(const s of ['Тем в форуме: <b>1','Записей в форуме: <b>2','Записей в гостевой: <b>1','Комментариев в новостях: <b>1'])assert.ok(page.text.includes(s),s);
 write('dataforum/mainforum.dat','1|Проверка|999|999|\r\n');
@@ -63,7 +63,7 @@ write('datagallery/fotobase.dat',`Описание|Фото|InfoAdmin||${now}|1|
 write('datagallery/test.jpg.dat','Один||1|InfoAdmin|\nДва||2|InfoAdmin|\n');write('datagallery/missing.jpg.dat','Orphan\n');
 assert.deepEqual(await pure('echo json_encode([stats_gallery(),stats(7)]);'),[1,2]);
 // Gallery addition increments comments, not chat/forum totals.
-const commentsBefore=+profile()[33];r=await req('/gallery/index.php?action=addkomm&gid=test.jpg',{uid,msg:'Третий комментарий'});assert.equal(r.httpStatusCode,302,r.text);assert.equal(+profile()[33],commentsBefore+1);assert.equal(await pure('echo json_encode(stats(7));'),3);
+const commentsBefore=+profile()[33],galleryBefore=profile().map(Number);r=await req('/gallery/index.php?action=addkomm&gid=test.jpg',{uid,msg:'Третий комментарий'});assert.equal(r.httpStatusCode,302,r.text);for(const n of [33,36,41]) assert.equal(+profile()[n],galleryBefore[n]+1);assert.equal(await pure('echo json_encode(stats(7));'),3);
 pass('gallery photo/comment informers exclude missing images; actual gallery comment updates personal count');
 const member=profile();member[0]='InfoMember';member[7]='0';member[37]='1';member[38]=String(now+3600);member[46]='1';write('profil/InfoMember.prof',member.join(':||:'));
 write('datatmp/userlist.dat','stale\n');write('datatmp/adminlist.dat','');write('datatmp/banlist.dat','');write('datatmp/reglist.dat','');

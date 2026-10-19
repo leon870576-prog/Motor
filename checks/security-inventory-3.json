@@ -1211,8 +1211,8 @@
   },
   {
     "path": "includes/informers.php",
-    "bytes": 11346,
-    "sha256": "7cf0b61d1c563aeffe82ad84047363cd54c9375d86812977a74a514031e10ab2"
+    "bytes": 11746,
+    "sha256": "d95b677c9ec773b8113920876069aae5884c2c133f7b0ff5e648400810c0f4ee"
   },
   {
     "path": "includes/isset.php",
@@ -1330,14 +1330,19 @@
     "sha256": "0251cf69f4cbd72e0bc7ca80a190ffba264bc7a0c4ee54001c69255229fbe3dc"
   },
   {
+    "path": "includes/userpage-activity.php",
+    "bytes": 8515,
+    "sha256": "8ffec2b34f2179c8dac8e0ae0332c589cfdddae66314f9d36e524caf2fc46fdd"
+  },
+  {
     "path": "includes/userpage-news-comments.php",
-    "bytes": 9074,
-    "sha256": "b4b47fe6790716ae0842c8b3491d22e695b8e2f9befa1ad3069f72ceca24b95c"
+    "bytes": 6725,
+    "sha256": "168ba36b5c204e1f9041421a257b10cc7abec0348f30f52b1534fe7a9a3cd75f"
   },
   {
     "path": "includes/userpages.php",
-    "bytes": 15994,
-    "sha256": "eb296fe4188a8aab362cb6d8a7818586f5e0a0e548e57e3bf8add77e12d03014"
+    "bytes": 16688,
+    "sha256": "52cf827a99ed22d45946cc3c5494e6b6e1ebc9fa15c85e6652ba1b649842e7d6"
   },
   {
     "path": "index.php",
@@ -1493,10 +1498,5 @@
     "path": "mpanel/news.php",
     "bytes": 14279,
     "sha256": "5afc9921516520bba96d0ebbe95a9eaf4c7fc4cdf1c57af238155eba9b1f9fcd"
-  },
-  {
-    "path": "mpanel/phpinfo.php",
-    "bytes": 2307,
-    "sha256": "7249b60f56c17d23f178b8ebdec86f0e89de89daa0b02fe5e471b950a090f03c"
   }
 ]

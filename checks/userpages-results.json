@@ -30,7 +30,7 @@
     },
     {
       "file": "edit-review.html",
-      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook&edit=189bae05346dcf86e6bea55c34c4783d",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook&edit=3da6c1c144e4b42e3f0145670da261b6",
       "role": "visitor",
       "name": "edit-review"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file": "edit-news.html",
-      "url": "/pages/userpage.php?uz=PageOwner&tab=news&edit=e95e2343d9896dea7c903cf5c661b265",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=news&edit=2a340387c53e235aeb402dd2faab99d0",
       "role": "owner",
       "name": "edit-news"
     },

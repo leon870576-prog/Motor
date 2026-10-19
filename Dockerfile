@@ -24,6 +24,7 @@ COPY php.ini /usr/local/etc/php/conf.d/motor-test.ini
 COPY entrypoint.sh /usr/local/bin/motor-entrypoint
 COPY auth.php /opt/motor-auth.php
 COPY migrate.php /opt/motor-migrate.php
+COPY migrate-comment-activity.php /opt/motor-migrate-comment-activity.php
 COPY validate.php /opt/motor-validate.php
 COPY checks/gallery-native.php /opt/motor-gallery-native.php
 COPY checks/informers-native.php /opt/motor-informers-native.php
@@ -32,6 +33,7 @@ COPY checks/arcade-native.php /opt/motor-arcade-native.php
 COPY checks/userpages-native.php /opt/motor-userpages-native.php
 COPY checks/reputation-native.php /opt/motor-reputation-native.php
 COPY checks/userpage-comments-native.php /opt/motor-userpage-comments-native.php
+COPY checks/comment-activity-native.php /opt/motor-comment-activity-native.php
 COPY MIGRATION.json /opt/motor-migration.json
 COPY migrate-themes.php /opt/motor-migrate-themes.php
 RUN chmod 755 /usr/local/bin/motor-entrypoint \
@@ -43,6 +45,8 @@ RUN chmod 755 /usr/local/bin/motor-entrypoint \
  && php /opt/motor-userpages-native.php \
  && php /opt/motor-reputation-native.php \
  && php /opt/motor-userpage-comments-native.php \
+ && php /opt/motor-comment-activity-native.php \
+ && php -l /opt/motor-migrate-comment-activity.php \
  && php -l /opt/motor-migrate.php \
  && php -l /opt/motor-migrate-themes.php \
  && a2dismod mpm_event mpm_worker \

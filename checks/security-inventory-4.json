@@ -1,5 +1,10 @@
 [
   {
+    "path": "mpanel/phpinfo.php",
+    "bytes": 2307,
+    "sha256": "7249b60f56c17d23f178b8ebdec86f0e89de89daa0b02fe5e471b950a090f03c"
+  },
+  {
     "path": "mpanel/reglist.php",
     "bytes": 7710,
     "sha256": "eec8e1a88622eaa2e8e1a507cd399e67dcc3b4a01c2715099b88020813a10993"
@@ -61,8 +66,8 @@
   },
   {
     "path": "news/komm.php",
-    "bytes": 8259,
-    "sha256": "5c76c3235807a228dc4fecec643440580555f904383800bec5427ba9fc0cd77d"
+    "bytes": 8272,
+    "sha256": "4c23cc5421cbcb3aa4c5462a60ef2803c327119dba6bf2195e8852e927efb5aa"
   },
   {
     "path": "news/rss.php",

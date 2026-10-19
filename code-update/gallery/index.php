@@ -59,7 +59,7 @@ try {
         karantin($udata[6], 'Location: index.php?action=komm&gid='.$gid.'&isset=karantin');
         $comments[]=no_br(antimat(check($msg)),'<br />').'||'.SITETIME.'|'.$log.'|';
         motor_media_atomic($commentsPath,implode("\n",array_slice($comments,-$settings['comments_max']))."\n");
-        statistics(7);increment_profil($log,[33=>1,36=>1,41=>1],[14=>$ip]);
+        statistics(7);increment_profil($log,motor_comment_activity_deltas(1),[14=>$ip]);
         if ($returnPage!=='') {header('Location: '.motor_userpage_url($returnPage,['tab'=>'photos']).'#photo-'.rawurlencode($gid),true,303);exit;}
         header('Location: index.php?action=komm&gid='.$gid);exit;
     }

@@ -15,5 +15,5 @@
     "actual recovery GET leaves password unchanged; POST+CSRF changes it once and invalidates the link",
     "disabled mail reports failure without changing password, recovery token or cooldown"
   ],
-  "inventoriedFiles": 994
+  "inventoriedFiles": 995
 }

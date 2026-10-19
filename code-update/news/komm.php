@@ -135,7 +135,7 @@ if ($countstr>=$config['maxkommnews']) {
 delete_lines(DATADIR."datakomm/$id.dat",array(0,1));
 }
 
-increment_profil($log,[33=>1,36=>1,41=>1],[14=>$ip]);
+increment_profil($log,motor_comment_activity_deltas(1),[14=>$ip]);
 
 header ("Location: komm.php?id=$id&isset=addon&".SID); exit;
 

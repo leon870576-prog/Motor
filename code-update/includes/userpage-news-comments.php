@@ -16,44 +16,15 @@ function motor_userpage_validate_comments(array $data): void {
     }
     if ($total>2000) throw new RuntimeException('Превышен лимит комментариев страницы.',503);
     motor_userpage_comment_totals($data['comment_totals']??[]);
+    motor_userpage_comment_totals($data['review_totals']??[]);
 }
 function motor_userpage_comment_totals($value): array {
     if (!is_array($value) || count($value)>10000) throw new RuntimeException('Счётчики комментариев повреждены.',503);
     foreach ($value as $name=>$count) if (!motor_userpage_login((string)$name) || !is_int($count) || $count<0 || $count>1000000000) throw new RuntimeException('Счётчик комментариев повреждён.',503);
     return $value;
 }
-function motor_userpage_comment_receipts($value): array {
-    if ($value===null || $value==='' || $value==='0') return [];
-    if (!is_string($value) || !str_starts_with($value,'upc1:') || strlen($value)>524288) throw new RuntimeException('Счётчик профиля недоступен. Обратитесь к администратору.',503);
-    try {$receipts=json_decode(substr($value,5),true,8,JSON_THROW_ON_ERROR);}
-    catch (Throwable $e) {throw new RuntimeException('Счётчик профиля повреждён.',503);}
-    return motor_userpage_comment_totals($receipts);
-}
-// Page aggregate is durable before synchronization. Profile field 97 stores the
-// last applied aggregate per page together with field 33 under the common lock.
-// A retry repairs a missed increment without ever applying an aggregate twice.
-function motor_userpage_comment_sync(string $actor,string $owner,int $total): void {
-    $path=DATADIR.'profil/'.$actor.'.prof';
-    if (is_link(DATADIR.'profil') || is_link($path) || !is_file($path)) throw new RuntimeException('Профиль недоступен.',503);
-    $fp=@fopen($path,'r+b');if (!$fp) throw new RuntimeException('Счётчик профиля недоступен.',503);
-    try {
-        if (!flock($fp,LOCK_EX)) throw new RuntimeException('Счётчик профиля временно занят.',503);
-        if (fstat($fp)['size']>1048576) throw new RuntimeException('Профиль повреждён.',503);
-        $raw=stream_get_contents($fp);$p=explode(':||:',$raw);
-        if (($p[0]??'')!==$actor || empty($p[1]) || empty($p[4])) throw new RuntimeException('Профиль повреждён.',503);
-        $receipts=motor_userpage_comment_receipts($p[97]??null);$before=$receipts[$owner]??0;
-        if ($total<=$before) return;
-        if (count($receipts)>=10000 && !isset($receipts[$owner])) throw new RuntimeException('Достигнут лимит счётчика профиля.',409);
-        $receipts[$owner]=$total;$p=array_pad($p,100,'');
-        $p[33]=(string)(max(0,(int)($p[33]??0))+$total-$before);
-        $p[97]='upc1:'.json_encode($receipts,JSON_UNESCAPED_SLASHES|JSON_THROW_ON_ERROR);
-        $next=implode(':||:',$p);rewind($fp);
-        if (fwrite($fp,$next)!==strlen($next) || !ftruncate($fp,strlen($next)) || !fflush($fp)) {
-            rewind($fp);fwrite($fp,$raw);ftruncate($fp,strlen($raw));fflush($fp);
-            throw new RuntimeException('Комментарий сохранён, но счётчик не обновлён. Повторите отправку той же формы.',503);
-        }
-    } finally {flock($fp,LOCK_UN);fclose($fp);}
-}
+function motor_userpage_comment_receipts($value): array {return motor_userpage_activity_receipts($value)['news'];}
+function motor_userpage_comment_sync(string $actor,string $owner,int $total): void {motor_userpage_activity_sync($actor,$owner,$total,null);}
 function motor_userpage_comment_apply(string $owner,string $actor,bool $staff,string $action,array $input,int $now,array $profile): array {
     global $config;
     if (!in_array($action,['comment_add','comment_edit','comment_delete'],true)) throw new RuntimeException('Неизвестное действие.',400);

@@ -1,0 +1,9 @@
+{
+  "php": "8.4 WASM",
+  "requests": 35,
+  "passed": [
+    "all four comment sources add exactly +1 count/+1 point/+1 coin; questionnaire and list agree; personal edit/retry/delete and read-only views retain totals; authority unchanged",
+    "v1 backfill rewards already-counted news without incrementing count twice; recovers retained/deleted-journal reviews; private/deleted-owner pages included; exact backups and repeated migration unchanged",
+    "numeric logins and short profiles supported; unknown markers and symlink refused; migration preserves existing activity, money, authority and unrelated fields"
+  ]
+}

@@ -102,6 +102,12 @@ function motor_profile_update(string $login,array $set,array $delta=[]): void {
         if (fwrite($fp,$text)!==strlen($text) || !ftruncate($fp,strlen($text)) || !fflush($fp)) throw new RuntimeException('Не удалось сохранить профиль.');
     } finally {flock($fp,LOCK_UN);fclose($fp);}
 }
+// All comment sources use the same existing reward: +1 activity point and +1 coin.
+function motor_comment_activity_deltas(int $comments,int $rewards=-1): array {
+    if ($rewards===-1) $rewards=$comments;
+    if ($comments<0 || $rewards<0) throw new InvalidArgumentException('Неверное начисление комментариев.');
+    return [33=>$comments,36=>$rewards,41=>$rewards];
+}
 function increment_profil(string $login,array $delta,array $set=[]): void {motor_profile_update($login,$set,$delta);}
 
 function motor_info_online_rows(?array $rows=null,?int $now=null): array {

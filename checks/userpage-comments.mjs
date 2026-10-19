@@ -48,7 +48,7 @@ assert.ok(!('comments' in state().news[0]),'legacy records remain readable witho
 const url=base+'&tab=comments&post='+post;let r=await req(url);assert.equal(r.httpStatusCode,200);assert.ok(r.text.includes('Комментарии (0)'));
 for(const u of [base,base+'&tab=settings',url])assert.ok(!/гостев(?:ая|ую|ой) книг/i.test((await req(u)).text));
 await logout();r=await req(url);assert.equal(r.httpStatusCode,200);assert.ok(!r.text.includes('name="msg"'));assert.equal((await action('comment_add',{post,id:id(),msg:'Гость'})).httpStatusCode,403);
-await login('PageGuest');const initial=Number(profile('PageGuest')[33]),globalInitial=await total();const cid=id(),input={post,id:cid,msg:'Спасибо! [b]Будем.[/b] 😊'};cool();
+await login('PageGuest');const initial=Number(profile('PageGuest')[33]),initialPoints=Number(profile('PageGuest')[36]),initialMoney=Number(profile('PageGuest')[41]),globalInitial=await total();const cid=id(),input={post,id:cid,msg:'Спасибо! [b]Будем.[/b] 😊'};cool();
 for(const a of ['comment_add','comment_edit','comment_delete'])assert.equal((await req(base+'&action='+a+'&uid='+uid+'&post='+post+'&id='+cid)).httpStatusCode,405);
 const before=raw();
 for(const body of [{...input,uid:'wrong'},{...input,uid:''}])assert.equal((await action('comment_add',body)).httpStatusCode,403);
@@ -65,7 +65,7 @@ r=await req(url);assert.ok(r.text.includes('<b>Будем.</b>'));capture(r,url,
 r=await req(url+'&edit='+cid);assert.equal(r.httpStatusCode,200);capture(r,url+'&edit='+cid,'edit-comment');
 assert.equal((await action('comment_edit',{post,id:cid,revision:'1',msg:'Спасибо! Придём всей семьёй.'})).httpStatusCode,303);assert.equal((await action('comment_edit',{post,id:cid,revision:'1',msg:'Устаревшее'})).httpStatusCode,409);assert.equal(Number(profile('PageGuest')[33]),initial+1);
 // Crash-window recovery: comment saved, profile increment not yet applied. Retry repairs once.
-setProfile('PageGuest',{33:initial,97:''});assert.equal((await action('comment_add',input)).httpStatusCode,303);assert.equal(Number(profile('PageGuest')[33]),initial+1);assert.equal((await action('comment_add',input)).httpStatusCode,303);assert.equal(Number(profile('PageGuest')[33]),initial+1);
+setProfile('PageGuest',{33:initial,36:initialPoints,41:initialMoney,97:''});assert.equal((await action('comment_add',input)).httpStatusCode,303);assert.equal(Number(profile('PageGuest')[33]),initial+1);assert.equal((await action('comment_add',input)).httpStatusCode,303);assert.equal(Number(profile('PageGuest')[33]),initial+1);
 pass('legacy news, comment links/counters, guest read-only, POST/CSRF/Origin/types/lengths, idempotent retry, cooldown, profile and global totals, recoverable profile synchronization');
 await login('PageOther');assert.equal((await action('comment_edit',{post,id:cid,revision:'2',msg:'Подмена'})).httpStatusCode,403);assert.equal((await action('comment_delete',{post,id:cid,revision:'2',staff:'1'})).httpStatusCode,403);assert.equal((await req(url+'&edit='+cid)).httpStatusCode,403);
 await login('PageOwner');assert.equal((await action('comment_edit',{post,id:cid,revision:'2',msg:'Подмена владельцем'})).httpStatusCode,403);
@@ -86,9 +86,9 @@ pass('author-only editing, owner/staff deletion, stale revisions, private pages,
 let d=state();for(let i=0;i<12;i++)d.news[0].comments.push({id:id(),author:'PageGuest',text:'Комментарий соседа '+(i+1),created:1750000100+i,updated:1750000100+i,revision:1});save(d);
 r=await req(url);assert.match(r.text,/post=[a-f0-9]+&amp;tab=comments&amp;page=2/);r=await req(url+'&page=2');assert.equal(r.httpStatusCode,200);assert.equal((r.text.match(/id="comment-/g)||[]).length,2);capture(r,url+'&page=2','comments-page2');
 const valid=raw();d=state();while(d.news[0].comments.length<500)d.news[0].comments.push({id:id(),author:'PageGuest',text:'Лимит',created:1,updated:1,revision:1});d.recent=[];save(d);const limit=raw();assert.equal((await action('comment_add',{post,id:id(),msg:'Лишний'})).httpStatusCode,409);assert.equal(raw(),limit);php.writeFile(path,valid);
-setProfile('PageGuest',{97:'unrecognized:protected'});cool();const preserved=raw();assert.equal((await action('comment_add',{post,id:id(),msg:'Нельзя'})).httpStatusCode,503);assert.equal(raw(),preserved);assert.equal(profile('PageGuest')[97],'unrecognized:protected');setProfile('PageGuest',{97:profile('PageGuest')[97]});
+const genuineReceipt=profile('PageGuest')[97];setProfile('PageGuest',{97:'unrecognized:protected'});cool();const preserved=raw();assert.equal((await action('comment_add',{post,id:id(),msg:'Нельзя'})).httpStatusCode,503);assert.equal(raw(),preserved);assert.equal(profile('PageGuest')[97],'unrecognized:protected');
 // Restore the genuine receipt from before this corruption injection.
-setProfile('PageGuest',{97:'upc1:'+JSON.stringify({PageOwner:2})});
+setProfile('PageGuest',{97:genuineReceipt});
 setProfile('PageGuest',{6:Math.floor(Date.now()/1000)});cfg=php.readFileAsText('/www/local/config.dat').split('|');cfg[3]='86400';php.writeFile('/www/local/config.dat',cfg.join('|'));assert.equal((await action('comment_add',{post,id:id(),msg:'Карантин'})).httpStatusCode,403);cfg[3]='0';php.writeFile('/www/local/config.dat',cfg.join('|'));setProfile('PageGuest',{6:1});
 await login('PageOwner');const previousTotal=Number(profile('PageGuest')[33]);assert.equal((await action('news_delete',{id:post,revision:'2'})).httpStatusCode,303);assert.equal((await req(url)).httpStatusCode,404);assert.equal((await action('comment_add',{post,id:id(),msg:'Удалено'})).httpStatusCode,404);assert.equal(Number(profile('PageGuest')[33]),previousTotal);assert.equal(await total(),globalInitial);
 pass('independent pagination, limits, unknown profile state preserved, quarantine, news editing preserves comments, news deletion removes discussion and visible counts');
