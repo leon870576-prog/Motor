@@ -125,7 +125,7 @@ $globfiles = glob(DATADIR."*.dat");
 if (is_file(DATADIR.'board-settings.json')) $globfiles[] = DATADIR.'board-settings.json';
 if (is_file(DATADIR.'gallery-settings.json')) $globfiles[] = DATADIR.'gallery-settings.json';
 if (is_file(DATADIR.'attachment-settings.json')) $globfiles[] = DATADIR.'attachment-settings.json';
-foreach (['chat-settings.json','chat-state.json','arcade-settings.json'] as $chatFile) if (is_file(DATADIR.$chatFile)) $globfiles[] = DATADIR.$chatFile;
+foreach (['chat-settings.json','chat-state.json','arcade-settings.json','points-settings.json'] as $chatFile) if (is_file(DATADIR.$chatFile)) $globfiles[] = DATADIR.$chatFile;
 foreach ($globfiles as $filename) {
 $dirarc[] = $filename;
 }}

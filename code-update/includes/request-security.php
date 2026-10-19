@@ -3,7 +3,7 @@ if(!defined('BASEDIR')){http_response_code(403);exit;}
 // Legacy forms share one CSRF policy. Specific controllers still enforce permissions.
 function motor_request_reject(int $status,string $message): never {http_response_code($status);header('Content-Type: text/plain; charset=UTF-8');exit($message);}
 function motor_request_actions(): array {
-    return ['input.php'=>['exit'],'games/bank.php'=>['operacia'],'games/kredit.php'=>['operacia'],'games/loterea.php'=>['bilet'],
+    return ['input.php'=>['exit'],'games/bank.php'=>['operacia'],'games/kredit.php'=>['operacia'],'games/perevod.php'=>['go'],'pages/account.php'=>['editmail'],'games/loterea.php'=>['bilet'],
         'games/hi.php'=>['hi'],'games/kosti.php'=>['go'],'games/naperstki.php'=>['go'],'games/bandit.php'=>['go'],
         'games/health.php'=>['operacia'],'games/stamina.php'=>['operacia'],'games/magazin.php'=>['shop'],
         'games/21.php'=>['ini','game'],'votes/vote.php'=>['vote'],'pages/nickname.php'=>[''],'pages/newpass.php'=>[''],

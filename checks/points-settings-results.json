@@ -1,0 +1,14 @@
+{
+  "php": "8.4 WASM",
+  "requests": 100,
+  "passed": [
+    "ten settings: defaults, main-admin-only access, CSRF/Origin/type/range/order validation, stale save and read-only GET/HEAD",
+    "reputation and transfer thresholds at exact boundary; newbie recipient, strict amounts, self/invalid/missing users, CSRF, replay and overdraft guards",
+    "transfer receipts recover both interrupted windows, pending operations block new ones; credit boundary/replay/repayment and read-only overdue GET",
+    "email, nickname and valid GIF upload handlers enforce exact custom boundaries; identical upload is not charged twice",
+    "email/nickname/avatar/FAQ and all four antiflood tiers synchronized; old price form cannot reset avatar threshold; settings included in ZIP backup; zero thresholds accepted",
+    "large existing debt remains repayable; wallet rechecks current ban and credential under the profile lock",
+    "corrupt/symlink settings and unknown wallet state fail closed without modifying external files"
+  ],
+  "concurrency": "mandatory native Docker gate"
+}

@@ -9,7 +9,7 @@ function motor_reputation_form(string $owner): void {
     echo '<form class="up-actions reputation-form" method="post" action="'.BASEDIR.'pages/raiting.php?uz='.rawurlencode($owner).'">';
     motor_form_token();
     echo '<button type="submit" name="vote" value="plus" aria-label="Повысить авторитет пользователя">+1 к авторитету</button> <button type="submit" name="vote" value="minus" aria-label="Понизить авторитет пользователя">−1 к авторитету</button></form>';
-    echo '<p class="up-meta">Голосование доступно от 150 баллов активности. Получать голоса можно с первого дня. Между голосами — 3 часа; за себя и повторно за одного из последних 20 получателей голосовать нельзя.</p>';
+    echo '<p class="up-meta">Голосование доступно от '.motor_points_min('reputation').' баллов активности. Получать голоса можно с первого дня. Между голосами — 3 часа; за себя и повторно за одного из последних 20 получателей голосовать нельзя.</p>';
 }
 function motor_reputation_write($fp,string $text): void {
     rewind($fp);$done=0;$length=strlen($text);
@@ -41,7 +41,7 @@ function motor_reputation_vote($actor,$target,$vote,int $now,string $credentialH
         if ((int)$voter[37]===1 && (int)$voter[38]>$now) throw new RuntimeException('Голосование недоступно во время блокировки.',403);
         if (!empty($config['regkeys']) && (int)$voter[46]===1) throw new RuntimeException('Подтвердите регистрацию.',403);
         if ((int)$voter[6]+max(0,(int)($config['karantin']??0))>$now) throw new RuntimeException('Дождитесь окончания карантина регистрации.',403);
-        if ((int)$voter[36]<150) throw new RuntimeException('Для голосования нужно 150 баллов активности. Получать голоса можно без этого ограничения.',403);
+        if ((int)$voter[36]<motor_points_min('reputation')) throw new RuntimeException('Для голосования нужно '.motor_points_min('reputation').' баллов активности. Получать голоса можно без этого ограничения.',403);
         if ((int)$voter[48]>$now) throw new RuntimeException('Изменять авторитет можно раз в 3 часа.',429);
         $path=$root.'/'.$actor.'.dat';
         if (is_link($path) || (file_exists($path) && !is_file($path))) throw new RuntimeException('История голосов недоступна.',503);

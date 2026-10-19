@@ -31,6 +31,7 @@ COPY checks/informers-native.php /opt/motor-informers-native.php
 COPY checks/game21-native.php /opt/motor-game21-native.php
 COPY checks/arcade-native.php /opt/motor-arcade-native.php
 COPY checks/userpages-native.php /opt/motor-userpages-native.php
+COPY checks/wallet-native.php /opt/motor-wallet-native.php
 COPY checks/reputation-native.php /opt/motor-reputation-native.php
 COPY checks/userpage-comments-native.php /opt/motor-userpage-comments-native.php
 COPY checks/comment-activity-native.php /opt/motor-comment-activity-native.php
@@ -43,6 +44,7 @@ RUN chmod 755 /usr/local/bin/motor-entrypoint \
  && php /opt/motor-game21-native.php \
  && php /opt/motor-arcade-native.php \
  && php /opt/motor-userpages-native.php \
+ && php /opt/motor-wallet-native.php \
  && php /opt/motor-reputation-native.php \
  && php /opt/motor-userpage-comments-native.php \
  && php /opt/motor-comment-activity-native.php \

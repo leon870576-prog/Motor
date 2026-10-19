@@ -167,7 +167,7 @@ function motor_userpage_label(string $name): string {
     if (!motor_userpage_login($name)) return 'Участник';
     try {$p=motor_userpage_profile($name);} catch (Throwable $e) {return motor_gallery_escape($name);}
     global $config;
-    $label=!empty($config['includenick']) && (int)($p[36]??0)>=150 && !empty($p[65])?motor_gallery_plain($p[65]):$name;
+    $label=!empty($config['includenick']) && (int)($p[36]??0)>=motor_points_min('nickname') && !empty($p[65])?motor_gallery_plain($p[65]):$name;
     return motor_gallery_escape($label);
 }
 function motor_userpage_author(string $name): string {

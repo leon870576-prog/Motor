@@ -11,6 +11,7 @@
 #-----------------------------------------------------#	
 require_once "../includes/start.php";
 require_once "../includes/functions.php";
+require_once "../includes/wallet.php";
 require_once "../includes/header.php";
 include_once "../themes/".$config['themes']."/index.php";
 
@@ -138,32 +139,13 @@ echo 'Всего аваторов: <b>'.(int)$total.'</b><br />';
 ##                                    Покупка аватара                                     ##
 ############################################################################################
 if($action=="addbuy"){
-motor_form_guard(['av']);
-
-$uid = $_POST['uid'];
-$av = $_POST['av'];
-
-if ($uid==$_SESSION['token']){
-if (preg_match('/^(?:[1-9][0-9]?|1[0-9]{2}|200)\.gif$/D', $av)){
-if (file_exists("../images/avators2/$av")){
-if ($udata[43]!="images/avators2/$av"){
-if ($udata[41]>=$config['avatarpay']){	
-
-change_profil($log, array(41=>$udata[41]-$config['avatarpay'], 43=>"images/avators2/$av"));
-
-if (file_exists(DATADIR.'dataavators/'.$log.'.gif')){ unlink (DATADIR.'dataavators/'.$log.'.gif'); }
-
-echo '<br />Аватар успешно куплен!<br />';
-echo 'Cейчас ваш аватар: '.user_avatars($log).'<br />';
-echo 'C вашего счета списано '.moneys($config['avatarpay']).'<br />';
-
-} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недостаточно средств на счету</b><br />';}
-} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Вы уже купили это аватар!</b><br />';}
-} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Такого аватара не существует!</b><br />';}
-} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недопустимое название аватара!</b><br />';}
-} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
-
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="avators.php?action=buy&amp;'.SID.'">Вернуться</a>';
+    motor_form_guard(['av']);
+    try {
+        $av=$_POST['av'];if(!preg_match('/^(?:[1-9][0-9]?|1[0-9]{2}|200)\.gif$/D',$av) || !is_file('../images/avators2/'.$av))throw new RuntimeException('Такого аватара не существует.',400);
+        motor_wallet_avatar($log,'images/avators2/'.$av,null,SITETIME,$udata[1]);
+        echo '<p>Аватар успешно выбран. Повторная покупка текущего аватара не списывает деньги.</p>'.user_avatars($log);
+    }catch(Throwable $e){http_response_code(in_array($e->getCode(),[400,403,409],true)?$e->getCode():503);echo '<p role="alert">'.htmlspecialchars($e->getMessage(),ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8').'</p>';}
+    echo '<p><a href="avators.php?action=buy">Вернуться</a></p>';
 }
 
 ############################################################################################
@@ -175,7 +157,7 @@ echo '<a href="avators.php?'.SID.'">Выбрать</a> | <a href="avators.php?ac
 
 echo 'В наличии: '.moneys($udata[41]).'<br />';
 
-if ($udata[36]>=$config['avatarpoints']){		
+if ($udata[36]>=motor_points_min('avatar_upload')){
 if ($udata[41]>=$config['avatarupload']){
 
 echo '<form action="avators.php?action=addload&amp;'.SID.'" method="post" name="form" enctype="multipart/form-data">';
@@ -185,12 +167,12 @@ echo '<input type="file" name="file" /><br /><br />';
 echo '<input type="submit" value="Загрузить" /></form><hr />';
 
 } else {echo '<b>У вас недостаточное количество денег на счету для загрузки аватара!</b><br /><br />';}
-} else {echo '<b>У вас недостаточное количество баллов, необходимо более '.(int)$config['avatarpoints'].' баллов!</b><br /><br />';}
+} else {echo '<b>У вас недостаточное количество баллов, необходимо не менее '.(int)motor_points_min('avatar_upload').' баллов!</b><br /><br />';}
 
 echo 'Cейчас ваш аватар: '.user_avatars($log).'<br />';
 echo 'Стоимость загрузки аватара составляет '.moneys($config['avatarupload']).'<br />';
 echo 'Внимание! На загрузку аватаров установлены строгие ограничения<br />';
-echo 'Загружать аватары могут только пользователи у которых более '.(int)$config['avatarpoints'].' баллов<br />';
+echo 'Загружать аватары могут только пользователи у которых не менее '.(int)motor_points_min('avatar_upload').' баллов<br />';
 echo 'Размер аватара должен быть '.(int)$config['avatarsize'].'*'.(int)$config['avatarsize'].' px, вес не более чем '.formatsize($config['avatarweight']).'<br />';
 echo 'Расширение аватаров в формате .gif (в нижнем регистре)<br /><br />';
 }
@@ -221,19 +203,14 @@ if ($av_string=='GIF' && $size && $size[2] === IMAGETYPE_GIF){
 if ($avat_size>0 && $avat_size<=$config['avatarweight']){
 if ($size[0]==$config['avatarsize'] && $size[1]==$config['avatarsize']){
 if ($udata[41]>=$config['avatarupload']){
-if ($udata[36]>=$config['avatarpoints']){
+if ($udata[36]>=motor_points_min('avatar_upload')){
 	
-if (move_uploaded_file($_FILES['file']['tmp_name'], DATADIR.'dataavators/'.$log.'.gif')){
-@chmod(DATADIR.'dataavators/'.$log.'.gif', 0666);	
+try {
+    motor_wallet_avatar($log,"gallery/avators.php?uz=$log",$_FILES['file']['tmp_name'],SITETIME,$udata[1]);
+    echo '<p>Аватар успешно загружен. Повтор того же файла не списывает деньги.</p>'.user_avatars($log);
+} catch(Throwable $e){http_response_code(in_array($e->getCode(),[400,403,409],true)?$e->getCode():503);echo '<p role="alert">'.htmlspecialchars($e->getMessage(),ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8').'</p>';}
 
-change_profil($log, array(41=>$udata[41]-$config['avatarupload'], 43=>"gallery/avators.php?uz=$log"));
-
-echo '<br />Аватар успешно загружен!<br />';
-echo 'Cейчас ваш аватар: '.user_avatars($log).'<br />';
-echo 'C вашего счета списано '.moneys($config['avatarupload']).'<br /><br />';
-
-} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не удалось загрузить аватар!</b><br />';}
-} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недостаточное количество баллов, необходимо более '.(int)$config['avatarpoints'].' баллов</b><br />';}
+} else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Недостаточное количество баллов, необходимо не менее '.(int)motor_points_min('avatar_upload').' баллов</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! На вашем счете недостаточно средств!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Размер аватара должен быть '.(int)$config['avatarsize'].'*'.(int)$config['avatarsize'].' px</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Вес аватара должен быть не более чем '.formatsize($config['avatarweight']).'</b><br />';}

@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 266,
-    "sha256": "51c5132f000690152fa775497593e7a678f5bf3d975e4fb58836bf2a24b61490"
+    "bytes": 265,
+    "sha256": "0b4c7a26a8cd7603886fa4d2360c3bc8b3a3006de4ade00a767d74c2c67e2f6f"
   },
   {
     "path": "assets/lesika/arcade.css",
@@ -271,8 +271,8 @@
   },
   {
     "path": "games/kredit.php",
-    "bytes": 6980,
-    "sha256": "8a89e4a25103e7e29da9d9b7484bdaee8d6ed65b795b22fa1d0b462527c99471"
+    "bytes": 4429,
+    "sha256": "ddae27c6cd186bb5a3ae02c2cf974a6e99091e7118a6ee277549a4209f9ff49b"
   },
   {
     "path": "games/livebank.php",
@@ -296,8 +296,8 @@
   },
   {
     "path": "games/perevod.php",
-    "bytes": 5366,
-    "sha256": "7a834993ebc0dac41a23c2c6ce16fbf7674cbfd889341aaa81530528321b249c"
+    "bytes": 3905,
+    "sha256": "e6c4ca83d04918d605339edc6f555603a7e5f67d062beb8247d6469eb8ace5ec"
   },
   {
     "path": "games/stamina.php",

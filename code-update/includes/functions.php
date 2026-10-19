@@ -15,6 +15,7 @@ if (!defined('BASEDIR')) {
 }
 
 require_once __DIR__.'/informers.php';
+require_once __DIR__.'/points-settings.php';
 
 // --------------------------- Функция перевода секунд во время -----------------------------//
 function maketime($string) {
@@ -639,7 +640,7 @@ function nickname($string) {
 
 			$data = explode(":||:", $text);
 
-			if ($data[65] != "" && $data[36] >= 150) {
+			if ($data[65] != "" && $data[36] >= motor_points_min('nickname')) {
 				$string = $data[65];
 			}
 		}
@@ -653,17 +654,18 @@ function flood_period() {
 	global $config, $udata;
 
 	$period = $config['floodstime'];
+	$thresholds=motor_points_settings();
 
-	if ($udata[36] < 50) {
+	if ($udata[36] < $thresholds['flood_newbie']) {
 		$period = round($config['floodstime'] * 2);
 	}
-	if ($udata[36] >= 500) {
+	if ($udata[36] >= $thresholds['flood_half']) {
 		$period = round($config['floodstime'] / 2);
 	}
-	if ($udata[36] >= 1000) {
+	if ($udata[36] >= $thresholds['flood_third']) {
 		$period = round($config['floodstime'] / 3);
 	}
-	if ($udata[36] >= 5000) {
+	if ($udata[36] >= $thresholds['flood_sixth']) {
 		$period = round($config['floodstime'] / 6);
 	}
 	if (is_admin()) {

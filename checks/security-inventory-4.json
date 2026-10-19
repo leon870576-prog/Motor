@@ -1,8 +1,23 @@
 [
   {
+    "path": "mpanel/navigation.php",
+    "bytes": 10679,
+    "sha256": "b0d27143b57fe01241d6bb6554f694f3b4eed33839e414a0baa7a74313bad51e"
+  },
+  {
+    "path": "mpanel/news.php",
+    "bytes": 14279,
+    "sha256": "5afc9921516520bba96d0ebbe95a9eaf4c7fc4cdf1c57af238155eba9b1f9fcd"
+  },
+  {
     "path": "mpanel/phpinfo.php",
     "bytes": 2307,
     "sha256": "7249b60f56c17d23f178b8ebdec86f0e89de89daa0b02fe5e471b950a090f03c"
+  },
+  {
+    "path": "mpanel/points-settings.php",
+    "bytes": 3156,
+    "sha256": "0fc58dc723ec1e54550dc54ac4c1ae6acca9560e34c14f2dbe91328f4a8a5dc0"
   },
   {
     "path": "mpanel/reglist.php",
@@ -16,8 +31,8 @@
   },
   {
     "path": "mpanel/setting.php",
-    "bytes": 52652,
-    "sha256": "b09a4044f3ca676808418cd61c5944bae49780771201025281c42b13b615e31d"
+    "bytes": 52639,
+    "sha256": "1ac020bfae929fdd54f5132a1cb616ec35977a9c0fb18b6617264cc892f4a9eb"
   },
   {
     "path": "mpanel/siteinfo.php",
@@ -76,8 +91,8 @@
   },
   {
     "path": "pages/account.php",
-    "bytes": 6956,
-    "sha256": "016e449d5681cd72302eff7805641f96a2cd95dd7fdc725cf27fa1972408f3f8"
+    "bytes": 7123,
+    "sha256": "2115dd6e5c8ba1271eb61a45f1a8fc5856bcac0da9b9b42f69cce2a4286b6111"
   },
   {
     "path": "pages/adminlist.php",
@@ -91,8 +106,8 @@
   },
   {
     "path": "pages/avators.php",
-    "bytes": 14837,
-    "sha256": "d70ae6b6e09be1b1b323fd2a3e9d7857853725d91282c5faedfbcc28db36b0ce"
+    "bytes": 13984,
+    "sha256": "b748325cfcf88de8ab26fa4bbdb3293514b97263afbb8e01a1f3357b703b9adf"
   },
   {
     "path": "pages/avtorlist.php",
@@ -126,8 +141,8 @@
   },
   {
     "path": "pages/faq.php",
-    "bytes": 8612,
-    "sha256": "aed842faf736b2f82343eb2bebaaf430de119e0e8b75cd048195703be6666702"
+    "bytes": 8317,
+    "sha256": "41533eb87f421807183fbca4267037a211079e289fa9d717f0b1c016a3c329e3"
   },
   {
     "path": "pages/ignor.php",
@@ -171,8 +186,8 @@
   },
   {
     "path": "pages/nickname.php",
-    "bytes": 3909,
-    "sha256": "736581bf3c99e8fffbdc0da99770756de80d842df69092d4903243b29adcd865"
+    "bytes": 3889,
+    "sha256": "48b108429e527eb6f482c82c4b365093840a81901c97754c4a44b0877a8e95d8"
   },
   {
     "path": "pages/online.php",

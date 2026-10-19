@@ -759,7 +759,7 @@ echo '<form method="post" action="setting.php?action=editeleven&amp;uid='.$_SESS
 
 echo 'Цена на покупку аватара: <br /><input name="set114" maxlength="9" value="'.$con_data[114].'" /><br />';
 echo 'Цена на загрузку аватара: <br /><input name="set115" maxlength="9" value="'.$con_data[115].'" /><br />';
-echo 'Кол. баллов для загрузки аватара: <br /><input name="set132" maxlength="4" value="'.$con_data[132].'" /><br />';
+echo '<p>Баллов для загрузки аватара: '.motor_points_min('avatar_upload').'. <a href="points-settings.php">Изменить пороги баллов</a>.</p>';
 echo 'Размер загружаемого аватара (px): <br /><input name="set133" maxlength="3" value="'.$con_data[133].'" /><br />';
 echo 'Вес загружаемого аватара (byte): <br /><input name="set134" maxlength="5" value="'.$con_data[134].'" /><br />';
 echo 'Джек-пот в лотерее: <br /><input name="set119" maxlength="9" value="'.$con_data[119].'" /><br />';
@@ -784,9 +784,9 @@ if ($action=="editeleven"){
 $uid = check($_GET['uid']);
 
 if ($uid==$_SESSION['token']){
-if ($_POST['set114']!="" && $_POST['set115']!="" && $_POST['set119']!="" && $_POST['set120']!="" && $_POST['set121']!="" && $_POST['set122']!="" && $_POST['set123']!="" && $_POST['set124']!="" && $_POST['set125']!="" && $_POST['set132']!="" && $_POST['set133']!="" && $_POST['set134']!="" && $_POST['set135']!=""){
+if ($_POST['set114']!="" && $_POST['set115']!="" && $_POST['set119']!="" && $_POST['set120']!="" && $_POST['set121']!="" && $_POST['set122']!="" && $_POST['set123']!="" && $_POST['set124']!="" && $_POST['set125']!="" && $_POST['set133']!="" && $_POST['set134']!="" && $_POST['set135']!=""){
 
-change_setting(array(114=>(int)$_POST['set114'], 115=>(int)$_POST['set115'], 119=>(int)$_POST['set119'], 120=>(int)$_POST['set120'], 121=>(int)$_POST['set121'], 122=>(int)$_POST['set122'], 123=>(int)$_POST['set123'], 124=>(int)$_POST['set124'], 125=>(int)$_POST['set125'], 132=>(int)$_POST['set132'], 133=>(int)$_POST['set133'], 134=>(int)$_POST['set134'], 135=>(int)$_POST['set135']));
+change_setting(array(114=>(int)$_POST['set114'], 115=>(int)$_POST['set115'], 119=>(int)$_POST['set119'], 120=>(int)$_POST['set120'], 121=>(int)$_POST['set121'], 122=>(int)$_POST['set122'], 123=>(int)$_POST['set123'], 124=>(int)$_POST['set124'], 125=>(int)$_POST['set125'], 133=>(int)$_POST['set133'], 134=>(int)$_POST['set134'], 135=>(int)$_POST['set135']));
 
 header ("Location: setting.php?isset=mp_yesset&".SID); exit;
 

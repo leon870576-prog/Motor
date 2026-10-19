@@ -1176,8 +1176,8 @@
   },
   {
     "path": "includes/functions.php",
-    "bytes": 70368,
-    "sha256": "dce46c4eaea1cef83fa605ab8b17c749ef372bee7715e741f84d5dfad7b27be9"
+    "bytes": 70567,
+    "sha256": "770ccd208edaad6fa6d566e37ae7573a4e0889cc1425dbd27548eacfe9215040"
   },
   {
     "path": "includes/gallery.php",
@@ -1285,6 +1285,11 @@
     "sha256": "23dd75cf4dac3f8b199f50810dfe3d3ea4cab9bd77108229047a253ad064b290"
   },
   {
+    "path": "includes/points-settings.php",
+    "bytes": 4519,
+    "sha256": "7fb3a664010a00302a8f95f0e7e40d8783ff597869180bd169625130f17f6846"
+  },
+  {
     "path": "includes/quotesbase.php",
     "bytes": 35476,
     "sha256": "48dc4bbd03162ce73e4cd6b33ea9478141b24beadd097ea834e2624132810b66"
@@ -1301,13 +1306,13 @@
   },
   {
     "path": "includes/reputation.php",
-    "bytes": 8167,
-    "sha256": "881dba96c6cecf6141e9b5df804cd9e4c1a8d18700d18612189b815c472b1e18"
+    "bytes": 8256,
+    "sha256": "774d674f3a11feed6d1af30b959dba70a523e226f00d7bb7cf38530a50bee262"
   },
   {
     "path": "includes/request-security.php",
-    "bytes": 5796,
-    "sha256": "83a5baece8db28336659f7f3d2408c56d0920b1c4e24248db4488052db4e3c53"
+    "bytes": 5858,
+    "sha256": "c351bcc21e12a5d2eef358873d25a856c22223e6dd278a3ac4bfa332f20a3e37"
   },
   {
     "path": "includes/skin.php",
@@ -1341,8 +1346,13 @@
   },
   {
     "path": "includes/userpages.php",
-    "bytes": 16688,
-    "sha256": "52cf827a99ed22d45946cc3c5494e6b6e1ebc9fa15c85e6652ba1b649842e7d6"
+    "bytes": 16713,
+    "sha256": "7e0b8aea08c2175e8d68b52aa6f6375d9f46e531d7c0a88cf6d692dcd79ba5a2"
+  },
+  {
+    "path": "includes/wallet.php",
+    "bytes": 16321,
+    "sha256": "d68c721e0e16e61daa6fb2265519e5ec67ac23547a575f9205b851ce00291daa"
   },
   {
     "path": "index.php",
@@ -1391,8 +1401,8 @@
   },
   {
     "path": "mpanel/backup.php",
-    "bytes": 14632,
-    "sha256": "631707b34f8a2155e3c90966e090b3db84e3df4af663df04b30bb49ec9a94157"
+    "bytes": 14655,
+    "sha256": "7dffadf5cfb2486372e0dd5a8cb44bd7cce62d21f4d8db5da0084acdaeb95a28"
   },
   {
     "path": "mpanel/ban.php",
@@ -1471,8 +1481,8 @@
   },
   {
     "path": "mpanel/index.php",
-    "bytes": 9286,
-    "sha256": "fea4ff1f5f09248d1989be5311b0a19c01a74cf1ef6021eb4b8c39ea1ba66540"
+    "bytes": 9381,
+    "sha256": "4919d598ab0930bbf4af952314ff05eb12083490c482050111465d606c813840"
   },
   {
     "path": "mpanel/license.php",
@@ -1488,15 +1498,5 @@
     "path": "mpanel/logfiles.php",
     "bytes": 5376,
     "sha256": "6f94a01559be2b815ca7c1ab481feb08790409d52642d89dc3e6dc939438f6a5"
-  },
-  {
-    "path": "mpanel/navigation.php",
-    "bytes": 10679,
-    "sha256": "b0d27143b57fe01241d6bb6554f694f3b4eed33839e414a0baa7a74313bad51e"
-  },
-  {
-    "path": "mpanel/news.php",
-    "bytes": 14279,
-    "sha256": "5afc9921516520bba96d0ebbe95a9eaf4c7fc4cdf1c57af238155eba9b1f9fcd"
   }
 ]
