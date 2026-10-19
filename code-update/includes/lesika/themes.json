@@ -1,0 +1,258 @@
+{
+  "lesika_dvor": {
+    "name": "Тёплый двор",
+    "description": "Компактная: текст 14 px, уменьшенные отступы. Кремовый фон и терракотовые акценты",
+    "number": 0,
+    "colors": {
+      "--bg": "#fcf8f1",
+      "--surface": "#fffdf9",
+      "--accent": "#b04d32",
+      "--accent-dark": "#963d27",
+      "--ink": "#392d25",
+      "--muted": "#716052",
+      "--line": "#ecdfd2",
+      "--wash": "#f8ecdc",
+      "--soft": "#f3dfcc",
+      "--sage": "#626a42",
+      "--title": "Arial,Helvetica,sans-serif",
+      "--on-accent": "#fffdf9"
+    },
+    "dark": false,
+    "layout": "compact",
+    "density": "compact"
+  },
+  "lesika_gazeta": {
+    "name": "Городская газета",
+    "description": "Цвет бумаги и спокойная книжная типографика",
+    "number": 1,
+    "colors": {
+      "--bg": "#f7eedb",
+      "--surface": "#fbf4e5",
+      "--accent": "#813d28",
+      "--accent-dark": "#963d27",
+      "--ink": "#3d281e",
+      "--muted": "#716052",
+      "--line": "#dcc5a9",
+      "--wash": "#eddfc8",
+      "--soft": "#f3dfcc",
+      "--sage": "#5e653f",
+      "--title": "Georgia,'Times New Roman',serif",
+      "--on-accent": "#fffdf9"
+    },
+    "dark": false,
+    "layout": "compact"
+  },
+  "lesika_gostinaya": {
+    "name": "Городская гостиная",
+    "description": "Мягкие персиковые оттенки",
+    "number": 2,
+    "colors": {
+      "--bg": "#fbf3e8",
+      "--surface": "#fffaf4",
+      "--accent": "#aa4b3c",
+      "--accent-dark": "#963d27",
+      "--ink": "#392d25",
+      "--muted": "#716052",
+      "--line": "#ecdfd2",
+      "--wash": "#fae4cc",
+      "--soft": "#f5d9bb",
+      "--sage": "#626a42",
+      "--title": "Arial,Helvetica,sans-serif",
+      "--on-accent": "#fffdf9"
+    },
+    "dark": false,
+    "layout": "compact"
+  },
+  "lesika_solnce": {
+    "name": "Солнечный город",
+    "description": "Мёд, песок и солнечное настроение",
+    "number": 3,
+    "colors": {
+      "--bg": "#fff8e6",
+      "--surface": "#fffdf5",
+      "--accent": "#925713",
+      "--accent-dark": "#8d5011",
+      "--ink": "#392d25",
+      "--muted": "#716052",
+      "--line": "#eedeb9",
+      "--wash": "#ffedc2",
+      "--soft": "#f7dfaa",
+      "--sage": "#626a42",
+      "--title": "Arial,Helvetica,sans-serif",
+      "--on-accent": "#fffdf9"
+    },
+    "dark": false,
+    "layout": "compact"
+  },
+  "lesika_vecher": {
+    "name": "Вечерний уют",
+    "description": "Компактная: текст 14 px, уменьшенные отступы. Тёплый тёмный фон и янтарный свет",
+    "number": 4,
+    "colors": {
+      "--bg": "#28211d",
+      "--surface": "#352b24",
+      "--accent": "#e4ae70",
+      "--accent-dark": "#f1c28e",
+      "--ink": "#f4e9da",
+      "--muted": "#bfaa96",
+      "--line": "#514234",
+      "--wash": "#443325",
+      "--soft": "#5d422c",
+      "--sage": "#a5af7a",
+      "--title": "Arial,Helvetica,sans-serif",
+      "--on-accent": "#28211d"
+    },
+    "dark": true,
+    "layout": "compact",
+    "density": "compact"
+  },
+  "lesika_albom": {
+    "name": "Соседский альбом",
+    "description": "Бежевые страницы семейного альбома",
+    "number": 5,
+    "colors": {
+      "--bg": "#f5edde",
+      "--surface": "#fff9ed",
+      "--accent": "#9c4934",
+      "--accent-dark": "#963d27",
+      "--ink": "#392d25",
+      "--muted": "#6c5c4e",
+      "--line": "#e0cfb5",
+      "--wash": "#eaddc5",
+      "--soft": "#f3dfcc",
+      "--sage": "#5e653f",
+      "--title": "Georgia,'Times New Roman',serif",
+      "--on-accent": "#fffdf9"
+    },
+    "dark": false,
+    "layout": "compact"
+  },
+  "lesika_uyut": {
+    "name": "Современный уют",
+    "description": "Светлое оформление и сдержанные акценты",
+    "number": 6,
+    "colors": {
+      "--bg": "#faf8f4",
+      "--surface": "#fffefa",
+      "--accent": "#905945",
+      "--accent-dark": "#963d27",
+      "--ink": "#44382f",
+      "--muted": "#716052",
+      "--line": "#e9e0d6",
+      "--wash": "#f1e8df",
+      "--soft": "#e7d7c9",
+      "--sage": "#626a42",
+      "--title": "Georgia,'Times New Roman',serif",
+      "--on-accent": "#fffdf9"
+    },
+    "dark": false,
+    "layout": "compact"
+  },
+  "lesika_web_terrace": {
+    "name": "Тёплая веранда",
+    "description": "Кремовые карточки и просторная сетка",
+    "number": 7,
+    "layout": "web",
+    "colors": {
+      "--bg": "#fbf5eb",
+      "--surface": "#fffdf8",
+      "--accent": "#97462f",
+      "--accent-dark": "#783522",
+      "--ink": "#392c23",
+      "--muted": "#725f50",
+      "--line": "#e5d4bf",
+      "--wash": "#f3e5d0",
+      "--soft": "#edd3b5",
+      "--sage": "#606b48",
+      "--title": "Georgia,serif",
+      "--on-accent": "#fffdf9"
+    },
+    "dark": false
+  },
+  "lesika_web_press": {
+    "name": "Городской журнал",
+    "description": "Компактная: текст 14 px, уменьшенные отступы. Бумажный фон, колонки и книжные заголовки",
+    "number": 8,
+    "layout": "web",
+    "colors": {
+      "--bg": "#f3ead7",
+      "--surface": "#fcf6e8",
+      "--accent": "#753f2a",
+      "--accent-dark": "#62331f",
+      "--ink": "#32271e",
+      "--muted": "#695c4b",
+      "--line": "#cdbc9f",
+      "--wash": "#e9dcc2",
+      "--soft": "#e5ceb0",
+      "--sage": "#5a623c",
+      "--title": "Georgia,serif",
+      "--on-accent": "#fffdf9"
+    },
+    "dark": false,
+    "density": "compact"
+  },
+  "lesika_web_garden": {
+    "name": "Садовая площадь",
+    "description": "Шалфей, песочные оттенки и мягкие карточки",
+    "number": 9,
+    "layout": "web",
+    "colors": {
+      "--bg": "#f4f2e7",
+      "--surface": "#fdfcf4",
+      "--accent": "#536241",
+      "--accent-dark": "#405131",
+      "--ink": "#303b29",
+      "--muted": "#656653",
+      "--line": "#d8dcc6",
+      "--wash": "#e9ecd9",
+      "--soft": "#dae1bf",
+      "--sage": "#556744",
+      "--title": "Arial,Helvetica,sans-serif",
+      "--on-accent": "#fffdf9"
+    },
+    "dark": false
+  },
+  "lesika_web_coffee": {
+    "name": "Кофейная",
+    "description": "Кофейные оттенки и боковое меню на компьютере",
+    "number": 10,
+    "layout": "web",
+    "colors": {
+      "--bg": "#efe3d5",
+      "--surface": "#fff8ed",
+      "--accent": "#79432e",
+      "--accent-dark": "#603120",
+      "--ink": "#38291f",
+      "--muted": "#6b5847",
+      "--line": "#d8c2a8",
+      "--wash": "#e9d5bc",
+      "--soft": "#dabb98",
+      "--sage": "#626040",
+      "--title": "Georgia,serif",
+      "--on-accent": "#fffdf9"
+    },
+    "dark": false
+  },
+  "lesika_web_evening": {
+    "name": "Вечер у камина",
+    "description": "Компактная: текст 14 px, уменьшенные отступы. Тёмное дерево, медные акценты и широкие карточки",
+    "number": 11,
+    "layout": "web",
+    "colors": {
+      "--bg": "#241e1a",
+      "--surface": "#302720",
+      "--accent": "#efbc84",
+      "--accent-dark": "#ffce9a",
+      "--ink": "#f5e8d7",
+      "--muted": "#cbb49c",
+      "--line": "#574636",
+      "--wash": "#3e3024",
+      "--soft": "#624730",
+      "--sage": "#bec791",
+      "--title": "Georgia,serif",
+      "--on-accent": "#241e1a"
+    },
+    "dark": true,
+    "density": "compact"
+  }
+}

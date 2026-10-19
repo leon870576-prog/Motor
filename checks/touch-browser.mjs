@@ -26,25 +26,26 @@ try{
  });
  const page=await context.newPage();page.on('pageerror',e=>results.jsErrors.push(e.message));
  async function load(f){fixture=f;await page.goto('https://motor.test'+f.url,{waitUntil:'load'});await page.waitForFunction(()=>document.documentElement.style.getPropertyValue('--visual-height'));}
- async function layout(){return page.evaluate(()=>{
+ async function layout(){return page.evaluate(compactIds=>{
   const rect=e=>({width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height});
   const visible=e=>Boolean(e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden');
+  const targetSize=compactIds.includes(document.body.dataset.theme)&&innerWidth>=900&&matchMedia('(hover:hover) and (pointer:fine)').matches?36:44;
   const targets=[...document.querySelectorAll('input[type="submit"],button:not(:disabled),summary,.touch-link,.icon-button,.bottom-nav a,.nav a,.choice-hit,label:has(>input[type="checkbox"]),label:has(>input[type="radio"])')].filter(visible);
-  const tiny=targets.map(e=>({tag:e.tagName,text:(e.textContent||e.value||'').trim().slice(0,45),class:e.className,...rect(e)})).filter(e=>e.width<43.5||e.height<43.5);
+  const tiny=targets.map(e=>({tag:e.tagName,text:(e.textContent||e.value||'').trim().slice(0,45),class:e.className,...rect(e)})).filter(e=>e.width<targetSize-.5||e.height<targetSize-.5);
   const textInputs=[...document.querySelectorAll('input:not([type="hidden"]):not([type="radio"]):not([type="checkbox"]):not([type="file"]):not([type="submit"]):not([type="button"]),textarea,select')].filter(visible);
-  return {viewport:innerWidth,document:document.documentElement.scrollWidth,bodyFont:parseFloat(getComputedStyle(document.body).fontSize),tiny,smallInputs:textInputs.filter(e=>parseFloat(getComputedStyle(e).fontSize)<16).map(e=>e.name),shell:rect(document.querySelector('.site-shell')).width,navVisible:visible(document.querySelector('.desktop-nav')),bottomVisible:visible(document.querySelector('.bottom-nav'))};
- });}
+  return {targetSize,fine:matchMedia('(pointer:fine)').matches,hover:matchMedia('(hover:hover)').matches,theme:document.body.dataset.theme,viewport:innerWidth,document:document.documentElement.scrollWidth,bodyFont:parseFloat(getComputedStyle(document.body).fontSize),tiny,smallInputs:textInputs.filter(e=>parseFloat(getComputedStyle(e).fontSize)<(targetSize===36?14:16)).map(e=>e.name),shell:rect(document.querySelector('.site-shell')).width,navVisible:visible(document.querySelector('.desktop-nav')),bottomVisible:visible(document.querySelector('.bottom-nav'))};
+ },Object.keys(themes).filter(id=>themes[id].density==='compact'));}
  // Every actual public/admin form, including comments, retains native values/ownership.
  for(const f of fixtures){
   await page.setViewportSize({width:320,height:680});await load(f);
-  const m=await layout();assert.ok(m.document<=m.viewport+1,JSON.stringify({f,m}));assert.ok(m.bodyFont>=16);assert.deepEqual(m.tiny,[],f.url);assert.deepEqual(m.smallInputs,[],f.url);
+  const m=await layout();assert.ok(m.document<=m.viewport+1,JSON.stringify({f,m}));assert.ok(m.bodyFont >= (themes[m.theme]?.density === 'compact' ? 14 : 16));assert.deepEqual(m.tiny,[],f.url);assert.deepEqual(m.smallInputs,[],f.url);
   const sameForms=await page.evaluate(html=>{
    const original=new DOMParser().parseFromString(html,'text/html');
    const serialize=doc=>[...doc.forms].map(form=>[...form.elements].filter(e=>e.name).map(e=>({tag:e.tagName,name:e.name,type:e.type,value:e.value,checked:e.checked,disabled:e.disabled})));
    return JSON.stringify(serialize(document))===JSON.stringify(serialize(original));
   },readFileSync(join(local,f.directory,f.file),'utf8'));
   assert.ok(sameForms,'native form fields changed: '+f.url);
-  results.pages.push({url:f.url,role:f.role,theme:f.theme||'stored',width:320,targets44:true,noOverflow:true});
+  results.pages.push({url:f.url,role:f.role,theme:f.theme||'stored',width:320,minTarget:m.targetSize,noOverflow:true});
  }
  pass(`${fixtures.length} PHP-generated pages/forms at 320px: readable text, 44px actions, no overflow and unchanged form values`);
  const home=fixtures.find(f=>f.url==='/index.php'&&f.role==='guest');
@@ -52,7 +53,7 @@ try{
   await page.setViewportSize({width,height});await load(home);
   for(const [theme,info]of Object.entries(themes)){
    await page.evaluate(t=>document.body.dataset.theme=t,theme);
-   const m=await layout();assert.ok(m.document<=width+1,JSON.stringify({width,theme,m}));assert.deepEqual(m.tiny,[]);assert.deepEqual(m.smallInputs,[]);
+   const m=await layout();assert.ok(m.document<=width+1,JSON.stringify({width,theme,m}));assert.deepEqual(m.tiny,[],JSON.stringify({width,theme,m}));assert.deepEqual(m.smallInputs,[]);
    const columns=await page.locator('.home-sections').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length);
    if(width<600)assert.equal(columns,1);
    if(width>=900&&info.layout==='web'){assert.ok(m.shell>850,JSON.stringify(m));assert.ok(m.navVisible);assert.equal(m.bottomVisible,false);assert.ok(columns>=2);}

@@ -1,0 +1,176 @@
+/* 2026-10-19: compact typography for exactly two ordinary and two desktop themes.
+   Theme scoping is explicit; palette, zoom, media geometry and input ownership are unchanged.
+   Touch controls keep 44px targets. Text-entry fields stay 16px on touch devices to avoid focus zoom. */
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) { font-size:.875rem; line-height:1.4 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) small { font-size:.75rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .site-header { min-height:56px; padding:4px 10px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .brand>span { font-size:1.5rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .brand small { font-size:.625rem; margin-top:2px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .brand img { width:26px; height:26px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .site-shell { padding-bottom:calc(60px + env(safe-area-inset-bottom)) }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) main { padding:8px 8px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .welcome { min-height:44px; padding:6px 9px; gap:7px; margin-bottom:8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .welcome strong { font-size:.875rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .welcome span { font-size:.75rem; margin-top:1px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .page-topline { font-size:.75rem; margin-bottom:4px; gap:8px; min-height:28px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .page-content>.legacy-content { padding:8px; line-height:1.4 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .page-title { font-size:1.125rem; margin-bottom:8px; gap:6px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content .b { padding:5px 7px; margin-top:7px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content .b+div { padding:7px; margin-bottom:7px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content .b small { font-size:.75rem; margin-top:1px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content>br { line-height:1.35 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) hr { margin:8px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) p { margin-bottom:8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) td,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) th { padding:4px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .home-account { gap:4px; margin-bottom:7px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .home-account a { font-size:.8125rem; padding:4px 8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .home-sections { gap:6px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .section-card { min-height:64px; padding:7px 9px; gap:8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .section-copy strong { font-size:.875rem; line-height:1.3 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .section-copy small { font-size:.75rem; line-height:1.35; margin-top:2px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .section-end,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .count-badge { font-size:.75rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .section-symbol { width:28px; height:30px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .neighbors { margin-top:12px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .neighbors h2 { font-size:.9375rem; margin-bottom:6px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .neighbor-links { gap:6px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .neighbor-links a { min-height:44px; padding:5px 7px; font-size:.8125rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .site-footer { padding:10px 8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .community-note,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .site-stats { font-size:.75rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-footer-link { font-size:.8125rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .bottom-nav a { min-height:44px; font-size:.6875rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .bottom-nav .l-icon { width:20px; height:20px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .menu-panel { padding:5px; top:46px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .menu-panel a { min-height:44px; padding:6px 9px; font-size:.875rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .form,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .login,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .notice-error,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) fieldset { padding:7px; margin:7px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) form { margin-top:7px; margin-bottom:7px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) textarea,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) select { min-height:40px; padding:6px 8px; margin:4px 0 7px; font-size:1rem; line-height:1.35 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) textarea { min-height:80px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content input[type="submit"],
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content input[type="button"],
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) button.primary { padding:6px 12px; margin:3px 3px 3px 0; font-size:.875rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) input[type="file"]::file-selector-button { padding:6px 8px; margin-right:6px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) label:has(>input[type="checkbox"]),
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) label:has(>input[type="radio"]),
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .choice-hit { padding:4px; gap:6px; margin:1px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .nav { margin:8px 0; gap:5px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .nav a,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .navcurrent { font-size:.875rem; padding:3px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .touch-link { padding:3px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-intro,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-success,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .isset { font-size:.875rem; line-height:1.4; margin-bottom:8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-group { margin-bottom:14px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-group h2 { font-size:1rem; margin:10px 0 7px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-grid { gap:8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-card { padding:7px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-preview { height:48px; padding:5px; margin-bottom:5px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-name { font-size:.875rem; min-height:34px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-description { font-size:.75rem; line-height:1.35 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .attachment-picker p,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .attachment-remove,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .attachment figcaption,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .attachment-formats label { font-size:.8125rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .attachments { gap:8px; margin:8px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .table-scroll { margin:5px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .avatar-grid { gap:7px; margin:8px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .avatar-card { gap:4px; padding:6px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .smile-picker .smile-picker-toggle,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .smile-picker .tag-picker-toggle { font-size:.8125rem; padding:5px 8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .smile-picker-panel,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .tag-picker-panel { padding:5px; margin-top:4px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .smile-picker-status,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .tag-picker-status,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .tag-picker-hint { font-size:.75rem; line-height:1.4 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .chat-livebar { min-height:44px; font-size:.8125rem; margin:5px 0; gap:6px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .chat-livebar button,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .chat-new { font-size:.8125rem; padding:6px 9px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .chat-composer { margin:9px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .chat-send-status { font-size:.8125rem; margin-top:5px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .chat-settings label { margin:7px 0 3px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .chat-settings fieldset { margin:8px 0; padding:8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content .news-calendar { margin:8px auto; max-width:22rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content .news-calendar caption { padding:4px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 { font-size:.875rem; margin-bottom:12px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 h1 { font-size:1.5rem; margin:3px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-header { margin-top:3px; gap:7px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-intro { margin:4px 0 10px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-wallet { margin-bottom:8px; gap:8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-table,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .arcade .arcade-table { padding:12px 10px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-hand { margin:9px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-center { min-height:85px; padding:5px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-center h2,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .arcade .arcade-outcome h2 { font-size:1.25rem; margin:4px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-player { margin:9px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-controls { padding:10px 0 3px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 button { padding:8px 10px; font-size:.875rem; min-height:44px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-action-row button,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .arcade .arcade-play { min-height:44px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-action-row,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-bet-row { gap:7px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-bet-row input { font-size:1rem; padding:7px 8px; min-height:44px; margin:0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-record { padding:9px 0; gap:12px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-rules summary { min-height:44px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .g21 .g21-rules p { line-height:1.45; margin-bottom:8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .arcade .arcade-caption { margin-bottom:10px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .arcade .arcade-outcome { padding-top:12px }
+@media(min-width:900px) {
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .site-shell { margin:10px auto; min-height:calc(100svh - 20px) }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .site-header { min-height:60px; padding:6px 16px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .brand>span { font-size:1.75rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .brand small { font-size:.6875rem; margin-top:2px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .brand img { width:30px; height:30px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .desktop-nav { padding:5px 12px; gap:3px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .desktop-nav a { font-size:.875rem; padding:5px 10px; gap:6px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] main { padding:12px 16px 0 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .welcome { min-height:56px; padding:9px 12px; margin-bottom:10px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .welcome strong { font-size:1.125rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .welcome span { font-size:.8125rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .home-sections { gap:8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .section-card { min-height:88px; padding:10px 12px; gap:10px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .section-copy strong { font-size:1rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .section-copy small { font-size:.8125rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .section-symbol { width:32px; height:32px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .neighbors { margin-top:14px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .neighbor-links { gap:8px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .site-footer { padding:14px 16px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .page-content>.legacy-content { padding:12px; line-height:1.4 }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .page-title { font-size:1.375rem }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .theme-grid { gap:10px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .theme-preview { height:60px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme^="lesika_web_"] .preview-columns i { height:24px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"])[data-theme="lesika_web_press"] .home-sections { gap:0 }
+}
+@media(min-width:900px) and (hover:hover) and (pointer:fine) {
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) textarea,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) select { font-size:.875rem; min-height:34px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) textarea { min-height:74px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content input[type="submit"],
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content input[type="button"],
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) button.primary,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .touch-link,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .nav a,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .navcurrent,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .desktop-nav a,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .home-account a,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .page-topline a,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .menu-panel a,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .neighbor-links a,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .theme-footer-link,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .site-stats>summary { min-height:36px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .touch-link,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .nav a,
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .navcurrent { min-width:36px }
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) label:has(>input[type="checkbox"]),
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) label:has(>input[type="radio"]),
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .choice-hit { min-height:36px; min-width:36px }
+}

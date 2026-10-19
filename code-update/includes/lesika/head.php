@@ -14,6 +14,7 @@ echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/palettes.css?v=touch
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/responsive.css?v=scroll1">';
 echo '<script src="'.BASEDIR.'assets/lesika/touch.js?v=scroll1" defer></script>';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/gallery.css?v=gallery1"><script src="'.BASEDIR.'assets/lesika/gallery.js?v=gallery1" defer></script>';
+echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/compact.css?v=compact1">';
 echo '<link rel="alternate" type="application/rss+xml" title="Новости Лесики" href="'.BASEDIR.'news/rss.php">';
 echo '</head><body data-theme="'.$config['themes'].'"><div class="site-shell">';
 echo '<a class="skip-link" href="#main-content">К содержимому</a><header class="site-header" id="up">';

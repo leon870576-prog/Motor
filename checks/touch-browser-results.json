@@ -6,7 +6,7 @@
       "role": "guest",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -14,7 +14,7 @@
       "role": "guest",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -22,7 +22,7 @@
       "role": "guest",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -30,7 +30,7 @@
       "role": "guest",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -38,7 +38,7 @@
       "role": "guest",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -46,7 +46,7 @@
       "role": "guest",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -54,7 +54,7 @@
       "role": "guest",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -62,7 +62,7 @@
       "role": "guest",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -70,7 +70,7 @@
       "role": "guest",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -78,7 +78,7 @@
       "role": "guest",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -86,7 +86,7 @@
       "role": "admin",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -94,7 +94,7 @@
       "role": "admin",
       "theme": "lesika_dvor",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -102,7 +102,7 @@
       "role": "admin",
       "theme": "lesika_gazeta",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -110,7 +110,7 @@
       "role": "admin",
       "theme": "lesika_gazeta",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -118,7 +118,7 @@
       "role": "admin",
       "theme": "lesika_gostinaya",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -126,7 +126,7 @@
       "role": "admin",
       "theme": "lesika_gostinaya",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -134,7 +134,7 @@
       "role": "admin",
       "theme": "lesika_solnce",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -142,7 +142,7 @@
       "role": "admin",
       "theme": "lesika_solnce",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -150,7 +150,7 @@
       "role": "admin",
       "theme": "lesika_vecher",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -158,7 +158,7 @@
       "role": "admin",
       "theme": "lesika_vecher",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -166,7 +166,7 @@
       "role": "admin",
       "theme": "lesika_albom",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -174,7 +174,7 @@
       "role": "admin",
       "theme": "lesika_albom",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -182,7 +182,7 @@
       "role": "admin",
       "theme": "lesika_uyut",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -190,7 +190,7 @@
       "role": "admin",
       "theme": "lesika_uyut",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -198,7 +198,7 @@
       "role": "admin",
       "theme": "lesika_web_terrace",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -206,7 +206,7 @@
       "role": "admin",
       "theme": "lesika_web_terrace",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -214,7 +214,7 @@
       "role": "admin",
       "theme": "lesika_web_press",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -222,7 +222,7 @@
       "role": "admin",
       "theme": "lesika_web_press",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -230,7 +230,7 @@
       "role": "admin",
       "theme": "lesika_web_garden",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -238,7 +238,7 @@
       "role": "admin",
       "theme": "lesika_web_garden",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -246,7 +246,7 @@
       "role": "admin",
       "theme": "lesika_web_coffee",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -254,7 +254,7 @@
       "role": "admin",
       "theme": "lesika_web_coffee",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -262,7 +262,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -270,7 +270,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -278,7 +278,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -286,7 +286,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -294,7 +294,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -302,7 +302,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -310,7 +310,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -318,7 +318,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -326,7 +326,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -334,7 +334,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -342,7 +342,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -350,7 +350,7 @@
       "role": "admin",
       "theme": "lesika_web_evening",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -358,7 +358,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -366,7 +366,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -374,7 +374,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -382,7 +382,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -390,7 +390,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -398,7 +398,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -406,7 +406,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -414,7 +414,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -422,7 +422,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -430,7 +430,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -438,7 +438,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -446,7 +446,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -454,7 +454,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -462,7 +462,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -470,7 +470,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -478,7 +478,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -486,7 +486,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -494,7 +494,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -502,7 +502,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -510,7 +510,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -518,7 +518,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -526,7 +526,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -534,7 +534,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -542,7 +542,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -550,7 +550,7 @@
       "role": "admin",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -558,7 +558,7 @@
       "role": "member",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -566,7 +566,7 @@
       "role": "guest",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     },
     {
@@ -574,7 +574,7 @@
       "role": "guest",
       "theme": "stored",
       "width": 320,
-      "targets44": true,
+      "minTarget": 44,
       "noOverflow": true
     }
   ],

@@ -1,0 +1,512 @@
+{
+  "browser": "153.0.8010.0",
+  "selected": [
+    "lesika_dvor",
+    "lesika_vecher",
+    "lesika_web_press",
+    "lesika_web_evening"
+  ],
+  "layouts": 252,
+  "home": [
+    {
+      "theme": "lesika_dvor",
+      "width": 320,
+      "font": 14,
+      "beforeCards": 549,
+      "afterCards": 423,
+      "reductionPercent": 23
+    },
+    {
+      "theme": "lesika_gazeta",
+      "width": 320,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_gostinaya",
+      "width": 320,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_solnce",
+      "width": 320,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_vecher",
+      "width": 320,
+      "font": 14,
+      "beforeCards": 549,
+      "afterCards": 423,
+      "reductionPercent": 23
+    },
+    {
+      "theme": "lesika_albom",
+      "width": 320,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_uyut",
+      "width": 320,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_terrace",
+      "width": 320,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_press",
+      "width": 320,
+      "font": 14,
+      "beforeCards": 549,
+      "afterCards": 423,
+      "reductionPercent": 23
+    },
+    {
+      "theme": "lesika_web_garden",
+      "width": 320,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_coffee",
+      "width": 320,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_evening",
+      "width": 320,
+      "font": 14,
+      "beforeCards": 549,
+      "afterCards": 423,
+      "reductionPercent": 23
+    },
+    {
+      "theme": "lesika_dvor",
+      "width": 390,
+      "font": 14,
+      "beforeCards": 555,
+      "afterCards": 419,
+      "reductionPercent": 25
+    },
+    {
+      "theme": "lesika_gazeta",
+      "width": 390,
+      "font": 16,
+      "beforeCards": 555,
+      "afterCards": 555,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_gostinaya",
+      "width": 390,
+      "font": 16,
+      "beforeCards": 555,
+      "afterCards": 555,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_solnce",
+      "width": 390,
+      "font": 16,
+      "beforeCards": 555,
+      "afterCards": 555,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_vecher",
+      "width": 390,
+      "font": 14,
+      "beforeCards": 555,
+      "afterCards": 419,
+      "reductionPercent": 25
+    },
+    {
+      "theme": "lesika_albom",
+      "width": 390,
+      "font": 16,
+      "beforeCards": 555,
+      "afterCards": 555,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_uyut",
+      "width": 390,
+      "font": 16,
+      "beforeCards": 555,
+      "afterCards": 555,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_terrace",
+      "width": 390,
+      "font": 16,
+      "beforeCards": 555,
+      "afterCards": 555,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_press",
+      "width": 390,
+      "font": 14,
+      "beforeCards": 555,
+      "afterCards": 419,
+      "reductionPercent": 25
+    },
+    {
+      "theme": "lesika_web_garden",
+      "width": 390,
+      "font": 16,
+      "beforeCards": 555,
+      "afterCards": 555,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_coffee",
+      "width": 390,
+      "font": 16,
+      "beforeCards": 555,
+      "afterCards": 555,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_evening",
+      "width": 390,
+      "font": 14,
+      "beforeCards": 555,
+      "afterCards": 419,
+      "reductionPercent": 25
+    },
+    {
+      "theme": "lesika_dvor",
+      "width": 768,
+      "font": 14,
+      "beforeCards": 549,
+      "afterCards": 414,
+      "reductionPercent": 25
+    },
+    {
+      "theme": "lesika_gazeta",
+      "width": 768,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_gostinaya",
+      "width": 768,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_solnce",
+      "width": 768,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_vecher",
+      "width": 768,
+      "font": 14,
+      "beforeCards": 549,
+      "afterCards": 414,
+      "reductionPercent": 25
+    },
+    {
+      "theme": "lesika_albom",
+      "width": 768,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_uyut",
+      "width": 768,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_terrace",
+      "width": 768,
+      "font": 16,
+      "beforeCards": 273,
+      "afterCards": 273,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_press",
+      "width": 768,
+      "font": 14,
+      "beforeCards": 273,
+      "afterCards": 209,
+      "reductionPercent": 24
+    },
+    {
+      "theme": "lesika_web_garden",
+      "width": 768,
+      "font": 16,
+      "beforeCards": 273,
+      "afterCards": 273,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_coffee",
+      "width": 768,
+      "font": 16,
+      "beforeCards": 273,
+      "afterCards": 273,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_evening",
+      "width": 768,
+      "font": 14,
+      "beforeCards": 273,
+      "afterCards": 209,
+      "reductionPercent": 24
+    },
+    {
+      "theme": "lesika_dvor",
+      "width": 1024,
+      "font": 14,
+      "beforeCards": 549,
+      "afterCards": 414,
+      "reductionPercent": 25
+    },
+    {
+      "theme": "lesika_gazeta",
+      "width": 1024,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_gostinaya",
+      "width": 1024,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_solnce",
+      "width": 1024,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_vecher",
+      "width": 1024,
+      "font": 14,
+      "beforeCards": 549,
+      "afterCards": 414,
+      "reductionPercent": 25
+    },
+    {
+      "theme": "lesika_albom",
+      "width": 1024,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_uyut",
+      "width": 1024,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_terrace",
+      "width": 1024,
+      "font": 16,
+      "beforeCards": 382,
+      "afterCards": 382,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_press",
+      "width": 1024,
+      "font": 14,
+      "beforeCards": 321,
+      "afterCards": 177,
+      "reductionPercent": 45
+    },
+    {
+      "theme": "lesika_web_garden",
+      "width": 1024,
+      "font": 16,
+      "beforeCards": 444,
+      "afterCards": 444,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_coffee",
+      "width": 1024,
+      "font": 16,
+      "beforeCards": 380,
+      "afterCards": 380,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_evening",
+      "width": 1024,
+      "font": 14,
+      "beforeCards": 382,
+      "afterCards": 280,
+      "reductionPercent": 27
+    },
+    {
+      "theme": "lesika_dvor",
+      "width": 1440,
+      "font": 14,
+      "beforeCards": 549,
+      "afterCards": 414,
+      "reductionPercent": 25
+    },
+    {
+      "theme": "lesika_gazeta",
+      "width": 1440,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_gostinaya",
+      "width": 1440,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_solnce",
+      "width": 1440,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_vecher",
+      "width": 1440,
+      "font": 14,
+      "beforeCards": 549,
+      "afterCards": 414,
+      "reductionPercent": 25
+    },
+    {
+      "theme": "lesika_albom",
+      "width": 1440,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_uyut",
+      "width": 1440,
+      "font": 16,
+      "beforeCards": 549,
+      "afterCards": 549,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_terrace",
+      "width": 1440,
+      "font": 16,
+      "beforeCards": 382,
+      "afterCards": 382,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_press",
+      "width": 1440,
+      "font": 14,
+      "beforeCards": 321,
+      "afterCards": 177,
+      "reductionPercent": 45
+    },
+    {
+      "theme": "lesika_web_garden",
+      "width": 1440,
+      "font": 16,
+      "beforeCards": 440,
+      "afterCards": 440,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_coffee",
+      "width": 1440,
+      "font": 16,
+      "beforeCards": 380,
+      "afterCards": 380,
+      "reductionPercent": 0
+    },
+    {
+      "theme": "lesika_web_evening",
+      "width": 1440,
+      "font": 14,
+      "beforeCards": 382,
+      "afterCards": 280,
+      "reductionPercent": 27
+    }
+  ],
+  "pages": [
+    "/index.php",
+    "/news/index.php",
+    "/forum/index.php",
+    "/forum/topic.php?fid=1&id=1",
+    "/board/index.php",
+    "/chat/index.php",
+    "/gallery/index.php",
+    "/pages/login.php",
+    "/pages/registration.php",
+    "/pages/setting.php",
+    "/pages/themes.php",
+    "/pages/anketa.php?uz=MotorTestAdmin",
+    "/pages/userlist.php",
+    "/mpanel/index.php",
+    "/mpanel/attachments.php",
+    "/mpanel/setting.php?action=setone"
+  ],
+  "errors": [],
+  "physical_devices": false
+}
