@@ -43,7 +43,7 @@ r=await req(base);assert.equal(r.httpStatusCode,200);assert.ok(r.text.includes('
 const order=html=>{const news=html.indexOf('<h2>Новости пользователя</h2>'),photo=html.indexOf('<h2>Фотографии</h2>'),reviews=html.indexOf('<h2>Отзывы</h2>');assert.ok(news>0&&photo>news&&reviews>photo);};order(r.text);
 await login('PageAdmin');r=await req('/input.php',{login:'PageAdmin',pass:password});assert.equal(r.headers.location[0],'pages/userpage.php');uid=await token();
 for(const url of ['/pages/userlist.php','/pages/avtorlist.php','/pages/online.php','/pages/adminlist.php','/mpanel/adminlist.php']){r=await req(url);assert.equal(r.httpStatusCode,200);assert.ok(!/href="[^\"]*anketa\.php/.test(r.text),url);}
-for(const url of [base,'/pages/userpage.php','/pages/userpage.php?uz=PageGuest']){r=await req(url);assert.equal(r.httpStatusCode,200);order(r.text);assert.match(r.text,/href="\.\.\/pages\/userpage.php" aria-label="Моя страница"/);}
+for(const url of [base,'/pages/userpage.php','/pages/userpage.php?uz=PageGuest']){r=await req(url);assert.equal(r.httpStatusCode,200);order(r.text);assert.match(r.text,/href="\.\.\/pages\/index.php\?action=menu" aria-label="Моё меню"/);}
 r=await req('/pages/anketa.php?view=details&uz=PageOwner');assert.equal(r.httpStatusCode,200);assert.ok(r.text.includes('Анкета PageOwner'));assert.ok(!r.text.includes('action=plus&amp;uid='));
 const target='/pages/raiting.php?uz=PageOwner',vote=(extra={},url=target,headers={},method)=>req(url,{uid,vote:'plus',...extra},headers,method);
 const counts=()=>[48,49,50,51].map(i=>profile('PageOwner')[i]).join(',');const initial=counts();
@@ -55,7 +55,7 @@ assert.equal((await vote({vote:'multiply'})).httpStatusCode,400);
 assert.equal((await vote({},'/pages/raiting.php?uz=PageAdmin')).httpStatusCode,403);
 assert.equal((await vote({},'/pages/raiting.php?uz=MissingUser')).httpStatusCode,404);
 assert.equal((await vote({},target,{},'PUT')).httpStatusCode,405);assert.equal(counts(),initial);
-pass('personal page first, old bookmarks, account icon/login, questionnaire access, News→Photos→Reviews, read-only GET/HEAD and CSRF/Origin/method/type guards');
+pass('personal pages and old bookmarks, header button opens My menu, login opens personal page, questionnaire access, News→Photos→Reviews, read-only GET/HEAD and CSRF/Origin/method/type guards');
 r=await vote();assert.equal(r.httpStatusCode,303,r.text.match(/role="alert">([^<]+)/)?.[1]);assert.equal(r.headers.location[0],'userpage.php?uz=PageOwner&voted=1');assert.equal(profile('PageOwner')[49],'1');assert.equal(profile('PageOwner')[50],'1');assert.equal(profile('PageOwner')[36],'0');
 const mail=php.readFileAsText('/www/local/privat/PageOwner.priv');assert.equal(mail.split('повысил ваш авторитет').length-1,1);const unread=profile('PageOwner')[10];
 assert.equal((await vote()).httpStatusCode,429);assert.equal((await vote({},'/pages/raiting.php?uz=PageGuest')).httpStatusCode,429);

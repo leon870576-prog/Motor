@@ -4,7 +4,8 @@ require_once __DIR__.'/catalog.php';
 $config['themes'] = lesika_theme_id($config['themes']);
 $lesikaTheme = lesika_themes()[$config['themes']];
 $lesikaHome = ($php_self === 'index.php' && empty($_GET['p']));
-$lesikaAccount = !empty($log) ? 'pages/userpage.php' : 'pages/login.php';
+$lesikaAccount = !empty($log) ? 'pages/index.php?action=menu' : 'pages/login.php';
+$lesikaAccountLabel = !empty($log) ? 'Моё меню' : 'Вход';
 header('Content-Type: text/html; charset=utf-8');
 echo '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">';
 echo '<title>%TITLE%</title><meta name="keywords" content="%KEYWORDS%"><meta name="description" content="%DESCRIPTION%">';
@@ -20,7 +21,7 @@ echo '<link rel="alternate" type="application/rss+xml" title="Новости Л�
 echo '</head><body data-theme="'.$config['themes'].'"><div class="site-shell">';
 echo '<a class="skip-link" href="#main-content">К содержимому</a><header class="site-header" id="up">';
 echo '<a class="brand" href="'.BASEDIR.'index.php" aria-label="Лесика — на главную"><img src="'.BASEDIR.'assets/lesika/leaf.svg" alt="" width="32" height="32"><span>Лесика<small>Городской портал</small></span></a>';
-echo '<div class="header-actions"><a class="icon-button" href="'.BASEDIR.$lesikaAccount.'" aria-label="Моя страница">'.lesika_icon('user').'</a>';
+echo '<div class="header-actions"><a class="icon-button" href="'.BASEDIR.$lesikaAccount.'" aria-label="'.$lesikaAccountLabel.'">'.lesika_icon('user').'</a>';
 echo '<details class="site-menu"><summary class="icon-button" aria-label="Меню">'.lesika_icon('menu').'</summary><nav class="menu-panel" aria-label="Все разделы">';
 foreach (['index.php'=>'Главная', 'news/index.php'=>'Новости сайта', 'forum/index.php'=>'Форум', 'book/index.php'=>'Гостевая', 'chat/index.php'=>'Мини-чат', 'gallery/index.php'=>'Фотогалерея', 'board/index.php'=>'Объявления', 'pages/userlist.php'=>'Жители', 'pages/themes.php'=>'Оформление'] as $href => $title) {
     echo '<a href="'.BASEDIR.$href.'">'.$title.lesika_icon('arrow').'</a>';
