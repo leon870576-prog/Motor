@@ -1,0 +1,14 @@
+{
+  "name": "Лесозаводск",
+  "region": "Приморский край, Россия",
+  "official_symbols_page": "https://mo-lgo.ru/okrug/simvolika.php",
+  "original_image_url": "https://mo-lgo.ru/images/coats/user/coat.png",
+  "retrieved": "2026-10-20",
+  "original_sha256": "b02097fb8493c8f14a5a50221e758177a49303afbc55fddc0db0bbb3f60b5af2",
+  "original_dimensions": [
+    59,
+    70
+  ],
+  "asset": "assets/lesika/lesozavodsk.svg",
+  "method": "Original PNG bytes embedded unchanged in an SVG container; no redrawing, recoloring, cropping or remote dependency."
+}

@@ -1,5 +1,15 @@
 [
   {
+    "path": "images/img/games.gif",
+    "bytes": 392,
+    "sha256": "4c50323940a14701bc1a2053186b9dd314b287908616c6d49fee0aa78d9cf2da"
+  },
+  {
+    "path": "images/img/golos.gif",
+    "bytes": 200,
+    "sha256": "78af7bdfa2e6d5c4dabb35ede603936620960621e69e44f586f015f88ccdcd94"
+  },
+  {
     "path": "images/img/grafic.gif",
     "bytes": 175,
     "sha256": "fa2be89a4abf316483f88957ee8e6cf5d74654d23c28375c898e555742228cae"
@@ -1201,8 +1211,8 @@
   },
   {
     "path": "includes/header.php",
-    "bytes": 14885,
-    "sha256": "29512c057b1d7ce083ca9a7666abb1cf4a86eccf17111b5945176a19a47368ae"
+    "bytes": 14971,
+    "sha256": "f4ebce7572a267b39db74798ce1c8bfb7d1ecaee05ccbcf11ec1d5a8102716a5"
   },
   {
     "path": "includes/info.php",
@@ -1231,8 +1241,8 @@
   },
   {
     "path": "includes/lesika/head.php",
-    "bytes": 4026,
-    "sha256": "011e80df06567985d59f105cdbc2b1c6f7f167c8685c9c831f2ba1724a1bacf3"
+    "bytes": 4282,
+    "sha256": "ec7b7c806d4074e04c7e553ca7610984afd8ee2b45b8650a5d2852165ae6ce74"
   },
   {
     "path": "includes/lesika/home.php",
@@ -1256,8 +1266,8 @@
   },
   {
     "path": "includes/nastya-legacy.php",
-    "bytes": 10638,
-    "sha256": "444391e1387b8d2ddcabf588f23d2c79b52cc8728bfff0267b5500ad32d01e17"
+    "bytes": 10692,
+    "sha256": "ee5893a802a96bfee8f359ee15a8e5c721952c84f50e6c7f6a0de0e2c921728e"
   },
   {
     "path": "includes/nastya.php",
@@ -1288,6 +1298,11 @@
     "path": "includes/points-settings.php",
     "bytes": 4519,
     "sha256": "7fb3a664010a00302a8f95f0e7e40d8783ff597869180bd169625130f17f6846"
+  },
+  {
+    "path": "includes/portal-brand.php",
+    "bytes": 2270,
+    "sha256": "d4a4bb1a9a4200911dd741516b1c4f91e6211e3d3cb888092fcaa1ed3225d533"
   },
   {
     "path": "includes/quotesbase.php",
@@ -1466,8 +1481,8 @@
   },
   {
     "path": "mpanel/gallery-settings.php",
-    "bytes": 4813,
-    "sha256": "1750a56bf4219316b4554b2ba4dea11a2521fa058d71f5817d77a48a0a1c4d04"
+    "bytes": 4823,
+    "sha256": "eba9a98c9e455ff2b99286ceac4e2fb421afcf7b174c2a3470852fba3379fca2"
   },
   {
     "path": "mpanel/gallery.php",
@@ -1483,20 +1498,5 @@
     "path": "mpanel/index.php",
     "bytes": 9381,
     "sha256": "4919d598ab0930bbf4af952314ff05eb12083490c482050111465d606c813840"
-  },
-  {
-    "path": "mpanel/license.php",
-    "bytes": 6003,
-    "sha256": "6008f821958802c542c63e3a28dd2db1428b81e4c52c36ff44f099b9f3a92ca5"
-  },
-  {
-    "path": "mpanel/logadmin.php",
-    "bytes": 4085,
-    "sha256": "471871a24f88b9c6d1f6235e76b5958b9a5aa01d8c08806fef25774e2d79a8c4"
-  },
-  {
-    "path": "mpanel/logfiles.php",
-    "bytes": 5376,
-    "sha256": "6f94a01559be2b815ca7c1ab481feb08790409d52642d89dc3e6dc939438f6a5"
   }
 ]

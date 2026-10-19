@@ -24,6 +24,7 @@ COPY php.ini /usr/local/etc/php/conf.d/motor-test.ini
 COPY entrypoint.sh /usr/local/bin/motor-entrypoint
 COPY auth.php /opt/motor-auth.php
 COPY migrate.php /opt/motor-migrate.php
+COPY migrate-branding.php /opt/motor-migrate-branding.php
 COPY migrate-comment-activity.php /opt/motor-migrate-comment-activity.php
 COPY validate.php /opt/motor-validate.php
 COPY checks/gallery-native.php /opt/motor-gallery-native.php
@@ -50,6 +51,7 @@ RUN chmod 755 /usr/local/bin/motor-entrypoint \
  && php /opt/motor-comment-activity-native.php \
  && php -l /opt/motor-migrate-comment-activity.php \
  && php -l /opt/motor-migrate.php \
+ && php -l /opt/motor-migrate-branding.php \
  && php -l /opt/motor-migrate-themes.php \
  && a2dismod mpm_event mpm_worker \
  && a2enmod mpm_prefork \

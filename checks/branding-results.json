@@ -1,0 +1,9 @@
+{
+  "php": "8.4 WASM",
+  "passed": [
+    "exact branding fields, immutable original backups, unchanged accounts/settings, idempotent repeat",
+    "custom metadata preserved, known previous logo URL upgraded",
+    "malformed configuration and symlink destinations/backups fail without changing originals",
+    "coat of arms equals official PNG bytes; SVG has no scripts, external assets or foreignObject"
+  ]
+}

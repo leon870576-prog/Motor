@@ -11,8 +11,8 @@
   },
   {
     "path": "INSTALL.php",
-    "bytes": 21402,
-    "sha256": "a60bd0c8af85e3adf5d78168646208034c49a8a2682bc3a01903536914cf15ef"
+    "bytes": 21449,
+    "sha256": "c787bd1e877efef1473ed45af46eda1f8cb1d7d6a105183469c2d863ad5d2343"
   },
   {
     "path": "README.md",
@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 265,
-    "sha256": "4b32c044440ea96e1f3cb22cb0a0fce51fc11887b1b5bb88b286e0a35e6e9e18"
+    "bytes": 261,
+    "sha256": "7e43e0851427e588156f06df51a4c683eaac37754b19bdec5126509ad7a0e890"
   },
   {
     "path": "assets/lesika/arcade.css",
@@ -38,6 +38,11 @@
     "path": "assets/lesika/arcade.js",
     "bytes": 3162,
     "sha256": "69d0a0c6338b4a79a210e077a585292f43eea399204b5b271160c7f852093998"
+  },
+  {
+    "path": "assets/lesika/branding.css",
+    "bytes": 982,
+    "sha256": "9ce648b4973d9e6d485d4a73e9870705db31bcc60e02e91eeabb266e5c0bbd20"
   },
   {
     "path": "assets/lesika/chat.css",
@@ -78,6 +83,11 @@
     "path": "assets/lesika/leaf.svg",
     "bytes": 320,
     "sha256": "753d7783e7239dbb0e5b3ff6d185ea04b1372792c2f30ac106e404499948a737"
+  },
+  {
+    "path": "assets/lesika/lesozavodsk.svg",
+    "bytes": 6660,
+    "sha256": "8a1a4920028ccb1ee1d79dbfca1ed5b96e3fcff599640455ffd81f55aa09a87c"
   },
   {
     "path": "assets/lesika/palettes.css",
@@ -1488,15 +1498,5 @@
     "path": "images/avators2/118.gif",
     "bytes": 14391,
     "sha256": "313e54f1431175c27d423a65acc3840596c501c01daa32d98d72de334d6dc3fa"
-  },
-  {
-    "path": "images/avators2/119.gif",
-    "bytes": 16121,
-    "sha256": "9e913326f103933babc1405f7f8e6d5c872b58fe15e583b9851c7d2880050973"
-  },
-  {
-    "path": "images/avators2/12.gif",
-    "bytes": 14859,
-    "sha256": "aabda12bca9585807e9df7746a49c1a3fb4c114da163222ea3974b87b2c373c8"
   }
 ]

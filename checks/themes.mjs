@@ -55,7 +55,10 @@ try {
     assert.equal(r.httpStatusCode, 200, path);
     assert.ok(r.text.length > 1000, path);
     if (path === '/index.php') {
-      assert.ok(r.text.includes('Лесика'));
+      assert.ok(r.text.includes('Лесозаводск'));
+      assert.ok(!r.text.includes('Лесика'));
+      assert.match(r.text, /assets\/lesika\/lesozavodsk\.svg/);
+      assert.match(r.text, /<title>Лесозаводск/);
       assert.ok(!r.text.includes('© VISAVI.NET'));
       assert.ok(!r.text.includes('Все для WAP-Motor'));
     }

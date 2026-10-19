@@ -31,7 +31,7 @@ try {
         echo '<label>'.$label.'<select name="'.$key.'"><option value="1"'.($settings[$key]?' selected':'').'>Включено</option><option value="0"'.(!$settings[$key]?' selected':'').'>Выключено</option></select></label>';
     }
     echo '<label for="watermark-text">Текст водяного знака<input id="watermark-text" type="text" name="watermark_text" required maxlength="60" value="'.motor_gallery_escape($settings['watermark_text']).'" aria-describedby="watermark-help"></label>';
-    echo '<p id="watermark-help">От 1 до 60 символов в одну строку, например «Лесика» или «сайт.ру». Подпись появится внизу фото, когда водяной знак включён. После сохранения она обновится и на ранее загруженных фотографиях при следующем просмотре. Скачиваемые оригиналы остаются без изменений.</p>';
+    echo '<p id="watermark-help">От 1 до 60 символов в одну строку, например «Лесозаводск» или «сайт.ру». Подпись появится внизу фото, когда водяной знак включён. После сохранения она обновится и на ранее загруженных фотографиях при следующем просмотре. Скачиваемые оригиналы остаются без изменений.</p>';
     echo '<p>Фото всегда помещается в экран. Посетители могут скачать оригинал. HEIC/HEIF нужно предварительно сохранить как JPEG или PNG.</p><button type="submit" class="primary">Сохранить настройки галереи</button></form>';
 } catch (Throwable $e) {motor_gallery_error($e);}
 echo '<nav class="gallery-actions"><a href="gallery.php">Управление фотографиями</a><a href="attachments.php">Вложения форума и новостей</a><a href="index.php">В админку</a></nav>';

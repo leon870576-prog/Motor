@@ -1,5 +1,20 @@
 [
   {
+    "path": "mpanel/license.php",
+    "bytes": 6003,
+    "sha256": "6008f821958802c542c63e3a28dd2db1428b81e4c52c36ff44f099b9f3a92ca5"
+  },
+  {
+    "path": "mpanel/logadmin.php",
+    "bytes": 4085,
+    "sha256": "471871a24f88b9c6d1f6235e76b5958b9a5aa01d8c08806fef25774e2d79a8c4"
+  },
+  {
+    "path": "mpanel/logfiles.php",
+    "bytes": 5376,
+    "sha256": "6f94a01559be2b815ca7c1ab481feb08790409d52642d89dc3e6dc939438f6a5"
+  },
+  {
     "path": "mpanel/navigation.php",
     "bytes": 10679,
     "sha256": "b0d27143b57fe01241d6bb6554f694f3b4eed33839e414a0baa7a74313bad51e"

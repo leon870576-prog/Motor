@@ -10,6 +10,8 @@
 #        для его дальнейшего распространения          #
 #-----------------------------------------------------#
 if (!defined('BASEDIR')) { header('Location:../index.php'); exit; }
+require_once __DIR__.'/portal-brand.php';
+$config=motor_portal_brand_config($config);
 
 if (isset($_SERVER['PHP_SELF'])) {$php_self = check(substr($_SERVER['PHP_SELF'],1));}
 if (isset($_SERVER['REQUEST_URI'])) {$request_uri = check(urldecode(substr(strtok($_SERVER['REQUEST_URI'],'S'),1)));} else {$request_uri = 'index.php';}
