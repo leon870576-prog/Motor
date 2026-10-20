@@ -10,7 +10,10 @@ function motor_check_chat_catalogue(string $root): array {
         $ok($pattern==='' || preg_match('~(*UCP)'.$pattern.'~u','')!==false,'regex '.$key);
         foreach ($answers as $a) {$all[]=$a;$ok(mb_check_encoding($a,'UTF-8') && mb_strlen($a,'UTF-8')<=600 && !preg_match('/[<>|\x00-\x1F]/',$a),'safe answer '.$key);}
     }
-    $ok(count($topics)===152,'152 topics');$ok(count($all)===4000,'4000 variants');$ok(count(array_unique($all))===4000,'4000 distinct variants');
+    $ok(count($topics)===152,'152 topics');$ok(count($all)===2000,'2000 variants');$ok(count(array_unique($all))===2000,'2000 distinct variants');
+    foreach ($topics as $key=>$topic) foreach ($topic[2]??[] as $core) {
+        $ok(count(array_filter($topic[1],fn($a)=>str_starts_with($a,$core.' ')))>=3,'retained core advice '.$key);
+    }
     $data=json_decode(file_get_contents($root.'/includes/nastya-everyday.json'),true);
     $settings=['bot_enabled'=>1,'bot_mode'=>'conversation','bot_cooldown'=>0,'context_seconds'=>180,'custom_rules'=>[]];
     $start=microtime(true);

@@ -35,8 +35,8 @@ let page=await req('/chat/index.php'),uid=field(page,'uid');
 assert.ok(page.text.includes('data-enabled="1"'));assert.ok(page.text.includes('data-interval="3"'));assert.ok(page.text.includes('chat-settings.php'));assert.ok(page.text.includes('chat.js?v=chat2'));
 let settings={auto_refresh:'1',refresh_seconds:'3',page_size:'10',history_limit:'100',bot_enabled:'1',joke_enabled:'0',quiz_enabled:'0',bot_greeting:'0',bot_mode:'conversation',context_seconds:'180',bot_cooldown:'0',joke_seconds:'300',quiz_seconds:'600',quiz_wait:'60',phrases:'мотоцикл; мотор => Есть любимая модель?\nc++ => Что пишешь на C++?'};
 let settingPage=await req('/mpanel/chat-settings.php'),version=field(settingPage,'version');
-assert.ok(settingPage.text.includes('4000 вариантов реплик'));assert.ok(settingPage.text.includes('Анекдотов: 400'));
-const help=await req('/chat/bots.php');assert.equal(help.httpStatusCode,200);assert.ok(help.text.includes('CC BY 4.0'));assert.ok(help.text.includes('4000 вариантов реплик'));
+assert.ok(settingPage.text.includes('2000 вариантов реплик'));assert.ok(settingPage.text.includes('Анекдотов: 400'));
+const help=await req('/chat/bots.php');assert.equal(help.httpStatusCode,200);assert.ok(help.text.includes('CC BY 4.0'));assert.ok(help.text.includes('2000 вариантов реплик'));
 assert.equal((await req('/mpanel/chat-settings.php',{...settings,version})).httpStatusCode,403);
 for(const change of [{refresh_seconds:'1'},{page_size:'51'},{history_limit:'5001'},{bot_mode:'anything'},{phrases:'неверный формат'},{phrases:'a => '+ 'x'.repeat(601)},{refresh_seconds:undefined,'refresh_seconds[0]':'3'}]){
  const data={...settings,uid,version,...change};for(const k in data)if(data[k]===undefined)delete data[k];assert.equal((await req('/mpanel/chat-settings.php',data)).httpStatusCode,400);

@@ -1,7 +1,7 @@
 """Build the reviewed offline response catalogue; never fetch data at runtime.
 
 Each response combines a substantive answer with a compatible clarification.
-4000 is the number of distinct response variants, not independent facts.
+2000 is the number of distinct response variants, not independent facts.
 """
 import json
 from pathlib import Path
@@ -80,9 +80,10 @@ for part in ['everyday-food.py','everyday-work.py','everyday-people.py','everyda
 assert len(topics)==100,len(topics)
 assert len({t['key'] for t in topics})==100
 for i,t in enumerate(topics):
-    t['limit']=38 if i<33 else 37
-    assert len({a+' '+f for a in t['answers'] for f in t['followups']})==40,t['key']
+    t['followups']=t['followups'][:4]
+    t['limit']=18 if i<33 else 17
+    assert len({a+' '+f for a in t['answers'] for f in t['followups']})==20,t['key']
     assert all(len(a+' '+f)<=600 for a in t['answers'] for f in t['followups']),t['key']
-assert sum(t['limit'] for t in topics)==3733
+assert sum(t['limit'] for t in topics)==1733
 (root/'code-update/includes/nastya-everyday.json').write_text(json.dumps(topics,ensure_ascii=False,indent=2)+'\n')
-print('100 everyday topics; 3733 composed responses + 267 preserved = 4000 variants')
+print('100 everyday topics; 1733 composed responses + 267 preserved = 2000 variants')

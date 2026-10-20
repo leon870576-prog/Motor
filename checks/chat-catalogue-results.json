@@ -1,8 +1,8 @@
 {
   "php": "8.4 WASM",
-  "assertions": 6114,
+  "assertions": 4614,
   "topics": 152,
-  "variants": 4000,
+  "variants": 2000,
   "jokes": 400,
-  "seconds": 0.879
+  "seconds": 0.851
 }

@@ -4,11 +4,11 @@
   "dialog": {
     "assertions": 778,
     "topics": 152,
-    "variants": 4000
+    "variants": 2000
   },
   "passed": [
     "admin settings, legacy links, bounds, custom phrases, CSRF and stale-save protection",
-    "778 conversation checks; 152 topics and 4000 answers",
+    "778 conversation checks; 152 topics and 2000 answers",
     "real send: greeting without name, question priority, combined question, restored flowers and per-user context",
     "human + Nastya in one response, idempotent retry, conflict recovery, rejected inputs, unchanged 204 and compressed JSON",
     "member/guest access, author path validation, stored markup, metadata privacy and POST authorization",

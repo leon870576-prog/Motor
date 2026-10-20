@@ -1306,13 +1306,13 @@
   },
   {
     "path": "includes/nastya-everyday.json",
-    "bytes": 148002,
-    "sha256": "f490dd287a78c30005b501126ff664ae8927a64b0c225d952450ff7ca312be90"
+    "bytes": 122838,
+    "sha256": "78e77d12e39db57372477ce7cc437aada3e69a6631c0852e9fc92e228b986683"
   },
   {
     "path": "includes/nastya-everyday.php",
-    "bytes": 3750,
-    "sha256": "1b11c6668e76645bf6c497d599311a11a0b23f9786fe3f55c2f00121512f9a5c"
+    "bytes": 3837,
+    "sha256": "8dec8478a865af7544af50bb4cd90cea2070bf4010268afa178952e49e016c7a"
   },
   {
     "path": "includes/nastya-legacy.php",

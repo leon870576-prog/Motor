@@ -11,9 +11,10 @@ function motor_nastya_everyday(): array {
     if (!is_array($data) || !array_is_list($data) || count($data)!==100) return $topics;
     $out=[];
     foreach ($data as $item) {
-        if (!is_array($item) || !is_string($item['key']??null) || !preg_match('/^daily_[a-z_]{1,32}$/D',$item['key']) || isset($out[$item['key']]) || !is_string($item['pattern']??null) || strlen($item['pattern'])>600 || !is_array($item['answers']??null) || !is_array($item['followups']??null) || count($item['answers'])!==5 || count($item['followups'])!==8 || !in_array($item['limit']??null,[37,38],true)) return $topics;
+        if (!is_array($item) || !is_string($item['key']??null) || !preg_match('/^daily_[a-z_]{1,32}$/D',$item['key']) || isset($out[$item['key']]) || !is_string($item['pattern']??null) || strlen($item['pattern'])>600 || !is_array($item['answers']??null) || !is_array($item['followups']??null) || count($item['answers'])!==5 || count($item['followups'])!==4 || !in_array($item['limit']??null,[17,18],true)) return $topics;
         $answers=[];
-        foreach ($item['answers'] as $core) foreach ($item['followups'] as $end) {
+        // Interleave cores so limiting variants preserves all five practical answers.
+        foreach ($item['followups'] as $end) foreach ($item['answers'] as $core) {
             if (!is_string($core) || !is_string($end) || mb_strlen($core.' '.$end,'UTF-8')>600 || preg_match('/[<>|\x00-\x1F]/',$core.$end)) return $topics;
             $answers[]=$core.' '.$end;
         }
