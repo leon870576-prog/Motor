@@ -2,7 +2,7 @@
 if (!defined('BASEDIR')) {http_response_code(403);exit;}
 
 function motor_home_sections(): array {
-    return ['news'=>['Новости','news/index.php'],'gallery'=>['Фото из галереи','gallery/index.php'],'forum'=>['Темы форума','forum/index.php'],'board'=>['Объявления','board/index.php'],'chat'=>['Мини-чат','chat/index.php'],'book'=>['Гостевая','book/index.php']];
+    return ['news'=>['Новости','news/index.php'],'gallery'=>['Фотогалерея','gallery/index.php'],'forum'=>['Темы форума','forum/index.php'],'board'=>['Объявления','board/index.php'],'chat'=>['Мини-чат','chat/index.php'],'book'=>['Гостевая','book/index.php']];
 }
 function motor_home_admin(): bool {
     if (!is_user()) return false;

@@ -141,7 +141,7 @@ try{
   r=await req('/index.php');const html=block(r.text,kind),n=mediaCounts(html);
   assert.equal(n.photo,photos?(kind==='gallery'?3:['news','forum','board'].includes(kind)?1:0):0,kind);
   assert.equal(n.video,videos&&['news','forum'].includes(kind)?1:0,kind);
-  if(kind==='gallery'){assert.ok(!html.includes('<h')&&!html.includes('Комментарии')&&!html.includes('home-meta')&&!html.includes('home-excerpt'));assert.equal(!!html,photos);if(photos){assert.ok(html.includes('--home-gallery-width:160px'));assert.ok(html.includes('--home-gallery-height:144px'));}}
+  if(kind==='gallery'){assert.ok(!html.includes('<h3')&&!html.includes('Комментарии')&&!html.includes('home-meta')&&!html.includes('home-excerpt'));if(photos)assert.ok(html.includes('<h2 id="home-gallery">Фотогалерея</h2>'));assert.equal(!!html,photos);if(photos){assert.ok(html.includes('--home-gallery-width:160px'));assert.ok(html.includes('--home-gallery-height:144px'));}}
   else assert.equal(recordIds(html).length,kind==='board'?4:3);
   assert.ok(!html.includes('autoplay'));assert.ok(!html.includes('<img onerror=bad>'));
   if(kind!=='news'){assert.equal(mediaCounts(block(r.text,'news')).video,1);assert.ok(block(r.text,'news').includes('Комментарии (2)'));}

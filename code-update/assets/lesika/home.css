@@ -32,12 +32,12 @@ body:is([data-theme=lesika_dvor],[data-theme=lesika_vecher],[data-theme=lesika_w
 
 .home-picker button{min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--wash);color:var(--ink);font:inherit;cursor:pointer}
 
-/* Only photographs on the homepage; the administration keeps full record details. */
+/* Tiled homepage previews under one heading; originals open through the photo links. */
 body .home-block[data-home-block=gallery]{padding:0;border:0;background:transparent}
-.home-block[data-home-block=gallery] .home-items{display:flex;flex-wrap:wrap;gap:6px}
+.home-block[data-home-block=gallery] .home-items{display:flex;flex-wrap:wrap;gap:0}
 body .home-block[data-home-block=gallery] .home-item{flex:0 1 var(--home-gallery-width,120px);width:var(--home-gallery-width,120px);max-width:100%;padding:0;border:0;background:transparent}
 body .home-block[data-home-block=gallery] .home-photo{margin:0;padding:0;min-height:0}
-body .legacy-content .home-block[data-home-block=gallery] .home-photo img{height:var(--home-gallery-height,128px);aspect-ratio:auto;object-fit:contain}
+body .legacy-content .home-block[data-home-block=gallery] .home-photo img{height:var(--home-gallery-height,128px);aspect-ratio:auto;object-fit:cover;border-radius:0}
 .home-media{display:grid;gap:8px;margin-bottom:8px;min-width:0}
 .home-media .home-photo{margin:0}
 body .legacy-content .home-media .home-photo img{height:160px;aspect-ratio:auto;object-fit:contain}

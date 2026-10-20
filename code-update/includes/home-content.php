@@ -107,7 +107,7 @@ function motor_home_render(): void {
         [$title,$href]=motor_home_sections()[$kind];$items=motor_home_pick(motor_home_catalog($kind),$block);
         if ($kind==='gallery') {
             if (!$block['photos'] || !$items) continue;
-            echo '<section class="home-block" data-home-block="gallery" aria-label="Фото из галереи" style="--home-gallery-width:'.$settings['gallery_size']['width'].'px;--home-gallery-height:'.$settings['gallery_size']['height'].'px">';
+            echo '<section class="home-block" data-home-block="gallery" aria-labelledby="home-gallery" style="--home-gallery-width:'.$settings['gallery_size']['width'].'px;--home-gallery-height:'.$settings['gallery_size']['height'].'px"><header class="home-block-heading"><h2 id="home-gallery">'.$title.'</h2></header>';
         } else echo '<section class="home-block" data-home-block="'.$kind.'" aria-labelledby="home-'.$kind.'"><header class="home-block-heading"><h2 id="home-'.$kind.'">'.$title.'</h2><a href="'.BASEDIR.$href.'">Все записи →</a></header>';
         if (!$items) echo '<p class="home-empty">'.($block['mode']==='selected'?'Пока нет выбранных записей.':'Пока нет записей.').'</p>';
         else {echo '<div class="home-items">';foreach ($items as $item) motor_home_item($item,$kind,$block);echo '</div>';}
