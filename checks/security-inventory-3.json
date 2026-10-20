@@ -1,5 +1,10 @@
 [
   {
+    "path": "images/img/gallery.gif",
+    "bytes": 402,
+    "sha256": "0a818955f0ebeb9d3fc748340d5f0a8366c9f2ab9dfc1bd15d03aeff24dd9561"
+  },
+  {
     "path": "images/img/games.gif",
     "bytes": 392,
     "sha256": "4c50323940a14701bc1a2053186b9dd314b287908616c6d49fee0aa78d9cf2da"
@@ -1186,8 +1191,8 @@
   },
   {
     "path": "includes/functions.php",
-    "bytes": 70567,
-    "sha256": "770ccd208edaad6fa6d566e37ae7573a4e0889cc1425dbd27548eacfe9215040"
+    "bytes": 70625,
+    "sha256": "fc00f08dd51a41a4b9970e24deb4855fe4a8042fbc4341eb252c6e2fa23336b6"
   },
   {
     "path": "includes/gallery.php",
@@ -1213,6 +1218,16 @@
     "path": "includes/header.php",
     "bytes": 14971,
     "sha256": "f4ebce7572a267b39db74798ce1c8bfb7d1ecaee05ccbcf11ec1d5a8102716a5"
+  },
+  {
+    "path": "includes/home-content.php",
+    "bytes": 8086,
+    "sha256": "5d31c57b6a6e55e78a1e51f9d1a68842dbdd8ee46ab4dff56a63fcf58e114226"
+  },
+  {
+    "path": "includes/home-settings.php",
+    "bytes": 8169,
+    "sha256": "cd674ca716cd85e214eaae780785e0fbfde4ac8e3c3e30bcbf52b86e2aa7eb29"
   },
   {
     "path": "includes/info.php",
@@ -1241,13 +1256,13 @@
   },
   {
     "path": "includes/lesika/head.php",
-    "bytes": 4282,
-    "sha256": "ec7b7c806d4074e04c7e553ca7610984afd8ee2b45b8650a5d2852165ae6ce74"
+    "bytes": 4411,
+    "sha256": "f14396aab98721ed0836c741981b4be9a6133b34f3241bddbd434b27b1022c9e"
   },
   {
     "path": "includes/lesika/home.php",
-    "bytes": 1925,
-    "sha256": "d92b3d4a971a0761a5f2fdda9418b1bbe9d60adc1e95ae6ec3ff48ddee3a969b"
+    "bytes": 1914,
+    "sha256": "e7a89ca661b5273dc53682bf978cb749bdebd998a98f9dff5c2f4e0e4609f21c"
   },
   {
     "path": "includes/lesika/themes.json",
@@ -1341,8 +1356,8 @@
   },
   {
     "path": "includes/start.php",
-    "bytes": 20974,
-    "sha256": "1d3da43394d037d60ea68645bdab2b7e74fed30c8ce6f6a93d938c750d16c5ce"
+    "bytes": 21358,
+    "sha256": "32ba2b9e18ea6987228a6d23dc63e99360f6cde5f23c2f254932a5e7d41f88cd"
   },
   {
     "path": "includes/upgrade_pass_19ver.php",
@@ -1371,8 +1386,8 @@
   },
   {
     "path": "index.php",
-    "bytes": 2904,
-    "sha256": "662691f1a452778065c85a49b1d013e7dc919c074c9a0376dda091a9e8488cd2"
+    "bytes": 3115,
+    "sha256": "f428a48a62d22254bc9df3b532901a2ee9157ad2768bc2fe80420238e9ffb358"
   },
   {
     "path": "input.php",
@@ -1416,8 +1431,8 @@
   },
   {
     "path": "mpanel/backup.php",
-    "bytes": 14655,
-    "sha256": "7dffadf5cfb2486372e0dd5a8cb44bd7cce62d21f4d8db5da0084acdaeb95a28"
+    "bytes": 14707,
+    "sha256": "6bd24f704285cc09c18434b2383acbd726fe89b25ed21216f5372054e67c58f6"
   },
   {
     "path": "mpanel/ban.php",
@@ -1483,20 +1498,5 @@
     "path": "mpanel/gallery-settings.php",
     "bytes": 4823,
     "sha256": "eba9a98c9e455ff2b99286ceac4e2fb421afcf7b174c2a3470852fba3379fca2"
-  },
-  {
-    "path": "mpanel/gallery.php",
-    "bytes": 7956,
-    "sha256": "f3522347f253b19d0424c9b53a29846aa2e70d8763cb28d001362496ba2a70d0"
-  },
-  {
-    "path": "mpanel/headlines.php",
-    "bytes": 9181,
-    "sha256": "e9c94ea6c27f8fce2875fe05ce4827c92617231a2d51a0fb26012885b8300029"
-  },
-  {
-    "path": "mpanel/index.php",
-    "bytes": 9381,
-    "sha256": "4919d598ab0930bbf4af952314ff05eb12083490c482050111465d606c813840"
   }
 ]

@@ -18,7 +18,7 @@ if (isset($_GET['start'])){$start = (int)$_GET['start'];} else {$start = 0;}
 
 require_once '../includes/attachments.php';
 
-show_title('partners.gif', 'Новости сайта');
+show_title('partners.gif', 'Новости');
 
 $file = file(DATADIR."news.dat");
 $file = array_reverse($file);

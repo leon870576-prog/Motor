@@ -11,8 +11,8 @@
   },
   {
     "path": "INSTALL.php",
-    "bytes": 21449,
-    "sha256": "c787bd1e877efef1473ed45af46eda1f8cb1d7d6a105183469c2d863ad5d2343"
+    "bytes": 21341,
+    "sha256": "799b578a615f38f93ed858f6c9f905412194a8d6d8deea84134efe8494adf1b8"
   },
   {
     "path": "README.md",
@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 261,
-    "sha256": "7e43e0851427e588156f06df51a4c683eaac37754b19bdec5126509ad7a0e890"
+    "bytes": 258,
+    "sha256": "d577703acf60e061ed656a73400be3d955d37367402f6359f1e389c9c47af7d3"
   },
   {
     "path": "assets/lesika/arcade.css",
@@ -78,6 +78,11 @@
     "path": "assets/lesika/game21.js",
     "bytes": 3728,
     "sha256": "d1fb62437359edac6f19b3f3c10aed276492517145c46e062cfcec02c2e31af4"
+  },
+  {
+    "path": "assets/lesika/home.css",
+    "bytes": 3022,
+    "sha256": "469075bfb91e596ce294fc5833da10f56db44f976ee560764435fe1c3ec2f4c5"
   },
   {
     "path": "assets/lesika/leaf.svg",
@@ -1493,10 +1498,5 @@
     "path": "images/avators2/117.gif",
     "bytes": 15790,
     "sha256": "4d9d47f66c4251ef858703df7ba5d30b557b693c902a4654547a4a17b44a40e4"
-  },
-  {
-    "path": "images/avators2/118.gif",
-    "bytes": 14391,
-    "sha256": "313e54f1431175c27d423a65acc3840596c501c01daa32d98d72de334d6dc3fa"
   }
 ]

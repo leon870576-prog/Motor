@@ -1,0 +1,13 @@
+{
+  "browser": "153.0.8010.0",
+  "layouts": 240,
+  "themes": 12,
+  "fixtureTypes": 4,
+  "zoom200": true,
+  "formsPreserved": true,
+  "confirmedSettingsPost": true,
+  "confirmedSelectionPost": true,
+  "photosContain": true,
+  "errors": [],
+  "physicalDevices": false
+}

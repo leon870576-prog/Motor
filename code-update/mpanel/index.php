@@ -48,6 +48,7 @@ echo '<img src="../images/img/act.gif" alt="image" /> <a href="antimat.php?'.SID
 }
 
 if (is_admin(array(101,102))){
+echo '<a href="home-settings.php">Главная страница: блоки и записи</a><br />';
 echo '<a href="gallery-settings.php">Настройки галереи</a><br />';
 echo '<a href="board-settings.php">Настройки фотографий объявлений</a><br />';
 echo '<a href="attachments.php">Фото, видео и файлы — настройки вложений</a><br />';

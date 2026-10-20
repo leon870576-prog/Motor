@@ -1656,7 +1656,7 @@ function site_title($string) {
 	if (file_exists(DATADIR."headlines.dat")) {
 		$headlines = search_string(DATADIR."headlines.dat", $string, 1);
 		if ($headlines) {
-			$position .= ' - '.$headlines[2];
+			$position .= ' - '.str_replace('Новости сайта','Новости',$headlines[2]);
 		}
 	}
 	if ($header_title) {
