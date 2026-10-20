@@ -1221,8 +1221,8 @@
   },
   {
     "path": "includes/home-content.php",
-    "bytes": 8966,
-    "sha256": "6eb48b5d30b2ff32d7789751ff822eaafa1dfc5b93ec136b73252512d998b806"
+    "bytes": 9021,
+    "sha256": "240dcfd8ab980535c28c77154b0e7e7b7d5805484e22c67eb84c4ef35ba085fd"
   },
   {
     "path": "includes/home-media.php",

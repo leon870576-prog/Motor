@@ -12,29 +12,30 @@
   "compactGallery": [
     {
       "width": 320,
-      "height": 285.71875,
-      "text": "Фотогалерея",
+      "height": 308,
+      "text": "ФотогалереяВсе записи →",
+      "headerHref": "/gallery/index.php",
       "gap": "0px",
       "rects": [
         {
           "left": 8,
           "right": 128,
-          "top": 1311.96875,
-          "bottom": 1439.96875,
+          "top": 1334.25,
+          "bottom": 1462.25,
           "radius": "0px"
         },
         {
           "left": 128,
           "right": 248,
-          "top": 1311.96875,
-          "bottom": 1439.96875,
+          "top": 1334.25,
+          "bottom": 1462.25,
           "radius": "0px"
         },
         {
           "left": 8,
           "right": 128,
-          "top": 1439.96875,
-          "bottom": 1567.96875,
+          "top": 1462.25,
+          "bottom": 1590.25,
           "radius": "0px"
         }
       ],
@@ -59,29 +60,30 @@
     },
     {
       "width": 390,
-      "height": 157.71875,
-      "text": "Фотогалерея",
+      "height": 180,
+      "text": "ФотогалереяВсе записи →",
+      "headerHref": "/gallery/index.php",
       "gap": "0px",
       "rects": [
         {
           "left": 8,
           "right": 128,
-          "top": 1331.75,
-          "bottom": 1459.75,
+          "top": 1354.03125,
+          "bottom": 1482.03125,
           "radius": "0px"
         },
         {
           "left": 128,
           "right": 248,
-          "top": 1331.75,
-          "bottom": 1459.75,
+          "top": 1354.03125,
+          "bottom": 1482.03125,
           "radius": "0px"
         },
         {
           "left": 248,
           "right": 368,
-          "top": 1331.75,
-          "bottom": 1459.75,
+          "top": 1354.03125,
+          "bottom": 1482.03125,
           "radius": "0px"
         }
       ],
@@ -106,29 +108,30 @@
     },
     {
       "width": 768,
-      "height": 157.71875,
-      "text": "Фотогалерея",
+      "height": 180,
+      "text": "ФотогалереяВсе записи →",
+      "headerHref": "/gallery/index.php",
       "gap": "0px",
       "rects": [
         {
           "left": 112,
           "right": 232,
-          "top": 1100.828125,
-          "bottom": 1228.828125,
+          "top": 1123.109375,
+          "bottom": 1251.109375,
           "radius": "0px"
         },
         {
           "left": 232,
           "right": 352,
-          "top": 1100.828125,
-          "bottom": 1228.828125,
+          "top": 1123.109375,
+          "bottom": 1251.109375,
           "radius": "0px"
         },
         {
           "left": 352,
           "right": 472,
-          "top": 1100.828125,
-          "bottom": 1228.828125,
+          "top": 1123.109375,
+          "bottom": 1251.109375,
           "radius": "0px"
         }
       ],
@@ -153,29 +156,30 @@
     },
     {
       "width": 1440,
-      "height": 157.71875,
-      "text": "Фотогалерея",
+      "height": 180,
+      "text": "ФотогалереяВсе записи →",
+      "headerHref": "/gallery/index.php",
       "gap": "0px",
       "rects": [
         {
           "left": 448,
           "right": 568,
-          "top": 846.421875,
-          "bottom": 974.421875,
+          "top": 868.703125,
+          "bottom": 996.703125,
           "radius": "0px"
         },
         {
           "left": 568,
           "right": 688,
-          "top": 846.421875,
-          "bottom": 974.421875,
+          "top": 868.703125,
+          "bottom": 996.703125,
           "radius": "0px"
         },
         {
           "left": 688,
           "right": 808,
-          "top": 846.421875,
-          "bottom": 974.421875,
+          "top": 868.703125,
+          "bottom": 996.703125,
           "radius": "0px"
         }
       ],
