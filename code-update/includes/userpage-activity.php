@@ -61,7 +61,8 @@ function motor_userpage_activity_sync(string $actor,string $owner,?int $news,?in
 }
 // Called only by the CLI migration. Backups are placed outside the web root.
 function motor_userpage_activity_migrate(string $backupRoot): array {
-    if (!is_dir($backupRoot) && !mkdir($backupRoot,0700,true)) throw new RuntimeException('Cannot create activity backup');
+    // Another migration may create the root before this process acquires its lock.
+    if (!is_dir($backupRoot) && !@mkdir($backupRoot,0700,true) && !is_dir($backupRoot)) throw new RuntimeException('Cannot create activity backup');
     if (is_link($backupRoot) || !is_dir($backupRoot)) throw new RuntimeException('Unsafe activity backup');
     $lockPath=$backupRoot.'/migration.lock';if (is_link($lockPath)) throw new RuntimeException('Unsafe migration lock');
     $lock=fopen($lockPath,'c');if (!$lock) throw new RuntimeException('Cannot open migration lock');

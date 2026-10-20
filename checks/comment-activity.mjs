@@ -102,5 +102,17 @@ create('ShortUser');let short=profile('ShortUser').slice(0,80);short[33]='0';sho
 await run(helper+"motor_userpage_activity_sync('ShortUser','OldPage',1,1);");assert.deepEqual(values('ShortUser'),[2,2,2,17]);
 const symlink=await run(helper+"symlink(DATADIR.'profil/OldUser.prof',DATADIR.'profil/LinkUser.prof');try {motor_userpage_activity_sync('LinkUser','OldPage',1,1);echo 'accepted';}catch(Throwable $e){echo $e->getCode();}");assert.equal(symlink,'503');assert.equal(php.readFileAsText('/www/local/profil/OldUser.prof'),migrated);
 pass('numeric logins and short profiles supported; unknown markers and symlink refused; migration preserves existing activity, money, authority and unrelated fields');
+// Deterministically model the other process creating the directory between is_dir and mkdir.
+const directoryRace=await run(String.raw`
+define('BASEDIR','/www/');define('DATADIR','/race-data/');require '/www/includes/functions.php';require '/www/includes/userpages.php';
+mkdir('/race-data');mkdir('/race-data/profil');mkdir('/race-data/userpages');
+$source=file_get_contents('/www/includes/userpage-activity.php');
+$shim='namespace MotorDirectoryRace; use \\RuntimeException; use \\InvalidArgumentException; use \\Throwable; function mkdir($path,$mode=0777,$recursive=false){$ok=\\mkdir($path,$mode,$recursive);return $path==="/race-backup"?false:$ok;} ';
+eval($shim.substr($source,5));
+$r=MotorDirectoryRace\motor_userpage_activity_migrate('/race-backup');
+echo json_encode($r);
+`);
+assert.deepEqual(JSON.parse(directoryRace),{pages:0,profile_updates:0,missing_profiles:0});
+pass('backup directory creation tolerates another process winning the mkdir race, with the migration lock and safety checks preserved');
 writeFileSync(new URL('./comment-activity-results.json',import.meta.url),JSON.stringify({php:'8.4 WASM',requests,passed},null,2));console.log('SUCCESS',requests,'HTTP requests plus migration assertions');
 }finally{php.exit()}

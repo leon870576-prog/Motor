@@ -17,7 +17,7 @@ try {
     foreach(['migrate','counter'] as $mode)for($i=0;$i<4;$i++){
         $p=proc_open([PHP_BINARY,__FILE__,'worker',$dir,$mode],[0=>['file','/dev/null','r'],1=>['file',$dir.'/'.$mode.$i.'.log','a'],2=>['file',$dir.'/'.$mode.$i.'.log','a']],$pipes);if(!is_resource($p))throw new RuntimeException('Cannot start activity worker');$processes[]=$p;
     }
-    foreach($processes as $p)if(proc_close($p)!==0)throw new RuntimeException('Activity worker failed');$processes=[];
+    foreach($processes as $i=>$p) { $exit=proc_close($p);unset($processes[$i]);if($exit!==0){$details='';foreach(glob($dir.'/*.log') as $log)$details.=basename($log).': '.file_get_contents($log);throw new RuntimeException('Activity worker failed: '.$details);}}$processes=[];
     $p=motor_userpage_profile('OldUser');
     if((int)$p[33]!==173 || (int)$p[36]!==186 || (int)$p[41]!==196 || (int)$p[49]!==17 || $p[98]!=='arc-state' || $p[99]!=='game-state')throw new RuntimeException('Lost or duplicated activity');
     $r=motor_userpage_activity_receipts($p[97]);if($r!==['news'=>['OldPage'=>3],'rewards'=>['OldPage'=>3],'reviews'=>['OldPage'=>3]])throw new RuntimeException('Invalid receipts');
