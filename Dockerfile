@@ -26,6 +26,8 @@ COPY auth.php /opt/motor-auth.php
 COPY migrate.php /opt/motor-migrate.php
 COPY migrate-branding.php /opt/motor-migrate-branding.php
 COPY migrate-comment-activity.php /opt/motor-migrate-comment-activity.php
+COPY restore-home.php /opt/motor-restore-home.php
+COPY checks/restore-home.php /opt/motor-restore-home-check.php
 COPY validate.php /opt/motor-validate.php
 COPY checks/chat-catalogue.php /opt/motor-chat-catalogue.php
 COPY checks/gallery-native.php /opt/motor-gallery-native.php
@@ -56,6 +58,8 @@ RUN chmod 755 /usr/local/bin/motor-entrypoint \
  && php /opt/motor-reputation-native.php \
  && php /opt/motor-userpage-comments-native.php \
  && php /opt/motor-comment-activity-native.php \
+ && php /opt/motor-restore-home-check.php \
+ && php -l /opt/motor-restore-home.php \
  && php -l /opt/motor-migrate-comment-activity.php \
  && php -l /opt/motor-migrate.php \
  && php -l /opt/motor-migrate-branding.php \
