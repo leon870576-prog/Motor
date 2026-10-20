@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -64,7 +64,7 @@ if ($uzdata[64]<5){
 echo '<form method="post" action="zaban.php?action=zaban&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">';
 echo 'Время бана:<br /><input name="bantime" /><br />';
 
-echo '<input name="banform" type="radio" value="min" checked="checked" /> Минут<br />';	
+echo '<input name="banform" type="radio" value="min" checked="checked" /> Минут<br />';
 echo '<input name="banform" type="radio" value="chas" /> Часов<br />';
 echo '<input name="banform" type="radio" value="sut" /> Суток<br />';
 
@@ -77,22 +77,22 @@ echo 'Максимальное время бана '.round($config['maxbantime']
 echo 'Внимание! Постарайтесь как можно подробнее описать причину бана<br />';
 
 } else {
-echo '<b><span style="color:#ff0000">Внимание! Пользователь превысил лимит банов</span></b><br />';	
+echo '<b><span style="color:#ff0000">Внимание! Пользователь превысил лимит банов</span></b><br />';
 echo 'Вы можете удалить этот профиль!<br /><br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="zaban.php?action=deluser&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Удалить профиль</a></b>';
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a data-motor-action href="zaban.php?action=deluser&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Удалить профиль</a></b>';
 }
 
 } else {
 echo '<b><span style="color:#ff0000">Внимание, данный аккаунт заблокирован!</span></b><br />';
 echo 'До окончания бана осталось '.formattime($uzdata[38]-SITETIME).'<br /><br />';
 
-echo '<img src="../images/img/reload.gif" alt="image" /> <b><a href="zaban.php?action=razban&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Разбанить</a></b><hr />';
+echo '<img src="../images/img/reload.gif" alt="image" /> <b><a data-motor-action href="zaban.php?action=razban&amp;users='.$users.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Разбанить</a></b><hr />';
 }
 
 } else {
 echo '<b><span style="color:#ff0000">У вас недостаточно прав для бана этого аккаунта</span></b><br />';
 echo 'Запрещается банить админов и модеров!<br />';
-} 
+}
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, пользователя с данным логином не существует!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка, необходимо ввести логин пользователя!</b><br />';}
@@ -116,11 +116,11 @@ if (preg_match('|^[a-z0-9\-]+$|i',$users)){
 if (file_exists(DATADIR."profil/$users.prof")){
 
 if ($banform=='min'){$bantotaltime = $bantime;}
-if ($banform=='chas'){$bantotaltime = round($bantime*60);}		
-if ($banform=='sut'){$bantotaltime = round($bantime*60*24);}	
-		
+if ($banform=='chas'){$bantotaltime = round($bantime*60);}
+if ($banform=='sut'){$bantotaltime = round($bantime*60*24);}
+
 if ($bantotaltime>0){
-if ($bantotaltime<=$config['maxbantime']){	
+if ($bantotaltime<=$config['maxbantime']){
 if (utf_strlen(trim($bancause))>=5){
 
 $bancause = no_br($bancause,' <br /> ');
@@ -131,7 +131,7 @@ if (SITETIME>($uzdata[52]+10800) && $bantotaltime>180){$bancount = 1;} else {$ba
 change_profil($users, array(37=>1, 38=>SITETIME+($bantotaltime*60), 39=>$bancause, 52=>SITETIME, 63=>$log, 64=>$uzdata[64]+$bancount, 73=>1));
 
 echo 'Данные пользователя <b>'.$users.'</b> успешно изменены!<br />';
-echo '<b><span style="color:#ff0000">Аккаунт заблокирован!</span></b><br /><br />'; 
+echo '<b><span style="color:#ff0000">Аккаунт заблокирован!</span></b><br /><br />';
 
 echo '<a href="zaban.php?'.SID.'">Редактировать нового юзера</a><br />';
 
@@ -163,7 +163,7 @@ if ($uzdata[64]>0){$bancount = 1;} else {$bancount = 0;}
 change_profil($users, array(37=>0, 38=>0, 64=>$uzdata[64]-$bancount, 73=>0));
 
 echo 'Данные юзера <b>'.$users.'</b> успешно изменены!<br />';
-echo '<b><span style="color:#00ff00">Аккаунт разблокирован!</span></b><br /><br />'; 
+echo '<b><span style="color:#00ff00">Аккаунт разблокирован!</span></b><br /><br />';
 
 echo '<a href="zaban.php?'.SID.'">Редактировать нового юзера</a><br />';
 

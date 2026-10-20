@@ -144,7 +144,7 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="kontakt.ph
 ############################################################################################
 if ($action=="prodel") {
 echo 'Вы уверены что хотите удалить всех пользователе из контактов?<br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="kontakt.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да, уверен!</a></b><br />';
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a data-motor-action href="kontakt.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да, уверен!</a></b><br />';
 
 echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="kontakt.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }

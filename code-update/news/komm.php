@@ -14,7 +14,7 @@ require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
 include_once ("../themes/".$config['themes']."/index.php");
 
-$id = (int)$_GET['id'];
+$id = (int)($_GET['id'] ?? 0);
 if (isset($_GET['start'])){$start = (int)$_GET['start'];} else {$start = 0;}
 if (isset($_GET['action'])){$action = check($_GET['action']);} else {$action = "";}
 
@@ -100,7 +100,7 @@ echo '<a href="../pages/tegi.php?'.SID.'">Теги</a><br />';
 if ($action=="add"){
 
 $uid = check($_GET['uid']);
-$id = (int)$_GET['id'];
+$id = (int)($_GET['id'] ?? 0);
 $msg = check($_POST['msg']);
 
 if (is_user()){
@@ -155,7 +155,7 @@ if ($action=="del"){
 if (is_admin(array(101,102,103,105))){
 
 $uid = check($_GET['uid']);
-if (isset($_GET['id'])) {$id = (int)$_GET['id'];} else {$id = "";}
+if (isset($_GET['id'])) {$id = (int)($_GET['id'] ?? 0);} else {$id = "";}
 if (isset($_POST['del'])) {$del = intar($_POST['del']);} else {$del = "";}
 
 if ($uid==$_SESSION['token']){

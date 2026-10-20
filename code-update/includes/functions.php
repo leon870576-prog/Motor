@@ -1874,29 +1874,20 @@ element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2
 
 // ----------------------- Функция изменения настроек сайта -------------------//
 function change_setting($str) {
-	global $config;
-
-	$file = file_get_contents(DATADIR."config.dat");
-	$data = explode('|', $file);
-
-	$text = "";
-	for ($u = 0; $u < $config['configkeys']; $u++) {
-		if (isset($str[$u])) {
-			$data[$u] = $str[$u];
-		}
-		$text .= $data[$u].'|';
-	}
-
-	if ($data[8] != "" && $data[9] != "" && $text != "") {
-		$fp = fopen(DATADIR."config.dat", "a+");
-		flock($fp, LOCK_EX);
-		ftruncate($fp, 0);
-		fputs($fp, $text);
-		fflush($fp);
-		flock($fp, LOCK_UN);
-		fclose($fp);
-		unset($text);
-	}
+    global $config;
+    $path=DATADIR.'config.dat';
+    if (is_link($path)) throw new RuntimeException('Недопустимый файл настроек.');
+    $fp=fopen($path,'r+b');
+    if (!$fp) throw new RuntimeException('Не удалось открыть настройки.');
+    try {
+        if (!flock($fp,LOCK_EX)) throw new RuntimeException('Не удалось заблокировать настройки.');
+        $data=explode('|',stream_get_contents($fp));
+        for($u=0;$u<$config['configkeys'];$u++)if(isset($str[$u]))$data[$u]=$str[$u];
+        if (empty($data[8]) || empty($data[9])) throw new RuntimeException('Не заполнены основные настройки.');
+        $text='';for($u=0;$u<$config['configkeys'];$u++)$text.=($data[$u]??'').'|';
+        rewind($fp);
+        if (fwrite($fp,$text)!==strlen($text) || !ftruncate($fp,strlen($text)) || !fflush($fp)) throw new RuntimeException('Не удалось сохранить настройки.');
+    } finally {flock($fp,LOCK_UN);fclose($fp);}
 }
 
 // ------------------------- Функция записи в профиль  ------------------------//

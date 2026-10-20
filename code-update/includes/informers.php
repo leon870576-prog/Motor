@@ -23,6 +23,21 @@ function motor_info_profiles(): array {
     }
     return $profiles;
 }
+function motor_info_adminlist(): array {
+    $users=array_filter(motor_info_profiles(),fn($d)=>(int)$d[7]>=101 && (int)$d[7]<=105);
+    uasort($users,fn($a,$b)=>(int)$a[7]<=>(int)$b[7]);
+    return array_values(array_map(fn($d)=>'|'.$d[0].'|'.(int)$d[7].'|',$users));
+}
+function motor_info_banlist(): array {
+    $users=array_filter(motor_info_profiles(),fn($d)=>!empty($d[37]) && (int)$d[38]>SITETIME);
+    uasort($users,fn($a,$b)=>(int)$a[52]<=>(int)$b[52]);
+    return array_values(array_map(fn($d)=>'|'.$d[0].'|'.(int)$d[38].'|'.$d[39].'|'.(int)$d[52].'|'.$d[63].'|',$users));
+}
+function motor_info_pending_rows(): array {
+    $users=array_filter(motor_info_profiles(),fn($d)=>!empty($d[46]));
+    uasort($users,fn($a,$b)=>(int)$a[6]<=>(int)$b[6] ?: strcmp($a[0],$b[0]));
+    return array_values(array_map(fn($d)=>$d[0].'|'.$d[4].'|'.(int)$d[6].'|',$users));
+}
 function motor_info_forum(?string $only=null): array {
     $topics=0;$posts=0;$seen=[];
     foreach (motor_info_lines(DATADIR.'dataforum/mainforum.dat') as $row) {

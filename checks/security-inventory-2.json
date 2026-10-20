@@ -1,5 +1,10 @@
 [
   {
+    "path": "images/avators2/114.gif",
+    "bytes": 12041,
+    "sha256": "edb6c1e938efa96f235e57623c20c031a52a2bda6eaf5e5436cb80c87fd1a8c3"
+  },
+  {
     "path": "images/avators2/115.gif",
     "bytes": 12235,
     "sha256": "2c26309ca92727a31062722c9203ec5e3175435fb8e589cc3c57d15f06b08644"
@@ -1493,10 +1498,5 @@
     "path": "images/img/exit.gif",
     "bytes": 272,
     "sha256": "aed18d450e81e6a38edaa6cff455b0b970ee5c719bef837da9b360fed1898748"
-  },
-  {
-    "path": "images/img/faq.gif",
-    "bytes": 364,
-    "sha256": "771454cf2f3d682774ce8328fc5fbec8b8fd1c48139a60406bd993de1d18179f"
   }
 ]

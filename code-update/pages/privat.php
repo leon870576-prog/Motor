@@ -68,8 +68,8 @@ echo user_avatars($data[0]);
 echo '<b><a href="userpage.php?uz='.$data[0].'&amp;'.SID.'">'.nickname($data[0]).'</a></b> '.user_online($data[0]).' ('.date_fixed($data[2]).')<br />';
 echo '<input type="checkbox" name="del[]" value="'.$num.'" /> ';
 echo '<a href="privat.php?action=submit&amp;uz='.$data[0].'&amp;'.SID.'">Ответить</a> | ';
-echo '<a href="kontakt.php?action=add&amp;uz='.$data[0].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">В контакт</a> | ';
-echo '<a href="ignor.php?action=add&amp;uz='.$data[0].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Игнор</a></div>';
+echo '<a data-motor-action href="kontakt.php?action=add&amp;uz='.$data[0].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">В контакт</a> | ';
+echo '<a data-motor-action href="ignor.php?action=add&amp;uz='.$data[0].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Игнор</a></div>';
 
 echo '<div>'.bb_code($data[1]).'</div>';
 }
@@ -83,7 +83,7 @@ page_strnavigation('privat.php?', $config['privatpost'], $start, $total);
 echo '<br /><br />Всего писем: <b>'.(int)$total.'</b><br />';
 echo 'Объем ящика: <b>'.(int)$pers.'%</b><br />';
 
-echo '<br /><img src="../images/img/error.gif" alt="image" /> <a href="privat.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Очистить ящик</a>';
+echo '<br /><img src="../images/img/error.gif" alt="image" /> <a data-motor-action href="privat.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Очистить ящик</a>';
 
 } else {show_error('Входящих писем еще нет!');}
 } else {show_error('Входящих писем еще нет!');}
@@ -154,7 +154,7 @@ echo '<br /><input type="submit" value="Удалить выбранное" /></f
 page_jumpnavigation('privat.php?action=output&amp;', $config['privatpost'], $start, $total);
 page_strnavigation('privat.php?action=output&amp;', $config['privatpost'], $start, $total);
 
-echo '<br /><br /><img src="../images/img/error.gif" alt="image" /> <a href="privat.php?action=alloutdel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Очистить ящик</a>';
+echo '<br /><br /><img src="../images/img/error.gif" alt="image" /> <a data-motor-action href="privat.php?action=alloutdel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Очистить ящик</a>';
 
 } else {show_error('Отправленных писем еще нет!');}
 } else {show_error('Отправленных писем еще нет!');}

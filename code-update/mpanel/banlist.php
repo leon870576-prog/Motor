@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -26,8 +26,8 @@ echo '<img src="../images/img/site.png" alt="image" /> <b>Список заба�
 ############################################################################################
 if ($action==""){
 
-if (file_exists(DATADIR."datatmp/banlist.dat")){
-$file = file(DATADIR."datatmp/banlist.dat");
+if (true){
+$file = motor_info_banlist();
 $file = array_reverse($file);
 $total = count($file);
 
@@ -37,7 +37,7 @@ if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['banlist']){ $end = $total; }
 else {$end = $start + $config['banlist'];}
 for ($i = $start; $i < $end; $i++){
-	
+
 $data = explode("|",$file[$i]);
 
 
@@ -95,13 +95,13 @@ $dat_date[] = $data[52];
 $dat_who[] = $data[63];
 }}
 
-asort($dat_date);	
+asort($dat_date);
 $admin_top = array();
 
 foreach ($dat_date as $k=>$v){
-$admin_top[] = '|'.$dat_user[$k].'|'.$dat_time[$k].'|'.$dat_cause[$k].'|'.$dat_date[$k].'|'.$dat_who[$k].'|';	
+$admin_top[] = '|'.$dat_user[$k].'|'.$dat_time[$k].'|'.$dat_cause[$k].'|'.$dat_date[$k].'|'.$dat_who[$k].'|';
 }
-	
+
 $text = implode("\r\n",$admin_top);
 
 write_files(DATADIR."datatmp/banlist.dat", $text, 1, 0666);
@@ -110,7 +110,7 @@ write_files(DATADIR."datatmp/banlist.dat", $text, 1, 0666);
 header ("Location: banlist.php?isset=reload&".SID); exit;
 }
 
-echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a href="banlist.php?action=reload&amp;'.SID.'">Пересчитать</a><br />';
+echo '<br /><img src="../images/img/reload.gif" alt="image" /> <a data-motor-action href="banlist.php?action=reload&amp;'.SID.'">Пересчитать</a><br />';
 echo '<img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
 echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
 

@@ -152,8 +152,8 @@ if ($uz!=$log){
 echo '<br /><div class="b">';
 
 echo '<img src="../images/img/chat.gif" alt="image" /> Добавить в ';
-echo '<a href="kontakt.php?action=add&amp;uz='.$uz.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">контакт</a> / ';
-echo '<a href="ignor.php?action=add&amp;uz='.$uz.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">игнор</a><br />';
+echo '<a data-motor-action href="kontakt.php?action=add&amp;uz='.$uz.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">контакт</a> / ';
+echo '<a data-motor-action href="ignor.php?action=add&amp;uz='.$uz.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">игнор</a><br />';
 echo '<img src="../images/img/mail.gif" alt="image" /> <a href="privat.php?action=submit&amp;uz='.$uz.'&amp;'.SID.'">Отправить сообщение</a><br />';
 
 echo '<img src="../images/img/many.gif" alt="image" /> <a href="../games/perevod.php?uz='.$uz.'&amp;'.SID.'">Перечислить денег</a><br />';

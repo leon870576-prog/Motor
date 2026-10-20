@@ -95,9 +95,9 @@ echo '<br /><div class="b"><b><span style="color:#ff0000">Внимание!!! П
 echo '<br /><div class="b"><b><span style="color:#ff0000">Внимание!!! Отсутствует профиль суперадмина</span></b><br />Логин который вписан в config.dat <b>'.check($config['nickname']).'</b> не задействован на сайте</div>';
 }
 
-if (file_exists(BASEDIR."INSTALL.php") && $config['nickname']!=""){
+if (is_admin([101]) && file_exists(BASEDIR."INSTALL.php") && $config['nickname']!=""){
 echo '<br /><div class="b"><b><span style="color:#ff0000">Внимание!!! Необходимо удалить файл INSTALL.php</span></b><br />';
-echo 'Удалите этот файл прямо <u><a href="index.php?action=delinstall&amp;'.SID.'">сейчас</a></u></div>';
+echo 'Удалите этот файл прямо <u><a data-motor-action href="index.php?action=delinstall&amp;'.SID.'">сейчас</a></u></div>';
 }
 }
 
@@ -105,6 +105,7 @@ echo 'Удалите этот файл прямо <u><a href="index.php?action=d
 ##                                     Удаление INSTALL                                   ##
 ############################################################################################
 if($action=="delinstall"){
+if (!is_admin([101])) {http_response_code(403);exit('Недостаточно прав.');}
 
 if (file_exists(BASEDIR."INSTALL.php")){
 

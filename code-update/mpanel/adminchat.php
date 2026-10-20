@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -39,7 +39,7 @@ echo '<input type="submit" value="Написать" /></form><hr />';
 
 $file = file(DATADIR."adminchat.dat");
 $file = array_reverse($file);
-$total = count($file);    
+$total = count($file);
 
 if ($total>0){
 
@@ -66,7 +66,7 @@ page_strnavigation('adminchat.php?', $config['bookpost'], $start, $total);
 
 if (is_admin(array(101))){
 echo '<br /><br /><img src="../images/img/error.gif" alt="image" /> <a href="adminchat.php?action=prodel&amp;'.SID.'">Очистить чат</a><br />';
-echo '<img src="../images/img/reload.gif" alt="image" /> <a href="adminchat.php?action=restatement&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Пересчитать</a>';
+echo '<img src="../images/img/reload.gif" alt="image" /> <a data-motor-action href="adminchat.php?action=restatement&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Пересчитать</a>';
 }
 
 } else {echo '<br /><img src="../images/img/reload.gif" alt="image" /> <b>Сообщений нет, будь первым!</b><br />';}
@@ -112,8 +112,8 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="adminchat.
 ############################################################################################
 if ($action=="prodel") {
 echo 'Вы уверены что хотите удалить все сообщения в админ-чате?<br /><br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="adminchat.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да уверен!</a></b><br />';	
-	
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a data-motor-action href="adminchat.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да уверен!</a></b><br />';
+
 echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="adminchat.php?'.SID.'">Вернуться</a>';
 }
 
@@ -127,7 +127,7 @@ $uid = check($_GET['uid']);
 if (is_admin(array(101))){
 if ($uid==$_SESSION['token']){
 
-clear_files(DATADIR."adminchat.dat");	
+clear_files(DATADIR."adminchat.dat");
 
 header ("Location: adminchat.php?isset=mp_admindelchat&".SID); exit;
 
@@ -151,12 +151,12 @@ $count = counter_string(DATADIR."adminchat.dat");
 
 statistics(4, $count);
 
-header ("Location: adminchat.php?isset=mp_adminrestatement&".SID); exit;	
+header ("Location: adminchat.php?isset=mp_adminrestatement&".SID); exit;
 
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 } else {echo '<b>Ошибка! Пересчитывать сообщения могут только суперадмины!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="adminchat.php?'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="adminchat.php?'.SID.'">Вернуться</a>';
 }
 
 

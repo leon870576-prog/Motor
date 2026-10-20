@@ -52,6 +52,8 @@ body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="les
 body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
 body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) textarea,
 body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) select { min-height:40px; padding:6px 8px; margin:4px 0 7px; font-size:1rem; line-height:1.35 }
+/* Selects are touch actions; desktop compact sizing below remains unchanged. */
+body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) select { min-height:44px }
 body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) textarea { min-height:80px }
 body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content input[type="submit"],
 body:is([data-theme="lesika_dvor"],[data-theme="lesika_vecher"],[data-theme="lesika_web_press"],[data-theme="lesika_web_evening"]) .legacy-content input[type="button"],

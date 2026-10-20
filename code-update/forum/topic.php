@@ -52,14 +52,14 @@ case "index":
 
 			if (is_admin()){
 				$lock = (empty($topic[5])) ? 'Закрепить' : 'Открепить';
-				echo '<a href="'.ADMINDIR.'forum.php?act=lockedtopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">'.$lock.'</a> / ';
+				echo '<a data-motor-action href="'.ADMINDIR.'forum.php?act=lockedtopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">'.$lock.'</a> / ';
 
 
 				$close = (empty($topic[6])) ? 'Закрыть' : 'Открыть';
-				echo '<a href="'.ADMINDIR.'forum.php?act=closedtopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">'.$close.'</a> / ';
+				echo '<a data-motor-action href="'.ADMINDIR.'forum.php?act=closedtopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">'.$close.'</a> / ';
 
 				echo '<a href="'.ADMINDIR.'forum.php?act=edittopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;'.SID.'">Изменить</a> / ';
-				echo '<a href="'.ADMINDIR.'forum.php?act=deltopic&amp;del='.$id.'&amp;fid='.$fid.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" onclick="return confirm(\'Вы действительно хотите удалить тему?\')">Удалить</a> / ';
+				echo '<a data-motor-action href="'.ADMINDIR.'forum.php?act=deltopic&amp;del='.$id.'&amp;fid='.$fid.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" onclick="return confirm(\'Вы действительно хотите удалить тему?\')">Удалить</a> / ';
 				echo '<a href="'.ADMINDIR.'forum.php?act=topic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;'.SID.'">Управление</a>';
 			}
 

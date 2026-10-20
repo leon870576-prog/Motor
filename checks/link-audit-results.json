@@ -1,0 +1,15 @@
+{
+  "runtime": "PHP 8.4 WASM",
+  "requests": 682,
+  "pages": 667,
+  "uniqueTargets": 736,
+  "skippedMutations": 14,
+  "expectedDiagnostics": [
+    "/check",
+    "/local"
+  ],
+  "broken": [],
+  "statusErrors": [],
+  "phpErrors": [],
+  "scope": "Rendered internal href/src/action references, local isolated guest/member/admin navigation; no external URLs fetched and no destructive links followed"
+}

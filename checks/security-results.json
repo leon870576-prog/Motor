@@ -1,6 +1,6 @@
 {
   "php": "8.4",
-  "requests": 435,
+  "requests": 436,
   "smokeRoutes": 116,
   "smokeRequests": 348,
   "passed": [
@@ -15,5 +15,5 @@
     "actual recovery GET leaves password unchanged; POST+CSRF changes it once and invalidates the link",
     "disabled mail reports failure without changing password, recovery token or cooldown"
   ],
-  "inventoriedFiles": 1012
+  "inventoriedFiles": 1015
 }

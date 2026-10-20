@@ -12,14 +12,14 @@
   ],
   "measurements": [
     {
-      "width": 254,
+      "width": 270,
       "height": 204.46875,
       "theme": "lesika_dvor",
-      "left": 33,
-      "right": 287,
+      "left": 25,
+      "right": 295,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 44.796875,
+      "cellWidth": 48.390625,
       "cellHeight": 44,
       "position": "static"
     },
@@ -60,14 +60,14 @@
       "position": "static"
     },
     {
-      "width": 254,
+      "width": 270,
       "height": 204.46875,
       "theme": "lesika_vecher",
-      "left": 33,
-      "right": 287,
+      "left": 25,
+      "right": 295,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 44.796875,
+      "cellWidth": 48.390625,
       "cellHeight": 44,
       "position": "static"
     },
@@ -108,14 +108,14 @@
       "position": "static"
     },
     {
-      "width": 254,
+      "width": 270,
       "height": 204.46875,
       "theme": "lesika_web_press",
-      "left": 33,
-      "right": 287,
+      "left": 25,
+      "right": 295,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 44.796875,
+      "cellWidth": 48.390625,
       "cellHeight": 44,
       "position": "static"
     },
@@ -144,26 +144,26 @@
       "position": "static"
     },
     {
-      "width": 254,
+      "width": 270,
       "height": 204.46875,
       "theme": "lesika_web_evening",
-      "left": 33,
-      "right": 287,
+      "left": 25,
+      "right": 295,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 44.796875,
+      "cellWidth": 48.390625,
       "cellHeight": 44,
       "position": "static"
     },
     {
-      "width": 288,
+      "width": 310,
       "height": 232,
       "theme": "lesika_dvor",
-      "left": 36,
-      "right": 324,
+      "left": 25,
+      "right": 335,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 51.59375,
+      "cellWidth": 46.5,
       "cellHeight": 44,
       "position": "static"
     },
@@ -204,14 +204,14 @@
       "position": "static"
     },
     {
-      "width": 288,
+      "width": 310,
       "height": 232,
       "theme": "lesika_vecher",
-      "left": 36,
-      "right": 324,
+      "left": 25,
+      "right": 335,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 51.59375,
+      "cellWidth": 46.5,
       "cellHeight": 44,
       "position": "static"
     },
@@ -252,14 +252,14 @@
       "position": "static"
     },
     {
-      "width": 288,
+      "width": 310,
       "height": 232,
       "theme": "lesika_web_press",
-      "left": 36,
-      "right": 324,
+      "left": 25,
+      "right": 335,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 51.59375,
+      "cellWidth": 46.5,
       "cellHeight": 44,
       "position": "static"
     },
@@ -288,26 +288,26 @@
       "position": "static"
     },
     {
-      "width": 288,
+      "width": 310,
       "height": 232,
       "theme": "lesika_web_evening",
-      "left": 36,
-      "right": 324,
+      "left": 25,
+      "right": 335,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 51.59375,
+      "cellWidth": 46.5,
       "cellHeight": 44,
       "position": "static"
     },
     {
-      "width": 318,
+      "width": 340,
       "height": 232,
       "theme": "lesika_dvor",
-      "left": 36,
-      "right": 354,
+      "left": 25,
+      "right": 365,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 47.5,
+      "cellWidth": 51.5,
       "cellHeight": 44,
       "position": "static"
     },
@@ -348,14 +348,14 @@
       "position": "static"
     },
     {
-      "width": 318,
+      "width": 340,
       "height": 232,
       "theme": "lesika_vecher",
-      "left": 36,
-      "right": 354,
+      "left": 25,
+      "right": 365,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 47.5,
+      "cellWidth": 51.5,
       "cellHeight": 44,
       "position": "static"
     },
@@ -396,14 +396,14 @@
       "position": "static"
     },
     {
-      "width": 318,
+      "width": 340,
       "height": 232,
       "theme": "lesika_web_press",
-      "left": 36,
-      "right": 354,
+      "left": 25,
+      "right": 365,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 47.5,
+      "cellWidth": 51.5,
       "cellHeight": 44,
       "position": "static"
     },
@@ -432,26 +432,26 @@
       "position": "static"
     },
     {
-      "width": 318,
+      "width": 340,
       "height": 232,
       "theme": "lesika_web_evening",
-      "left": 36,
-      "right": 354,
+      "left": 25,
+      "right": 365,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 47.5,
+      "cellWidth": 51.5,
       "cellHeight": 44,
       "position": "static"
     },
     {
-      "width": 358,
+      "width": 380,
       "height": 232,
       "theme": "lesika_dvor",
-      "left": 36,
-      "right": 394,
+      "left": 25,
+      "right": 405,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 46,
+      "cellWidth": 49.421875,
       "cellHeight": 44,
       "position": "static"
     },
@@ -492,14 +492,14 @@
       "position": "static"
     },
     {
-      "width": 358,
+      "width": 380,
       "height": 232,
       "theme": "lesika_vecher",
-      "left": 36,
-      "right": 394,
+      "left": 25,
+      "right": 405,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 46,
+      "cellWidth": 49.421875,
       "cellHeight": 44,
       "position": "static"
     },
@@ -540,14 +540,14 @@
       "position": "static"
     },
     {
-      "width": 358,
+      "width": 380,
       "height": 232,
       "theme": "lesika_web_press",
-      "left": 36,
-      "right": 394,
+      "left": 25,
+      "right": 405,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 46,
+      "cellWidth": 49.421875,
       "cellHeight": 44,
       "position": "static"
     },
@@ -576,26 +576,26 @@
       "position": "static"
     },
     {
-      "width": 358,
+      "width": 380,
       "height": 232,
       "theme": "lesika_web_evening",
-      "left": 36,
-      "right": 394,
+      "left": 25,
+      "right": 405,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 46,
+      "cellWidth": 49.421875,
       "cellHeight": 44,
       "position": "static"
     },
     {
-      "width": 488,
+      "width": 510,
       "height": 168,
       "theme": "lesika_dvor",
-      "left": 126,
-      "right": 614,
+      "left": 115,
+      "right": 625,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 44.296875,
+      "cellWidth": 46.6875,
       "cellHeight": 44,
       "position": "static"
     },
@@ -636,14 +636,14 @@
       "position": "static"
     },
     {
-      "width": 488,
+      "width": 510,
       "height": 168,
       "theme": "lesika_vecher",
-      "left": 126,
-      "right": 614,
+      "left": 115,
+      "right": 625,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 44.296875,
+      "cellWidth": 46.6875,
       "cellHeight": 44,
       "position": "static"
     },
@@ -684,14 +684,14 @@
       "position": "static"
     },
     {
-      "width": 668,
+      "width": 690,
       "height": 168,
       "theme": "lesika_web_press",
-      "left": 36,
-      "right": 704,
+      "left": 25,
+      "right": 715,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 47.21875,
+      "cellWidth": 45.34375,
       "cellHeight": 44,
       "position": "static"
     },
@@ -720,14 +720,14 @@
       "position": "static"
     },
     {
-      "width": 668,
+      "width": 690,
       "height": 168,
       "theme": "lesika_web_evening",
-      "left": 36,
-      "right": 704,
+      "left": 25,
+      "right": 715,
       "overflow": false,
       "scrollable": true,
-      "cellWidth": 47.21875,
+      "cellWidth": 45.34375,
       "cellHeight": 44,
       "position": "static"
     }

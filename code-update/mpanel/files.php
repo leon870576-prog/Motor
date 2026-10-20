@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -33,25 +33,25 @@ foreach ($globfiles as $filename) {
 $arrfiles[] = basename($filename);
 }
 
-$total = count($arrfiles);  
+$total = count($arrfiles);
 
 if ($total>0) {
 
 if ($start < 0 || $start > $total){$start = 0;}
 if ($total < $start + $config['editfiles']){ $end = $total; }
 else {$end = $start + $config['editfiles']; }
-for ($i = $start; $i < $end; $i++){	
-	
+for ($i = $start; $i < $end; $i++){
+
 $filename = str_replace('.dat','',$arrfiles[$i]);
-$size = formatsize(filesize(DATADIR."datamain/$arrfiles[$i]")); 
-$strok = count(file(DATADIR."datamain/$arrfiles[$i]")); 
+$size = formatsize(filesize(DATADIR."datamain/$arrfiles[$i]"));
+$strok = count(file(DATADIR."datamain/$arrfiles[$i]"));
 
 if ($arrfiles[$i]=='index.dat'){
 
 echo '<div class="b"><img src="../images/img/edit.gif" alt="image" /> ';
 echo '<b><a href="../index.php?'.SID.'"><span style="color:#ff0000">'.$arrfiles[$i].'</span></a></b> ('.$size.')<br />';
 echo '<a href="files.php?action=edit&amp;file='.$arrfiles[$i].'&amp;'.SID.'">Редактировать</a> | ';
-echo '<a href="files.php?action=obzor&amp;file='.$arrfiles[$i].'&amp;'.SID.'">Просмотр</a></div>'; 
+echo '<a href="files.php?action=obzor&amp;file='.$arrfiles[$i].'&amp;'.SID.'">Просмотр</a></div>';
 echo '<div>Кол. строк: '.$strok.'<br />';
 echo 'Изменен: '.date_fixed(filemtime(DATADIR."datamain/$arrfiles[$i]")).'</div>';
 } else {
@@ -168,7 +168,7 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="files.php?
 ############################################################################################
 if ($action=="faq"){
 
-echo '<b>Сокрашенные коды Wap-Motor</b><br /><br />';	
+echo '<b>Сокрашенные коды Wap-Motor</b><br /><br />';
 
 echo '<img src="../images/editor/a.gif" alt="image" /> - Тег служит для создания гипертекста (ссылок). Гипертекст позволяет осуществлять мгновенный переход от одного фрагмента текста к другому.<br />';
 echo '<img src="../images/editor/img.gif" alt="image" /> - Тег служит для внедрения графики на страницы. alt - Выводит текст к картинке. Полезно, если браузер не отображает графику на странице.<br />';
@@ -221,7 +221,7 @@ $newfile = check($_POST['newfile']);
 
 if ($uid==$_SESSION['token']){
 if (preg_match('|^[a-z0-9_\-]+$|i', $newfile)){
-if (!file_exists(DATADIR.'datamain/'.$newfile.'.dat')){	
+if (!file_exists(DATADIR.'datamain/'.$newfile.'.dat')){
 
 write_files(DATADIR.'datamain/'.$newfile.'.dat', '', 1, 0666);
 
@@ -243,7 +243,7 @@ if (preg_match('|^[a-z0-9_\.\-]+$|i', $file)){
 if (file_exists(DATADIR."datamain/$file")){
 
 echo 'Вы подтверждаете что хотите удалить файл <b>'.$file.'</b><br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="files.php?action=del&amp;file='.$file.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Удалить</a></b><br />';
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a data-motor-action href="files.php?action=del&amp;file='.$file.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Удалить</a></b><br />';
 
 } else {show_error('Ошибка! Данного файла не существует!');}
 } else {show_error('Ошибка! Недопустимое название страницы!');}

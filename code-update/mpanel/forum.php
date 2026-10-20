@@ -49,11 +49,11 @@ if (file_exists(DATADIR."dataforum/mainforum.dat")) {
 
 		if (is_admin(array(101,102))){
 			echo '<br />';
-			if ($key != 0){echo '<a href="forum.php?act=move&amp;fid='.$forum[0].'&amp;where=0&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Вверх</a> / ';} else {echo 'Вверх / ';}
-			if ($total > ($key+1)){echo '<a href="forum.php?act=move&amp;fid='.$forum[0].'&amp;where=1&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Вниз</a>';} else {echo 'Вниз';}
+			if ($key != 0){echo '<a data-motor-action href="forum.php?act=move&amp;fid='.$forum[0].'&amp;where=0&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Вверх</a> / ';} else {echo 'Вверх / ';}
+			if ($total > ($key+1)){echo '<a data-motor-action href="forum.php?act=move&amp;fid='.$forum[0].'&amp;where=1&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Вниз</a>';} else {echo 'Вниз';}
 			echo ' / <a href="forum.php?act=editforum&amp;fid='.$forum[0].'&amp;'.SID.'">Редактировать</a>';
 			if (is_admin(array(101))){
-				echo ' / <a href="forum.php?act=delforum&amp;fid='.$forum[0].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" onclick="return confirm(\'Вы действительно хотите удалить раздел?\')">Удалить</a>';
+				echo ' / <a data-motor-action href="forum.php?act=delforum&amp;fid='.$forum[0].'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" onclick="return confirm(\'Вы действительно хотите удалить раздел?\')">Удалить</a>';
 			}
 		}
 		echo '</div>';
@@ -89,7 +89,7 @@ if (is_admin(array(101))){
 	echo '<input type="text" name="title" size="50" maxlength="50" /><br />';
 	echo '<input value="Создать раздел" type="submit" /></form></div><br />';
 
-	echo '<img src="../images/img/reload.gif" alt="image" /> <a href="forum.php?act=recount&amp;'.SID.'">Пересчитать</a><br />';
+	echo '<img src="../images/img/reload.gif" alt="image" /> <a data-motor-action href="forum.php?act=recount&amp;'.SID.'">Пересчитать</a><br />';
 }
 break;
 
@@ -205,14 +205,14 @@ case "topic":
 			echo '<br /><br /><img src="../images/img/themes.gif" alt="image" /> <b>'.$topic[3].'</b> ('.$total.' пост.)<hr />';
 
 			$lock = (empty($topic[5])) ? 'Закрепить' : 'Открепить';
-			echo '<a href="forum.php?act=lockedtopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">'.$lock.'</a> / ';
+			echo '<a data-motor-action href="forum.php?act=lockedtopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">'.$lock.'</a> / ';
 
 
 			$close = (empty($topic[6])) ? 'Закрыть' : 'Открыть';
-			echo '<a href="forum.php?act=closedtopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">'.$close.'</a> / ';
+			echo '<a data-motor-action href="forum.php?act=closedtopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">'.$close.'</a> / ';
 
 			echo '<a href="forum.php?act=edittopic&amp;fid='.$fid.'&amp;id='.$id.'&amp;'.SID.'">Изменить</a> / ';
-			echo '<a href="forum.php?act=deltopic&amp;del='.$id.'&amp;fid='.$fid.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" onclick="return confirm(\'Вы действительно хотите удалить тему?\')">Удалить</a> / ';
+			echo '<a data-motor-action href="forum.php?act=deltopic&amp;del='.$id.'&amp;fid='.$fid.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" onclick="return confirm(\'Вы действительно хотите удалить тему?\')">Удалить</a> / ';
 			echo '<a href="../forum/topic.php?fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;'.SID.'">Обзор</a>';
 
 			echo '<form action="forum.php?act=delpost&amp;fid='.$fid.'&amp;id='.$id.'&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';

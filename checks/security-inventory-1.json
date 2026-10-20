@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 261,
-    "sha256": "a35632915d075f95a528a50684d470c60bec9555f8e46843e27195322acaa5a8"
+    "bytes": 255,
+    "sha256": "8de587edad648fc53a94e53a5aaefc5eedc72146cac18ce03775b069c97262da"
   },
   {
     "path": "assets/lesika/arcade.css",
@@ -56,8 +56,8 @@
   },
   {
     "path": "assets/lesika/compact.css",
-    "bytes": 30083,
-    "sha256": "580a07a6c303ba334c0463552f10b210f4db655aefab0097a4eb4bb0f1ae836e"
+    "bytes": 30322,
+    "sha256": "94e31c544229c2e4429b57fdf77f41be6c5ea71f64bd936eb4185c42f36eeecd"
   },
   {
     "path": "assets/lesika/gallery.css",
@@ -211,8 +211,8 @@
   },
   {
     "path": "forum/topic.php",
-    "bytes": 10446,
-    "sha256": "c9b43d14634f2429d444637cccccc1b3ee802a9b15bf0a202be66546a95705a3"
+    "bytes": 10500,
+    "sha256": "e17147e6e47d4e537d87cd09273c47fccf025a9faa9eab447e524dfde1f6710d"
   },
   {
     "path": "gallery/avators.php",
@@ -333,6 +333,11 @@
     "path": "games/stamina.php",
     "bytes": 8987,
     "sha256": "16f3faac5fef6735440bdebfa6ab90f8f149fd85b15ad11c06ef73891c3e8590"
+  },
+  {
+    "path": "help/CHANGES.html",
+    "bytes": 1964,
+    "sha256": "6f4851825be986fa59dcdad01f7bcbf45280676e5cea1f8c9ba1f6759ab05247"
   },
   {
     "path": "help/LICENSE.html",
@@ -1493,10 +1498,5 @@
     "path": "images/avators2/113.gif",
     "bytes": 14762,
     "sha256": "208d04755beaefdedfed669823977571923a5a0abee81cd29be84deca08ee5e0"
-  },
-  {
-    "path": "images/avators2/114.gif",
-    "bytes": 12041,
-    "sha256": "edb6c1e938efa96f235e57623c20c031a52a2bda6eaf5e5436cb80c87fd1a8c3"
   }
 ]

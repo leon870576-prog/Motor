@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -30,7 +30,7 @@ if ($action==""){
 
 $file = file(DATADIR."ban.dat");
 $file = array_reverse($file);
-$total = count($file);    
+$total = count($file);
 
 if ($total>0){
 
@@ -51,7 +51,7 @@ echo '<img src="../images/img/files.gif" alt="image" /> <b>'.$data[1].'</b></div
 
 echo '<div>Добавлен: ';
 
-if (empty($data[3])){ 
+if (empty($data[3])){
 echo '<b>Автоматически</b><br />';
 } else {
 echo '<b><a href="../pages/userpage.php?uz='.$data[3].'&amp;'.SID.'">'.nickname($data[3]).'</a></b><br />';
@@ -67,7 +67,7 @@ page_strnavigation('ban.php?', $config['ipbanlist'], $start, $total);
 
 } else {echo '<img src="../images/img/reload.gif" alt="image" /> <b>Список чист!</b>';}
 
-echo '<br /><br />Всего заблокировано: <b>'.(int)$total.'</b>'; 
+echo '<br /><br />Всего заблокировано: <b>'.(int)$total.'</b>';
 
 echo '<hr /><form method="post" action="ban.php?action=add&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">';
 echo 'IP-адрес:<br />';
@@ -76,14 +76,14 @@ echo '<input name="ips" /> <input value="Добавить" type="submit" /></for
 echo 'Примеры банов: 127.0.0.1 без отступов и пробелов<br />';
 echo 'Или по маске 127.0.0.* , 127.0.*.* , будут забанены все IP совпадающие по начальным цифрам<br /><br />';
 
-if ($total>1){echo'<img src="../images/img/error.gif" alt="image" /> <a href="ban.php?action=clear&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Очистить список</a><br />';}
+if ($total>1){echo'<img src="../images/img/error.gif" alt="image" /> <a data-motor-action href="ban.php?action=clear&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Очистить список</a><br />';}
 echo '<img src="../images/img/arhiv.gif" alt="image" /> <a href="logfiles.php?list=ban&amp;'.SID.'">Смотреть логи</a>';
 }
 
 ############################################################################################
 ##                                   Занесение в список                                   ##
 ############################################################################################
-if ($action=="add"){ 
+if ($action=="add"){
 
 $uid = check($_GET['uid']);
 $ips = check($_POST['ips']);
@@ -116,7 +116,7 @@ if (isset($_POST['del'])) {$del = intar($_POST['del']);} else {$del = "";}
 if ($uid==$_SESSION['token']){
 if ($del!==""){
 
-delete_lines(DATADIR."ban.dat", $del); 
+delete_lines(DATADIR."ban.dat", $del);
 
 header ("Location: ban.php?start=$start&isset=mp_delbanlist&".SID);  exit;
 

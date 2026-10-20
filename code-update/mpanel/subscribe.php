@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -23,14 +23,14 @@ echo '<img src="../images/img/partners.gif" alt="image" /> <b>Управлени
 
 ############################################################################################
 ##                                 Главная страница                                       ##
-############################################################################################	
+############################################################################################
 if ($action==""){
 
 $file = file(DATADIR."subscribe.dat");
 $file = array_reverse($file);
-$total = count($file);    
+$total = count($file);
 
-if ($total>0){  
+if ($total>0){
 
 echo '<form action="subscribe.php?action=del&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
 
@@ -40,7 +40,7 @@ else {$end = $start + $config['maxpostsub']; }
 for ($fm = $start; $fm < $end; $fm++){
 
 $num = $total - $fm - 1;
-	
+
 $data = explode("|",$file[$fm]);
 
 echo '<div class="b">';
@@ -60,7 +60,7 @@ echo '<br /><br />Всего подписчиков: <b>'.(int)$total.'</b><br /
 
 echo '<img src="../images/img/error.gif" alt="image" /> <a href="subscribe.php?action=poddel&amp;'.SID.'">Очистить</a>';
 
-} else {echo '<img src="../images/img/reload.gif" alt="image" />  <b>Подписчиков еще нет!</b><br />';} 
+} else {echo '<img src="../images/img/reload.gif" alt="image" />  <b>Подписчиков еще нет!</b><br />';}
 }
 
 
@@ -75,14 +75,14 @@ if (isset($_POST['del'])) {$del = intar($_POST['del']);} else {$del = "";}
 if ($uid==$_SESSION['token']){
 if ($del!==""){
 
-delete_lines(DATADIR."subscribe.dat", $del); 
+delete_lines(DATADIR."subscribe.dat", $del);
 
 header ("Location: subscribe.php?start=$start&isset=mp_delsubmail&".SID); exit;
 
 } else {echo '<b>Ошибка удаления! Отсутствуют выбранные подписчики!</b><br />';}
 } else {echo '<b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="subscribe.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="subscribe.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 
 ############################################################################################
@@ -90,8 +90,8 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="subscribe.
 ############################################################################################
 if ($action=="poddel") {
 echo '<br />Вы уверены что хотите удалить всех подписчиков из базы?<br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="subscribe.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да уверен!</a></b><br />';	
-	
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a data-motor-action href="subscribe.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да уверен!</a></b><br />';
+
 echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="subscribe.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 
@@ -105,7 +105,7 @@ $uid = check($_GET['uid']);
 
 if ($uid==$_SESSION['token']){
 
-clear_files(DATADIR."subscribe.dat");	
+clear_files(DATADIR."subscribe.dat");
 
 header ("Location: subscribe.php?isset=mp_delsuball&".SID); exit;
 
@@ -114,7 +114,7 @@ header ("Location: subscribe.php?isset=mp_delsuball&".SID); exit;
 echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="subscribe.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 
-//-------------------------------- КОНЦОВКА ------------------------------------//	
+//-------------------------------- КОНЦОВКА ------------------------------------//
 echo '<br /><img src="../images/img/panel.gif" alt="image" /> <a href="index.php?'.SID.'">В админку</a><br />';
 echo '<img src="../images/img/homepage.gif" alt="image" /> <a href="../index.php?'.SID.'">На главную</a><br />';
 

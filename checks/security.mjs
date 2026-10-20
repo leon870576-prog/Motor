@@ -64,7 +64,7 @@ assert.equal((await req('/pages/nickname.php',{uid,'nickname[0]':'oops'})).httpS
 assert.equal((await req('/input.php',{'login[0]':'SecureAdmin',pass:password})).httpStatusCode,400);
 pass('cross-site POST, missing/invalid CSRF, old GET mutations and array injection denied; old forms/buttons receive tokens');
 // Exercise real permitted actions so the protection does not merely disable the old features.
-r=await req('/votes/index.php');php.writeFile('/www/local/datavotes/votes.dat','Проверка|Первый|Второй|||||||||');php.writeFile('/www/local/datavotes/result.dat','|0|0|0|0|0|0|0|0|0|0|');php.writeFile('/www/local/datavotes/users.dat','');assert.equal((await req('/votes/vote.php?action=vote',{uid,golos:'1'})).httpStatusCode,302);assert.equal(lines('datavotes/result.dat')[0].split('|')[1],'1');
+r=await req('/votes/index.php');php.writeFile('/www/local/datavotes/votes.dat','Проверка|Первый|Второй|||||||||');php.writeFile('/www/local/datavotes/result.dat','|0|0|0|0|0|0|0|0|0|0|');php.writeFile('/www/local/datavotes/users.dat','');assert.equal((await req('/votes/vote.php?action=vote',{uid,golos:'1',poll_revision:(await req('/votes/index.php')).text.match(/name="poll_revision" value="([^"]+)"/)[1]})).httpStatusCode,302);assert.equal(lines('datavotes/result.dat')[0].split('|')[1],'1');
 r=await req('/games/bank.php?action=operacia',{uid,gold:'1',oper:'2'});assert.equal(r.httpStatusCode,200);assert.ok(!r.text.includes('Fatal error'));
 pass('legitimate votes and bank forms still execute');
 // Path traversal is rejected before any archive entry is written.

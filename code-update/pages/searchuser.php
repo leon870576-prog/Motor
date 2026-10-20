@@ -106,8 +106,8 @@ if ($string){
 echo 'Пользователь с логином <b>'.$uz.'</b> найден!<br /><br />';
 echo '<img src="../images/img/chel.gif" alt="image" /> <a href="userpage.php?uz='.$uz.'&amp;'.SID.'">Перейти на личную страницу</a><br />';
 
-echo '<img src="../images/img/chat.gif" alt="image" /> <a href="kontakt.php?action=add&amp;uz='.$uz.'&amp;'.SID.'">Добавить в контакт</a><br />';
-echo '<img src="../images/img/ignor.gif" alt="image" /> <a href="ignor.php?action=add&amp;uz='.$uz.'&amp;'.SID.'">Добавить в игнор</a><br />';
+echo '<img src="../images/img/chat.gif" alt="image" /> <a data-motor-action href="kontakt.php?action=add&amp;uz='.$uz.'&amp;'.SID.'">Добавить в контакт</a><br />';
+echo '<img src="../images/img/ignor.gif" alt="image" /> <a data-motor-action href="ignor.php?action=add&amp;uz='.$uz.'&amp;'.SID.'">Добавить в игнор</a><br />';
 echo '<img src="../images/img/mail.gif" alt="image" /> <a href="privat.php?action=submit&amp;uz='.$uz.'&amp;'.SID.'">Приватное сообщение</a><br />';
 echo '<img src="../images/img/many.gif" alt="image" /> <a href="../games/perevod.php?uz='.$uz.'&amp;'.SID.'">Перечислить денег</a><br />';
 
@@ -134,8 +134,8 @@ if ($string){
 echo 'Пользователь с ником <b>'.$uz.' ('.$string[1].')</b> найден!<br /><br />';
 echo '<img src="../images/img/chel.gif" alt="image" /> <a href="userpage.php?uz='.$string[1].'&amp;'.SID.'">Перейти на личную страницу</a><br />';
 
-echo '<img src="../images/img/chat.gif" alt="image" /> <a href="kontakt.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в контакт</a><br />';
-echo '<img src="../images/img/ignor.gif" alt="image" /> <a href="ignor.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в игнор</a><br />';
+echo '<img src="../images/img/chat.gif" alt="image" /> <a data-motor-action href="kontakt.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в контакт</a><br />';
+echo '<img src="../images/img/ignor.gif" alt="image" /> <a data-motor-action href="ignor.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в игнор</a><br />';
 echo '<img src="../images/img/mail.gif" alt="image" /> <a href="privat.php?action=submit&amp;uz='.$string[1].'&amp;'.SID.'">Приватное сообщение</a><br />';
 echo '<img src="../images/img/many.gif" alt="image" /> <a href="../games/perevod.php?uz='.$string[1].'&amp;'.SID.'">Перечислить денег</a><br />';
 
@@ -163,8 +163,8 @@ if ($string){
 echo 'Пользователь с ICQ <b>'.$uz.' ('.$string[1].')</b> найден!<br /><br />';
 echo '<img src="../images/img/chel.gif" alt="image" /> <a href="userpage.php?uz='.$string[1].'&amp;'.SID.'">Перейти на личную страницу</a><br />';
 
-echo '<img src="../images/img/chat.gif" alt="image" /> <a href="kontakt.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в контакт</a><br />';
-echo '<img src="../images/img/ignor.gif" alt="image" /> <a href="ignor.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в игнор</a><br />';
+echo '<img src="../images/img/chat.gif" alt="image" /> <a data-motor-action href="kontakt.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в контакт</a><br />';
+echo '<img src="../images/img/ignor.gif" alt="image" /> <a data-motor-action href="ignor.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в игнор</a><br />';
 echo '<img src="../images/img/mail.gif" alt="image" /> <a href="privat.php?action=submit&amp;uz='.$string[1].'&amp;'.SID.'">Приватное сообщение</a><br />';
 echo '<img src="../images/img/many.gif" alt="image" /> <a href="../games/perevod.php?uz='.$string[1].'&amp;'.SID.'">Перечислить денег</a><br />';
 
@@ -182,8 +182,8 @@ if ($string){
 echo 'Пользователь с IP <b>'.$uz.' ('.$string[1].')</b> найден!<br /><br />';
 echo '<img src="../images/img/chel.gif" alt="image" /> <a href="userpage.php?uz='.$string[1].'&amp;'.SID.'">Перейти на личную страницу</a><br />';
 
-echo '<img src="../images/img/chat.gif" alt="image" /> <a href="kontakt.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в контакт</a><br />';
-echo '<img src="../images/img/ignor.gif" alt="image" /> <a href="ignor.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в игнор</a><br />';
+echo '<img src="../images/img/chat.gif" alt="image" /> <a data-motor-action href="kontakt.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в контакт</a><br />';
+echo '<img src="../images/img/ignor.gif" alt="image" /> <a data-motor-action href="ignor.php?action=add&amp;uz='.$string[1].'&amp;'.SID.'">Добавить в игнор</a><br />';
 echo '<img src="../images/img/mail.gif" alt="image" /> <a href="privat.php?action=submit&amp;uz='.$string[1].'&amp;'.SID.'">Приватное сообщение</a><br />';
 echo '<img src="../images/img/many.gif" alt="image" /> <a href="../games/perevod.php?uz='.$string[1].'&amp;'.SID.'">Перечислить денег</a><br />';
 

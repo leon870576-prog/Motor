@@ -196,7 +196,7 @@ r=await req('/mpanel/forum.php?act=changepost&fid='+fid+'&id='+topic+'&post=1&ui
 assert.equal((await req(replyURL)).httpStatusCode,200);
 pass('moderator edit, old-record compatibility, deletion shifts rows without shifting attachments');
 // Closing a topic stops member replies and edits, including uploads.
-assert.equal((await req('/mpanel/forum.php?act=closedtopic&fid='+fid+'&id='+topic+'&uid='+uid)).httpStatusCode,302);
+assert.equal((await req('/mpanel/forum.php?act=closedtopic&fid='+fid+'&id='+topic,{uid})).httpStatusCode,302);
 await req('/input.php?action=exit');await req('/input.php',{login:'MediaAuthor',pass:password});uid=await token();
 assert.equal((await req('/forum/edit.php?fid='+fid+'&id='+topic+'&post=0')).httpStatusCode,403);
 let beforeClosed=php.readFileAsText('/www/local/'+postPath);await req('/forum/topic.php?act=add&fid='+fid+'&id='+topic+'&uid='+uid,{msg:'Нельзя отвечать в закрытую тему','attachments[0]':upload(gif,'closed.gif')});assert.equal(php.readFileAsText('/www/local/'+postPath),beforeClosed);
@@ -236,7 +236,7 @@ for(let n=0;n<2;n++){
  const id=lines('dataforum/topic'+fid+'.dat').at(-1).split('|')[0],p=lines('dataforum/'+fid+'-'+id+'.dat')[0].split('|')[6];
  if(previousParent)assert.ok(!php.fileExists('/www/local/attachments/forum/'+previousParent));previousParent=p;
 }
-assert.equal((await req('/mpanel/forum.php?act=delforum&fid='+fid+'&uid='+uid)).httpStatusCode,302);assert.ok(!php.fileExists('/www/local/attachments/forum/'+previousParent));
+assert.equal((await req('/mpanel/forum.php?act=delforum&fid='+fid,{uid})).httpStatusCode,302);assert.ok(!php.fileExists('/www/local/attachments/forum/'+previousParent));
 pass('automatic old-topic pruning and whole-forum deletion clean up attachments');
 
 // A missing parent record never exposes orphaned data.

@@ -8,7 +8,7 @@
 #                  ICQ  :  36-44-66                   #
 #  Вы не имеете право вносить изменения в код скрипта #
 #        для его дальнейшего распространения          #
-#-----------------------------------------------------#	
+#-----------------------------------------------------#
 require_once ("../includes/start.php");
 require_once ("../includes/functions.php");
 require_once ("../includes/header.php");
@@ -24,17 +24,17 @@ echo '<img src="../images/img/menu.gif" alt="image" /> <b>Управление �
 ############################################################################################
 ##                                    Главная страница                                    ##
 ############################################################################################
-if ($action==""){	
-	
-echo '<a href="#down"><img src="../images/img/downs.gif" alt="image" /></a> ';	
+if ($action==""){
+
+echo '<a href="#down"><img src="../images/img/downs.gif" alt="image" /></a> ';
 echo '<a href="book.php?rand='.mt_rand(100,999).'&amp;'.SID.'">Обновить</a> | ';
 echo '<a href="../book/index.php?start='.$start.'&amp;'.SID.'">Обзор</a><br /><hr />';
-	
+
 $file = file(DATADIR."book.dat");
 $file = array_reverse($file);
-$total = count($file);    
+$total = count($file);
 
-if ($total>0){  
+if ($total>0){
 
 echo '<form action="book.php?action=del&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
 
@@ -51,7 +51,7 @@ echo '<div class="b">';
 
 echo user_avatars($data[1]);
 
-if ($data[1]==$config['guestsuser']){ 
+if ($data[1]==$config['guestsuser']){
 echo '<b>'.$data[1].'</b> ';
 } else {
 echo '<b><a href="../pages/userpage.php?uz='.$data[1].'&amp;'.SID.'">'.nickname($data[1]).'</a></b> '.user_title($data[1]).user_online($data[1]).' ';
@@ -64,9 +64,9 @@ echo '<input type="checkbox" name="del[]" value="'.$num.'" /> ';
 echo '<a href="book.php?action=edit&amp;id='.$num.'&amp;start='.$start.'&amp;'.SID.'">Редактировать</a> | ';
 echo '<a href="book.php?action=otvet&amp;id='.$num.'&amp;start='.$start.'&amp;'.SID.'">Ответить</a></div>';
 
-echo '<div>'.bb_code($data[0]).'<br /><small><span style="color:#cc00cc">('.$data[4].','. $data[5].')</span></small>'; 
+echo '<div>'.bb_code($data[0]).'<br /><small><span style="color:#cc00cc">('.$data[4].','. $data[5].')</span></small>';
 if ($data[6]!=""){ echo '<br /><span style="color:#ff0000">Ответ: '.motor_smiles_render($data[6]).'</span>';}
-if ($data[7]!=""){ echo '<br /><span style="color:#ff0000">Отредактировано: '.nickname($data[7]).' ('.date_fixed($data[2]).')</span>';} 
+if ($data[7]!=""){ echo '<br /><span style="color:#ff0000">Отредактировано: '.nickname($data[7]).' ('.date_fixed($data[2]).')</span>';}
 echo '</div>';
 }
 
@@ -79,10 +79,10 @@ echo '<br /><br />Всего сообщений: <b>'.(int)$total.'</b><br />';
 
 if (is_admin(array(101))) {
 echo '<br /><img src="../images/img/error.gif" alt="image" /> <a href="book.php?action=prodel&amp;'.SID.'">Очистить</a><br />';
-echo '<img src="../images/img/reload.gif" alt="image" /> <a href="book.php?action=restatement&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Пересчитать</a>';
+echo '<img src="../images/img/reload.gif" alt="image" /> <a data-motor-action href="book.php?action=restatement&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Пересчитать</a>';
 }
 
-} else {echo '<img src="../images/img/reload.gif" alt="image" />  <b>Сообщений еще нет!</b><br />';} 
+} else {echo '<img src="../images/img/reload.gif" alt="image" />  <b>Сообщений еще нет!</b><br />';}
 }
 
 ############################################################################################
@@ -101,7 +101,7 @@ echo '<b><big>Добавление ответа</big></b><br /><br />';
 
 echo '<div class="b"><img src="../images/img/edit.gif" alt="image" /> <b><a href="../pages/userpage.php?uz='.$data[1].'&amp;'.SID.'">'.nickname($data[1]).'</a></b> '.user_title($data[1]).user_online($data[1]).' <small>('.date_fixed($data[3]).')</small></div>';
 echo '<div>Сообщение: '.bb_code($data[0]).'</div><hr />';
-	
+
 echo '<form action="book.php?id='.$id.'&amp;action=addotvet&amp;start='.$start.'&amp;uid='.$_SESSION['token'].'&amp;'.SID.'" method="post">';
 echo 'Cообщение:<br />';
 echo '<textarea cols="25" rows="3" name="otvet" data-smile-picker>'.nosmiles($data[6]).'</textarea>';
@@ -136,7 +136,7 @@ $otvet = smiles($otvet);
 $text = no_br($data[0].'|'.$data[1].'|'.$data[2].'|'.$data[3].'|'.$data[4].'|'.$data[5].'|'.$otvet.'|'.$data[7].'|');
 
 replace_lines(DATADIR."book.dat", $id, $text);
-	
+
 header ("Location: book.php?start=$start&isset=mp_bookotvet&".SID);	exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Сообщения для ответа не существует!</b><br />';}
@@ -152,7 +152,7 @@ echo '<img src="../images/img/smenu.gif" alt="image" /> <a href="book.php?start=
 ##                                    Редактирование                                      ##
 ############################################################################################
 if ($action=="edit") {
-	
+
 if (isset($_GET['id'])) {$id = (int)$_GET['id'];} else {$id = "";}
 
 if ($id!==""){
@@ -175,15 +175,15 @@ echo '<input type="submit" value="Изменить" /></form><hr />';
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Сообщения для редактирования не существует!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не выбрано сообщение для редактирования!</b><br />';}
-	
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 
 ############################################################################################
 ##                                 Изменение сообщения                                    ##
 ############################################################################################
 if ($action=="addedit") {
-	
+
 $uid = check($_GET['uid']);
 $msg = check($_POST['msg']);
 if (isset($_GET['id'])) {$id = (int)$_GET['id'];} else {$id = "";}
@@ -210,7 +210,7 @@ header ("Location: book.php?start=$start&isset=mp_bookeditpost&".SID); exit();
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Не выбрано сообщение для редактирования!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?action=edit&amp;id='.$id.'&amp;start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?action=edit&amp;id='.$id.'&amp;start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 
 ############################################################################################
@@ -224,14 +224,14 @@ if (isset($_POST['del'])) {$del = intar($_POST['del']);} else {$del = "";}
 if ($uid==$_SESSION['token']){
 if ($del!==""){
 
-delete_lines(DATADIR."book.dat", $del); 
+delete_lines(DATADIR."book.dat", $del);
 
 header ("Location: book.php?start=$start&isset=mp_checkdelpost&".SID); exit();
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка удаления! Отсутствуют выбранные сообщения!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 
 ############################################################################################
@@ -239,9 +239,9 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?s
 ############################################################################################
 if ($action=="prodel") {
 echo 'Вы уверены что хотите удалить все сообщения в гостевой?<br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="book.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да, уверен!</a></b><br />';	
-	
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a data-motor-action href="book.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да, уверен!</a></b><br />';
+
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 
 
@@ -255,14 +255,14 @@ $uid = check($_GET['uid']);
 if (is_admin(array(101))){
 if ($uid==$_SESSION['token']){
 
-clear_files(DATADIR."book.dat");	
+clear_files(DATADIR."book.dat");
 
 header ("Location: book.php?isset=mp_bookclear&".SID); exit;
 
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Неверный идентификатор сессии, повторите действие!</b><br />';}
 } else {echo '<img src="../images/img/error.gif" alt="image" /> <b>Ошибка! Очищать гостевую могут только суперадмины!</b><br />';}
 
-echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';	
+echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="book.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
 
 ############################################################################################

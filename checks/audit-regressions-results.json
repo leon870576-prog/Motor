@@ -1,0 +1,13 @@
+{
+  "runtime": "PHP 8.4 WASM",
+  "requests": 110,
+  "passed": [
+    "login rotates session ID and CSRF token; remembered cookies Secure/HttpOnly/SameSite; GET credentials rejected",
+    "16 legacy actions reject GET/HEAD with valid token, wrong POST token and cross-site POST",
+    "real contact/ignore POSTs work; action links rendered as forms; unmarked user link receives no token; subdirectory route normalized",
+    "zero/one voter totals, same-user replay, invalid option, admin create/archive/edit and stale form after replacement",
+    "legacy admin pagination rejects zero/negative/text/out-of-range values, valid save works, old invalid settings read safely without rewriting data",
+    "admin/ban/pending lists match current profiles with empty cache; GET never deletes old pending account; explicit approval, forged target and stale delete rejected",
+    "moderator cannot remove installer or open owner-only settings"
+  ]
+}

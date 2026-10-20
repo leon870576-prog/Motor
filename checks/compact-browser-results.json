@@ -501,7 +501,7 @@
     "/pages/registration.php",
     "/pages/setting.php",
     "/pages/themes.php",
-    "/pages/anketa.php?uz=MotorTestAdmin",
+    "/pages/anketa.php?view=details&uz=MotorTestAdmin",
     "/pages/userlist.php",
     "/mpanel/index.php",
     "/mpanel/attachments.php",

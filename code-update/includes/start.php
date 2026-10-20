@@ -90,7 +90,9 @@ if (!file_exists(DATADIR.'config.dat')) {
 }
 
 if (file_exists(DATADIR.'config.dat')){
-$con_text = file_get_contents(DATADIR.'config.dat');
+$configStream=fopen(DATADIR.'config.dat','rb');
+if (!$configStream || !flock($configStream,LOCK_SH)) {http_response_code(503);exit('Настройки временно недоступны.');}
+try {$con_text=stream_get_contents($configStream);} finally {flock($configStream,LOCK_UN);fclose($configStream);}
 $con_data = explode('|',$con_text);
 
 $config['welcome'] = $con_data[0];                  #  Показывать приветствие
@@ -231,6 +233,10 @@ $config['avatarweight'] = $con_data[134];           #  Максимальный 
 $config['maxsumbank'] = $con_data[135];             #  Максимальная сумма в банке
 
 } else {echo '<b>Ошибка! Не установлены настройки сайта!</b>'; exit;}
+
+// Invalid legacy pagination cannot cause division by zero; stored settings stay unchanged.
+require_once __DIR__.'/legacy-settings.php';
+foreach (motor_setting_page_fields() as $settingKey) if (isset($config[$settingKey])) $config[$settingKey]=max(1,min(1000,(int)$config[$settingKey]));
 
 //------------------- Технические настройки --------------------//
 $config['userprofkey'] = 100;                       #  Количество ячеек в профиле

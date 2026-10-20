@@ -53,9 +53,9 @@ echo '<a href="'.BASEDIR.'forum/?'.SID.'">В форуме:</a> '.(int)$forum_she
 echo '<a href="'.BASEDIR.'chat/?'.SID.'">В мини-чате:</a> '.(int)$chat_shet.'<br />';
 echo '<a href="'.BASEDIR.'book/?'.SID.'">В гостевой:</a> '.(int)$book_shet.'<br />';
 echo '<a href="'.BASEDIR.'news/?'.SID.'">В новостях:</a> '.(int)$news_shet.'<br />';
-echo '<a href="'.BASEDIR.'download/?'.SID.'">В загрузках:</a> '.(int)$down_shet.'<br />';
+if (is_file(BASEDIR.'download/index.php')) echo '<a href="'.BASEDIR.'download/?'.SID.'">В загрузках:</a> '.(int)$down_shet.'<br />';
 echo '<a href="'.BASEDIR.'index.php?action=arkada&amp;'.SID.'">В развлечениях:</a>  '.(int)$games_shet.'<br />';
-echo '<a href="'.BASEDIR.'library/?'.SID.'">В библиотеке:</a> '.(int)$library_shet.'<br />';
+if (is_file(BASEDIR.'library/index.php')) echo '<a href="'.BASEDIR.'library/?'.SID.'">В библиотеке:</a> '.(int)$library_shet.'<br />';
 echo '<a href="'.BASEDIR.'gallery/?'.SID.'">В галерее:</a> '.(int)$gallery_shet.'<br />';
 
 echo '<br /><b>Пользователи на сайте:</b><br />';

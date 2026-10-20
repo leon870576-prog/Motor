@@ -144,7 +144,7 @@ echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="ignor.php?
 ############################################################################################
 if ($action=="prodel") {
 echo 'Вы уверены что хотите удалить всех пользователе из игнора?<br />';
-echo '<img src="../images/img/error.gif" alt="image" /> <b><a href="ignor.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да, уверен!</a></b><br />';
+echo '<img src="../images/img/error.gif" alt="image" /> <b><a data-motor-action href="ignor.php?action=alldel&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">Да, уверен!</a></b><br />';
 
 echo '<br /><img src="../images/img/back.gif" alt="image" /> <a href="ignor.php?start='.$start.'&amp;'.SID.'">Вернуться</a>';
 }
