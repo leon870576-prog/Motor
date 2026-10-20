@@ -1,5 +1,15 @@
 [
   {
+    "path": "mpanel/backup.php",
+    "bytes": 14707,
+    "sha256": "6bd24f704285cc09c18434b2383acbd726fe89b25ed21216f5372054e67c58f6"
+  },
+  {
+    "path": "mpanel/ban.php",
+    "bytes": 7103,
+    "sha256": "7bd41c44fa2afc6dd1a5af7c3f091cf91f6f03a1682d24cf63a0be71218ef7b1"
+  },
+  {
     "path": "mpanel/banlist.php",
     "bytes": 4696,
     "sha256": "f1afa37bfdd5e41ec8b07f2eeef885e0593390cb2d937ffd10ffb51454de2caa"
@@ -46,8 +56,8 @@
   },
   {
     "path": "mpanel/files.php",
-    "bytes": 16777,
-    "sha256": "41a4a1c3cd862d671ec9f1536e10ad5183d5cc01e43dc8ad9f3bd47365c4aecc"
+    "bytes": 9954,
+    "sha256": "c49ba3eafae0727896a9c1749cd01ab95844abd2b78f4213df7cd29701db278b"
   },
   {
     "path": "mpanel/forum.php",
@@ -246,8 +256,8 @@
   },
   {
     "path": "pages/index.php",
-    "bytes": 1888,
-    "sha256": "516b5c5f4e4f385ccff6f896219250ca7c0a1f31c63294585971b0d0dd962425"
+    "bytes": 1997,
+    "sha256": "37c24218348757679909396fec0e9832357cbf0a65dde79194b6f5fadd63048b"
   },
   {
     "path": "pages/key.php",

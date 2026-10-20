@@ -31,13 +31,13 @@ try{
  for(const[name,role]of [['TemplateMember',0],['TemplateOtherOwner',101],['TemplateAdmin',102],['TemplateMod',103]]){const p=[...profile];p[0]=name;p[7]=String(role);p[6]='1';p[25]='1';p[37]='0';p[46]='0';php.writeFile('/www/local/profil/'+name+'.prof',p.join(':||:'));}
  async function token(){return (await req('/pages/themes.php')).text.match(/name="uid" value="([^"]+)"/)[1];}
  async function login(name){if(logged){await req('/input.php?action=exit',{uid});logged=false;}uid=await token();if(name){assert.equal((await req('/input.php',{login:name,pass:password})).httpStatusCode,302);logged=true;uid=await token();}}
- function form(r){const source=r.text.match(/<textarea[^>]*name="msg"[^>]*>([\s\S]*?)<\/textarea>/);assert.ok(source);return {uid,operation:'save',version:r.text.match(/name="version" value="([a-f0-9]{64})"/)[1],msg:decode(source[1])};}
+ function form(r){const source=r.text.match(/<textarea[^>]*name="msg"[^>]*>([\s\S]*?)<\/textarea>/);assert.ok(source);return {uid,operation:'save',version:r.text.match(/name="version" value="([a-f0-9]{64})"/)[1],msg:decode(source[1].replace(/^\n/,''))};}
  const section=s=>s.slice(s.indexOf('<div class="home-sections">'),s.indexOf('</section>',s.indexOf('<section class="neighbors">'))+10);
  const fresh=async()=>form(await req(editor));
  for(const name of [null,'TemplateMember','TemplateOtherOwner','TemplateAdmin','TemplateMod']){
   await login(name);const r=await req(editor);assert.ok([302,403].includes(r.httpStatusCode),String(name));assert.ok(!r.text.includes('name="msg"'));assert.ok([302,403].includes((await req(save,{uid,version:hash('bad'),msg:standard})).httpStatusCode));assert.equal(raw(),seed);
  }
- await login('TemplateOwner');let r=await req(editor),f=form(r);assert.equal(f.msg,standard);assert.notEqual(f.msg,seed);assert.match(r.text,/href="\.\.\/index.php"/);assert.match(r.text,/href="home-settings.php"/);assert.match(r.text,/home\.css\?v=home5/);
+ await login('TemplateOwner');let r=await req(editor),f=form(r);assert.equal(f.msg,standard);assert.notEqual(f.msg,seed);assert.match(r.text,/href="\.\.\/index.php"/);assert.match(r.text,/href="home-settings.php"/);assert.match(r.text,/home\.css\?v=home6/);
  writeFileSync(new URL('editor.html',fixtures),r.text);
  const initial=section((await req('/index.php')).text);assert.match(initial,/section-card/);assert.match(initial,/В нашем городе/);
  await req(editor,undefined,{},'HEAD');await req('/mpanel/files.php?action=obzor&file=index.dat');await req('/index.php',undefined,{},'HEAD');assert.equal(raw(),seed);assert.equal(php.fileExists('/www/local/home-template-backups'),false);

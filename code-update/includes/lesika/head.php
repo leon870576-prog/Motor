@@ -17,7 +17,7 @@ echo '<script src="'.BASEDIR.'assets/lesika/touch.js?v=scroll1" defer></script>'
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/gallery.css?v=gallery1"><script src="'.BASEDIR.'assets/lesika/gallery.js?v=gallery1" defer></script>';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/compact.css?v=compact2">';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/branding.css?v=city1">';
-if ($lesikaHome || in_array($php_self,['mpanel/home-settings.php','mpanel/files.php'],true)) echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/home.css?v=home5">';
+if ($lesikaHome || in_array($php_self,['mpanel/home-settings.php','mpanel/files.php','pages/index.php','games/index.php'],true)) echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/home.css?v=home6">';
 if ($php_self==='pages/userpage.php') echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/userpages.css?v=userpages1">';
 echo '<link rel="alternate" type="application/rss+xml" title="Новости Лесозаводска" href="'.BASEDIR.'news/rss.php">';
 echo '</head><body data-theme="'.$config['themes'].'"><div class="site-shell">';
@@ -39,5 +39,5 @@ if ($lesikaHome) {
     echo '<div class="page-topline"><a href="'.BASEDIR.'index.php">← На главную</a><a href="'.BASEDIR.'pages/themes.php">'.lesika_escape($lesikaTheme['name']).'</a></div>';
 }
 echo '<div class="legacy-content">';
-if ($config['rekhead']==1) include DATADIR.'datamain/reklama_head.dat';
+if ($config['rekhead']==1) {echo '<div id="motor-ad-head" class="dat-ad">';$motorDatFile='reklama_head.dat';include BASEDIR.'includes/dat-page-output.php';echo '</div>';}
 include BASEDIR.'includes/isset.php';

@@ -50,3 +50,9 @@ body .legacy-content .home-video{display:block;width:100%;height:auto;max-width:
 body .home-template-form textarea{display:block;box-sizing:border-box;width:100%;max-width:100%;min-width:0;font:16px/1.5 monospace;resize:vertical;white-space:pre-wrap;overflow-wrap:anywhere}
 .home-template-editor button{min-height:44px;white-space:normal;margin:6px 0}
 .home-template-help,.home-template-reset{margin:14px 0;padding:10px;border:1px solid var(--line);border-radius:8px}
+.dat-files,.dat-page{min-width:0;overflow-wrap:anywhere}
+.dat-file-card{padding:12px;margin:12px 0;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.dat-file-card h2{font-size:1.1em;margin:0 0 6px}.dat-file-card small{display:block;overflow-wrap:anywhere}
+.dat-page{padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.dat-page>a{display:inline-flex;align-items:center;min-height:44px;max-width:100%}
+.dat-files button{min-height:44px}.dat-files code{overflow-wrap:anywhere}

@@ -47,7 +47,7 @@ function motor_home_template_save(array $input): void {
         $text=$operation==='standard'?$state['standard']:($input['msg']??null);
         if (!is_string($text) || trim($text)==='' || strlen($text)>262144 || !mb_check_encoding($text,'UTF-8') || str_contains($text,"\0")) throw new InvalidArgumentException('Введите шаблон в UTF-8 размером до 256 КБ.');
         try {token_get_all($text,TOKEN_PARSE);} catch (ParseError $e) {throw new InvalidArgumentException('Ошибка синтаксиса PHP в строке '.$e->getLine().'. Файл не изменён.');}
-        if ($text===$state['raw']) return;
+        if ($text===$state['raw'] || str_replace(["\r\n","\r"],"\n",$state['raw'])===$text) return;
         $dir=DATADIR.'home-template-backups';
         if (is_link($dir) || (file_exists($dir) && !is_dir($dir))) throw new RuntimeException('Каталог резервных копий недоступен.',503);
         if (!is_dir($dir) && !mkdir($dir,0700) && !is_dir($dir)) throw new RuntimeException('Не удалось создать каталог резервных копий.',503);

@@ -29,7 +29,7 @@ if ($homeState!==null) {
     // Keep an old form stale after a conflict instead of authorizing an accidental retry.
     $homeVersion=$homeError!=='' && isset($_POST['version']) && is_string($_POST['version'])?$_POST['version']:$homeState['version'];
     echo '<input type="hidden" name="version" value="'.$homeEscape($homeVersion).'"><input type="hidden" name="operation" value="save">';
-    echo '<label for="home-template-source">HTML и PHP шаблона разделов</label><textarea id="home-template-source" name="msg" rows="24" spellcheck="false" autocapitalize="off" autocomplete="off">'.$homeEscape($homeDraft??$homeState['contents']).'</textarea>';
+    echo '<label for="home-template-source">HTML и PHP шаблона разделов</label><textarea id="home-template-source" name="msg" rows="24" spellcheck="false" autocapitalize="off" autocomplete="off">'."\n".$homeEscape($homeDraft??$homeState['contents']).'</textarea>';
     echo '<p>Проверяется синтаксис PHP. Перед заменой сохраняется резервная копия. Старое окно редактора не сможет перезаписать более свежую версию.</p><button class="primary" type="submit">Сохранить шаблон главной</button></form>';
     echo '<details class="home-template-reset"><summary>Восстановить стандартный шаблон разделов</summary><p>Будут возвращены стандартные карточки и ссылки. Настройки блоков и записи сохранятся. Текущий шаблон будет сохранён в резервной копии.</p><form method="post" action="files.php?action=editfile&amp;file=index.dat">';motor_form_token();
     echo '<input type="hidden" name="version" value="'.$homeEscape($homeState['version']).'"><input type="hidden" name="operation" value="standard"><button type="submit">Восстановить стандартный шаблон</button></form></details>';

@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 261,
-    "sha256": "efeeb92ed0213905a2a1e191b65df34eec74df5a3b9d3ed9c708c0b0eae83c71"
+    "bytes": 260,
+    "sha256": "f4018d6d778f97a72ce7c0ea602ee15323c245a6f743f4ca80a4604a37e4d122"
   },
   {
     "path": "assets/lesika/arcade.css",
@@ -81,8 +81,8 @@
   },
   {
     "path": "assets/lesika/home.css",
-    "bytes": 4872,
-    "sha256": "39c62face1ead8bc6cb6835b1ed2444d535a1f02a75aed2d1b99fa8261327496"
+    "bytes": 5409,
+    "sha256": "45c265007a76a688037394552b4a7a055615d93055d94f175d7ae6c8a309f747"
   },
   {
     "path": "assets/lesika/leaf.svg",
@@ -291,8 +291,8 @@
   },
   {
     "path": "games/index.php",
-    "bytes": 1075,
-    "sha256": "0667adeb3e38908fcde6d5032c38daa5f650b3b9d6ee8e1be8eec54df1aec45a"
+    "bytes": 1166,
+    "sha256": "1d164086c30177b4973a6be64ba19619d8bfe1730bf48529d5ae4a46a579f339"
   },
   {
     "path": "games/kosti.php",

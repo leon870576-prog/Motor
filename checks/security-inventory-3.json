@@ -1210,6 +1210,16 @@
     "sha256": "d706f6c4675948f1000fa257f6e05e613889336ec4e0a20382e0c20ed81805a7"
   },
   {
+    "path": "includes/dat-page-output.php",
+    "bytes": 734,
+    "sha256": "cfbadf49a1a0fc30b1843cbe9c76190cf0e01d608573ef3f714547036d9e1511"
+  },
+  {
+    "path": "includes/dat-pages.php",
+    "bytes": 7147,
+    "sha256": "e28f9f78b8b990d1965c34e8da9ec9e176eadc09ee76d16c73cfb2450443b0cb"
+  },
+  {
     "path": "includes/form_security.php",
     "bytes": 938,
     "sha256": "2ee4313d5122a1000659f7076f465a36d4804dfc5f463d77f46c761f20761a89"
@@ -1236,8 +1246,8 @@
   },
   {
     "path": "includes/gzip_foot.php",
-    "bytes": 2126,
-    "sha256": "25b0721a03f994291a9622aac490899e4ad37e5d00b05def70d9f4e5d079a622"
+    "bytes": 2131,
+    "sha256": "b5eb8e9f3ccbdaf04465a1360e7b65c475a5752aef190fc09390d595aa19640c"
   },
   {
     "path": "includes/header.php",
@@ -1261,13 +1271,13 @@
   },
   {
     "path": "includes/home-template-editor.php",
-    "bytes": 5708,
-    "sha256": "172218fa2986f9779a1da9b98728dc6b5f8ac2a5c5261142a20ef7868a733afe"
+    "bytes": 5713,
+    "sha256": "d6f57d1ca85d242268c6ea97919ead0af039afb620fdc0169d801f5198a1ba2b"
   },
   {
     "path": "includes/home-template.php",
-    "bytes": 5805,
-    "sha256": "5e2c7a12f1ec52785c3e3abffdba6b5acac4782c9f90e1073d1ee5a4e414d936"
+    "bytes": 5862,
+    "sha256": "cdee6e1f9738f8fab4201e0db0f78807f6110c982fcfd29f68eb8e1661876bc3"
   },
   {
     "path": "includes/info.php",
@@ -1296,13 +1306,13 @@
   },
   {
     "path": "includes/lesika/foot.php",
-    "bytes": 1384,
-    "sha256": "a43f89841f9b4a033d4a71a12ed8c19847dacec92c2f41462d6fa3ca0464aef3"
+    "bytes": 1584,
+    "sha256": "62c9dde7ed31fa24ccb489f98896c72e88b3ebe315617ecddec32d8da9a8f9e1"
   },
   {
     "path": "includes/lesika/head.php",
-    "bytes": 4445,
-    "sha256": "b67eba44c5f1080c060a24f1767d005f6d08facc8f8203135e33d72b420d795b"
+    "bytes": 4580,
+    "sha256": "1fb2e8758c29076b40827c37377d299320d8738c95020106811da986cb42ac73"
   },
   {
     "path": "includes/lesika/home.php",
@@ -1488,15 +1498,5 @@
     "path": "mpanel/attachments.php",
     "bytes": 4942,
     "sha256": "6c6e67a4b5b458511066ab72151e73cc762db48416f45abc327ca10b67e3d221"
-  },
-  {
-    "path": "mpanel/backup.php",
-    "bytes": 14707,
-    "sha256": "6bd24f704285cc09c18434b2383acbd726fe89b25ed21216f5372054e67c58f6"
-  },
-  {
-    "path": "mpanel/ban.php",
-    "bytes": 7103,
-    "sha256": "7bd41c44fa2afc6dd1a5af7c3f091cf91f6f03a1682d24cf63a0be71218ef7b1"
   }
 ]

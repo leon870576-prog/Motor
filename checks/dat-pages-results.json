@@ -1,0 +1,23 @@
+{
+  "runtime": "PHP 8.4 WASM",
+  "requests": 127,
+  "passed": [
+    "all ten standard files resolve actual sources; preview routes match games/pages/ad slots; unchanged saves and GET/HEAD preserve bytes; owner-only access",
+    "source roundtrip, actual public output, PHP syntax/size/CSRF/Origin/array guards, stale edits and exact private backups",
+    "empty files can be cleared; custom pages inherit current theme; exclusive create, stale delete and system-page protection preserve navigation",
+    "header/footer advertising follows admin switches, renders once in actual positions, footer outside collapsed statistics",
+    "symlink files/directories/locks/backups refused; runtime failures do not disclose details and remain editable; unrelated news/settings untouched"
+  ],
+  "files": [
+    "arkada.dat",
+    "buttons.dat",
+    "index.dat",
+    "info.dat",
+    "menu.dat",
+    "partners.dat",
+    "reklama_foot.dat",
+    "reklama_head.dat",
+    "statistik.dat",
+    "test.dat"
+  ]
+}
