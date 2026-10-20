@@ -35,6 +35,8 @@ let page=await req('/chat/index.php'),uid=field(page,'uid');
 assert.ok(page.text.includes('data-enabled="1"'));assert.ok(page.text.includes('data-interval="3"'));assert.ok(page.text.includes('chat-settings.php'));assert.ok(page.text.includes('chat.js?v=chat2'));
 let settings={auto_refresh:'1',refresh_seconds:'3',page_size:'10',history_limit:'100',bot_enabled:'1',joke_enabled:'0',quiz_enabled:'0',bot_greeting:'0',bot_mode:'conversation',context_seconds:'180',bot_cooldown:'0',joke_seconds:'300',quiz_seconds:'600',quiz_wait:'60',phrases:'мотоцикл; мотор => Есть любимая модель?\nc++ => Что пишешь на C++?'};
 let settingPage=await req('/mpanel/chat-settings.php'),version=field(settingPage,'version');
+assert.ok(settingPage.text.includes('4000 вариантов реплик'));assert.ok(settingPage.text.includes('Анекдотов: 400'));
+const help=await req('/chat/bots.php');assert.equal(help.httpStatusCode,200);assert.ok(help.text.includes('CC BY 4.0'));assert.ok(help.text.includes('4000 вариантов реплик'));
 assert.equal((await req('/mpanel/chat-settings.php',{...settings,version})).httpStatusCode,403);
 for(const change of [{refresh_seconds:'1'},{page_size:'51'},{history_limit:'5001'},{bot_mode:'anything'},{phrases:'неверный формат'},{phrases:'a => '+ 'x'.repeat(601)},{refresh_seconds:undefined,'refresh_seconds[0]':'3'}]){
  const data={...settings,uid,version,...change};for(const k in data)if(data[k]===undefined)delete data[k];assert.equal((await req('/mpanel/chat-settings.php',data)).httpStatusCode,400);
@@ -51,7 +53,7 @@ define('BASEDIR','/');require '/www/includes/functions.php';require '/www/includ
 $s=json_decode(file_get_contents('/www/local/chat-settings.json'),true);$n=0;
 function ok($v,$m){global $n;if(!$v)throw new Exception($m);$n++;}
 foreach(motor_nastya_topics() as $key=>[$pattern,$answers]){if($pattern!=='')ok(preg_match('~(*UCP)'.$pattern.'~u','')!==false,'regex '.$key);ok(count($answers)>=3,'variants '.$key);}
-$cases=['Настя, ты бот?'=>'identity','Настенька, как тебя зовут?'=>'name','Настюха, сколько тебе лет?'=>'age','Настя, откуда ты?'=>'location','Настя, привет'=>'greeting','Настя, устал сегодня'=>'tired','Настя, мне грустно'=>'sadness','Настя, слушаю радио'=>'music','Настя, смена закончилась'=>'work','Настя, кошка спит'=>'pets','Настя, который час?'=>'fallback','Настя, сменим тему'=>'fallback','Настя, c++'=>'custom','Настя, cxx'=>'fallback','Настя, мотоцикл'=>'custom'];
+$cases=['Настя, ты бот?'=>'identity','Настенька, как тебя зовут?'=>'name','Настюха, сколько тебе лет?'=>'age','Настя, откуда ты?'=>'location','Настя, привет'=>'greeting','Настя, устал сегодня'=>'tired','Настя, мне грустно'=>'sadness','Настя, слушаю радио'=>'music','Настя, смена закончилась'=>'work','Настя, кошка спит'=>'pets','Настя, который час?'=>'daily_clock','Настя, сменим тему'=>'fallback','Настя, c++'=>'custom','Настя, cxx'=>'fallback','Настя, мотоцикл'=>'custom'];
 foreach($cases as $msg=>$topic){$c=[];$a=motor_nastya_reply($msg,$c,$s,10000);ok(is_string($a)&&$c['topic']===$topic,$msg.' '.($c['topic']??''));}
 $legacyCases=['Настя, что делаешь?'=>'activity','Настя, с возвращением'=>'greeting','Настя, как оно?'=>'wellbeing','Настя, скучно'=>'bored','Настя, откуда ты?'=>'location','Настя, любопытно'=>'curiosity','Настя, ты умная'=>'clever','Настя, как зовут?'=>'name','Настя, сколько лет?'=>'age','Настя, удачи'=>'goodbye','Настя, спасибо'=>'thanks','Настя, познакомимся?'=>'acquaintance','Настя, хочешь поговорить?'=>'desire','Настя, будешь?'=>'invitation','Настя, тупая'=>'rude','Настя, из-за чего?'=>'why','Настя, куда разместить объявление?'=>'advertising','Настя, ***'=>'swearing','Настя, обнимаю'=>'affection','Настя, кто?'=>'who','Настя, что?'=>'what','Настя, хочешь торт?'=>'cake','Настя, цветы'=>'flowers','Настя, ты откуда?'=>'location','Настя, откуда?'=>'location','Настя, люблю!'=>'affection','Настя, скучаю'=>'affection','Настя, ты бот?'=>'identity'];
 foreach($legacyCases as $msg=>$topic){$c=[];$a=motor_nastya_reply($msg,$c,$s,10000);ok(is_string($a)&&$c['topic']===$topic,'legacy '.$msg.' '.($c['topic']??''));}
@@ -79,7 +81,7 @@ echo json_encode(['assertions'=>$n,'topics'=>count(motor_nastya_topics()),'varia
 assert.equal(pure.errors,'');assert.equal(pure.exitCode,0,pure.text);const dialog=JSON.parse(pure.text);pass(`${dialog.assertions} conversation checks; ${dialog.topics} topics and ${dialog.variants} answers`);
 // Isolated public chat with actual native POST handling.
 write('chat.dat','');if(php.fileExists(local('chat-state.json')))write('chat-state.json','{}');
-for(const [msg,topic]of [['Привет, как дела?','wellbeing'],['Привет, как дела и что делаешь?','wellbeing_activity'],['Привет! Как тебя зовут?','name'],['Настя, цветы','flowers']]){
+for(const [msg,topic]of [['Привет, как дела?','wellbeing'],['Привет, как дела и что делаешь?','wellbeing_activity'],['Привет! Как тебя зовут?','name'],['Настя, цветы','flowers'],['Настя, почему телефон не заряжается?','daily_battery'],['Настя, как сварить рис?','daily_rice']]){
  write('chat.dat','');write('chat-state.json','{}');const response=packet(await req('/chat/add.php',{uid,msg,message_id:nonce()},ajax));assert.equal(rows().length,2);assert.equal(JSON.parse(read('chat-state.json')).users.ChatAdmin.topic,topic);assert.ok(response.html.includes('Настюха'));
  if(topic==='wellbeing')assert.ok(rows().at(-1).split('|')[0].includes('Привет! '));
 }
@@ -150,6 +152,7 @@ data=packet(await req('/chat/add.php',{uid,msg:'Настя, расскажи о 
 const edited=rows();last=edited.at(-1).split('|');last[0]='Сообщение исправлено';edited[edited.length-1]=last.join('|');write('chat.dat',edited.slice(1).join('\r\n')+'\r\n');writeFileSync(new URL('edited.json',dir),JSON.stringify(packet(await req('/chat/updates.php'))));
 write('chat.dat','');writeFileSync(new URL('empty.json',dir),JSON.stringify(packet(await req('/chat/updates.php'))));
 // New settings and per-user bot state survive the existing backup/restore path.
+write('chat-state.json',JSON.stringify({joke_cycle:{version:'test',remaining:[1,2,3],last:4}}));
 const backupSettings=read('chat-settings.json'),backupState=read('chat-state.json');
 assert.equal((await req('/mpanel/backup.php?action=newbackup',{files:'1'})).httpStatusCode,403);
 for(const body of [{uid,files:'1',dirarc:'text'},{uid,files:'1','dirarc[0]':'/www'},{uid,files:'1','dirarc[0][a]':'../local'}])assert.equal((await req('/mpanel/backup.php?action=newbackup',body)).httpStatusCode,400);

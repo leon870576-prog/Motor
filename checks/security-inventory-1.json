@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 262,
-    "sha256": "eef064f83bb9ea9f853305e08cae672163599dee8f74cfab123fa0690ed94167"
+    "bytes": 264,
+    "sha256": "1a8fe99f3faca94243474319812db5e32d636dd353f3bc38dfecbe95798703d5"
   },
   {
     "path": "assets/lesika/arcade.css",
@@ -165,9 +165,24 @@
     "sha256": "3dd5ea5c2c9550cd9a889135288f29422300ed1b7d79a8012325cf9a8c99cbdc"
   },
   {
+    "path": "chat/bots.php",
+    "bytes": 2883,
+    "sha256": "7545ae35aed7265d7ac4723d23c056e1c7054ae92fdb8ac06b770bb825e58aae"
+  },
+  {
+    "path": "chat/cleancomedy-license.txt",
+    "bytes": 18656,
+    "sha256": "9e5f1b3c610b9c2da5c313bf81d577a7d1acec686bdb0384edefa6df0f90cd94"
+  },
+  {
     "path": "chat/index.php",
-    "bytes": 3712,
-    "sha256": "286e4c9cfde6385ed7590dc41bb65ee5184789972250d30357a0c3597aa9c7d0"
+    "bytes": 3770,
+    "sha256": "3472e60040c27a00c543e3c35f483fcbe48be179c643e73529c5e2fbee6ae157"
+  },
+  {
+    "path": "chat/joke-sources.json",
+    "bytes": 68358,
+    "sha256": "0ba0f54cceb7eaf4177bf7754e96dc553f80667b81e05f57018e040da18bd175"
   },
   {
     "path": "chat/updates.php",
@@ -1483,20 +1498,5 @@
     "path": "images/avators2/114.gif",
     "bytes": 12041,
     "sha256": "edb6c1e938efa96f235e57623c20c031a52a2bda6eaf5e5436cb80c87fd1a8c3"
-  },
-  {
-    "path": "images/avators2/115.gif",
-    "bytes": 12235,
-    "sha256": "2c26309ca92727a31062722c9203ec5e3175435fb8e589cc3c57d15f06b08644"
-  },
-  {
-    "path": "images/avators2/116.gif",
-    "bytes": 14672,
-    "sha256": "1d2186e2784a284e25167ba84c6524b3b96cd99ceecabd6bdfa95c6bc21af92d"
-  },
-  {
-    "path": "images/avators2/117.gif",
-    "bytes": 15790,
-    "sha256": "4d9d47f66c4251ef858703df7ba5d30b557b693c902a4654547a4a17b44a40e4"
   }
 ]

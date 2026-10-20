@@ -27,6 +27,7 @@ COPY migrate.php /opt/motor-migrate.php
 COPY migrate-branding.php /opt/motor-migrate-branding.php
 COPY migrate-comment-activity.php /opt/motor-migrate-comment-activity.php
 COPY validate.php /opt/motor-validate.php
+COPY checks/chat-catalogue.php /opt/motor-chat-catalogue.php
 COPY checks/gallery-native.php /opt/motor-gallery-native.php
 COPY checks/informers-native.php /opt/motor-informers-native.php
 COPY checks/game21-native.php /opt/motor-game21-native.php

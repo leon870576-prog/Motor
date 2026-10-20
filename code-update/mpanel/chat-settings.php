@@ -49,12 +49,13 @@ chat_setting_select('bot_mode','Когда отвечать',['conversation'=>'�
 chat_setting_number('context_seconds','Сколько секунд продолжать разговор без повторения имени',30,600);
 chat_setting_number('bot_cooldown','Минимальная пауза между ответами одному участнику, секунд',0,60);
 $topics=motor_nastya_topics();$phrases=array_sum(array_map(fn($v)=>count($v[1]),$topics));
-echo '<p>Встроено '.count($topics).' тем и '.$phrases.' вариантов ответа. На приветствие с вопросом Настя сначала отвечает по смыслу вопроса. Настя помечена как бот, учитывает недавнюю тему и избегает повторов.</p>';
+echo '<p>Встроено '.count($topics).' темы и '.$phrases.' вариантов реплик. Новые реплики сочетают подготовленный совет с уточнением. Настя работает без внешнего API, учитывает недавнюю тему и избегает повторов. <a href="../chat/bots.php">Возможности и ограничения ботов</a>.</p>';
 $lines=[];foreach ($settings['custom_rules'] as $rule) $lines[]=implode('; ',$rule['keys']).' => '.$rule['answer'];
 echo '<label for="phrases">Дополнительные ответы Насти</label><textarea name="phrases" id="phrases" rows="8" placeholder="выходные; суббота => Какие планы на выходные?">'.motor_chat_escape(implode("\n",$lines)).'</textarea>';
 echo '<small>Одна строка: ключевая фраза; другая фраза =&gt; ответ. До 40 строк. Эти ответы срабатывают в разговоре с Настей; регулярные выражения не используются.</small></fieldset>';
 echo '<fieldset><legend>Другие боты</legend>';
 chat_setting_select('joke_enabled','Весельчак',[1=>'Включён',0=>'Выключен']);
+echo '<p>Анекдотов: '.count(motor_chat_jokes()).'. Случайная очередь без повторов до конца полного круга сохраняется между перезапусками.</p>';
 chat_setting_number('joke_seconds','Пауза без сообщений перед шуткой, секунд',60,3600);
 chat_setting_select('quiz_enabled','Вундер-киндер',[1=>'Включён',0=>'Выключен']);
 chat_setting_number('quiz_seconds','Время на ответ в викторине, секунд',60,1800);

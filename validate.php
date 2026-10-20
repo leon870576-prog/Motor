@@ -80,6 +80,9 @@ $chatContext = [];
 motor_nastya_reply('Привет, как дела и что делаешь?', $chatContext, $chatSettings, 10000);
 if ($chatContext['topic'] !== 'wellbeing_activity') throw new RuntimeException('Combined small-talk question');
 echo 'PASS: restored 24 legacy Nastya categories, greeting/question priority and small-talk follow-up'.PHP_EOL;
+require '/opt/motor-chat-catalogue.php';
+$catalogueResult=motor_check_chat_catalogue($root);
+echo 'PASS: native chat catalogue '.json_encode($catalogueResult).PHP_EOL;
 
 require_once $root.'/includes/recovery.php';
 [$resetToken,$resetStored]=motor_recovery_issue(1000);

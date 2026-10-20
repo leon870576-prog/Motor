@@ -1,6 +1,7 @@
 <?php
 if (!defined('DATADIR')) { http_response_code(403); exit; }
 require_once __DIR__.'/nastya.php';
+require_once __DIR__.'/chat-jokes.php';
 
 function motor_chat_escape($value): string { return htmlspecialchars((string)$value,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8'); }
 function motor_chat_settings(): array {
@@ -95,8 +96,8 @@ function motor_chat_tick(array $settings,bool $welcome=false): void {
     motor_chat_transaction(function (&$rows,&$state) use ($settings,$welcome,$log,$now) {
         $last=$rows?explode('|',end($rows)):[];
         if ($settings['joke_enabled'] && $rows && $now-max((int)($last[3]??0),(int)($state['joke_at']??0))>=$settings['joke_seconds'] && empty($last[6])) {
-            $jokes=array_values(array_filter(file(__DIR__.'/chat_shut.php',FILE_IGNORE_NEW_LINES)));
-            if ($jokes) { motor_chat_append($rows,check($jokes[random_int(0,count($jokes)-1)]),'Весельчак','Бот','',$now,null,1);$state['joke_at']=$now; }
+            $joke=motor_chat_next_joke($state);
+            if ($joke!==null) {motor_chat_append($rows,check($joke),'Весельчак','Бот','',$now,null,1);$state['joke_at']=$now;}
         }
         $last=$rows?explode('|',end($rows)):[];
         $deadline=(int)($last[7]??$state['quiz_after']??0);$answer=(string)($last[8]??'');
@@ -113,7 +114,7 @@ function motor_chat_tick(array $settings,bool $welcome=false): void {
         }
         if ($welcome && $settings['bot_enabled'] && $settings['bot_greeting'] && ($state['users'][$log]['welcome']??0)+3600<$now) {
             $context=$state['users'][$log]??[];
-            $hello=motor_nastya_choose(['Привет! Я Настя, чат-бот Лесики 🙂 Как проходит день?', 'Привет 🙂 Я Настя, виртуальная собеседница этого чата. О чём хочется поговорить?', 'Здравствуй! Я Настя, бот Лесики. Добро пожаловать в разговор 🙂'],$context);
+            $hello=motor_nastya_choose(['Привет! Я Настя, чат-бот Лесозаводска 🙂 Как проходит день?', 'Привет 🙂 Я Настя, виртуальная собеседница этого чата. О чём хочется поговорить?', 'Здравствуй! Я Настя, бот Лесозаводска. Добро пожаловать в разговор 🙂'],$context);
             $context['welcome']=$now;$state['users'][$log]=$context;
             motor_chat_append($rows,check(nickname($log).', '.$hello),'Настюха','Бот','',$now);
         }

@@ -1,5 +1,35 @@
 [
   {
+    "path": "mpanel/chat-settings.php",
+    "bytes": 6865,
+    "sha256": "10af82cdac122e712d155a7568414f7319bb36cd3dfa5aad5fae142741445c4b"
+  },
+  {
+    "path": "mpanel/chat.php",
+    "bytes": 6791,
+    "sha256": "7d7c6f693aaf3643b626de5fd358f8c35a133d1a9ce39a21847bf3d5db87c811"
+  },
+  {
+    "path": "mpanel/checker.php",
+    "bytes": 5031,
+    "sha256": "8b8f07018c0cc169c4695f61572d5e81c78ec9fb8535a9a903ebaf40bf2aa4cc"
+  },
+  {
+    "path": "mpanel/delusers.php",
+    "bytes": 6044,
+    "sha256": "7dff4f53636cb6e11be7dfb4863293e25691b2a03f77c854b26da7217d473b41"
+  },
+  {
+    "path": "mpanel/files.php",
+    "bytes": 16079,
+    "sha256": "c4fb544d0db8b3a577a8c03bde937cb000babe6c26059a94b6da41fc7b59c538"
+  },
+  {
+    "path": "mpanel/forum.php",
+    "bytes": 38799,
+    "sha256": "2874944a72e459630be4a718eb1fd72b075db6e5c8a66bf0fa480b307fd5d9e7"
+  },
+  {
     "path": "mpanel/gallery-settings.php",
     "bytes": 4823,
     "sha256": "eba9a98c9e455ff2b99286ceac4e2fb421afcf7b174c2a3470852fba3379fca2"

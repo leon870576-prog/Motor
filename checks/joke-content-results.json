@@ -1,0 +1,7 @@
+{
+  "jokes": 400,
+  "old_jokes": 235,
+  "near_duplicate_threshold": 0.84,
+  "manual_selection": true,
+  "automated_filter": true
+}

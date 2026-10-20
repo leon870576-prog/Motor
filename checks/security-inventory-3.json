@@ -1,5 +1,20 @@
 [
   {
+    "path": "images/img/files.gif",
+    "bytes": 616,
+    "sha256": "9eee57aad0896c4700d3b9d15f5efd841f042a333d4e036ce5dfcfa0ce4aba73"
+  },
+  {
+    "path": "images/img/files2.gif",
+    "bytes": 276,
+    "sha256": "35a14e93d8b6899fac3d6672a120a5a1bfbad957bac4311dd0b52918532afb2d"
+  },
+  {
+    "path": "images/img/forums.gif",
+    "bytes": 324,
+    "sha256": "db85da1472d85de6810c1d2e29afb8ef86dfbca03e63734905ec58df9ff0340e"
+  },
+  {
     "path": "images/img/gallery.gif",
     "bytes": 402,
     "sha256": "0a818955f0ebeb9d3fc748340d5f0a8366c9f2ab9dfc1bd15d03aeff24dd9561"
@@ -1155,9 +1170,14 @@
     "sha256": "72917a07dcb6c5b4fa35d2dce9f3a2e9ceb3913889790720751147c942c1bdc0"
   },
   {
+    "path": "includes/chat-jokes.php",
+    "bytes": 2022,
+    "sha256": "b53fdd479017b615649e0fe6e18d770cb6cffcb83f634de648685e02e880ad11"
+  },
+  {
     "path": "includes/chat.php",
-    "bytes": 12532,
-    "sha256": "6bd296eea45ea29dd2fd947b8567788f1b75b5ca15760dfda9c5b2d7348ad208"
+    "bytes": 12515,
+    "sha256": "d228bd1c01b0fb9b01578a5f7c4132825e9a11abb91893fbe5715b930e6f8f72"
   },
   {
     "path": "includes/chat_bot.php",
@@ -1171,8 +1191,8 @@
   },
   {
     "path": "includes/chat_shut.php",
-    "bytes": 110395,
-    "sha256": "9cc5b427294a3f99a4d5dcdd21e6db27579e981081232ec336337e2b5b77bf93"
+    "bytes": 73540,
+    "sha256": "b7e0a200bb0e6112db31bde1c7605ca66f24e50a1976eeb311d3a7916e676dbe"
   },
   {
     "path": "includes/compression.php",
@@ -1285,14 +1305,24 @@
     "sha256": "b8a28370e6479bcfc3ad453c4e9ceef43b5ca4c1ba7babc43e421e3d8131e16a"
   },
   {
+    "path": "includes/nastya-everyday.json",
+    "bytes": 148002,
+    "sha256": "f490dd287a78c30005b501126ff664ae8927a64b0c225d952450ff7ca312be90"
+  },
+  {
+    "path": "includes/nastya-everyday.php",
+    "bytes": 3750,
+    "sha256": "1b11c6668e76645bf6c497d599311a11a0b23f9786fe3f55c2f00121512f9a5c"
+  },
+  {
     "path": "includes/nastya-legacy.php",
     "bytes": 10692,
     "sha256": "ee5893a802a96bfee8f359ee15a8e5c721952c84f50e6c7f6a0de0e2c921728e"
   },
   {
     "path": "includes/nastya.php",
-    "bytes": 33958,
-    "sha256": "fae6fddaff42d371ae0917da87aa7702e82ae46254ef7c7d8d2328f28792d018"
+    "bytes": 35538,
+    "sha256": "e00752bc401ea830008032a5c30b0763d24a6ad0526b5e7aab481e9a889fe528"
   },
   {
     "path": "includes/navigation.php",
@@ -1468,35 +1498,5 @@
     "path": "mpanel/book.php",
     "bytes": 15505,
     "sha256": "6d2e9248b7eeeee53fe9b6d15b9526cd6a386514347f580eae97161d1f0f1c35"
-  },
-  {
-    "path": "mpanel/chat-settings.php",
-    "bytes": 6546,
-    "sha256": "5b04b2df0767515b4db93b07305d59b36dfd23d9e57eb83d1166e337abaee27f"
-  },
-  {
-    "path": "mpanel/chat.php",
-    "bytes": 6791,
-    "sha256": "7d7c6f693aaf3643b626de5fd358f8c35a133d1a9ce39a21847bf3d5db87c811"
-  },
-  {
-    "path": "mpanel/checker.php",
-    "bytes": 5031,
-    "sha256": "8b8f07018c0cc169c4695f61572d5e81c78ec9fb8535a9a903ebaf40bf2aa4cc"
-  },
-  {
-    "path": "mpanel/delusers.php",
-    "bytes": 6044,
-    "sha256": "7dff4f53636cb6e11be7dfb4863293e25691b2a03f77c854b26da7217d473b41"
-  },
-  {
-    "path": "mpanel/files.php",
-    "bytes": 16079,
-    "sha256": "c4fb544d0db8b3a577a8c03bde937cb000babe6c26059a94b6da41fc7b59c538"
-  },
-  {
-    "path": "mpanel/forum.php",
-    "bytes": 38799,
-    "sha256": "2874944a72e459630be4a718eb1fd72b075db6e5c8a66bf0fa480b307fd5d9e7"
   }
 ]

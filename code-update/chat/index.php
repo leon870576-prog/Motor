@@ -36,7 +36,7 @@ if (is_user()) {
     echo '<label for="chat-message"><b>Сообщение:</b></label><br /><textarea id="chat-message" cols="20" rows="3" name="msg" minlength="4" maxlength="999" required data-smile-picker>'.motor_chat_escape($imja).'</textarea><br />';
     echo '<input type="submit" value="Добавить"><p class="chat-send-status" data-chat-send-status role="status"></p></form></div>';
 } else { show_login('Вы не авторизованы, чтобы добавить сообщение, необходимо'); }
-echo '<p><a class="touch-link" href="../pages/pravila.php">Правила</a> / <a class="touch-link" href="../pages/smiles.php">Смайлы</a> / <a class="touch-link" href="../pages/tegi.php">Теги</a></p>';
+echo '<p><a class="touch-link" href="../pages/pravila.php">Правила</a> / <a class="touch-link" href="../pages/smiles.php">Смайлы</a> / <a class="touch-link" href="../pages/tegi.php">Теги</a> / <a class="touch-link" href="bots.php">О ботах</a></p>';
 echo '<a class="touch-link" href="../index.php">На главную</a>';
 echo '<script src="../assets/lesika/chat.js?v=chat2" defer></script>';
 include '../themes/'.$config['themes'].'/foot.php';

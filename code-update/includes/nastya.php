@@ -1,29 +1,30 @@
 <?php
 if (!defined('BASEDIR')) { http_response_code(403); exit; }
 require_once __DIR__.'/nastya-legacy.php';
+require_once __DIR__.'/nastya-everyday.php';
 
 function motor_nastya_topics(): array {
     static $topics;
     if ($topics !== null) return $topics;
     $topics = [
         'identity'=>['\b(бот\w*|робот\w*|настоящ\w*|живой|живая|человек|искусственн\w*)\b',[
-            'Я Настя, чат-бот Лесики 🙂 Могу поддержать разговор, но за живого человека себя не выдаю.',
+            'Я Настя, чат-бот Лесозаводска 🙂 Могу поддержать разговор, но за живого человека себя не выдаю.',
             'Да, я виртуальная собеседница. Давай познакомимся: о чём тебе интересно поболтать?',
             'Я бот этого чата. Стараюсь отвечать по теме, а если что-то не пойму — лучше переспрошу.'
         ]],
         'name'=>['\b(как (?:тебя )?зовут|твое имя|кто ты)\b',[
             'Я Настя 🙂 В чате мой ник — Настюха. А как к тебе обращаться?',
-            'Давай знакомиться! Я Настя, виртуальная собеседница Лесики. Что привело тебя в чат?',
+            'Давай знакомиться! Я Настя, виртуальная собеседница Лесозаводска. Что привело тебя в чат?',
             'Можно просто Настя. Как проходит твой день?',
             'Настя, приятно познакомиться 🙂 О чём обычно любишь разговаривать?'
         ]],
         'age'=>['\b(сколько тебе лет|твой возраст|когда родилась)\b',[
-            'Человеческого возраста у меня нет — я чат-бот. А в Лесике знакомятся люди самых разных возрастов 🙂',
+            'Человеческого возраста у меня нет — я чат-бот. А на портале Лесозаводска знакомятся люди самых разных возрастов 🙂',
             'Дня рождения как у человека у меня нет. Зато день рождения портала можно отметить всем чатом!',
             'Я виртуальная собеседница, поэтому возраст себе не придумываю. Лучше расскажи, чем увлекаешься.'
         ]],
         'location'=>['\b(откуда ты|где живешь|где ты живешь|где ты сейчас|твой город)\b',[
-            'Моё место — здесь, в чате Лесики 🙂 А что тебе больше всего нравится в твоём городе?',
+            'Моё место — здесь, в чате Лесозаводска 🙂 А что тебе больше всего нравится в твоём городе?',
             'Я виртуальная собеседница, поэтому своего адреса у меня нет. Расскажешь о любимом месте для прогулок?',
             'Я здесь, на портале. У тебя сейчас шумный день или спокойный вечер?',
             'Встретиться со мной можно только в этом чате. А куда ты любишь выбираться в выходные?'
@@ -259,7 +260,7 @@ function motor_nastya_topics(): array {
         'Вот и славно. О чём хочешь поболтать?',
         'Здорово 🙂 Какие планы на оставшуюся часть дня?'
     ]];
-    return $topics;
+    return $topics=array_merge($topics,motor_nastya_everyday());
 }
 
 function motor_nastya_plain(string $text): string {
@@ -270,12 +271,19 @@ function motor_nastya_plain(string $text): string {
 function motor_nastya_mentioned(string $text): bool {
     return (bool)preg_match('~(*UCP)\b(?:настя|настюха|настенька|настюша|настюшка|насть|nastya)\b~u', $text);
 }
-function motor_nastya_choose(array $answers, array &$context): string {
+function motor_nastya_choose(array $answers, array &$context, array $cores=[]): string {
     $recent = $context['recent'] ?? [];
     $fresh = array_values(array_filter($answers, fn($a)=>!in_array(hash('sha256',$a),$recent,true)));
     $notLast=array_values(array_filter($answers,fn($a)=>hash('sha256',$a)!==($recent?end($recent):'')));
     $pool = $fresh ?: ($notLast ?: $answers);
+    $coreOf=function(string $answer) use ($cores): string {foreach ($cores as $core) if (str_starts_with($answer,$core.' ')) return hash('sha256',$core);return '';};
+    if ($cores) {
+        $recentCore=is_array($context['recent_core']??null)?$context['recent_core']:[];
+        $varied=array_values(array_filter($pool,fn($a)=>!in_array($coreOf($a),$recentCore,true)));
+        if ($varied) $pool=$varied;
+    }
     $answer = $pool[random_int(0,count($pool)-1)];
+    if ($cores) $context['recent_core']=array_slice(array_merge($recentCore,[$coreOf($answer)]),-2);
     $context['recent'] = array_slice(array_merge($recent,[hash('sha256',$answer)]),-5);
     return $answer;
 }
@@ -283,6 +291,11 @@ function motor_nastya_choose(array $answers, array &$context): string {
 function motor_nastya_intent(string $text,array $topics): string {
     $matched=[];
     foreach ($topics as $key=>[$pattern]) if ($pattern!=='' && preg_match('~(*UCP)'.$pattern.'~u',$text)) $matched[$key]=true;
+    // More specific practical questions must precede broad old words like «работа».
+    $broad=['daily_dinner','daily_choosing','daily_help','daily_walk','daily_repair','daily_storage','daily_memory'];
+    foreach (['daily_medical','daily_electric','daily_leak','daily_scam','daily_password'] as $key) if (isset($matched[$key])) return $key;
+    foreach ($matched as $key=>$_) if (str_starts_with($key,'daily_') && !in_array($key,$broad,true)) return $key;
+    foreach ($broad as $key) if (isset($matched[$key])) return $key;
     if (isset($matched['identity'])) return 'identity';
     if (isset($matched['wellbeing'],$matched['activity'])) return 'wellbeing_activity';
     foreach (['identity','name','age','location','wellbeing','activity','acquaintance','flowers','cake','advertising','swearing','clever','affection','thanks'] as $key) if (isset($matched[$key])) return $key;
@@ -306,6 +319,7 @@ function motor_nastya_starter(string $text): bool {
 }
 function motor_nastya_reply(string $message, array &$context, array $settings, int $now): ?string {
     if (!$settings['bot_enabled']) return null;
+    if (strlen($message)>8000 || !mb_check_encoding($message,'UTF-8')) return null;
     $text = motor_nastya_plain($message);$topics=motor_nastya_topics();
     $direct = motor_nastya_mentioned($text);
     if (preg_match('~^\s*\[b\]([^\[]+)\[/b\]\s*,~iu',$message,$to)) {
@@ -317,6 +331,9 @@ function motor_nastya_reply(string $message, array &$context, array $settings, i
     $starter = motor_nastya_starter($text);
     if (!$direct && !$general && !$starter && !($settings['bot_mode']==='conversation' && $continuing)) return null;
     if (($context['at'] ?? 0) + $settings['bot_cooldown'] > $now) return null;
+    if (($urgent=motor_nastya_urgent($text))!==null) {
+        $context['at']=$now;$context['topic']='urgent';return $urgent;
+    }
     $intent=motor_nastya_intent($text,$topics);$answers=$topics[$intent][1];
     if ($continuing && in_array($context['topic']??'',['greeting','wellbeing','wellbeing_activity','wellbeing_reply'],true)) {
         if (in_array($intent,['positive','thanks','fallback'],true) && preg_match('~(*UCP)\b(?:хорошо|нормально|отлично|неплохо|супер|потихоньку|все в порядке)\b~u',$text)) $intent='wellbeing_reply';
@@ -325,7 +342,7 @@ function motor_nastya_reply(string $message, array &$context, array $settings, i
         $answers=$topics[$intent][1];
     }
     // Custom phrases supplement conversation; identity remains explicit.
-    if ($intent !== 'identity') foreach ($settings['custom_rules'] as $rule) {
+    if (!in_array($intent,['identity','daily_medical','daily_scam','daily_password','daily_electric','daily_leak'],true)) foreach ($settings['custom_rules'] as $rule) {
         foreach ($rule['keys'] as $key) if (preg_match('~(*UCP)(?<!\w)'.preg_quote($key,'~').'(?!\w)~u',$text)) {
             $intent='custom';$answers=[$rule['answer']];break 2;
         }
@@ -334,7 +351,7 @@ function motor_nastya_reply(string $message, array &$context, array $settings, i
         $previous=$context['topic'] ?? '';
         if (isset($topics[$previous]) && !in_array($previous,['identity','goodbye','fallback'],true)) { $intent=$previous;$answers=$topics[$previous][1]; }
     }
-    $answer=motor_nastya_choose($answers,$context);
+    $answer=motor_nastya_site_time(motor_nastya_choose($answers,$context,$topics[$intent][2]??[]),$now);
     $hello=motor_nastya_greeting($text);
     if ($hello!=='' && !in_array($intent,['greeting','goodbye'],true) && motor_nastya_greeting(motor_nastya_plain($answer))==='') $answer=$hello.' '.$answer;
     $context['at']=$intent==='goodbye' ? 0 : $now;

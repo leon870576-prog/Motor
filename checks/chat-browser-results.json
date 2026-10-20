@@ -4,73 +4,73 @@
     {
       "width": 320,
       "theme": "lesika_dvor",
-      "composerShift": 0.25,
+      "composerShift": -0.15625,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_gazeta",
-      "composerShift": -0.5,
+      "composerShift": -0.296875,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_gostinaya",
-      "composerShift": -0.5,
+      "composerShift": -0.296875,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_solnce",
-      "composerShift": -0.5,
+      "composerShift": -0.296875,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_vecher",
-      "composerShift": 0.25,
+      "composerShift": -0.15625,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_albom",
-      "composerShift": -0.5,
+      "composerShift": -0.296875,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_uyut",
-      "composerShift": -0.5,
+      "composerShift": -0.296875,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_web_terrace",
-      "composerShift": -0.5,
+      "composerShift": -0.296875,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_web_press",
-      "composerShift": 0.25,
+      "composerShift": -0.15625,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_web_garden",
-      "composerShift": -0.5,
+      "composerShift": -0.296875,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_web_coffee",
-      "composerShift": -0.5,
+      "composerShift": -0.296875,
       "documentRequests": 1
     },
     {
       "width": 320,
       "theme": "lesika_web_evening",
-      "composerShift": 0.25,
+      "composerShift": -0.15625,
       "documentRequests": 1
     },
     {
@@ -82,19 +82,19 @@
     {
       "width": 390,
       "theme": "lesika_gazeta",
-      "composerShift": -0.078125,
+      "composerShift": -0.28125,
       "documentRequests": 1
     },
     {
       "width": 390,
       "theme": "lesika_gostinaya",
-      "composerShift": -0.078125,
+      "composerShift": -0.28125,
       "documentRequests": 1
     },
     {
       "width": 390,
       "theme": "lesika_solnce",
-      "composerShift": -0.078125,
+      "composerShift": -0.28125,
       "documentRequests": 1
     },
     {
@@ -106,19 +106,19 @@
     {
       "width": 390,
       "theme": "lesika_albom",
-      "composerShift": -0.078125,
+      "composerShift": -0.28125,
       "documentRequests": 1
     },
     {
       "width": 390,
       "theme": "lesika_uyut",
-      "composerShift": -0.078125,
+      "composerShift": -0.28125,
       "documentRequests": 1
     },
     {
       "width": 390,
       "theme": "lesika_web_terrace",
-      "composerShift": -0.078125,
+      "composerShift": -0.28125,
       "documentRequests": 1
     },
     {
@@ -130,13 +130,13 @@
     {
       "width": 390,
       "theme": "lesika_web_garden",
-      "composerShift": -0.078125,
+      "composerShift": -0.28125,
       "documentRequests": 1
     },
     {
       "width": 390,
       "theme": "lesika_web_coffee",
-      "composerShift": -0.078125,
+      "composerShift": -0.28125,
       "documentRequests": 1
     },
     {
