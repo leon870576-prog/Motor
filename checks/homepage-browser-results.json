@@ -8,6 +8,52 @@
   "confirmedSettingsPost": true,
   "confirmedSelectionPost": true,
   "photosContain": true,
+  "compactGallery": [
+    {
+      "width": 320,
+      "height": 476,
+      "columns": 2,
+      "photos": [
+        96,
+        96,
+        96
+      ],
+      "commentLinks": true
+    },
+    {
+      "width": 390,
+      "height": 270,
+      "columns": 3,
+      "photos": [
+        96,
+        96,
+        96
+      ],
+      "commentLinks": true
+    },
+    {
+      "width": 768,
+      "height": 286,
+      "columns": 3,
+      "photos": [
+        112,
+        112,
+        112
+      ],
+      "commentLinks": true
+    },
+    {
+      "width": 1440,
+      "height": 286,
+      "columns": 3,
+      "photos": [
+        112,
+        112,
+        112
+      ],
+      "commentLinks": true
+    }
+  ],
   "errors": [],
   "physicalDevices": false
 }

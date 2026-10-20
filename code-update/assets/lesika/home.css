@@ -31,3 +31,15 @@ body:is([data-theme=lesika_dvor],[data-theme=lesika_vecher],[data-theme=lesika_w
 body:is([data-theme=lesika_dvor],[data-theme=lesika_vecher],[data-theme=lesika_web_press],[data-theme=lesika_web_evening]) .home-item{padding:7px}
 
 .home-picker button{min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--wash);color:var(--ink);font:inherit;cursor:pointer}
+
+/* Compact homepage previews; the gallery and administration keep full details. */
+.home-block[data-home-block=gallery] .home-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+body .home-block[data-home-block=gallery] .home-item{padding:5px}
+.home-block[data-home-block=gallery] .home-photo{margin-bottom:4px}
+body .legacy-content .home-block[data-home-block=gallery] .home-photo img{height:96px;aspect-ratio:auto;object-fit:contain}
+.home-block[data-home-block=gallery] .home-item h3{font-size:.9em;line-height:1.3;margin:0}
+.home-block[data-home-block=gallery] .home-item h3 a{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.home-block[data-home-block=gallery] :is(.home-meta,.home-excerpt){display:none}
+.home-block[data-home-block=gallery] .home-open{font-size:.85em;line-height:1.3;min-height:44px;max-width:100%}
+@media(min-width:360px){.home-block[data-home-block=gallery] .home-items{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:600px){body .legacy-content .home-block[data-home-block=gallery] .home-photo img{height:112px}}
