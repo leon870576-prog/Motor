@@ -22,6 +22,14 @@ if (is_admin(array(101)) && $log==$config['nickname']){
 
 show_title('menu.gif', 'Редактирование страниц');
 
+if ($file==='index.dat' && in_array($action,['edit','obzor','editfile'],true)) {
+    require_once BASEDIR.'includes/home-template.php';
+    include BASEDIR.'includes/home-template-editor.php';
+    include '../themes/'.$config['themes'].'/foot.php';
+    exit;
+}
+echo '<p><a href="home-settings.php">Главная: блоки и записи</a> · <a href="files.php?action=edit&amp;file=index.dat">Главная: шаблон разделов</a></p>';
+
 ############################################################################################
 ##                                    Главная страница                                    ##
 ############################################################################################
@@ -47,6 +55,8 @@ $size = formatsize(filesize(DATADIR."datamain/$arrfiles[$i]"));
 $strok = count(file(DATADIR."datamain/$arrfiles[$i]"));
 
 if ($arrfiles[$i]=='index.dat'){
+require_once BASEDIR.'includes/home-template.php';
+try {$homeListing=motor_home_template_state();$size=formatsize(strlen($homeListing['contents']));$strok=substr_count($homeListing['contents'],"\n")+1;} catch (Throwable $ignored) {}
 
 echo '<div class="b"><img src="../images/img/edit.gif" alt="image" /> ';
 echo '<b><a href="../index.php?'.SID.'"><span style="color:#ff0000">'.$arrfiles[$i].'</span></a></b> ('.$size.')<br />';

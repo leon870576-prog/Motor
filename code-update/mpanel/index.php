@@ -79,6 +79,7 @@ echo '<img src="../images/img/act.gif" alt="image" /> <a href="systems.php?'.SID
 echo '<img src="../images/img/act.gif" alt="image" /> <a href="checker.php?'.SID.'">Сканировать систему</a> ('.stats_checker().')<br />';
 
 if ($log==$config['nickname']){
+echo '<a href="files.php?action=edit&amp;file=index.dat">Главная страница: шаблон разделов</a><br />';
 echo '<img src="../images/img/act.gif" alt="image" /> <a href="files.php?'.SID.'">Редактирование файлов</a><br />';
 }}
 

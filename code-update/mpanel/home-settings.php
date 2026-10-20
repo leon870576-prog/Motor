@@ -23,6 +23,10 @@ try {
 }
 include '../themes/'.$config['themes'].'/index.php';show_title('menu.gif','Главная страница: блоки и записи');
 $h='motor_home_escape';
+require_once BASEDIR.'includes/home-template.php';
+echo '<nav class="home-editor-nav"><a href="../index.php">Посмотреть главную</a>';
+if (motor_home_template_owner()) echo '<a href="files.php?action=edit&amp;file=index.dat">Шаблон карточек и ссылок</a>';
+echo '<a href="../pages/themes.php">Оформление</a></nav>';
 if ($error!=='') echo '<p class="notice-error" role="alert">'.$h($error).'</p>';
 if (($_GET['saved']??'')==='1' && $error==='') echo '<p class="theme-success" role="status">Настройки сохранены.</p>';
 echo '<p>Задайте количество записей, режим и порядок блоков. 0 скрывает блок. В режиме «Выбранные» показываются только добавленные вами записи, в заданном порядке, не больше указанного количества.</p>';

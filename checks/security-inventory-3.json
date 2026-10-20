@@ -1260,6 +1260,16 @@
     "sha256": "7f7dcc18365c8b4b7823a09627239e79df542f20b8a47f6fe7b7b13b579eaf12"
   },
   {
+    "path": "includes/home-template-editor.php",
+    "bytes": 5708,
+    "sha256": "172218fa2986f9779a1da9b98728dc6b5f8ac2a5c5261142a20ef7868a733afe"
+  },
+  {
+    "path": "includes/home-template.php",
+    "bytes": 5805,
+    "sha256": "5e2c7a12f1ec52785c3e3abffdba6b5acac4782c9f90e1073d1ee5a4e414d936"
+  },
+  {
     "path": "includes/info.php",
     "bytes": 2417,
     "sha256": "2a9b164b74b2264ae7f31b8951489cb0e6b761ff42acbac5087ce6a1998ce558"
@@ -1291,8 +1301,8 @@
   },
   {
     "path": "includes/lesika/head.php",
-    "bytes": 4411,
-    "sha256": "d3e6e76734112a05ad6cb24aafd86cdc46ddde392d246fed75998e20e151605f"
+    "bytes": 4445,
+    "sha256": "b67eba44c5f1080c060a24f1767d005f6d08facc8f8203135e33d72b420d795b"
   },
   {
     "path": "includes/lesika/home.php",
@@ -1436,8 +1446,8 @@
   },
   {
     "path": "index.php",
-    "bytes": 3115,
-    "sha256": "f428a48a62d22254bc9df3b532901a2ee9157ad2768bc2fe80420238e9ffb358"
+    "bytes": 3401,
+    "sha256": "6737cb5578e6e2ae4544475d4d4cb9efda0cf8fa3300174ecbf5e795de699620"
   },
   {
     "path": "input.php",
@@ -1488,15 +1498,5 @@
     "path": "mpanel/ban.php",
     "bytes": 7103,
     "sha256": "7bd41c44fa2afc6dd1a5af7c3f091cf91f6f03a1682d24cf63a0be71218ef7b1"
-  },
-  {
-    "path": "mpanel/banlist.php",
-    "bytes": 4696,
-    "sha256": "f1afa37bfdd5e41ec8b07f2eeef885e0593390cb2d937ffd10ffb51454de2caa"
-  },
-  {
-    "path": "mpanel/blacklist.php",
-    "bytes": 10832,
-    "sha256": "d76b5226bc48d9e821b6ef66120f1260fbf5b3a5b0efd022e657aa89364b432b"
   }
 ]

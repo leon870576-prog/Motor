@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 255,
-    "sha256": "8de587edad648fc53a94e53a5aaefc5eedc72146cac18ce03775b069c97262da"
+    "bytes": 261,
+    "sha256": "efeeb92ed0213905a2a1e191b65df34eec74df5a3b9d3ed9c708c0b0eae83c71"
   },
   {
     "path": "assets/lesika/arcade.css",
@@ -81,8 +81,8 @@
   },
   {
     "path": "assets/lesika/home.css",
-    "bytes": 4099,
-    "sha256": "c0c38ba0f2817aae14c6351d9d15d26e10f0ca241dc1270fd1daf140e75f8e82"
+    "bytes": 4872,
+    "sha256": "39c62face1ead8bc6cb6835b1ed2444d535a1f02a75aed2d1b99fa8261327496"
   },
   {
     "path": "assets/lesika/leaf.svg",

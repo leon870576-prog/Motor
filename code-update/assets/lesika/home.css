@@ -42,3 +42,11 @@ body .legacy-content .home-block[data-home-block=gallery] .home-photo img{height
 .home-media .home-photo{margin:0}
 body .legacy-content .home-media .home-photo img{height:160px;aspect-ratio:auto;object-fit:contain}
 body .legacy-content .home-video{display:block;width:100%;height:auto;max-width:100%;max-height:220px;aspect-ratio:16/9;object-fit:contain;border-radius:6px;background:#141414}
+.home-editor-nav{display:flex;flex-wrap:wrap;gap:8px 16px;margin:8px 0 12px}
+.home-editor-nav a,.home-template-editor summary{display:inline-flex;align-items:center;min-height:44px}
+.home-template-editor{min-width:0;overflow-wrap:anywhere}
+.home-template-editor code{white-space:normal;overflow-wrap:anywhere}
+.home-template-form label{display:block;margin:12px 0 6px;font-weight:bold}
+body .home-template-form textarea{display:block;box-sizing:border-box;width:100%;max-width:100%;min-width:0;font:16px/1.5 monospace;resize:vertical;white-space:pre-wrap;overflow-wrap:anywhere}
+.home-template-editor button{min-height:44px;white-space:normal;margin:6px 0}
+.home-template-help,.home-template-reset{margin:14px 0;padding:10px;border:1px solid var(--line);border-radius:8px}

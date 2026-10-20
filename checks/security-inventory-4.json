@@ -1,5 +1,15 @@
 [
   {
+    "path": "mpanel/banlist.php",
+    "bytes": 4696,
+    "sha256": "f1afa37bfdd5e41ec8b07f2eeef885e0593390cb2d937ffd10ffb51454de2caa"
+  },
+  {
+    "path": "mpanel/blacklist.php",
+    "bytes": 10832,
+    "sha256": "d76b5226bc48d9e821b6ef66120f1260fbf5b3a5b0efd022e657aa89364b432b"
+  },
+  {
     "path": "mpanel/board-settings.php",
     "bytes": 2933,
     "sha256": "8039e8122ffe2a92cea4086fc989077e9840db24022d5d9028e7428ce27d4fe4"
@@ -36,8 +46,8 @@
   },
   {
     "path": "mpanel/files.php",
-    "bytes": 16088,
-    "sha256": "9df9e0938508202594358e5a930a600691c074d2c0cf119df635d5ca71f07605"
+    "bytes": 16777,
+    "sha256": "41a4a1c3cd862d671ec9f1536e10ad5183d5cc01e43dc8ad9f3bd47365c4aecc"
   },
   {
     "path": "mpanel/forum.php",
@@ -61,13 +71,13 @@
   },
   {
     "path": "mpanel/home-settings.php",
-    "bytes": 10568,
-    "sha256": "e336f692abbcdcd410b05fd70c5e47b0a69d2324e6f3fc6d4e5777a125df6e39"
+    "bytes": 10930,
+    "sha256": "bb114b031660b560a7c96eebe130bfb4e727db8612313272bdbcbe36243ffab8"
   },
   {
     "path": "mpanel/index.php",
-    "bytes": 9616,
-    "sha256": "d28db6a2883eb3d2596c6e76b50e0d5e616ada91e0baaf205216c8cb00757747"
+    "bytes": 9748,
+    "sha256": "27363e05c937b0bf021c3f2bb97702496688157c78507c090497282234911ce1"
   },
   {
     "path": "mpanel/license.php",

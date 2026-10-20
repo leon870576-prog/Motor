@@ -39,12 +39,17 @@ echo '<img src="images/img/act2.gif" alt="image" /> <a href="mail/lostpassword.p
 echo '</div>';
 require_once BASEDIR.'includes/home-content.php';
 motor_home_render();
-// Preserve a customized home page; use Lesika cards for the original section directory.
-if (hash_file('sha256', DATADIR.'datamain/index.dat') === '577fcd0bc84a2b4f55bade258b0d56e3d24e4bb3cf66d183aee3e903bc3e4aad') {
-    include BASEDIR.'includes/lesika/home.php';
-} else {
-    ob_start();include DATADIR.'datamain/index.dat';$customHome=ob_get_clean();
+require_once BASEDIR.'includes/home-template.php';
+$homeBufferLevel=ob_get_level();
+try {
+    $homeTemplate=motor_home_template_state();
+    ob_start();include $homeTemplate['path'];$customHome=ob_get_clean();
     echo preg_replace('~(?<=>)\s*Новости сайта\s*(?=</a>)~u','Новости',$customHome);
+} catch (Throwable $e) {
+    while (ob_get_level()>$homeBufferLevel) ob_end_clean();
+    http_response_code(503);
+    echo '<p class="notice-error">Шаблон разделов главной временно недоступен.</p>';
+    if (motor_home_template_owner()) echo '<p><a href="'.ADMINDIR.'files.php?action=edit&amp;file=index.dat">Открыть редактор и восстановить шаблон</a></p>';
 }
 
 } else {

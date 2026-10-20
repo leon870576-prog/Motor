@@ -1,0 +1,10 @@
+{
+  "runtime": "PHP 8.4 WASM",
+  "requests": 69,
+  "passed": [
+    "only configured owner edits template; editor/source preview/public page share actual modern template; GET and HEAD do not write",
+    "POST/CSRF/Origin/arrays/size/syntax guards; unchanged save preserves modern design and creates exact private backups",
+    "literal ampersands, PHP operators and textarea payload roundtrip exactly; edits visible; stale forms rejected; standard reset retains settings/content",
+    "symlink target/directory/lock/backups and corrupt backups refused; failed runtime template remains repairable; preview resolves to homepage"
+  ]
+}
