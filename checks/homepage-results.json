@@ -1,6 +1,6 @@
 {
   "php": "8.4 WASM",
-  "requests": 94,
+  "requests": 187,
   "passed": [
     "six default blocks, three latest records by timestamp, four manually selected ads, public-only photos, no IP/browser leakage and synchronized comment links",
     "only administrators 101/102 may curate; CSRF, Origin, method, scalar/type/range/mode/order and hidden/expired record validation",
@@ -8,6 +8,8 @@
     "all six sources support selection; deletion, reused numeric IDs, hidden photos, expired ads and trimmed messages never substitute other records",
     "search and pagination, escaped hostile content/query/author, accessible local links and preserved customized homepage with normalized news label",
     "corrupt settings fail closed; settings/data/lock and parent symlinks cannot read external content or overwrite files",
+    "legacy JSON reads without migration writes; all six independent photo/video switch combinations, strict size/type bounds, photo-only gallery, stable selections and comment counts",
+    "bounded media reads, context/metadata validation, corrupt/missing/deleted media, symlink rejection, real photo/JPEG/video Range delivery and unchanged shared counters/source records",
     "homepage settings included in normal ZIP backup; guest/member/admin outputs verified without changing source records"
   ]
 }

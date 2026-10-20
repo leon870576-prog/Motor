@@ -1,6 +1,7 @@
 <?php
 if (!defined('BASEDIR')) {http_response_code(403);exit;}
 require_once __DIR__.'/home-settings.php';
+require_once __DIR__.'/home-media.php';
 
 function motor_home_escape($s): string {return htmlspecialchars((string)$s,ENT_QUOTES|ENT_SUBSTITUTE,'UTF-8');}
 function motor_home_plain(string $s,int $limit=240): string {
@@ -30,13 +31,13 @@ function motor_home_time(string $s): bool {return preg_match('/^[1-9][0-9]{0,9}$
 function motor_home_catalog(string $kind): array {
     if (!isset(motor_home_sections()[$kind])) throw new InvalidArgumentException('Неизвестный блок.');
     $items=[];
-    $add=function(string $id,string $title,string $text,string $author,int $time,string $url,string $image='',string $comments='',string $detail='') use (&$items) {
+    $add=function(string $id,string $title,string $text,string $author,int $time,string $url,string $image='',string $comments='',string $detail='',array $media=[]) use (&$items) {
         if (isset($items[$id])) return;
-        $items[$id]=['id'=>$id,'title'=>motor_home_plain($title,140),'text'=>motor_home_plain($text),'author'=>$author,'time'=>$time,'url'=>$url,'image'=>$image,'comments'=>$comments,'detail'=>motor_home_plain($detail,120),'sequence'=>count($items)];
+        $items[$id]=['id'=>$id,'title'=>motor_home_plain($title,140),'text'=>motor_home_plain($text),'author'=>$author,'time'=>$time,'url'=>$url,'image'=>$image,'comments'=>$comments,'detail'=>motor_home_plain($detail,120),'sequence'=>count($items),'media'=>$media];
     };
     if ($kind==='news') foreach (motor_home_lines('news.dat') as $row) {
         $d=explode('|',$row);if (count($d)<6 || !motor_home_number($d[5]) || !motor_home_time($d[3])) continue;
-        $url='news/komm.php?id='.$d[5];$add($d[5].':'.$d[3],$d[0],$d[1],$d[4],(int)$d[3],$url,'',$url.'#form');
+        $url='news/komm.php?id='.$d[5];$add($d[5].':'.$d[3],$d[0],$d[1],$d[4],(int)$d[3],$url,'',$url.'#form','',['parent'=>$d[5]]);
     }
     if ($kind==='gallery') {
         require_once __DIR__.'/gallery.php';
@@ -49,14 +50,14 @@ function motor_home_catalog(string $kind): array {
         $f=explode('|',$row);if (count($f)<2 || !motor_home_number($f[0])) continue;
         foreach (motor_home_lines('dataforum/topic'.$f[0].'.dat') as $topic) {
             $d=explode('|',$topic);if (count($d)<7 || !motor_home_number($d[0]) || $d[1]!==$f[0] || !motor_home_time($d[4]) || motor_home_path('dataforum/'.$f[0].'-'.$d[0].'.dat')===null) continue;
-            $add($f[0].'-'.$d[0].':'.$d[4],$d[3],'',$d[2],(int)$d[4],'forum/topic.php?fid='.$f[0].'&id='.$d[0],'','',$f[1]);
+            $add($f[0].'-'.$d[0].':'.$d[4],$d[3],'',$d[2],(int)$d[4],'forum/topic.php?fid='.$f[0].'&id='.$d[0],'','',$f[1],['context'=>['fid'=>$f[0],'topic'=>$d[0]]]);
         }
     }
     if ($kind==='board') foreach (motor_home_lines('databoard/database.dat') as $row) {
         $c=explode('|',$row);if (count($c)<3 || !motor_home_number($c[2])) continue;
         foreach (motor_home_lines('databoard/'.$c[2].'.dat') as $record) {
             $d=explode('|',$record);if (count($d)<7 || !motor_home_number($d[5]) || $d[6]!==$c[2] || !motor_home_time($d[3]) || !ctype_digit($d[4]) || (int)$d[4]<SITETIME) continue;
-            $add($c[2].'-'.$d[5].':'.$d[3],$d[0],$d[2],$d[1],(int)$d[3],'board/index.php?action=view&id='.$c[2].'&bid='.$d[5],'','',$c[0]);
+            $add($c[2].'-'.$d[5].':'.$d[3],$d[0],$d[2],$d[1],(int)$d[3],'board/index.php?action=view&id='.$c[2].'&bid='.$d[5],'','',$c[0],['parent'=>$d[7]??'','context'=>['category'=>$c[2],'bid'=>$d[5]]]);
         }
     }
     if ($kind==='chat' || $kind==='book') foreach (motor_home_lines($kind.'.dat') as $row) {
@@ -80,10 +81,12 @@ function motor_home_author(string $author): string {
     if (preg_match('/^[a-z0-9_-]{1,20}$/Di',$author)) return '<a href="'.BASEDIR.'pages/userpage.php?uz='.rawurlencode($author).'">'.motor_home_escape(motor_home_plain(nickname($author),60)).'</a>';
     return motor_home_escape(motor_home_plain($author,60));
 }
-function motor_home_item(array $item,string $kind): void {
+function motor_home_item(array $item,string $kind,?array $options=null): void {
     $h='motor_home_escape';$url=$h(BASEDIR.$item['url']);
     echo '<article class="home-item" data-home-record="'.$h($item['id']).'">';
-    if ($item['image']!=='') echo '<a class="home-photo" href="'.$url.'"><img src="'.$h(BASEDIR.$item['image']).'" alt="'.$h($item['title']).'" width="480" height="320" loading="lazy" decoding="async"></a>';
+    if ($item['image']!=='' && ($options===null || $options['photos'])) echo '<a class="home-photo" href="'.$url.'"><img src="'.$h(BASEDIR.$item['image']).'" alt="'.$h($item['title']?:'Фото из галереи').'" width="480" height="320" loading="lazy" decoding="async"></a>';
+    if ($kind==='gallery' && $options!==null) {echo '</article>';return;}
+    motor_home_render_media($item,$kind,$options??['photos'=>true,'videos'=>true]);
     if ($item['title']!=='') echo '<h3><a href="'.$url.'">'.$h($item['title']).'</a></h3>';
     echo '<p class="home-meta">'.motor_home_author($item['author']).' · '.$h(date_fixed($item['time'])).'</p>';
     if ($item['detail']!=='') echo '<p class="home-meta">'.$h($item['detail']).'</p>';
@@ -102,9 +105,12 @@ function motor_home_render(): void {
     foreach ($settings['order'] as $kind) {
         $block=$settings['blocks'][$kind];if ($block['count']===0) continue;
         [$title,$href]=motor_home_sections()[$kind];$items=motor_home_pick(motor_home_catalog($kind),$block);
-        echo '<section class="home-block" data-home-block="'.$kind.'" aria-labelledby="home-'.$kind.'"><header class="home-block-heading"><h2 id="home-'.$kind.'">'.$title.'</h2><a href="'.BASEDIR.$href.'">Все записи →</a></header>';
+        if ($kind==='gallery') {
+            if (!$block['photos'] || !$items) continue;
+            echo '<section class="home-block" data-home-block="gallery" aria-label="Фото из галереи" style="--home-gallery-width:'.$settings['gallery_size']['width'].'px;--home-gallery-height:'.$settings['gallery_size']['height'].'px">';
+        } else echo '<section class="home-block" data-home-block="'.$kind.'" aria-labelledby="home-'.$kind.'"><header class="home-block-heading"><h2 id="home-'.$kind.'">'.$title.'</h2><a href="'.BASEDIR.$href.'">Все записи →</a></header>';
         if (!$items) echo '<p class="home-empty">'.($block['mode']==='selected'?'Пока нет выбранных записей.':'Пока нет записей.').'</p>';
-        else {echo '<div class="home-items">';foreach ($items as $item) motor_home_item($item,$kind);echo '</div>';}
+        else {echo '<div class="home-items">';foreach ($items as $item) motor_home_item($item,$kind,$block);echo '</div>';}
         echo '</section>';
     }
     echo '</div>';

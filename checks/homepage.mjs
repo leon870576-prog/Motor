@@ -31,17 +31,30 @@ try{
  async function login(name){if(logged){await req('/input.php?action=exit',{uid});logged=false;}uid=await token();if(name){assert.equal((await req('/input.php',{login:name,pass:password})).httpStatusCode,302);logged=true;uid=await token();}}
  const now=+(await run('echo time();')),at=i=>now-1000+i*20,stamp=i=>String(at(i));
  const write=(p,s)=>php.writeFile('/www/local/'+p,s),news=[],photos=[],topics=[],ads=[],chat=[],book=[];
+ const forumParent='f'.repeat(31)+'6',boardParent='b'.repeat(31)+'2';
  for(const i of [2,6,1,5,3,4]){
   news.push(`Новость ${i}|Городская новость ${i} [b]подробности[/b]||${at(i)}|HomeMember|${i}|`);
   photos.push(`Подпись ${i}|Фото ${i}|HomeMember||${at(i)}|0|city${i}.gif|`);php.writeFile('/www/local/datagallery/city'+i+'.gif',readFileSync(join(root,'images/avators/1.gif')));
-  topics.push(`${i}|1|HomeMember|Тема ${i}|${at(i)}|0|0|`);write(`dataforum/1-${i}.dat`,`${i}|1|HomeMember|Сообщение|Browser, PRIVATE-IP|${at(i)}||\n`);
-  ads.push(`Объявление ${i}|HomeMember|Текст объявления ${i}|${at(i)}|${now+86400}|${i}|1||`);
+  topics.push(`${i}|1|HomeMember|Тема ${i}|${at(i)}|0|0|`);write(`dataforum/1-${i}.dat`,`${i}|1|HomeMember|Сообщение|Browser, PRIVATE-IP|${at(i)}|${i===6?forumParent:''}|\n`);
+  ads.push(`Объявление ${i}|HomeMember|Текст объявления ${i}|${at(i)}|${now+86400}|${i}|1|${i===2?boardParent:''}|`);
   chat.push(`Чат ${i}|HomeMember|0|${at(i)}|SECRET-BROWSER|SECRET-IP||||${String(i).padStart(32,'0')}|`);
   book.push(`Гостевая ${i}|HomeMember|0|${at(i)}|SECRET-BROWSER|SECRET-IP|||`);
  }
  write('news.dat',news.join('\n')+'\n');write('datakomm/6.dat','one\ntwo\n');
  write('datagallery/fotobase.dat',photos.join('\n')+`\nНевидимое|Скрытое фото|HomeMember|hidden|${at(7)}|0|hidden.gif|\n`);php.writeFile('/www/local/datagallery/hidden.gif',readFileSync(join(root,'images/avators/1.gif')));
  write('dataforum/mainforum.dat','1|Город|0|0|\n');write('dataforum/topic1.dat',topics.join('\n')+'\n');write('databoard/database.dat','Городские объявления|Описание|1|\n');write('databoard/1.dat',ads.join('\n')+`\nПросроченное|HomeMember|Нельзя показывать|${at(7)}|${now-1}|7|1||\n`);write('chat.dat',chat.join('\n')+'\n');write('book.dat',book.join('\n')+'\n');
+ const mediaFiles={};
+ async function seedMedia(kind,parent,context){
+  const dir='/www/local/attachments/'+kind+'/'+parent;await run('mkdir('+JSON.stringify(dir)+',0700,true);');
+  const files=[];
+  for(const [type,ext,mime,bytes]of [['photo','gif','image/gif',readFileSync(join(root,'images/avators/1.gif'))],['video','mp4','video/mp4',readFileSync(new URL('./sample.mp4',import.meta.url))]]){
+   const id=(type==='photo'?'1':'2').repeat(32);files.push({id,name:type==='photo'?'Фото &quot; <img onerror=bad> .gif':'Видео.mp4',kind:type,ext,mime,size:bytes.length});php.writeFile(dir+'/'+id+'.blob',bytes);
+  }
+  // Extra photos/documents must not inflate the number of homepage cards/previews.
+  const extra={...files[0],id:'3'.repeat(32)};files.push(extra);php.writeFile(dir+'/'+extra.id+'.blob',readFileSync(join(root,'images/avators/1.gif')));
+  const manifest={context,files};write('attachments/'+kind+'/'+parent+'/manifest.json',JSON.stringify(manifest));mediaFiles[kind]={parent,manifest};
+ }
+ await seedMedia('news','6',[]);await seedMedia('forum',forumParent,{fid:1,topic:6});await seedMedia('board',boardParent,{category:1,bid:2});
  const sourcePaths=['news.dat','datagallery/fotobase.dat','dataforum/mainforum.dat','dataforum/topic1.dat','databoard/1.dat','chat.dat','book.dat'];const sources=Object.fromEntries(sourcePaths.map(p=>[p,php.readFileAsText('/www/local/'+p)]));
  const keys=['news','gallery','forum','board','chat','book'],admin='/mpanel/home-settings.php';
  const block=(html,key)=>html.match(new RegExp('<section class="home-block" data-home-block="'+key+'"[\\s\\S]*?</section>'))?.[0]||'';
@@ -57,7 +70,7 @@ try{
  await login('HomeCoAdmin');assert.equal((await req(admin)).httpStatusCode,200);assert.ok((await req('/mpanel/index.php')).text.includes('home-settings.php'));
  await login('HomeAdmin');assert.ok(!(await req('/mpanel/headlines.php')).text.includes('Новости сайта'));
  const state=()=>pure('echo json_encode(motor_home_settings());'),version=async()=>pure('echo json_encode(motor_home_version(motor_home_settings()));');
- async function form(){const s=await state(),f={uid,version:await version(),operation:'settings'};s.order.forEach((k,i)=>{f['position_'+k]=String(i+1);f['count_'+k]=String(s.blocks[k].count);f['mode_'+k]=s.blocks[k].mode;s.blocks[k].selected.forEach((v,n)=>f['rank_'+k+'_'+n]=String(n+1));});return f;}
+ async function form(){const s=await state(),f={uid,version:await version(),operation:'settings',gallery_width:String(s.gallery_size.width),gallery_height:String(s.gallery_size.height)};s.order.forEach((k,i)=>{f['position_'+k]=String(i+1);f['count_'+k]=String(s.blocks[k].count);f['mode_'+k]=s.blocks[k].mode;f['photos_'+k]=s.blocks[k].photos?'1':'0';f['videos_'+k]=s.blocks[k].videos?'1':'0';s.blocks[k].selected.forEach((v,n)=>f['rank_'+k+'_'+n]=String(n+1));});return f;}
  async function select(k,id,expected=303){const r=await req(admin+'?block='+k,{uid,version:await version(),operation:'select',block:k,record:id});assert.equal(r.httpStatusCode,expected,r.text.match(/role="alert">([^<]+)/)?.[1]);return r;}
  let f=await form();assert.equal((await req(admin,{...f,uid:'invalid'})).httpStatusCode,403);assert.equal((await req(admin,f,{Origin:'https://other.test'})).httpStatusCode,403);
  for(const [key,value]of [['count_news','-1'],['count_news','21'],['count_news','1.5'],['count_news','1e1'],['mode_news','unsafe'],['position_gallery','1'],['position_news','7']])assert.equal((await req(admin,{...f,[key]:value})).httpStatusCode,400,key);
@@ -109,6 +122,55 @@ try{
  await run("rename('/www/local/databoard','/tmp/board-original');symlink('/tmp/board-original','/www/local/databoard');");assert.deepEqual(await pure('echo json_encode(motor_home_catalog("board"));'),[]);await run("unlink('/www/local/databoard');rename('/tmp/board-original','/www/local/databoard');");
  assert.equal(php.readFileAsText('/www/local/home-settings.json'),raw);
  pass('corrupt settings fail closed; settings/data/lock and parent symlinks cannot read external content or overwrite files');
+ // Media switches and dimensions preserve old settings and all shared activity counters.
+ const counters=()=>JSON.stringify(['HomeAdmin','HomeMember'].map(name=>{const p=php.readFileAsText('/www/local/profil/'+name+'.prof').split(':||:');return [6,33,36,41,96,97,98,99].map(i=>p[i]);}));
+ const beforeMediaCounters=counters(),beforeMediaSettings=await state();
+ const legacy=structuredClone(beforeMediaSettings);delete legacy.gallery_size;for(const b of Object.values(legacy.blocks)){delete b.photos;delete b.videos;}
+ const legacyRaw=JSON.stringify(legacy);write('home-settings.json',legacyRaw);s=await state();assert.deepEqual(s.gallery_size,{width:120,height:128});assert.ok(Object.values(s.blocks).every(b=>b.photos&&b.videos));assert.equal(php.readFileAsText('/www/local/home-settings.json'),legacyRaw);
+ const legacyVersion=createHash('sha256').update(legacyRaw).digest('hex');assert.equal((await req(admin,{...await form(),version:legacyVersion})).httpStatusCode,409);
+ f=await form();
+ for(const [key,value]of [['gallery_width','79'],['gallery_width','481'],['gallery_height','0'],['gallery_height','128.5'],['gallery_width','1e2'],['photos_news','yes'],['videos_board','2'],['photos_chat','-1']])assert.equal((await req(admin,{...f,[key]:value})).httpStatusCode,400,key);
+ for(const key of ['photos_news','videos_forum','gallery_width','gallery_height']){const invalid={...f};delete invalid[key];invalid[key+'[]']='120';assert.equal((await req(admin,invalid)).httpStatusCode,400,key);}
+ assert.equal(php.readFileAsText('/www/local/home-settings.json'),legacyRaw);
+ for(const value of [null,'120',79,481]){const bad=structuredClone(s);bad.gallery_size.width=value;write('home-settings.json',JSON.stringify(bad));assert.equal((await req(admin)).httpStatusCode,503);}
+ for(const value of [null,'1',1,[]]){const bad=structuredClone(s);bad.blocks.news.photos=value;write('home-settings.json',JSON.stringify(bad));assert.equal((await req(admin)).httpStatusCode,503);}
+ write('home-settings.json',legacyRaw);
+ const mediaCounts=html=>({photo:(html.match(/class="home-photo"/g)||[]).length,video:(html.match(/<video /g)||[]).length});
+ for(const kind of keys)for(const [photos,videos]of [[false,false],[true,false],[false,true],[true,true]]){
+  f=await form();f['photos_'+kind]=photos?'1':'0';f['videos_'+kind]=videos?'1':'0';f.gallery_width='160';f.gallery_height='144';assert.equal((await req(admin,f)).httpStatusCode,303);
+  r=await req('/index.php');const html=block(r.text,kind),n=mediaCounts(html);
+  assert.equal(n.photo,photos?(kind==='gallery'?3:['news','forum','board'].includes(kind)?1:0):0,kind);
+  assert.equal(n.video,videos&&['news','forum'].includes(kind)?1:0,kind);
+  if(kind==='gallery'){assert.ok(!html.includes('<h')&&!html.includes('Комментарии')&&!html.includes('home-meta')&&!html.includes('home-excerpt'));assert.equal(!!html,photos);if(photos){assert.ok(html.includes('--home-gallery-width:160px'));assert.ok(html.includes('--home-gallery-height:144px'));}}
+  else assert.equal(recordIds(html).length,kind==='board'?4:3);
+  assert.ok(!html.includes('autoplay'));assert.ok(!html.includes('<img onerror=bad>'));
+  if(kind!=='news'){assert.equal(mediaCounts(block(r.text,'news')).video,1);assert.ok(block(r.text,'news').includes('Комментарии (2)'));}
+  if(kind==='news'&&photos&&!videos)writeFileSync(new URL('photos-only-home.html',dir),r.text);
+ }
+ // Both size bounds render without bypassing the saved ordering/curation.
+ for(const size of [80,480]){f=await form();f.gallery_width=String(size);f.gallery_height=String(size);assert.equal((await req(admin,f)).httpStatusCode,303);writeFileSync(new URL('gallery-'+size+'.html',dir),(await req('/index.php')).text);}
+ f=await form();f.gallery_width='120';f.gallery_height='128';assert.equal((await req(admin,f)).httpStatusCode,303);
+ f=await form();for(const key of keys){f['photos_'+key]='0';f['videos_'+key]='0';}assert.equal((await req(admin,f)).httpStatusCode,303);writeFileSync(new URL('no-media-home.html',dir),(await req('/index.php')).text);
+ f=await form();for(const key of keys){f['photos_'+key]='1';f['videos_'+key]='1';}assert.equal((await req(admin,f)).httpStatusCode,303);
+ const settingsMedia=await state();await select('board','1-2:'+at(2));assert.deepEqual(await state(),settingsMedia);
+ assert.deepEqual(settingsMedia.blocks.board.selected,beforeMediaSettings.blocks.board.selected);
+ pass('legacy JSON reads without migration writes; all six independent photo/video switch combinations, strict size/type bounds, photo-only gallery, stable selections and comment counts');
+ // Invalid, mismatched, missing or symlinked manifests/blobs fail closed without breaking HTML.
+ const manifestPath='attachments/news/6/manifest.json',goodManifest=JSON.stringify(mediaFiles.news.manifest);
+ for(const bad of ['broken','null',JSON.stringify({files:'wrong'}),JSON.stringify({files:Array(101).fill({})}),'x'.repeat(1048577)]){write(manifestPath,bad);r=await req('/index.php');assert.equal(r.httpStatusCode,200);assert.deepEqual(mediaCounts(block(r.text,'news')),{photo:0,video:0});}
+ const badFile={...mediaFiles.news.manifest.files[0],id:'../outside',name:'" onerror="bad',mime:'image/gif\r\nX-Bad: yes'};write(manifestPath,JSON.stringify({files:[badFile]}));assert.equal(mediaCounts(block((await req('/index.php')).text,'news')).photo,0);write(manifestPath,goodManifest);
+ const boardManifest='attachments/board/'+boardParent+'/manifest.json';write(boardManifest,JSON.stringify({...mediaFiles.board.manifest,context:{category:1,bid:6}}));assert.equal(mediaCounts(block((await req('/index.php')).text,'board')).photo,0);write(boardManifest,JSON.stringify(mediaFiles.board.manifest));
+ const forumManifest='attachments/forum/'+forumParent+'/manifest.json';write(forumManifest,JSON.stringify({...mediaFiles.forum.manifest,context:{fid:1,topic:5}}));assert.deepEqual(mediaCounts(block((await req('/index.php')).text,'forum')),{photo:0,video:0});write(forumManifest,JSON.stringify(mediaFiles.forum.manifest));
+ await run("rename('/www/local/attachments/news/6','/tmp/home-news-media');symlink('/tmp/home-news-media','/www/local/attachments/news/6');");assert.deepEqual(mediaCounts(block((await req('/index.php')).text,'news')),{photo:0,video:0});await run("unlink('/www/local/attachments/news/6');rename('/tmp/home-news-media','/www/local/attachments/news/6');");
+ const mediaUrl=(kind,file)=>'/attachment.php?section='+kind+'&parent='+mediaFiles[kind].parent+'&file='+file.id;
+ r=await req(mediaUrl('news',mediaFiles.news.manifest.files[0]));assert.equal(r.httpStatusCode,200);assert.deepEqual(Buffer.from(r.bytes),readFileSync(join(root,'images/avators/1.gif')));
+ r=await req(mediaUrl('news',mediaFiles.news.manifest.files[1]),undefined,{range:'bytes=0-15'});assert.equal(r.httpStatusCode,206);assert.deepEqual(Buffer.from(r.bytes),readFileSync(new URL('./sample.mp4',import.meta.url)).subarray(0,16));
+ r=await req(mediaUrl('board',mediaFiles.board.manifest.files[0])+'&preview=1');assert.equal(r.httpStatusCode,200);assert.equal(r.headers['content-type'][0],'image/jpeg');
+ r=await req(mediaUrl('forum',mediaFiles.forum.manifest.files[1]));assert.equal(r.httpStatusCode,200);
+ const deleted=php.readFileAsText('/www/local/news.dat');write('news.dat',news.filter(l=>l.split('|')[5]!=='6').join('\n')+'\n');assert.equal(mediaCounts(block((await req('/index.php')).text,'news')).photo,0);assert.equal((await req(mediaUrl('news',mediaFiles.news.manifest.files[0]))).httpStatusCode,404);write('news.dat',deleted);
+ assert.equal(counters(),beforeMediaCounters,'preview/settings requests must not award comments, points, coins or change reputation');
+ for(const p of sourcePaths)assert.equal(php.readFileAsText('/www/local/'+p),sources[p],p);
+ pass('bounded media reads, context/metadata validation, corrupt/missing/deleted media, symlink rejection, real photo/JPEG/video Range delivery and unchanged shared counters/source records');
  const backup=await req('/mpanel/backup.php?action=newbackup',{uid,files:'1'});assert.ok([200,302].includes(backup.httpStatusCode));
  assert.equal(await pure('$ok=false;foreach(glob(DATADIR."databackup/*.zip") as $p){$z=new ZipArchive();if($z->open($p)===true){for($i=0;$i<$z->numFiles;$i++)if(basename($z->getNameIndex($i))==="home-settings.json")$ok=$z->getFromIndex($i)===file_get_contents(DATADIR."home-settings.json");$z->close();}}echo json_encode($ok);'),true);
  for(const [file,url]of [['admin.html',admin],['picker.html',admin+'?block=board'],['full-home.html','/index.php']])writeFileSync(new URL(file,dir),(await req(url)).text);

@@ -1,0 +1,9 @@
+{
+  "videoPlayback": [
+    "news",
+    "forum"
+  ],
+  "noAutoplay": true,
+  "noVideoPrefetch": true,
+  "disabledMediaRequests": 0
+}

@@ -17,7 +17,7 @@ echo '<script src="'.BASEDIR.'assets/lesika/touch.js?v=scroll1" defer></script>'
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/gallery.css?v=gallery1"><script src="'.BASEDIR.'assets/lesika/gallery.js?v=gallery1" defer></script>';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/compact.css?v=compact1">';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/branding.css?v=city1">';
-if ($lesikaHome || $php_self==='mpanel/home-settings.php') echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/home.css?v=home2">';
+if ($lesikaHome || $php_self==='mpanel/home-settings.php') echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/home.css?v=home3">';
 if ($php_self==='pages/userpage.php') echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/userpages.css?v=userpages1">';
 echo '<link rel="alternate" type="application/rss+xml" title="Новости Лесозаводска" href="'.BASEDIR.'news/rss.php">';
 echo '</head><body data-theme="'.$config['themes'].'"><div class="site-shell">';

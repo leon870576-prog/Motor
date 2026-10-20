@@ -1,5 +1,10 @@
 [
   {
+    "path": "mpanel/gallery-settings.php",
+    "bytes": 4823,
+    "sha256": "eba9a98c9e455ff2b99286ceac4e2fb421afcf7b174c2a3470852fba3379fca2"
+  },
+  {
     "path": "mpanel/gallery.php",
     "bytes": 7956,
     "sha256": "f3522347f253b19d0424c9b53a29846aa2e70d8763cb28d001362496ba2a70d0"
@@ -11,8 +16,8 @@
   },
   {
     "path": "mpanel/home-settings.php",
-    "bytes": 8305,
-    "sha256": "e8c4986a9bc515040c4fe622861584c6747096085e2d65a179d27687f0d7c9fb"
+    "bytes": 10407,
+    "sha256": "164eeff18c69ad3d918c513672b700900abe825ebc867c973e37de1ba566a196"
   },
   {
     "path": "mpanel/index.php",

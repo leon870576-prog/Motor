@@ -1221,13 +1221,18 @@
   },
   {
     "path": "includes/home-content.php",
-    "bytes": 8086,
-    "sha256": "5d31c57b6a6e55e78a1e51f9d1a68842dbdd8ee46ab4dff56a63fcf58e114226"
+    "bytes": 8896,
+    "sha256": "5deb3e2027a88d1a79f9ee97d5aa7a5ea0ba27c05795b622006689d5e36a5891"
+  },
+  {
+    "path": "includes/home-media.php",
+    "bytes": 3691,
+    "sha256": "a3099996a7690da3e5f8be71c56fa929041a69548c1fcb5876b4543d549464df"
   },
   {
     "path": "includes/home-settings.php",
-    "bytes": 8169,
-    "sha256": "cd674ca716cd85e214eaae780785e0fbfde4ac8e3c3e30bcbf52b86e2aa7eb29"
+    "bytes": 9758,
+    "sha256": "a2e896917872b93fbc97fa2808c13aeea381ed6c9faddc02490c4527c3e63818"
   },
   {
     "path": "includes/info.php",
@@ -1257,7 +1262,7 @@
   {
     "path": "includes/lesika/head.php",
     "bytes": 4411,
-    "sha256": "f14396aab98721ed0836c741981b4be9a6133b34f3241bddbd434b27b1022c9e"
+    "sha256": "c44d9064ee18d0dd71dca379d91f35a4b4a95bfbe501726ca6537efd2349ff2d"
   },
   {
     "path": "includes/lesika/home.php",
@@ -1366,8 +1371,8 @@
   },
   {
     "path": "includes/userpage-activity.php",
-    "bytes": 8515,
-    "sha256": "8ffec2b34f2179c8dac8e0ae0332c589cfdddae66314f9d36e524caf2fc46fdd"
+    "bytes": 8624,
+    "sha256": "887e70bc58752b0b037606c7223ba11d35db5372acddc41e72c127ccdd6d791f"
   },
   {
     "path": "includes/userpage-news-comments.php",
@@ -1493,10 +1498,5 @@
     "path": "mpanel/forum.php",
     "bytes": 38799,
     "sha256": "2874944a72e459630be4a718eb1fd72b075db6e5c8a66bf0fa480b307fd5d9e7"
-  },
-  {
-    "path": "mpanel/gallery-settings.php",
-    "bytes": 4823,
-    "sha256": "eba9a98c9e455ff2b99286ceac4e2fb421afcf7b174c2a3470852fba3379fca2"
   }
 ]

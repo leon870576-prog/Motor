@@ -26,6 +26,7 @@ $h='motor_home_escape';
 if ($error!=='') echo '<p class="notice-error" role="alert">'.$h($error).'</p>';
 if (($_GET['saved']??'')==='1' && $error==='') echo '<p class="theme-success" role="status">Настройки сохранены.</p>';
 echo '<p>Задайте количество записей, режим и порядок блоков. 0 скрывает блок. В режиме «Выбранные» показываются только добавленные вами записи, в заданном порядке, не больше указанного количества.</p>';
+echo '<p>Фото и видео включаются отдельно для каждого блока. У новости и темы форума показываются до одного фото и одного видео; у объявления — первое фото. Видео запускается только по нажатию. Галерея содержит только фотографии: отключение фото скрывает этот блок. Мини-чат и гостевая остаются текстовыми — загрузки медиа в них нет.</p>';
 if ($settings!==null) {
     $version=motor_home_version($settings);$catalog=[];
     foreach (motor_home_sections() as $kind=>$label) $catalog[$kind]=motor_home_catalog($kind);
@@ -38,7 +39,17 @@ if ($settings!==null) {
         echo '<label>Количество записей<input type="number" inputmode="numeric" min="0" max="20" required name="count_'.$kind.'" value="'.$b['count'].'"></label>';
         echo '<label>Режим<select name="mode_'.$kind.'">';
         foreach (['latest'=>'Последние — сначала новые','oldest'=>'Сначала старые','selected'=>'Выбранные — мой порядок'] as $value=>$text) echo '<option value="'.$value.'"'.($value===$b['mode']?' selected':'').'>'.$text.'</option>';
-        echo '</select></label></div>';
+        echo '</select></label>';
+        foreach (['photos'=>'Фото на главной','videos'=>'Видео на главной'] as $media=>$caption) {
+            echo '<label>'.$caption.'<select name="'.$media.'_'.$kind.'">';
+            foreach (['1'=>'Показывать','0'=>'Не показывать'] as $value=>$text) echo '<option value="'.$value.'"'.((bool)(int)$value===$b[$media]?' selected':'').'>'.$text.'</option>';
+            echo '</select></label>';
+        }
+        if ($kind==='gallery') foreach (['width'=>'Ширина фото, px','height'=>'Высота фото, px'] as $side=>$caption) echo '<label>'.$caption.'<input type="number" inputmode="numeric" min="80" max="480" required name="gallery_'.$side.'" value="'.$settings['gallery_size'][$side].'"></label>';
+        echo '</div>';
+        if ($kind==='gallery') echo '<p>Размер от 80 до 480 px. По умолчанию 120 × 128 px. Фото видны целиком и переносятся на следующую строку; ширина уменьшается, если экран уже заданного размера. Видеофайлы в галерее не загружаются.</p>';
+        if ($kind==='board') echo '<p>В объявлениях доступны фотографии; загрузка видео не поддерживается.</p>';
+        if ($kind==='forum') echo '<p>Предпросмотр берётся из вложений первого сообщения темы.</p>';
         if ($b['selected']) {
             echo '<ol class="home-selection">';
             foreach ($b['selected'] as $i=>$id) {

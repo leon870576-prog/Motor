@@ -11,8 +11,8 @@ function motor_home_admin(): bool {
 }
 function motor_home_defaults(): array {
     $blocks=[];
-    foreach (motor_home_sections() as $key=>$label) $blocks[$key]=['count'=>$key==='board'?4:3,'mode'=>$key==='board'?'selected':'latest','selected'=>[]];
-    return ['revision'=>'initial','order'=>array_keys($blocks),'blocks'=>$blocks];
+    foreach (motor_home_sections() as $key=>$label) $blocks[$key]=['count'=>$key==='board'?4:3,'mode'=>$key==='board'?'selected':'latest','selected'=>[],'photos'=>true,'videos'=>true];
+    return ['revision'=>'initial','order'=>array_keys($blocks),'blocks'=>$blocks,'gallery_size'=>['width'=>120,'height'=>128]];
 }
 function motor_home_valid_settings(array $s): array {
     $keys=array_keys(motor_home_sections());
@@ -22,7 +22,16 @@ function motor_home_valid_settings(array $s): array {
         if (!is_array($b) || !isset($b['count'],$b['mode'],$b['selected']) || !is_int($b['count']) || $b['count']<0 || $b['count']>20 || !in_array($b['mode'],['latest','oldest','selected'],true) || !is_array($b['selected']) || !array_is_list($b['selected']) || count($b['selected'])>20) throw new RuntimeException('Настройки главной страницы повреждены.',503);
         foreach ($b['selected'] as $id) if (!is_string($id) || !preg_match('/^[a-zA-Z0-9_.:-]{1,160}$/D',$id)) throw new RuntimeException('Неверная подборка главной страницы.',503);
         if (count(array_unique($b['selected']))!==count($b['selected'])) throw new RuntimeException('В подборке повторяются записи.',503);
+        // Old files gain defaults in memory only; GET never rewrites existing settings.
+        foreach (['photos','videos'] as $media) {
+            if (!array_key_exists($media,$b)) $b[$media]=true;
+            if (!is_bool($b[$media])) throw new RuntimeException('Неверные настройки медиа главной страницы.',503);
+        }
+        $s['blocks'][$key]=$b;
     }
+    if (!array_key_exists('gallery_size',$s)) $s['gallery_size']=motor_home_defaults()['gallery_size'];
+    if (!is_array($s['gallery_size']) || count($s['gallery_size'])!==2) throw new RuntimeException('Неверные размеры фото главной страницы.',503);
+    foreach (['width','height'] as $side) if (!isset($s['gallery_size'][$side]) || !is_int($s['gallery_size'][$side]) || $s['gallery_size'][$side]<80 || $s['gallery_size'][$side]>480) throw new RuntimeException('Неверные размеры фото главной страницы.',503);
     return $s;
 }
 function motor_home_settings(): array {
@@ -68,6 +77,11 @@ function motor_home_save(array $input): array {
                 $positions[$n]=$kind;$b['count']=motor_home_integer($input['count_'.$kind]??null,0,20);
                 $mode=$input['mode_'.$kind]??null;if (!in_array($mode,['latest','oldest','selected'],true)) throw new InvalidArgumentException('Выберите режим вывода записей.');
                 $b['mode']=$mode;$ordered=[];
+                foreach (['photos','videos'] as $media) {
+                    $value=$input[$media.'_'.$kind]??null;
+                    if (!in_array($value,['0','1'],true)) throw new InvalidArgumentException('Выберите, показывать ли фото и видео в каждом блоке.');
+                    $b[$media]=$value==='1';
+                }
                 foreach ($b['selected'] as $i=>$id) {
                     $remove=$input['remove_'.$kind.'_'.$i]??'0';if (!in_array($remove,['0','1'],true)) throw new InvalidArgumentException('Некорректный выбор записи.');
                     if ($remove==='1') continue;
@@ -78,6 +92,7 @@ function motor_home_save(array $input): array {
                 ksort($ordered);$b['selected']=array_values($ordered);$s['blocks'][$kind]=$b;
             }
             ksort($positions);$s['order']=array_values($positions);
+            $s['gallery_size']=['width'=>motor_home_integer($input['gallery_width']??null,80,480),'height'=>motor_home_integer($input['gallery_height']??null,80,480)];
         } else throw new InvalidArgumentException('Неизвестное действие.');
         if (!motor_home_admin()) throw new RuntimeException('Недостаточно прав для сохранения.',403);
         $s['revision']=bin2hex(random_bytes(16));motor_home_valid_settings($s);
