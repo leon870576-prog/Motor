@@ -23,7 +23,7 @@ echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/compact.css?v=compac
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/branding.css?v=brand2">';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/bottom-menu.css?v=bottom1">';
 if ($lesikaHome || in_array($php_self,['mpanel/home-settings.php','mpanel/files.php','pages/index.php','games/index.php'],true)) echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/home.css?v=home6">';
-if ($php_self==='pages/userpage.php') echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/userpages.css?v=userpages2">';
+if (in_array($php_self,['pages/userpage.php','pages/anketa.php','pages/profil.php','mpanel/userpages.php'],true)) echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/userpages.css?v=userpages3">';
 echo '<link rel="alternate" type="application/rss+xml" title="'.motor_brand_escape('Новости — '.$portalBrand['title']).'" href="'.BASEDIR.'news/rss.php">';
 echo '</head><body data-theme="'.$config['themes'].'" data-bottom-menu="'.(motor_bottom_items($motorBottomMenu)?'on':'off').'"><div class="site-shell">';
 echo '<a class="skip-link" href="#main-content">К содержимому</a><header class="site-header" id="up">';

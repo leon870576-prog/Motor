@@ -55,7 +55,7 @@ function motor_userpage_comment_apply(string $owner,string $actor,bool $staff,st
         } else {
             if ($at===null) throw new RuntimeException('Комментарий не найден.',404);
             $row=$rows[$at];$delete=$action==='comment_delete';
-            if ($delete? !($actor===$row['author'] || $actor===$owner || $staff):$actor!==$row['author']) throw new RuntimeException('Недостаточно прав для изменения комментария.',403);
+            if ($delete? !($actor===$row['author'] || $actor===$owner || $staff):($actor!==$row['author'] && !motor_userpage_manager($actor))) throw new RuntimeException('Недостаточно прав для изменения комментария.',403);
             motor_userpage_version($input['revision']??null,$row['revision']);
             if ($delete) array_splice($rows,$at,1);
             else {$rows[$at]['text']=motor_userpage_text_input($input['msg']??null,1,2000);$rows[$at]['revision']++;$rows[$at]['updated']=$now;}

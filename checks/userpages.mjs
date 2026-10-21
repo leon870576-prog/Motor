@@ -114,11 +114,14 @@ await login('PageGuest');assert.equal((await action('guest_add',{id:id(),msg:'З
 await login('PageOwner');assert.equal((await action('save',{...settings,revision:String(state().revision)})).httpStatusCode,303);
 r=await req(base+'&tab=settings');capture(r,base+'&tab=settings','owner','settings');
 pass('news create/edit/delete, public/private page, closed guestbook, escaped HTML/BBCode, deleted-post replay remains idempotent');
-// Moderators can remove records but cannot forge an owner publication or rewrite visitor reviews.
+// Admins can edit existing content; moderators retain deletion only. Nobody publishes news as another owner.
 for(const mod of ['PageAdmin','PageCoAdmin','PageMod','PagePhoto']){
  await login(mod);r=await req(base+'&tab=photos');assert.ok(r.text.includes(hidden));
- assert.equal((await action('news_edit',{id:news,revision:'2',title:'Подмена',msg:'Нельзя'})).httpStatusCode,403);
- assert.equal((await action('guest_edit',{id:note,revision:'2',msg:'Подмена отзыва'})).httpStatusCode,403);
+ const beforeEdit=raw(),allowed=['PageAdmin','PageCoAdmin'].includes(mod);
+ assert.equal((await action('news_edit',{id:news,revision:'2',title:'Правка',msg:'Исправленный текст'})).httpStatusCode,allowed?303:403);
+ assert.equal((await action('guest_edit',{id:note,revision:'2',msg:'Исправленный отзыв'})).httpStatusCode,allowed?303:403);
+ assert.equal(state().news.find(e=>e.id===news).author,'PageOwner');assert.equal(state().guestbook.find(e=>e.id===note).author,'PageGuest');
+ php.writeFile(path,beforeEdit);
  const s=state(),entry={id:id(),title:'Тест модерации',text:'Нарушение правил',author:'PageOwner',created:1750000000,updated:1750000000,revision:1};s.news.push(entry);saveState(s);
  assert.equal((await action('news_delete',{id:entry.id,revision:'1'})).httpStatusCode,303);
 }
@@ -173,12 +176,72 @@ r=await req(base+'&tab=settings');for(const[name,value]of Object.entries(sizes))
 for(const key of ['news','guestbook','comment_totals','review_totals','recent'])assert.deepEqual(state()[key],preserved[key],key);
 assert.equal(php.readFileAsText('/www/local/profil/PageOwner.prof'),ownerProfile);assert.equal(php.readFileAsText('/www/local/profil/PageGuest.prof'),guestProfile);
 const ownerRaw=raw();
-for(const name of ['PageGuest','PageAdmin']){await login(name);assert.equal((await req(base+'&tab=settings')).httpStatusCode,403);assert.equal((await action('save',sizeForm())).httpStatusCode,403);assert.equal(raw(),ownerRaw);assert.equal(visibleIds(await req(base),'news').length,2);}
+for(const name of ['PageGuest','PageMod','PagePhoto']){await login(name);assert.equal((await req(base+'&tab=settings')).httpStatusCode,403);assert.equal((await action('save',sizeForm())).httpStatusCode,403);assert.equal(raw(),ownerRaw);assert.equal(visibleIds(await req(base),'news').length,2);}
 await logout();assert.equal(visibleIds(await req(base),'photo').length,3);assert.equal(visibleIds(await req(base+'&tab=guestbook'),'guest').length,4);assert.equal(raw(),ownerRaw);
 await login('PageOwner');
 for(const bad of [null,[],{news:0,photos:3,reviews:4},{news:2,photos:'3',reviews:4},{news:2,photos:3},{news:2,photos:3,reviews:4,extra:1}]){saveState({...state(),page_sizes:bad});const badRaw=raw();assert.equal((await req(base)).httpStatusCode,503);assert.equal((await action('save',{...settings,...sizes,revision:'1'})).httpStatusCode,503);assert.equal(raw(),badRaw);php.writeFile(path,ownerRaw);}
 php.writeFile(galleryFile,galleryBefore);
 pass('owner page sizes 1–20: overview and section pagination, exact first/middle/last slices, unchanged totals/rewards/content, guest visibility, legacy no-write defaults/forms, stale/CSRF/Origin/type/corrupt-storage guards; profile buttons and settings return link');
+// Administrative page management: only roles 101/102, no author forgery or activity loss.
+const managementOriginal=raw(),galleryOriginal=php.readFileAsText(galleryFile);
+for(const actor of ['PageOwner','PageGuest','PageMod','PagePhoto']){
+ await login(actor);assert.equal((await req('/mpanel/userpages.php')).httpStatusCode,403);
+ for(const command of ['reset_settings','clear_page']){const keep=raw();assert.equal((await action(command,{revision:String(state().revision),confirm:'1',manager:'1',staff:'1'})).httpStatusCode,403);assert.equal(raw(),keep);}
+}
+for(const actor of ['PageAdmin','PageCoAdmin']){
+ await login(actor);assert.match((await req('/mpanel/index.php')).text,/href="userpages.php"/);
+ r=await req('/mpanel/userpages.php?uz=PageOwn');assert.equal(r.httpStatusCode,200);assert.match(r.text,/userpage.php\?uz=PageOwner/);assert.doesNotMatch(r.text,/private-PageOwner|:\|\|:/);capture(r,'/mpanel/userpages.php?uz=PageOwn','admin','admin-pages-'+actor);
+ for(const q of ['uz[]=PageOwner','uz=../PageOwner','page=-1']){const bad=await req('/mpanel/userpages.php?'+q);assert.ok([302,400].includes(bad.httpStatusCode));if(bad.httpStatusCode===302)assert.ok(bad.headers.location[0].includes('isset=403'));}
+ assert.equal((await req('/mpanel/userpages.php',{uid,uz:'PageOwner'})).httpStatusCode,405);
+ r=await req(base);assert.match(actionsHtml(r),/up-button[^>]*href="privat.php\?action=submit&amp;uz=PageOwner"/);assert.match(actionsHtml(r),/Управлять страницей/);assert.match(r.text,/gallery.php\?action=edit&amp;gid=/);
+ let d=state();d.published=false;saveState(d);assert.equal((await req(base+'&tab=settings')).httpStatusCode,200);
+ r=await req(base+'&tab=settings');capture(r,base+'&tab=settings','admin','admin-settings-'+actor);
+ const adminSave={...sizeForm(),title:'Правка администрации',published:'1'};
+ assert.equal((await action('save',adminSave)).httpStatusCode,303);assert.equal(state().title,'Правка администрации');assert.deepEqual(state().page_sizes,{news:2,photos:3,reviews:4});assert.equal(state().audit.at(-1).actor,actor);
+ assert.equal((await action('save',adminSave)).httpStatusCode,409);
+ const first=state().news[0],review=state().guestbook[0];
+ for(const [tab,e]of [['news',first],['guestbook',review]])assert.equal((await req(base+'&tab='+tab+'&edit='+e.id)).httpStatusCode,200);
+ assert.equal((await action('news_add',{id:id(),title:'Чужая публикация',msg:'Нет'})).httpStatusCode,403);
+ for(const command of ['reset_settings','clear_page']){
+  const original=raw(),before=state(),body={revision:String(before.revision),confirm:'1'};
+  assert.equal((await req(base+'&action='+command+'&uid='+uid)).httpStatusCode,405);assert.equal(raw(),original);
+  for(const bad of [{...body,uid:'wrong'},{...body,confirm:'0'}])assert.equal((await action(command,bad)).httpStatusCode,bad.uid?403:400);
+  assert.equal((await action(command,body,'PageOwner',{Origin:'https://evil.test'})).httpStatusCode,403);assert.equal(raw(),original);
+  assert.equal((await action(command,body)).httpStatusCode,303);const cleared=state();assert.equal(cleared.revision,before.revision+1);assert.equal(cleared.published,false);assert.equal(cleared.title,'');assert.equal(cleared.about,'');assert.equal(cleared.page_sizes,undefined);
+  for(const key of ['comment_totals','review_totals','recent'])assert.deepEqual(cleared[key],before[key],key);
+  assert.equal(cleared.audit.at(-1).actor,actor);assert.equal(cleared.audit.at(-1).action,command);
+  assert.deepEqual(cleared.news,command==='clear_page'?[]:before.news);assert.deepEqual(cleared.guestbook,command==='clear_page'?[]:before.guestbook);
+  const after=raw();assert.equal((await action(command,body)).httpStatusCode,409);assert.equal(raw(),after);assert.equal((await action('save',{...settings,revision:body.revision})).httpStatusCode,409);
+  assert.equal(php.readFileAsText(galleryFile),galleryOriginal);php.writeFile(path,original);
+ }
+ php.writeFile(path,managementOriginal);
+}
+pass('admin/superadmin page directory, private-page settings, existing news/review edits, preserved authors, photo controls, reset/clear confirmations, CSRF/Origin/revisions, retained cumulative counts and replay receipts; lower roles denied');
+// Phone field uses string storage, including + and leading zeroes; no external ICQ requests.
+await login('PageOwner');
+const profilePath='/www/local/profil/PageOwner.prof',profileOriginal=php.readFileAsText(profilePath),getProfile=()=>php.readFileAsText(profilePath).split(':||:');
+const profileForm={my_name:'Сосед',otkel:'Город',infa:'О себе',mobila:'Browser',pol:'M',rost:'180',ves:'70',site:'',happy:''};
+for(const phone of ['+82 10-1234-5678','00821012345678','+12345678901234567890','']){
+ assert.equal((await req('/pages/profil.php?action=edit',{uid,...profileForm,phone})).httpStatusCode,302);assert.equal(getProfile()[19],phone);
+ r=await req('/pages/anketa.php?view=details&uz=PageOwner');assert.match(r.text,/up-button[^>]*>Личная страница<\/a>/);assert.doesNotMatch(r.text,/web.icq.com|ICQ:/);if(phone)assert.ok(r.text.includes('Номер телефона: '+phone));
+}
+for(const phone of ['12','1'.repeat(21),'+82abc12345','1e12345','++123456','<script>12345</script>','12345\n67890','1'.repeat(41)]){const keep=getProfile()[19];assert.equal((await req('/pages/profil.php?action=edit',{uid,...profileForm,phone})).httpStatusCode,400);assert.equal(getProfile()[19],keep);}
+assert.equal((await req('/pages/profil.php?action=edit',{uid,...profileForm,'phone[]':'12345'})).httpStatusCode,400);
+assert.equal((await req('/pages/profil.php?action=edit',{uid:'bad',...profileForm,phone:'+821012345678'})).httpStatusCode,403);
+assert.equal((await req('/pages/profil.php?action=edit',{uid,...profileForm,phone:'+821012345678'},{Origin:'https://evil.test'})).httpStatusCode,403);
+assert.equal((await req('/pages/profil.php?action=edit',{uid,...profileForm,icq:'00123456789'})).httpStatusCode,302);assert.equal(getProfile()[19],'00123456789');
+r=await req('/pages/profil.php');assert.match(r.text,/type="tel"[^>]*name="phone"[^>]*maxlength="40"/);capture(r,'/pages/profil.php','owner','phone-form');
+r=await req('/pages/anketa.php?view=details&uz=PageOwner');capture(r,'/pages/anketa.php?view=details&uz=PageOwner','owner','phone-questionnaire');
+assert.match(actionsHtml(await req(base)),/up-button[^>]*href="privat.php"[^>]*>Личные сообщения/);
+await login('PageGuest');assert.match(actionsHtml(await req(base)),/up-button[^>]*href="privat.php\?action=submit&amp;uz=PageOwner"[^>]*>Личное сообщение/);
+const adminProfileForm={ud1:'',ud2:'Город',ud3:'О себе',ud4:'page@example.test',ud5:'',ud6:'01.01.2020',ud13:'Browser',ud19:'+82 (10) 1234-5678',ud29:'Сосед',ud36:'0',ud40:'',ud41:'0',ud43:'',ud49:'17',ud65:'',ud7:'0'};
+await login('PageCoAdmin');assert.equal((await req('/mpanel/users.php?action=upgrade&users=PageOwner',{uid,...adminProfileForm})).httpStatusCode,200);assert.equal(getProfile()[19],adminProfileForm.ud19);
+assert.equal((await req('/mpanel/users.php?action=upgrade&users=PageOwner',{uid,...adminProfileForm,ud19:'<img src=x>'})).httpStatusCode,400);assert.equal(getProfile()[19],adminProfileForm.ud19);
+const adminBefore=php.readFileAsText('/www/local/profil/PageAdmin.prof');assert.equal((await req('/mpanel/users.php?action=upgrade&users=PageAdmin',{uid,...adminProfileForm})).httpStatusCode,403);assert.equal(php.readFileAsText('/www/local/profil/PageAdmin.prof'),adminBefore);
+await login('PageAdmin');assert.equal((await req('/mpanel/users.php?action=upgrade&users=PageOwner',{uid,...adminProfileForm,ud19:'001234567890'})).httpStatusCode,200);assert.equal(getProfile()[19],'001234567890');
+php.writeFile(profilePath,profileOriginal);php.writeFile(path,managementOriginal);await login('PageOwner');
+pass('phone profile/admin forms: international prefix, 20 digits and leading zeroes preserved; invalid inputs/arrays/CSRF/Origin refused, empty/legacy forms supported, escaped display, no ICQ tracker, admin account hierarchy enforced');
+
 // Corrupt storage and path redirection must fail without replacing data.
 await login('PageOwner');const valid=raw();php.writeFile(path,'{broken');assert.equal((await req(base)).httpStatusCode,503);assert.equal((await action('save',{...settings,revision:'1'})).httpStatusCode,503);assert.equal(raw(),'{broken');php.writeFile(path,valid);
 const helper="define('BASEDIR','/www/');define('DATADIR','/www/local/');require '/www/includes/functions.php';require '/www/includes/userpages.php';";

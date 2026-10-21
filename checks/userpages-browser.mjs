@@ -24,7 +24,7 @@ try{
  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
  async function load(f,w=390){fixture=f;await page.setViewportSize({width:w,height:844});await page.goto('https://motor.test'+fixture.url,{waitUntil:'load'});}
  for(theme of Object.keys(themes))for(const width of [320,768,1440])for(const f of chosen){
-  await load(f,width);assert.ok(await page.locator('link[href*="userpages.css?v=userpages2"]').count());
+  await load(f,width);assert.ok(await page.locator('link[href*="userpages.css?v=userpages3"]').count());
   if (f.name==='overview-owner') assert.deepEqual(await page.locator('.up-section > .up-heading > h2').allTextContents(),['Новости пользователя','Фотографии','Отзывы']);
   assert.equal(await page.locator('.userpage a[href="index.php?action=menu"]').count(),0);
   const buttons=await page.locator('.up-page-actions .up-button').evaluateAll(es=>es.map(e=>({height:e.getBoundingClientRect().height,border:parseFloat(getComputedStyle(e).borderTopWidth)})));assert.ok(buttons.length&&buttons.every(b=>b.height>=44&&b.border>=1));
@@ -79,7 +79,27 @@ try{
  for(const[name,value]of Object.entries({news_per_page:'5',photos_per_page:'7',reviews_per_page:'9'}))await sizeForm.locator('[name="'+name+'"]').fill(value);
  allowedPost=true;await sizeForm.getByRole('button',{name:'Сохранить страницу',exact:true}).click();await page.waitForURL('**/*action=save');allowedPost=false;
  const sizePost=new URLSearchParams(posts.at(-1).body);assert.equal(sizePost.get('news_per_page'),'5');assert.equal(sizePost.get('photos_per_page'),'7');assert.equal(sizePost.get('reviews_per_page'),'9');assert.match(sizePost.get('uid'),/^[a-f0-9]{64}$/);assert.match(sizePost.get('revision'),/^[0-9]+$/);
- assert.equal(posts.length,6);assert.deepEqual(errors,[]);assert.ok(posts.every(p=>p.allowed));
- writeFileSync(new URL('./userpages-browser-results.json',import.meta.url),JSON.stringify({browser:browser.version(),layouts,themes:12,fixtureTypes:chosen.length+2,formsPreserved:true,photoZoom:true,tagAndSmilePickers:true,confirmedPost:true,reputationPost:true,reputationEditing:true,newsCommentPost:true,photoCommentsLinkOnly:true,sectionOrder:true,questionnaireLink:true,profileButtons:true,settingsReturn:true,pageSizesPost:true,errors,physicalDevices:false},null,2));
+ assert.equal(posts.length,6);
+ const extraNames=['admin-pages-PageAdmin','admin-pages-PageCoAdmin','admin-settings-PageAdmin','admin-settings-PageCoAdmin','phone-form','phone-questionnaire'];
+ for(theme of Object.keys(themes))for(const width of [320,768,1440])for(const name of extraNames){
+  await load(fixtures.find(f=>f.name===name),width);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,name+' overflow '+theme+' '+width);
+  const buttons=await page.locator('.up-button').evaluateAll(es=>es.map(e=>({height:e.getBoundingClientRect().height,border:parseFloat(getComputedStyle(e).borderTopWidth)})));assert.ok(buttons.length&&buttons.every(b=>b.height>=44&&b.border>=1));
+  if(name==='phone-form'){assert.equal(await page.locator('[name=phone]').getAttribute('maxlength'),'40');assert.equal(await page.locator('[name=phone]').getAttribute('type'),'tel');}
+  layouts++;
+ }
+ theme='lesika_dvor';await load(fixtures.find(f=>f.name==='admin-settings-PageAdmin'),390);
+ await page.screenshot({path:join(dir,'admin-settings-mobile.png'),fullPage:true,animations:'disabled'});
+ await page.getByRole('link',{name:'Личное сообщение',exact:true}).click();assert.equal(new URL(page.url()).searchParams.get('uz'),'PageOwner');assert.equal(new URL(page.url()).searchParams.get('action'),'submit');
+ await load(fixtures.find(f=>f.name==='admin-settings-PageAdmin'));const clearForm=page.locator('form[action*="action=clear_page"]');
+ await page.locator('details').filter({has:clearForm}).locator('summary').click();assert.equal(posts.length,6);
+ await clearForm.getByRole('button',{name:'Удалить данные личной страницы',exact:true}).click();assert.equal(posts.length,6,'Explicit confirmation is required');
+ await clearForm.locator('[name=confirm]').check();allowedPost=true;await clearForm.getByRole('button',{name:'Удалить данные личной страницы',exact:true}).click();await page.waitForURL('**/*action=clear_page');allowedPost=false;
+ const cleared=new URLSearchParams(posts.at(-1).body);assert.equal(cleared.get('confirm'),'1');assert.match(cleared.get('revision'),/^[0-9]+$/);assert.match(cleared.get('uid'),/^[a-f0-9]{64}$/);assert.equal(new URL(posts.at(-1).url).searchParams.get('uz'),'PageOwner');
+ await load(fixtures.find(f=>f.name==='phone-form'));await page.screenshot({path:join(dir,'phone-mobile.png'),fullPage:true,animations:'disabled'});
+ const phoneForm=page.locator('form[action*="profil.php?action=edit"]');await phoneForm.locator('[name=phone]').fill('+12345678901234567890');allowedPost=true;await phoneForm.locator('[type=submit]').click();await page.waitForURL('**/*action=edit*');allowedPost=false;
+ assert.equal(new URLSearchParams(posts.at(-1).body).get('phone'),'+12345678901234567890');assert.equal(posts.length,8);
+ assert.deepEqual(errors,[]);assert.ok(posts.every(p=>p.allowed));
+ writeFileSync(new URL('./userpages-browser-results.json',import.meta.url),JSON.stringify({browser:browser.version(),layouts,themes:12,fixtureTypes:chosen.length+2+extraNames.length,formsPreserved:true,photoZoom:true,tagAndSmilePickers:true,confirmedPost:true,reputationPost:true,reputationEditing:true,newsCommentPost:true,photoCommentsLinkOnly:true,sectionOrder:true,questionnaireLink:true,profileButtons:true,settingsReturn:true,pageSizesPost:true,adminPageControls:true,clearConfirmation:true,phonePost:true,messageButtons:true,errors,physicalDevices:false},null,2));
  console.log('SUCCESS',layouts,'layouts; 12 themes; form integrity, photo viewer, tags/smiles, delete confirmation, POST submission and 200% zoom');
 }finally{await browser.close()}

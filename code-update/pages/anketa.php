@@ -31,7 +31,7 @@ if (preg_match('|^[a-z0-9\-]+$|i',$uz)){
 if (file_exists(DATADIR."profil/$uz.prof")){
 $text = motor_info_read(DATADIR."profil/$uz.prof");
 $uzdata = explode(":||:",$text);
-echo '<p><a class="touch-link" href="userpage.php?uz='.rawurlencode($uz).'">Личная страница: новости, фото и отзывы</a></p>';
+echo '<p><a class="touch-link up-button" href="userpage.php?uz='.rawurlencode($uz).'">Личная страница</a></p>';
 
 if ($uzdata[46]==1) {echo '<b><span style="color:#ff0000">Внимание, аккаунт требует подтверждение регистрации!</span></b><br />';}
 
@@ -64,7 +64,7 @@ if ($uzdata[3]!="") {echo 'О себе: '.motor_gallery_text($uzdata[3]).' <br /
 if ($uzdata[18]!=""){echo 'Дата рождения: '.motor_gallery_escape(motor_gallery_plain($uzdata[18])).'<br />';}
 if ($uzdata[16]!="") {echo 'Рост: '.(int)$uzdata[16].' см.<br />';}
 if ($uzdata[17]!="") {echo 'Вес: '.(int)$uzdata[17].' кг.<br />';}
-if ($uzdata[19]!="") {echo '<img src="http://web.icq.com/whitepages/online?icq='.(int)$uzdata[19].'&amp;img=5" alt="image" /> ICQ: '.(int)$uzdata[19].' <br />';}
+if ($uzdata[19]!="") {echo 'Номер телефона: '.motor_gallery_escape(motor_gallery_plain($uzdata[19])).'<br />';}
 
 echo 'Входов в аккаунт: '.(int)$uzdata[11].'<br />';
 echo 'Сообщений на форуме: '.(int)$uzdata[8].'<br />';

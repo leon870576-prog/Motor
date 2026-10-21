@@ -11,6 +11,12 @@ if (($argv[1]??'')==='worker') {
         catch (RuntimeException $e) {if($e->getCode()!==409)throw $e;echo 'stale';}
         exit;
     }
+    if (($argv[4]??'')==='administration') {
+        $i=(int)$argv[3];$action=['save','reset_settings','clear_page'][$i%3];
+        try {motor_userpage_apply('PageOwner','Manager'.($i%2),true,$action,['revision'=>'62','confirm'=>'1','title'=>'Admin settings','about'=>'','published'=>'1','guestbook_open'=>'1','news_per_page'=>'7','photos_per_page'=>'8','reviews_per_page'=>'9'],1750020000);echo 'saved';}
+        catch (RuntimeException $e) {if($e->getCode()!==409)throw $e;echo 'stale';}
+        exit;
+    }
     for ($i=0;$i<10;$i++) {
         $id=md5($actor.':'.$i);$input=['id'=>$id,'msg'=>'Parallel review '.$actor.' '.$i];
         motor_userpage_apply('PageOwner',$actor,false,'guest_add',$input,1750000000+$i*10);
@@ -51,6 +57,19 @@ try {
     if($profileHash!==hash_file('sha256',$dir.'/profil/PageOwner.prof'))throw new RuntimeException('Settings changed owner profile');
     echo 'PASS: personal page sizes, eight competing settings saves -> one complete set and seven stale refusals; sizes survive concurrent reviews, counts/rewards/content preserved'.PHP_EOL;
     echo 'PASS: personal pages, six workers, 120 submissions, exactly 60 reviews, exact review counts/points/coins, unchanged owner authority'.PHP_EOL;
+    for($i=0;$i<3;$i++){$p=explode(':||:',file_get_contents($dir.'/profil/PageOwner.prof'));$p[0]='Manager'.$i;$p[7]=(string)(101+$i);file_put_contents($dir.'/profil/Manager'.$i.'.prof',implode(':||:',$p));}
+    try {motor_userpage_apply('PageOwner','Manager2',true,'clear_page',['revision'=>'62','confirm'=>'1'],1750020000);throw new Exception('Moderator acquired admin powers');} catch(RuntimeException $e){if($e->getCode()!==403)throw $e;}
+    for($i=0;$i<8;$i++){$p=proc_open([PHP_BINARY,__FILE__,'worker',$dir,(string)$i,'administration'],[0=>['file','/dev/null','r'],1=>['file',$dir.'/admin-'.$i.'.log','w'],2=>['file',$dir.'/admin-'.$i.'.err','w']],$pipes);if(!is_resource($p))throw new RuntimeException('Cannot start admin worker');$processes[]=$p;}
+    foreach($processes as $p)if(proc_close($p)!==0)throw new RuntimeException('Admin worker failed');$processes=[];$saved=0;$stale=0;
+    for($i=0;$i<8;$i++){if(file_get_contents($dir.'/admin-'.$i.'.err')!=='')throw new RuntimeException('Admin warning');$v=file_get_contents($dir.'/admin-'.$i.'.log');$saved+=($v==='saved');$stale+=($v==='stale');}
+    $last=motor_userpage_read('PageOwner');$action=$last['audit'][array_key_last($last['audit'])]['action'];
+    if($saved!==1||$stale!==7||$last['revision']!==63||$last['review_totals']!==$next['review_totals']||$last['recent']!==$next['recent']||$profileHash!==hash_file('sha256',$dir.'/profil/PageOwner.prof'))throw new RuntimeException('Admin race lost data or revived stale settings');
+    if(count($last['guestbook'])!==($action==='clear_page'?0:60))throw new RuntimeException('Admin clear was not atomic');
+    if($action==='save'?(motor_userpage_sizes($last)!==['news'=>7,'photos'=>8,'reviews'=>9]):(isset($last['page_sizes'])||$last['published']||$last['title']!==''))throw new RuntimeException('Admin action mixed fields');
+    require $root.'/includes/profile-phone.php';
+    foreach(['+82 10-1234-5678','001234567890','+12345678901234567890',''] as $phone)if(motor_profile_phone($phone)!==$phone)throw new RuntimeException('Phone lost prefix or digits');
+    foreach(['12',str_repeat('9',21),"12345\n6789",'<script>123456</script>',[]] as $phone){try{motor_profile_phone($phone);throw new Exception('Bad phone accepted');}catch(RuntimeException $e){if($e->getCode()!==400)throw $e;}}
+    echo 'PASS: personal page administration, eight competing save/reset/clear actions -> one atomic update, seven stale refusals; role boundary, cumulative counts, replay receipts and profile intact; phone prefix and 20 digits preserved'.PHP_EOL;
 } finally {
     foreach ($processes as $p) if (is_resource($p)) {proc_terminate($p);proc_close($p);}
     foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir,FilesystemIterator::SKIP_DOTS),RecursiveIteratorIterator::CHILD_FIRST) as $f) {$f->isDir()?rmdir($f->getPathname()):unlink($f->getPathname());}rmdir($dir);

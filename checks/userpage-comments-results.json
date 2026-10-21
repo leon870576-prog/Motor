@@ -1,6 +1,6 @@
 {
   "php": "8.4 WASM",
-  "requests": 118,
+  "requests": 122,
   "passed": [
     "legacy news, comment links/counters, guest read-only, POST/CSRF/Origin/types/lengths, idempotent retry, cooldown, profile and global totals, recoverable profile synchronization",
     "author-only editing, owner/staff deletion, stale revisions, private pages, deleted-comment retry, escaped XSS/BBCode, cumulative author total retained after deletion",

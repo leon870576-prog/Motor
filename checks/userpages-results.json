@@ -1,12 +1,14 @@
 {
   "php": "8.4",
-  "requests": 300,
+  "requests": 447,
   "passed": [
     "explicit page creation, links from menu/profile, live authority, no private profile fields; GET/CSRF/Origin/types/lengths/stale settings protected",
     "owner-only news, review author editing, per-record revisions, duplicate submit, cooldown, shared photo comments and hidden-photo boundaries",
     "news create/edit/delete, public/private page, closed guestbook, escaped HTML/BBCode, deleted-post replay remains idempotent",
     "moderation roles 101/102/103/105, owner/author delete, private edit forms, independent pagination and guest read-only access",
     "owner page sizes 1–20: overview and section pagination, exact first/middle/last slices, unchanged totals/rewards/content, guest visibility, legacy no-write defaults/forms, stale/CSRF/Origin/type/corrupt-storage guards; profile buttons and settings return link",
+    "admin/superadmin page directory, private-page settings, existing news/review edits, preserved authors, photo controls, reset/clear confirmations, CSRF/Origin/revisions, retained cumulative counts and replay receipts; lower roles denied",
+    "phone profile/admin forms: international prefix, 20 digits and leading zeroes preserved; invalid inputs/arrays/CSRF/Origin refused, empty/legacy forms supported, escaped display, no ICQ tracker, admin account hierarchy enforced",
     "100-news/500-review limits preserve existing records; banned and quarantined users cannot post",
     "corrupt JSON and symlink refused without data loss; authority unchanged; personal-page data included in backup and safe restore"
   ],
@@ -31,7 +33,7 @@
     },
     {
       "file": "edit-review.html",
-      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook&edit=552f822ca0c85211c25ab222bf7398a9",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook&edit=1764de1f47a43fa2696152f1d3716497",
       "role": "visitor",
       "name": "edit-review"
     },
@@ -43,7 +45,7 @@
     },
     {
       "file": "edit-news.html",
-      "url": "/pages/userpage.php?uz=PageOwner&tab=news&edit=ed2ef5a93ebaad2bcf5cb4dc080614e8",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=news&edit=bcef49395b8c82292a329ceed3fcd94b",
       "role": "owner",
       "name": "edit-news"
     },
@@ -100,6 +102,42 @@
       "url": "/pages/userpage.php?uz=PageOwner&tab=settings",
       "role": "owner",
       "name": "settings-custom"
+    },
+    {
+      "file": "admin-pages-PageAdmin.html",
+      "url": "/mpanel/userpages.php?uz=PageOwn",
+      "role": "admin",
+      "name": "admin-pages-PageAdmin"
+    },
+    {
+      "file": "admin-settings-PageAdmin.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=settings",
+      "role": "admin",
+      "name": "admin-settings-PageAdmin"
+    },
+    {
+      "file": "admin-pages-PageCoAdmin.html",
+      "url": "/mpanel/userpages.php?uz=PageOwn",
+      "role": "admin",
+      "name": "admin-pages-PageCoAdmin"
+    },
+    {
+      "file": "admin-settings-PageCoAdmin.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=settings",
+      "role": "admin",
+      "name": "admin-settings-PageCoAdmin"
+    },
+    {
+      "file": "phone-form.html",
+      "url": "/pages/profil.php",
+      "role": "owner",
+      "name": "phone-form"
+    },
+    {
+      "file": "phone-questionnaire.html",
+      "url": "/pages/anketa.php?view=details&uz=PageOwner",
+      "role": "owner",
+      "name": "phone-questionnaire"
     }
   ]
 }

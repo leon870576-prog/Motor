@@ -29,9 +29,9 @@ function up_editor(string $owner,string $kind,?array $entry=null,string $post=''
     echo '<label>'.($news?'Текст новости':($kind==='comment'?'Ваш комментарий':'Ваш отзыв')).'<textarea name="msg" rows="'.($news?6:3).'" maxlength="'.($news?8000:2000).'" required data-smile-picker data-smile-scope="common">'.up_h($entry['text']??'').'</textarea></label>';
     echo '<button type="submit" class="primary">'.($entry?'Сохранить изменения':($news?'Опубликовать новость':($kind==='comment'?'Отправить комментарий':'Оставить отзыв'))).'</button></form>';
 }
-function up_record(string $owner,string $kind,array $e,bool $self,bool $staff,string $actor,string $post=''): void {
+function up_record(string $owner,string $kind,array $e,bool $self,bool $staff,string $actor,string $post='',bool $manager=false): void {
     $news=$kind==='news';$tab=$news?'news':($kind==='comment'?'comments':'guestbook');
-    $canEdit=$news?$self:($actor!=='' && $e['author']===$actor);
+    $canEdit=$manager || ($news?$self:($actor!=='' && $e['author']===$actor));
     $canDelete=$actor!=='' && ($self || $staff || !$news && $e['author']===$actor);
     echo '<article class="up-record" id="'.$kind.'-'.$e['id'].'">';
     if ($news) echo '<h3><a href="'.up_link($owner,['tab'=>'news','post'=>$e['id']]).'">'.up_h($e['title']).'</a></h3>';
@@ -51,17 +51,18 @@ function up_record(string $owner,string $kind,array $e,bool $self,bool $staff,st
     }
     echo '</article>';
 }
-function up_photo(string $owner,array $photo): void {
+function up_photo(string $owner,array $photo,bool $manager=false): void {
     $d=$photo['data'];$id=$d[6];$gid=rawurlencode($id);$comments=motor_userpage_comments($id);
     echo '<article class="up-photo up-record" id="photo-'.up_h($id).'"><h3><a href="../gallery/index.php?action=showimg&amp;gid='.$gid.'">'.up_h(motor_gallery_plain($d[1]??'Фотография')).'</a></h3>';
     if (($d[3]??'')==='hidden') echo '<p class="up-notice">Скрыто модератором. Видно только администрации.</p>';
     echo '<a class="gallery-photo up-photo-link"'.(motor_gallery_settings()['zoom']?' data-gallery-zoom':'').' href="../gallery/fullsize.php?name='.$gid.'" aria-label="Увеличить фото: '.up_h(motor_gallery_plain($d[1]??'')).'"><img src="../gallery/resize.php?name='.$gid.'" alt="'.up_h(motor_gallery_plain($d[1]??'')).'" loading="lazy" decoding="async"></a>';
     echo '<div class="up-text">'.motor_gallery_text($d[0]??'').'</div><p class="up-meta">'.date_fixed((int)($d[4]??0)).'</p>';
     echo '<a class="touch-link up-photo-comments" href="../gallery/index.php?action=komm&amp;gid='.$gid.'">Комментарии ('.$comments['count'].')</a>';
+    if ($manager) echo '<p><a class="touch-link up-button" href="'.ADMINDIR.'gallery.php?action=edit&amp;gid='.$gid.'">Редактировать / удалить фото</a></p>';
     echo '</article>';
 }
 
-function up_news_comments(string $owner,array $data,string $post,int $page,string $edit,bool $self,bool $staff,string $actor): void {
+function up_news_comments(string $owner,array $data,string $post,int $page,string $edit,bool $self,bool $staff,string $actor,bool $manager=false): void {
     motor_userpage_id($post);$news=null;
     foreach ($data['news'] as $entry) if ($entry['id']===$post) {$news=$entry;break;}
     if (!$news) throw new RuntimeException('Новость не найдена.',404);
@@ -69,15 +70,15 @@ function up_news_comments(string $owner,array $data,string $post,int $page,strin
     if ($edit!=='') {
         motor_userpage_id($edit);foreach ($rows as $entry) if ($entry['id']===$edit) $editing=$entry;
         if (!$editing) throw new RuntimeException('Комментарий не найден.',404);
-        if ($actor==='' || $editing['author']!==$actor) throw new RuntimeException('Редактировать комментарий может только его автор.',403);
+        if (!$manager && ($actor==='' || $editing['author']!==$actor)) throw new RuntimeException('Редактировать комментарий может только его автор.',403);
     }
     echo '<section class="up-section"><h2>Комментарии к новости</h2>';
-    up_record($owner,'news',$news,$self,$staff,$actor);
+    up_record($owner,'news',$news,$self,$staff,$actor,'',$manager);
     echo '<h3>Комментарии ('.count($rows).')</h3>';
     if ($actor==='') show_login('Чтобы оставить комментарий, необходимо');
     else {if ($editing) echo '<h3>Редактировать комментарий</h3>';up_editor($owner,'comment',$editing,$post);}
     $size=10;$p=min($page,max(1,(int)ceil(count($rows)/$size)));
-    foreach (array_slice(array_reverse($rows),($p-1)*$size,$size) as $entry) up_record($owner,'comment',$entry,$self,$staff,$actor,$post);
+    foreach (array_slice(array_reverse($rows),($p-1)*$size,$size) as $entry) up_record($owner,'comment',$entry,$self,$staff,$actor,$post,$manager);
     if (!$rows) echo '<p>Комментариев пока нет. Будьте первым!</p>';
     up_pager($owner,'comments',$p,count($rows),$size,['post'=>$post]);
     echo '<p><a class="touch-link" href="'.up_link($owner,['tab'=>'news']).'">К новостям пользователя</a></p></section>';
@@ -89,7 +90,7 @@ try {
     if ($owner==='') {
         echo '<h1>Моя страница</h1>';show_login('Чтобы создать свою страницу, необходимо');
     } else {
-        $profile=motor_userpage_profile($owner);$self=$actor===$owner;$staff=$actor!=='' && is_admin([101,102,103,105]);
+        $profile=motor_userpage_profile($owner);$self=$actor===$owner;$manager=motor_userpage_manager($actor);$staff=$actor!=='' && is_admin([101,102,103,105]);
         $action=$_GET['action']??'';$tab=$_GET['tab']??'overview';
         if (!is_string($action) || !is_string($tab) || !in_array($tab,['overview','photos','news','guestbook','settings','comments'],true)) throw new RuntimeException('Неизвестный раздел страницы.',400);
         if (!in_array($_SERVER['REQUEST_METHOD']??'GET',['GET','HEAD','POST'],true)) throw new RuntimeException('Метод запроса не поддерживается.',405);
@@ -98,23 +99,24 @@ try {
             motor_form_guard([]);
             if ($actor==='') throw new RuntimeException('Войдите на сайт, чтобы оставить запись.',403);
             $data=motor_userpage_apply($owner,$actor,$staff,$action,$_POST,SITETIME);
-            $target=$action==='save'?'overview':(str_starts_with($action,'comment_')?'comments':(str_starts_with($action,'news_')?'news':'guestbook'));
+            $pageAction=in_array($action,['save','reset_settings','clear_page'],true);
+            $target=$pageAction?'overview':(str_starts_with($action,'comment_')?'comments':(str_starts_with($action,'news_')?'news':'guestbook'));
             $query=['tab'=>$target,'saved'=>'1'];
             if (in_array($action,['news_add','news_edit'],true)) $query['post']=motor_userpage_id($_POST['id']??null);
-            $anchor=$action==='save'?'':((str_starts_with($action,'news_')?'news':'guest').'-'.motor_userpage_id($_POST['id']??null));
+            $anchor=$pageAction?'':((str_starts_with($action,'news_')?'news':'guest').'-'.motor_userpage_id($_POST['id']??null));
             if ($target==='comments') {$query['post']=motor_userpage_id($_POST['post']??null);$anchor='comment-'.motor_userpage_id($_POST['id']??null);}
             header('Location: '.motor_userpage_url($owner,$query).($anchor!==''?'#'.$anchor:''),true,303);exit;
         }
         $data=motor_userpage_read($owner);
         if ($data['created'] && !$data['published'] && !$self && !$staff) throw new RuntimeException('Страница пока не опубликована.',404);
-        if ($tab==='settings' && !$self) throw new RuntimeException('Настройки доступны только владельцу страницы.',403);
+        if ($tab==='settings' && !$self && !$manager) throw new RuntimeException('Настройки доступны владельцу, админу и суперадмину.',403);
         $photos=motor_userpage_photos($owner);
         $title=$data['title']!==''?$data['title']:'Страница '.$owner;
         echo '<header class="up-hero"><div class="up-avatar">'.user_avatars($owner,96).'</div><div class="up-identity"><p class="up-kicker">Личная страница</p><h1>'.up_h($title).'</h1><p>'.motor_userpage_label($owner).'</p><p class="up-authority">Авторитет: <strong>'.(int)($profile[49]??0).'</strong> <span>(+'.(int)($profile[50]??0).' / −'.(int)($profile[51]??0).')</span></p></div></header>';
         if ($actor!=='' && !$self) motor_reputation_form($owner);
         echo '<div class="up-actions up-page-actions"><a class="touch-link up-button" href="anketa.php?view=details&amp;uz='.rawurlencode($owner).'">Анкета пользователя</a>';
-        if ($self) echo $tab==='settings'?'<a class="touch-link up-button" href="'.up_link($owner).'">На личную страницу</a>':'<a class="touch-link up-button" href="'.up_link($owner,['tab'=>'settings']).'">Настроить страницу</a>';
-        elseif ($actor!=='') echo '<a class="touch-link" href="privat.php?action=submit&amp;uz='.rawurlencode($owner).'">Личное сообщение</a>';
+        if ($self || $manager) echo $tab==='settings'?'<a class="touch-link up-button" href="'.up_link($owner).'">На личную страницу</a>':'<a class="touch-link up-button" href="'.up_link($owner,['tab'=>'settings']).'">'.($self?'Настроить страницу':'Управлять страницей').'</a>';
+        if ($actor!=='') echo $self?'<a class="touch-link up-button" href="privat.php">Личные сообщения</a>':'<a class="touch-link up-button" href="privat.php?action=submit&amp;uz='.rawurlencode($owner).'">Личное сообщение</a>';
         echo '</div>';
         if (!$data['published'] && $data['created']) echo '<p class="up-notice">Страница не опубликована. Её видят только владелец и администрация.</p>';
         if (($_GET['saved']??'')==='1') echo '<p class="up-notice" role="status">Изменения сохранены.</p>';
@@ -128,6 +130,7 @@ try {
             echo '</nav>';
         }
         if ($tab==='settings') {
+            if ($manager && !$self) echo '<p class="up-notice">Управление страницей пользователя '.up_h($owner).'. Изменения будут сохранены от имени вашей учётной записи в журнале страницы.</p>';
             echo '<section class="up-panel"><h2>'.($data['created']?'Настройки страницы':'Создать свою страницу').'</h2><p>Добавьте название и несколько слов о себе. Ваши фотографии из галереи и авторитет появятся автоматически. Новости вы сможете публиковать здесь.</p>';
             up_start_form($owner,'save');up_hidden('revision',$data['revision']);
             echo '<label>Название страницы<input name="title" required maxlength="100" value="'.up_h($title).'"></label><label>О странице<textarea name="about" rows="5" maxlength="2000" data-smile-picker data-smile-scope="common">'.up_h($data['about']).'</textarea></label>';
@@ -138,19 +141,28 @@ try {
             foreach (['news'=>'Новостей','photos'=>'Фото','reviews'=>'Отзывов'] as $kind=>$label) echo '<label>'.$label.'<input type="number" name="'.$kind.'_per_page" min="1" max="20" step="1" inputmode="numeric" required value="'.$sizes[$kind].'"></label>';
             echo '</fieldset>';
             echo '<p class="up-meta">Видимость страницы не меняет доступ к фотографиям в общей галерее.</p><button type="submit" class="primary">'.($data['created']?'Сохранить страницу':'Создать страницу').'</button></form></section>';
+            if ($manager) {
+                echo '<section class="up-panel"><h2>Действия администрации</h2>';
+                foreach (['reset_settings'=>['Сбросить настройки страницы','Название и описание будут очищены, видимость станет закрытой, количества записей вернутся к стандартным. Новости, отзывы и комментарии сохранятся.'],'clear_page'=>['Удалить данные личной страницы','Будут удалены личные новости с комментариями и отзывы, настройки будут сброшены. Аккаунт, анкета и накопленные баллы сохранятся. Фото удаляются отдельно через кнопку у фотографии.']] as $command=>$info) {
+                    echo '<details class="up-delete"><summary>'.up_h($info[0]).'</summary><p>'.up_h($info[1]).'</p>';
+                    up_start_form($owner,$command);up_hidden('revision',$data['revision']);
+                    echo '<label class="up-confirm"><input type="checkbox" name="confirm" value="1" required> Подтверждаю действие для '.up_h($owner).'</label><button class="primary" type="submit">'.up_h($info[0]).'</button></form></details>';
+                }
+                echo '</section>';
+            }
         } else {
             $pageRaw=$_GET['page']??'1';
             if (!is_string($pageRaw) || !preg_match('/^[1-9][0-9]{0,5}$/D',$pageRaw)) throw new RuntimeException('Некорректный номер страницы.',400);
             $page=$tab==='overview'?1:(int)$pageRaw;$sizes=motor_userpage_sizes($data,$tab==='overview');$edit=$_GET['edit']??'';$post=$_GET['post']??'';
             if (!is_string($edit) || !is_string($post)) throw new RuntimeException('Некорректная запись.',400);
             $editing=null;
-            if ($tab==='comments') up_news_comments($owner,$data,$post,$page,$edit,$self,$staff,$actor);
+            if ($tab==='comments') up_news_comments($owner,$data,$post,$page,$edit,$self,$staff,$actor,$manager);
             if ($edit!=='' && $tab!=='comments') {
                 motor_userpage_id($edit);$kind=$tab==='news'?'news':($tab==='guestbook'?'guestbook':'');
                 if (!$kind) throw new RuntimeException('Неизвестный раздел записи.',400);
                 foreach ($data[$kind] as $e) if ($e['id']===$edit) $editing=$e;
                 if (!$editing) throw new RuntimeException('Запись не найдена.',404);
-                if ($kind==='news'?!$self:$actor==='' || $editing['author']!==$actor) throw new RuntimeException('Редактировать запись может только её автор.',403);
+                if (!$manager && ($kind==='news'?!$self:($actor==='' || $editing['author']!==$actor))) throw new RuntimeException('Редактировать запись может только её автор.',403);
                 echo '<section class="up-panel"><h2>Редактировать '.($kind==='news'?'новость':'отзыв').'</h2>';up_editor($owner,$kind==='news'?'news':'guest',$editing);echo '</section>';
             }
             if ($tab==='overview' && $data['about']!=='') echo '<section class="up-panel"><h2>О странице</h2><div class="up-text">'.motor_userpage_render_text($data['about']).'</div></section>';
@@ -159,7 +171,7 @@ try {
                 if ($self && $data['created'] && !$editing) {echo '<details class="up-panel"><summary>Написать новость</summary>';up_editor($owner,'news');echo '</details>';}
                 $items=array_reverse($data['news']);$size=$sizes['news'];$p=min($page,max(1,(int)ceil(count($items)/$size)));
                 if ($post!=='') {motor_userpage_id($post);$items=array_values(array_filter($items,fn($e)=>$e['id']===$post));if (!$items) throw new RuntimeException('Новость не найдена.',404);}
-                foreach ($post!==''?$items:array_slice($items,($p-1)*$size,$size) as $e) up_record($owner,'news',$e,$self,$staff,$actor);
+                foreach ($post!==''?$items:array_slice($items,($p-1)*$size,$size) as $e) up_record($owner,'news',$e,$self,$staff,$actor,'',$manager);
                 if (!$items) echo '<p>Новостей пока нет.</p>';
                 if ($tab==='news' && $post==='') up_pager($owner,$tab,$p,count($items),$size);
                 echo '</section>';
@@ -169,7 +181,7 @@ try {
                 echo '<section class="up-section"><div class="up-heading"><h2>Фотографии</h2><a class="touch-link" href="'.up_link($owner,['tab'=>'photos']).'">Все фото ('.count($photos).')</a></div>';
                 if ($self) echo '<p><a class="touch-link" href="../gallery/index.php?action=addfoto">Добавить фото в галерею</a></p>';
                 if (!$photos) echo '<p>Фотографий пока нет.</p>';
-                echo '<div class="up-photo-grid">';foreach (array_slice($photos,($p-1)*$size,$size) as $photo) up_photo($owner,$photo);echo '</div>';
+                echo '<div class="up-photo-grid">';foreach (array_slice($photos,($p-1)*$size,$size) as $photo) up_photo($owner,$photo,$manager);echo '</div>';
                 if ($tab==='photos') up_pager($owner,$tab,$p,count($photos),$size);
                 echo '</section>';
             }
@@ -180,7 +192,7 @@ try {
                 elseif ($actor==='' ) show_login('Чтобы оставить отзыв, необходимо');
                 elseif (!$editing) up_editor($owner,'guest');
                 $size=$sizes['reviews'];$p=min($page,max(1,(int)ceil(count($data['guestbook'])/$size)));
-                foreach (array_slice(array_reverse($data['guestbook']),($p-1)*$size,$size) as $e) up_record($owner,'guest',$e,$self,$staff,$actor);
+                foreach (array_slice(array_reverse($data['guestbook']),($p-1)*$size,$size) as $e) up_record($owner,'guest',$e,$self,$staff,$actor,'',$manager);
                 if (!$data['guestbook']) echo '<p>Отзывов пока нет.</p>';
                 if ($tab==='guestbook') up_pager($owner,$tab,$p,count($data['guestbook']),$size);
                 echo '</section>';

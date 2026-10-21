@@ -26,6 +26,12 @@ function motor_userpage_root(bool $create=false): string {
 function motor_userpage_default(string $owner): array {
     return ['schema'=>1,'owner'=>$owner,'revision'=>0,'created'=>0,'updated'=>0,'published'=>false,'title'=>'','about'=>'','guestbook_open'=>true,'news'=>[],'guestbook'=>[],'recent'=>[],'audit'=>[]];
 }
+function motor_userpage_manager(string $actor): bool {
+    global $config;
+    if ($actor==='') return false;
+    $profile=motor_userpage_profile($actor);
+    return in_array((int)($profile[7]??0),[101,102],true) && empty($profile[37]) && (empty($config['regkeys']) || empty($profile[46]));
+}
 function motor_userpage_sizes(array $data,bool $overview=false): array {
     if (!array_key_exists('page_sizes',$data)) return $overview?['news'=>3,'photos'=>2,'reviews'=>3]:['news'=>5,'photos'=>6,'reviews'=>10];
     $sizes=$data['page_sizes'];
@@ -106,10 +112,13 @@ function motor_userpage_apply(string $owner,string $actor,bool $staff,string $ac
     if (str_starts_with($action,'comment_')) return motor_userpage_comment_apply($owner,$actor,$staff,$action,$input,$now,$profile);
     $self=$actor===$owner;
     if (str_starts_with($action,'guest_')) motor_userpage_activity_receipts($profile[97]??null);
-    if (!in_array($action,['save','news_add','news_edit','news_delete','guest_add','guest_edit','guest_delete'],true)) throw new RuntimeException('Неизвестное действие.',400);
-    if (($action==='save' || str_starts_with($action,'news_') && $action!=='news_delete') && !$self) throw new RuntimeException('Изменять страницу и новости может только её владелец.',403);
+    if (!in_array($action,['save','reset_settings','clear_page','news_add','news_edit','news_delete','guest_add','guest_edit','guest_delete'],true)) throw new RuntimeException('Неизвестное действие.',400);
+    $manager=motor_userpage_manager($actor);
+    if (($action==='news_add' && !$self) || (in_array($action,['save','news_edit'],true) && !$self && !$manager) || (in_array($action,['reset_settings','clear_page'],true) && !$manager)) throw new RuntimeException('Недостаточно прав для изменения страницы.',403);
     if (in_array($action,['news_add','guest_add','comment_add'],true) && (int)($profile[6]??0)+(int)($config['karantin']??0)>$now) throw new RuntimeException('Публикация станет доступна после карантина нового аккаунта.',403);
     return motor_userpage_mutate($owner,function(array $data) use($owner,$actor,$staff,$self,$action,$input,$now,$config): array {
+        $manager=motor_userpage_manager($actor);
+        if ((in_array($action,['save','news_edit'],true) && !$self && !$manager) || (in_array($action,['reset_settings','clear_page'],true) && !$manager)) throw new RuntimeException('Недостаточно прав для изменения страницы.',403);
         if (!$data['published'] && !$self && !$staff) throw new RuntimeException('Страница пока не опубликована.',404);
         $data=motor_userpage_activity_upgrade($data);
         if (str_starts_with($action,'guest_')) motor_userpage_activity_sync($actor,$owner,$data['comment_totals'][$actor]??0,$data['review_totals'][$actor]??0);
@@ -132,6 +141,13 @@ function motor_userpage_apply(string $owner,string $actor,bool $staff,string $ac
                 if (!in_array($input[$k]??null,['0','1'],true)) throw new RuntimeException('Некорректная настройка страницы.',400);
                 $data[$k]=$input[$k]==='1';
             }
+        } elseif (in_array($action,['reset_settings','clear_page'],true)) {
+            motor_userpage_version($input['revision']??null,$data['revision']);
+            if (($input['confirm']??null)!=='1') throw new RuntimeException('Подтвердите выбранное действие.',400);
+            $data['title']='';$data['about']='';$data['published']=false;$data['guestbook_open']=true;
+            unset($data['page_sizes']);
+            if ($action==='clear_page') {$data['news']=[];$data['guestbook']=[];}
+            // Keep revision, activity totals and replay receipts: never recreate this JSON from zero.
         } else {
             if (!$data['created']) throw new RuntimeException('Сначала создайте личную страницу.',409);
             $kind=str_starts_with($action,'news_')?'news':'guestbook';
@@ -160,7 +176,7 @@ function motor_userpage_apply(string $owner,string $actor,bool $staff,string $ac
                 if ($index===null) throw new RuntimeException('Запись не найдена.',404);
                 $entry=$data[$kind][$index];
                 $deleting=str_ends_with($action,'_delete');
-                if ($deleting ? !($self || $staff || $kind==='guestbook' && $entry['author']===$actor) : !($kind==='news'?$self:$entry['author']===$actor)) throw new RuntimeException('Недостаточно прав для изменения этой записи.',403);
+                if ($deleting ? !($self || $staff || $kind==='guestbook' && $entry['author']===$actor) : !($manager || ($kind==='news'?$self:$entry['author']===$actor))) throw new RuntimeException('Недостаточно прав для изменения этой записи.',403);
                 motor_userpage_version($input['revision']??null,$entry['revision']);
                 if ($deleting) {array_splice($data[$kind],$index,1);}
                 else {

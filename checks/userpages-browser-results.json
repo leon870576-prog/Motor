@@ -1,8 +1,8 @@
 {
   "browser": "153.0.8010.0",
-  "layouts": 556,
+  "layouts": 772,
   "themes": 12,
-  "fixtureTypes": 15,
+  "fixtureTypes": 21,
   "formsPreserved": true,
   "photoZoom": true,
   "tagAndSmilePickers": true,
@@ -16,6 +16,10 @@
   "profileButtons": true,
   "settingsReturn": true,
   "pageSizesPost": true,
+  "adminPageControls": true,
+  "clearConfirmation": true,
+  "phonePost": true,
+  "messageButtons": true,
   "errors": [],
   "physicalDevices": false
 }

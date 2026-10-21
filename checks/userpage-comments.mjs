@@ -75,7 +75,7 @@ assert.equal((await action('save',{...settings,revision:String(state().revision)
 await login('PageGuest');assert.equal((await req(url)).httpStatusCode,404);assert.equal((await action('comment_add',{post,id:id(),msg:'Скрытая'})).httpStatusCode,404);
 await login('PageOwner');assert.equal((await action('save',{...settings,revision:String(state().revision),published:'1'})).httpStatusCode,303);
 for(const actor of ['PageMod','PageCoAdmin','PagePhoto','PageAdmin']){
- await login(actor);assert.equal((await action('comment_edit',{post,id:cid,revision:'2',msg:'Подмена модератором'})).httpStatusCode,403);
+ await login(actor);const beforeEdit=raw(),manager=['PageAdmin','PageCoAdmin'].includes(actor);assert.equal((await req(url+'&edit='+cid)).httpStatusCode,manager?200:403);assert.equal((await action('comment_edit',{post,id:cid,revision:'2',msg:'Правка администрации'})).httpStatusCode,manager?303:403);assert.equal(state().news[0].comments[0].author,'PageGuest');php.writeFile(path,beforeEdit);
 }
 await login('PageMod');assert.equal((await action('comment_delete',{post,id:cid,revision:'1'})).httpStatusCode,409);assert.equal((await action('comment_delete',{post,id:cid,revision:'2'})).httpStatusCode,303);assert.equal(state().news[0].comments.length,0);assert.equal(await total(),globalInitial);assert.equal(Number(profile('PageGuest')[33]),initial+1);
 await login('PageGuest');assert.equal((await action('comment_add',input)).httpStatusCode,303);assert.equal(state().news[0].comments.length,0);assert.equal(Number(profile('PageGuest')[33]),initial+1);
