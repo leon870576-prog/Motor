@@ -26,6 +26,13 @@ function motor_userpage_root(bool $create=false): string {
 function motor_userpage_default(string $owner): array {
     return ['schema'=>1,'owner'=>$owner,'revision'=>0,'created'=>0,'updated'=>0,'published'=>false,'title'=>'','about'=>'','guestbook_open'=>true,'news'=>[],'guestbook'=>[],'recent'=>[],'audit'=>[]];
 }
+function motor_userpage_sizes(array $data,bool $overview=false): array {
+    if (!array_key_exists('page_sizes',$data)) return $overview?['news'=>3,'photos'=>2,'reviews'=>3]:['news'=>5,'photos'=>6,'reviews'=>10];
+    $sizes=$data['page_sizes'];
+    if (!is_array($sizes) || count($sizes)!==3) throw new RuntimeException('Настройки количества записей повреждены.',503);
+    foreach (['news','photos','reviews'] as $kind) if (!is_int($sizes[$kind]??null) || $sizes[$kind]<1 || $sizes[$kind]>20) throw new RuntimeException('Настройки количества записей повреждены.',503);
+    return $sizes;
+}
 function motor_userpage_text_input($value,int $min,int $max,bool $single=false): string {
     if (!is_string($value) || strlen($value)>$max*4 || !mb_check_encoding($value,'UTF-8')) throw new RuntimeException('Некорректное текстовое поле.',400);
     $value=trim(str_replace(["\r\n","\r"],"\n",$value));
@@ -35,6 +42,7 @@ function motor_userpage_text_input($value,int $min,int $max,bool $single=false):
     return $value;
 }
 function motor_userpage_validate(array $d,string $owner): void {
+    motor_userpage_sizes($d);
     if (($d['schema']??null)!==1 || ($d['owner']??null)!==$owner || !is_int($d['revision']??null) || $d['revision']<0 || !is_bool($d['published']??null) || !is_bool($d['guestbook_open']??null)) throw new RuntimeException('Данные страницы повреждены. Обратитесь к администратору.',503);
     foreach (['created','updated'] as $k) if (!is_int($d[$k]??null) || $d[$k]<0) throw new RuntimeException('Данные страницы повреждены.',503);
     motor_userpage_text_input($d['title']??null,0,100,true);motor_userpage_text_input($d['about']??null,0,2000);
@@ -108,6 +116,16 @@ function motor_userpage_apply(string $owner,string $actor,bool $staff,string $ac
         $id='';
         if ($action==='save') {
             motor_userpage_version($input['revision']??null,$data['revision']);
+            $sizeKeys=['news_per_page'=>'news','photos_per_page'=>'photos','reviews_per_page'=>'reviews'];
+            if (array_intersect_key($input,$sizeKeys)) {
+                $sizes=[];
+                foreach ($sizeKeys as $field=>$kind) {
+                    $value=$input[$field]??null;
+                    if (!is_string($value) || !preg_match('/^(?:[1-9]|1[0-9]|20)$/D',$value)) throw new RuntimeException('Количество новостей, фото и отзывов: целое число от 1 до 20 для каждого раздела.',400);
+                    $sizes[$kind]=(int)$value;
+                }
+                $data['page_sizes']=$sizes;
+            }
             $data['title']=motor_userpage_text_input($input['title']??null,1,100,true);
             $data['about']=motor_userpage_text_input($input['about']??null,0,2000);
             foreach (['published','guestbook_open'] as $k) {

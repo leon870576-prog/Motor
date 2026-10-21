@@ -1,8 +1,8 @@
 {
   "browser": "153.0.8010.0",
-  "layouts": 472,
+  "layouts": 556,
   "themes": 12,
-  "fixtureTypes": 13,
+  "fixtureTypes": 15,
   "formsPreserved": true,
   "photoZoom": true,
   "tagAndSmilePickers": true,
@@ -13,6 +13,9 @@
   "photoCommentsLinkOnly": true,
   "sectionOrder": true,
   "questionnaireLink": true,
+  "profileButtons": true,
+  "settingsReturn": true,
+  "pageSizesPost": true,
   "errors": [],
   "physicalDevices": false
 }

@@ -6,7 +6,8 @@ import assert from 'node:assert/strict';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/playwright');
 const root=resolve(process.argv[2]||'.test-site'),dir=fileURLToPath(new URL('./userpages-fixtures/',import.meta.url));
 const fixtures=[...JSON.parse(readFileSync(join(dir,'manifest.json'))),...JSON.parse(readFileSync(join(dir,'comments-manifest.json')))],themes=JSON.parse(readFileSync(join(root,'includes/lesika/themes.json')));
-const chosen=['create','overview-owner','photos-owner-full','news-owner','settings','edit-news','edit-review','moderation','comments-reader','edit-comment','comments-page2'].map(n=>{const f=fixtures.find(x=>x.name===n);assert.ok(f,n);return f;});
+assert.equal(Object.keys(themes).length,12);
+const chosen=['create','overview-owner','overview-custom','photos-owner-full','news-owner','settings','settings-custom','edit-news','edit-review','moderation','comments-reader','edit-comment','comments-page2'].map(n=>{const f=fixtures.find(x=>x.name===n);assert.ok(f,n);return f;});
 const browser=await chromium.launch({executablePath:process.env.MOTOR_BROWSER_EXECUTABLE,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage'],headless:true});
 let fixture=chosen[0],theme='lesika_dvor',layouts=0,originals=0,allowedPost=false;const posts=[],errors=[];
 try{
@@ -23,8 +24,11 @@ try{
  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
  async function load(f,w=390){fixture=f;await page.setViewportSize({width:w,height:844});await page.goto('https://motor.test'+fixture.url,{waitUntil:'load'});}
  for(theme of Object.keys(themes))for(const width of [320,768,1440])for(const f of chosen){
-  await load(f,width);assert.ok(await page.locator('link[href*="userpages.css?v=userpages1"]').count());
+  await load(f,width);assert.ok(await page.locator('link[href*="userpages.css?v=userpages2"]').count());
   if (f.name==='overview-owner') assert.deepEqual(await page.locator('.up-section > .up-heading > h2').allTextContents(),['Новости пользователя','Фотографии','Отзывы']);
+  assert.equal(await page.locator('.userpage a[href="index.php?action=menu"]').count(),0);
+  const buttons=await page.locator('.up-page-actions .up-button').evaluateAll(es=>es.map(e=>({height:e.getBoundingClientRect().height,border:parseFloat(getComputedStyle(e).borderTopWidth)})));assert.ok(buttons.length&&buttons.every(b=>b.height>=44&&b.border>=1));
+  if(['create','settings','settings-custom'].includes(f.name)){assert.equal(await page.locator('.up-page-actions').getByRole('link',{name:'На личную страницу',exact:true}).count(),1);assert.equal(await page.locator('.userpage').getByRole('link',{name:'Настроить страницу',exact:true}).count(),0);}
   const m=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth+1,fields:[...document.querySelectorAll('.userpage input:not([type=hidden]),.userpage textarea,.userpage select')].filter(e=>e.getClientRects().length).map(e=>({font:parseFloat(getComputedStyle(e).fontSize),width:e.getBoundingClientRect().width})),images:[...document.querySelectorAll('.up-photo-link img')].map(e=>({fit:getComputedStyle(e).objectFit,width:e.getBoundingClientRect().width})),fine:matchMedia('(min-width:900px) and (pointer:fine) and (hover:hover)').matches}));
   assert.equal(m.overflow,false,JSON.stringify({theme,width,fixture:f.name,m}));
   const minFont=themes[theme].density==='compact'&&m.fine?14:16;assert.ok(m.fields.every(x=>x.font>=minFont),JSON.stringify({theme,width,fixture:f.name,m}));
@@ -66,7 +70,16 @@ try{
   allowedPost=true;await page.locator('form.reputation-form button[value="'+opposite+'"]').click();await page.waitForURL('**/pages/raiting.php?uz=PageOwner');allowedPost=false;
   const sent=new URLSearchParams(posts.at(-1).body);assert.equal(sent.get('vote'),opposite);assert.equal(sent.get('revision'),expected);assert.match(expected,/^[a-f0-9]{32}$/);assert.match(sent.get('uid'),/^[a-f0-9]{64}$/);
  }
- assert.equal(posts.length,5);assert.deepEqual(errors,[]);assert.ok(posts.every(p=>p.allowed));
- writeFileSync(new URL('./userpages-browser-results.json',import.meta.url),JSON.stringify({browser:browser.version(),layouts,themes:12,fixtureTypes:chosen.length+2,formsPreserved:true,photoZoom:true,tagAndSmilePickers:true,confirmedPost:true,reputationPost:true,reputationEditing:true,newsCommentPost:true,photoCommentsLinkOnly:true,sectionOrder:true,questionnaireLink:true,errors,physicalDevices:false},null,2));
+ for(theme of Object.keys(themes)){await load(fixtures.find(f=>f.name==='settings-custom'),320);await page.evaluate(()=>document.documentElement.style.fontSize='200%');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'settings 200% '+theme);layouts++;}
+ theme='lesika_dvor';await load(fixtures.find(f=>f.name==='settings-custom'));
+ await page.screenshot({path:join(dir,'settings-mobile.png'),fullPage:true,animations:'disabled'});
+ await page.getByRole('link',{name:'На личную страницу',exact:true}).click();assert.equal(new URL(page.url()).search,'?uz=PageOwner');
+ await load(fixtures.find(f=>f.name==='overview-owner'));await page.getByRole('link',{name:'Настроить страницу',exact:true}).click();assert.equal(new URL(page.url()).searchParams.get('tab'),'settings');
+ await load(fixtures.find(f=>f.name==='settings-custom'));const sizeForm=page.locator('.up-form[action*="action=save"]');
+ for(const[name,value]of Object.entries({news_per_page:'5',photos_per_page:'7',reviews_per_page:'9'}))await sizeForm.locator('[name="'+name+'"]').fill(value);
+ allowedPost=true;await sizeForm.getByRole('button',{name:'Сохранить страницу',exact:true}).click();await page.waitForURL('**/*action=save');allowedPost=false;
+ const sizePost=new URLSearchParams(posts.at(-1).body);assert.equal(sizePost.get('news_per_page'),'5');assert.equal(sizePost.get('photos_per_page'),'7');assert.equal(sizePost.get('reviews_per_page'),'9');assert.match(sizePost.get('uid'),/^[a-f0-9]{64}$/);assert.match(sizePost.get('revision'),/^[0-9]+$/);
+ assert.equal(posts.length,6);assert.deepEqual(errors,[]);assert.ok(posts.every(p=>p.allowed));
+ writeFileSync(new URL('./userpages-browser-results.json',import.meta.url),JSON.stringify({browser:browser.version(),layouts,themes:12,fixtureTypes:chosen.length+2,formsPreserved:true,photoZoom:true,tagAndSmilePickers:true,confirmedPost:true,reputationPost:true,reputationEditing:true,newsCommentPost:true,photoCommentsLinkOnly:true,sectionOrder:true,questionnaireLink:true,profileButtons:true,settingsReturn:true,pageSizesPost:true,errors,physicalDevices:false},null,2));
  console.log('SUCCESS',layouts,'layouts; 12 themes; form integrity, photo viewer, tags/smiles, delete confirmation, POST submission and 200% zoom');
 }finally{await browser.close()}

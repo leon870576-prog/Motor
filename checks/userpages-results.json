@@ -1,11 +1,12 @@
 {
   "php": "8.4",
-  "requests": 205,
+  "requests": 300,
   "passed": [
     "explicit page creation, links from menu/profile, live authority, no private profile fields; GET/CSRF/Origin/types/lengths/stale settings protected",
     "owner-only news, review author editing, per-record revisions, duplicate submit, cooldown, shared photo comments and hidden-photo boundaries",
     "news create/edit/delete, public/private page, closed guestbook, escaped HTML/BBCode, deleted-post replay remains idempotent",
     "moderation roles 101/102/103/105, owner/author delete, private edit forms, independent pagination and guest read-only access",
+    "owner page sizes 1–20: overview and section pagination, exact first/middle/last slices, unchanged totals/rewards/content, guest visibility, legacy no-write defaults/forms, stale/CSRF/Origin/type/corrupt-storage guards; profile buttons and settings return link",
     "100-news/500-review limits preserve existing records; banned and quarantined users cannot post",
     "corrupt JSON and symlink refused without data loss; authority unchanged; personal-page data included in backup and safe restore"
   ],
@@ -30,7 +31,7 @@
     },
     {
       "file": "edit-review.html",
-      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook&edit=3da6c1c144e4b42e3f0145670da261b6",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=guestbook&edit=552f822ca0c85211c25ab222bf7398a9",
       "role": "visitor",
       "name": "edit-review"
     },
@@ -42,7 +43,7 @@
     },
     {
       "file": "edit-news.html",
-      "url": "/pages/userpage.php?uz=PageOwner&tab=news&edit=2a340387c53e235aeb402dd2faab99d0",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=news&edit=ed2ef5a93ebaad2bcf5cb4dc080614e8",
       "role": "owner",
       "name": "edit-news"
     },
@@ -87,6 +88,18 @@
       "url": "/pages/userpage.php?uz=PageOwner",
       "role": "guest",
       "name": "overview-guest"
+    },
+    {
+      "file": "overview-custom.html",
+      "url": "/pages/userpage.php?uz=PageOwner",
+      "role": "owner",
+      "name": "overview-custom"
+    },
+    {
+      "file": "settings-custom.html",
+      "url": "/pages/userpage.php?uz=PageOwner&tab=settings",
+      "role": "owner",
+      "name": "settings-custom"
     }
   ]
 }

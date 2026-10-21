@@ -134,6 +134,51 @@ for(const q of ['&page[]=1','&page=-1','&tab[]=news','&edit[]=x','&post[]=x','&a
 await logout();r=await req(base);capture(r,base,'guest','overview-guest');assert.ok(!r.text.includes('Написать новость'));assert.ok(!r.text.includes('name="msg"'));assert.ok(!r.text.includes(hidden));
 assert.equal((await action('guest_add',{id:id(),msg:'Гость без входа'})).httpStatusCode,403);
 pass('moderation roles 101/102/103/105, owner/author delete, private edit forms, independent pagination and guest read-only access');
+// Owner-specific page sizes must affect real slices and navigation, never the totals or rewards.
+await login('PageOwner');
+const visibleIds=(response,kind)=>Array.from(response.text.matchAll(new RegExp('<article[^>]*id="'+kind+'-([^"]+)"','g')),m=>m[1]);
+const actionsHtml=response=>response.text.match(/<div class="up-actions up-page-actions">([\s\S]*?)<\/div>/)?.[1]||'';
+let legacy=raw();assert.equal(state().page_sizes,undefined);
+r=await req(base+'&tab=settings');assert.match(actionsHtml(r),/На личную страницу/);assert.doesNotMatch(actionsHtml(r),/Настроить страницу|Моё меню/);assert.match(actionsHtml(r),/class="touch-link up-button"[^>]*>Анкета пользователя/);
+assert.doesNotMatch(actionsHtml(await req(base)),/Моё меню/);assert.match(actionsHtml(await req(base)),/class="touch-link up-button"[^>]*>Настроить страницу/);
+await req(base+'&tab=settings',undefined,{},'HEAD');assert.equal(raw(),legacy);
+assert.equal(visibleIds(await req(base),'news').length,3);assert.equal(visibleIds(await req(base+'&tab=news'),'news').length,5);assert.equal(visibleIds(await req(base+'&tab=guestbook'),'guest').length,10);
+const galleryFile='/www/local/datagallery/fotobase.dat',galleryBefore=php.readFileAsText(galleryFile),addedPhotos=[];
+for(let i=0;i<6;i++){const p=id()+'.png';addedPhotos.push(p);php.writeFile('/www/local/datagallery/'+p,image);}
+php.writeFile(galleryFile,galleryBefore+addedPhotos.map((p,i)=>'Фото '+i+'|Дополнительное фото '+i+'|PageOwner||175000010'+i+'|extra|'+p+'|').join('\n')+'\n');
+const photoOrder=[...addedPhotos].reverse().concat(photo),newsOrder=[...state().news].reverse().map(e=>e.id),reviewOrder=[...state().guestbook].reverse().map(e=>e.id);
+const sizes={news_per_page:'2',photos_per_page:'3',reviews_per_page:'4'};
+const sizeForm=()=>({...settings,...sizes,revision:String(state().revision)});
+const preserved=state(),ownerProfile=php.readFileAsText('/www/local/profil/PageOwner.prof'),guestProfile=php.readFileAsText('/www/local/profil/PageGuest.prof');
+for(const field of Object.keys(sizes))for(const value of ['0','-1','21','1.5','1e1','02',' 2','<script>','9'.repeat(40)]){
+ const keep=raw();assert.equal((await action('save',{...sizeForm(),[field]:value})).httpStatusCode,400,field+' '+value);assert.equal(raw(),keep);
+}
+for(const field of Object.keys(sizes)){const keep=raw();assert.equal((await action('save',{...sizeForm(),[field+'[]']:'3'})).httpStatusCode,400);assert.equal(raw(),keep);}
+assert.equal((await action('save',{...settings,revision:String(state().revision),news_per_page:'2'})).httpStatusCode,400);
+assert.equal((await action('save',{...sizeForm(),uid:'wrong'})).httpStatusCode,403);
+assert.equal((await action('save',sizeForm(),'PageOwner',{Origin:'https://evil.test'})).httpStatusCode,403);
+const staleSizes=sizeForm();assert.equal((await action('save',staleSizes)).httpStatusCode,303);assert.deepEqual(state().page_sizes,{news:2,photos:3,reviews:4});
+const sizedRaw=raw();assert.equal((await action('save',{...staleSizes,news_per_page:'10'})).httpStatusCode,409);assert.equal(raw(),sizedRaw);
+for(const tab of ['', '&page=2']){r=await req(base+tab);assert.deepEqual(visibleIds(r,'news'),newsOrder.slice(0,2));assert.deepEqual(visibleIds(r,'photo'),photoOrder.slice(0,3));assert.deepEqual(visibleIds(r,'guest'),reviewOrder.slice(0,4));assert.match(r.text,/Все новости \(8\)/);assert.match(r.text,/Все фото \(7\)/);assert.match(r.text,/Все отзывы \(12\)/);}
+capture(await req(base),base,'owner','overview-custom');
+for(const [tab,kind,order,size]of [['news','news',newsOrder,2],['photos','photo',photoOrder,3],['guestbook','guest',reviewOrder,4]]){
+ r=await req(base+'&tab='+tab+'&page=2');assert.deepEqual(visibleIds(r,kind),order.slice(size,size*2));assert.match(r.text,new RegExp('Страница 2 из '+Math.ceil(order.length/size)));assert.match(r.text,new RegExp('tab='+tab+'&amp;page=1'));
+ const last=Math.ceil(order.length/size);r=await req(base+'&tab='+tab+'&page=999999');assert.deepEqual(visibleIds(r,kind),order.slice((last-1)*size));assert.doesNotMatch(r.text,/Следующая →/);
+}
+for(const boundary of ['1','20']){assert.equal((await action('save',{...sizeForm(),news_per_page:boundary,photos_per_page:boundary,reviews_per_page:boundary})).httpStatusCode,303);r=await req(base);for(const[kind,total]of [['news',8],['photo',7],['guest',12]])assert.equal(visibleIds(r,kind).length,Math.min(Number(boundary),total));}
+assert.equal((await action('save',sizeForm())).httpStatusCode,303);
+// An old form with all three new fields absent retains the owner's choices.
+assert.equal((await action('save',{...settings,revision:String(state().revision)})).httpStatusCode,303);assert.deepEqual(state().page_sizes,{news:2,photos:3,reviews:4});
+r=await req(base+'&tab=settings');for(const[name,value]of Object.entries(sizes))assert.match(r.text,new RegExp('name="'+name+'"[^>]*value="'+value+'"'));capture(r,base+'&tab=settings','owner','settings-custom');
+for(const key of ['news','guestbook','comment_totals','review_totals','recent'])assert.deepEqual(state()[key],preserved[key],key);
+assert.equal(php.readFileAsText('/www/local/profil/PageOwner.prof'),ownerProfile);assert.equal(php.readFileAsText('/www/local/profil/PageGuest.prof'),guestProfile);
+const ownerRaw=raw();
+for(const name of ['PageGuest','PageAdmin']){await login(name);assert.equal((await req(base+'&tab=settings')).httpStatusCode,403);assert.equal((await action('save',sizeForm())).httpStatusCode,403);assert.equal(raw(),ownerRaw);assert.equal(visibleIds(await req(base),'news').length,2);}
+await logout();assert.equal(visibleIds(await req(base),'photo').length,3);assert.equal(visibleIds(await req(base+'&tab=guestbook'),'guest').length,4);assert.equal(raw(),ownerRaw);
+await login('PageOwner');
+for(const bad of [null,[],{news:0,photos:3,reviews:4},{news:2,photos:'3',reviews:4},{news:2,photos:3},{news:2,photos:3,reviews:4,extra:1}]){saveState({...state(),page_sizes:bad});const badRaw=raw();assert.equal((await req(base)).httpStatusCode,503);assert.equal((await action('save',{...settings,...sizes,revision:'1'})).httpStatusCode,503);assert.equal(raw(),badRaw);php.writeFile(path,ownerRaw);}
+php.writeFile(galleryFile,galleryBefore);
+pass('owner page sizes 1–20: overview and section pagination, exact first/middle/last slices, unchanged totals/rewards/content, guest visibility, legacy no-write defaults/forms, stale/CSRF/Origin/type/corrupt-storage guards; profile buttons and settings return link');
 // Corrupt storage and path redirection must fail without replacing data.
 await login('PageOwner');const valid=raw();php.writeFile(path,'{broken');assert.equal((await req(base)).httpStatusCode,503);assert.equal((await action('save',{...settings,revision:'1'})).httpStatusCode,503);assert.equal(raw(),'{broken');php.writeFile(path,valid);
 const helper="define('BASEDIR','/www/');define('DATADIR','/www/local/');require '/www/includes/functions.php';require '/www/includes/userpages.php';";

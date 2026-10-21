@@ -1322,7 +1322,7 @@
   {
     "path": "includes/lesika/head.php",
     "bytes": 5050,
-    "sha256": "0a5c9f49c81d7395f14819c884f569e798cb5012d301838bc83cf5c7d2dae5fc"
+    "sha256": "7f102bf08b72254bb249ab5c7ad4bb872444803d7dafd071f59729c845cf2e21"
   },
   {
     "path": "includes/lesika/home.php",
@@ -1451,8 +1451,8 @@
   },
   {
     "path": "includes/userpages.php",
-    "bytes": 16713,
-    "sha256": "7e0b8aea08c2175e8d68b52aa6f6375d9f46e531d7c0a88cf6d692dcd79ba5a2"
+    "bytes": 18094,
+    "sha256": "15664960ed1fc6b104fadf7b1cfceeb38755a301d7c08b9d7678ebb2b55349e5"
   },
   {
     "path": "includes/voting.php",

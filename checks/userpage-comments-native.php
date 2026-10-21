@@ -16,12 +16,12 @@ try {
     define('BASEDIR',$root.'/');define('DATADIR',$dir.'/');require $root.'/includes/functions.php';require $root.'/includes/userpages.php';
     $config=['userprofkey'=>100,'karantin'=>0,'regkeys'=>0,'floodstime'=>5];
     foreach(['OwnerA','OwnerB','Writer0','Writer1','Writer2','Writer3','Writer4','Writer5'] as $name){$p=array_fill(0,100,'0');$p[0]=$name;$p[1]='fixture';$p[4]='fixture@example.test';$p[6]='1';$p[33]='7';$p[49]='17';$p[98]='arc-state';$p[99]='game-state';file_put_contents($dir.'/profil/'.$name.'.prof',implode(':||:',$p).':||:');}
-    foreach(['OwnerA','OwnerB'] as $owner){motor_userpage_apply($owner,$owner,false,'save',['revision'=>'0','title'=>'News','about'=>'','published'=>'1','guestbook_open'=>'1'],1740000000);motor_userpage_apply($owner,$owner,false,'news_add',['id'=>md5($owner),'title'=>'News','msg'=>'Test'],1740000010);}
+    foreach(['OwnerA','OwnerB'] as $owner){motor_userpage_apply($owner,$owner,false,'save',['revision'=>'0','title'=>'News','about'=>'','published'=>'1','guestbook_open'=>'1','news_per_page'=>'4','photos_per_page'=>'7','reviews_per_page'=>'9'],1740000000);motor_userpage_apply($owner,$owner,false,'news_add',['id'=>md5($owner),'title'=>'News','msg'=>'Test'],1740000010);}
     foreach(['comments','counter'] as $mode)for($i=0;$i<6;$i++){
         $p=proc_open([PHP_BINARY,__FILE__,'worker',$dir,(string)$i,$mode],[0=>['file','/dev/null','r'],1=>['file',$dir.'/'.$mode.$i.'.log','a'],2=>['file',$dir.'/'.$mode.$i.'.log','a']],$pipes);if(!is_resource($p))throw new RuntimeException('Cannot start comments worker');$processes[]=$p;
     }
     foreach($processes as $p)if(proc_close($p)!==0)throw new RuntimeException('Comments worker failed');$processes=[];
-    foreach(['OwnerA','OwnerB'] as $owner){$d=motor_userpage_read($owner);if(count($d['news'][0]['comments'])!==60 || $d['revision']!==62)throw new RuntimeException('Lost or duplicate comments');}
+    foreach(['OwnerA','OwnerB'] as $owner){$d=motor_userpage_read($owner);if(count($d['news'][0]['comments'])!==60 || $d['revision']!==62 || motor_userpage_sizes($d)!==['news'=>4,'photos'=>7,'reviews'=>9])throw new RuntimeException('Lost or duplicate comments or page settings');}
     for($i=0;$i<6;$i++){$p=explode(':||:',file_get_contents($dir.'/profil/Writer'.$i.'.prof'));$receipts=motor_userpage_comment_receipts($p[97]);if((int)$p[33]!==67 || (int)$p[12]!==40 || (int)$p[36]!==60 || (int)$p[41]!==60 || $p[98]!=='arc-state' || $p[99]!=='game-state' || $receipts!==['OwnerA'=>10,'OwnerB'=>10])throw new RuntimeException('Lost or double-counted profile activity');}
     if(motor_userpage_public_comment_count()!==120)throw new RuntimeException('Incorrect global count');
     foreach(glob($dir.'/*.log') as $log)if(trim(file_get_contents($log))!=='')throw new RuntimeException('Comments worker emitted a warning');
