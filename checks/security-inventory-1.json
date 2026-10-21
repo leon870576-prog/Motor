@@ -11,8 +11,8 @@
   },
   {
     "path": "INSTALL.php",
-    "bytes": 21341,
-    "sha256": "799b578a615f38f93ed858f6c9f905412194a8d6d8deea84134efe8494adf1b8"
+    "bytes": 21369,
+    "sha256": "315378562256a74b1e43a131f43d7435aafaa755ab25420c30f3dfec43f742ec"
   },
   {
     "path": "README.md",
@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 260,
-    "sha256": "f4018d6d778f97a72ce7c0ea602ee15323c245a6f743f4ca80a4604a37e4d122"
+    "bytes": 264,
+    "sha256": "434f2176f5fba71f6f51241b24402abcb3746bdf14717b9d08fafefd2d6d24cc"
   },
   {
     "path": "assets/lesika/arcade.css",
@@ -41,8 +41,8 @@
   },
   {
     "path": "assets/lesika/branding.css",
-    "bytes": 982,
-    "sha256": "9ce648b4973d9e6d485d4a73e9870705db31bcc60e02e91eeabb266e5c0bbd20"
+    "bytes": 1443,
+    "sha256": "6b175773bdebdcdb2419aa1e8cd16aaadd4f2eb6b7a200719b8834b3f93443b9"
   },
   {
     "path": "assets/lesika/chat.css",

@@ -1,10 +1,10 @@
 <?php
 // Run before the web server starts, or with a hosted site temporarily stopped.
 // Only the two configuration files are changed; backups stay outside the web root.
-function motorMigratePortalBrand(string $dataRoot,string $codeRoot): array {
+function motorMigratePortalBrand(string $dataRoot,string $codeRoot,bool $online=false): array {
     if (!defined('BASEDIR')) define('BASEDIR',rtrim($codeRoot,'/').'/');
     require_once $codeRoot.'/includes/portal-brand.php';
-    $id='2026-10-20-lesozavodsk-r1';$dataRoot=rtrim($dataRoot,'/');
+    $id=$online?'2026-10-21-brand-settings-r1':'2026-10-20-lesozavodsk-r1';$dataRoot=rtrim($dataRoot,'/');
     $local=$dataRoot.'/local';$markers=$dataRoot.'/.motor-migrations';$backups=$dataRoot.'/motor-backups';
     foreach ([$dataRoot,$local,$markers,$backups,$backups.'/'.$id] as $dir) {
         if (is_link($dir) || (file_exists($dir) && !is_dir($dir))) throw new RuntimeException('Unsafe branding migration directory');
@@ -24,7 +24,7 @@ function motorMigratePortalBrand(string $dataRoot,string $codeRoot): array {
             $raw=file_get_contents($path,false,null,0,2097153);
             if ($raw===false || strlen($raw)>2097152) throw new RuntimeException('Invalid configuration file');
             $fields=explode('|',$raw);if (count($fields)<84) throw new RuntimeException('Incomplete configuration file');
-            $next=implode('|',motor_portal_brand_fields($fields));if ($next===$raw) continue;
+            $next=implode('|',$online?motor_portal_online_fields($fields):motor_portal_brand_fields($fields));if ($next===$raw) continue;
             $backup=$backups.'/'.$id.'/'.$relative;
             if (!is_dir(dirname($backup)) && !mkdir(dirname($backup),0700,true)) throw new RuntimeException('Cannot create branding backup directory');
             if (is_link(dirname($backup)) || is_link($backup) || (file_exists($backup) && !is_file($backup))) throw new RuntimeException('Unsafe branding backup');
@@ -49,4 +49,6 @@ function motorMigratePortalBrand(string $dataRoot,string $codeRoot): array {
 if (PHP_SAPI==='cli' && realpath($_SERVER['SCRIPT_FILENAME']??'')===__FILE__) {
     $result=motorMigratePortalBrand($argv[1]??'/data',$argv[2]??'/var/www/html');
     echo 'MOTOR: portal branding '.json_encode($result,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR).PHP_EOL;
+    $result=motorMigratePortalBrand($argv[1]??'/data',$argv[2]??'/var/www/html',true);
+    echo 'MOTOR: portal title '.json_encode($result,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR).PHP_EOL;
 }

@@ -23,6 +23,13 @@ try{
  assert.equal(php.readFileAsText('/data/local/profil/Untouched.prof'),'PROFILE-MUST-NOT-CHANGE');
  assert.equal((await run('echo json_encode(motorMigratePortalBrand("/data","/www"));')).status,'already-applied');assert.equal(php.readFileAsText('/data/local/config.dat'),current);
  passed.push('exact branding fields, immutable original backups, unchanged accounts/settings, idempotent repeat');
+ assert.equal((await run('echo json_encode(motorMigratePortalBrand("/data","/www",true));')).changed,2);
+ const online=php.readFileAsText('/data/local/config.dat').split('|');assert.equal(online[11],'Лесозаводск онлайн');assert.equal(online[12],'Приморский край · Россия');for(let i=0;i<b.length;i++)if(![11,12].includes(i))assert.equal(online[i],b[i]);
+ assert.equal(php.readFileAsText('/data/motor-backups/2026-10-21-brand-settings-r1/config.dat'),current);
+ online[11]='Название владельца';php.writeFile('/data/local/config.dat',online.join('|'));assert.equal((await run('echo json_encode(motorMigratePortalBrand("/data","/www",true));')).status,'already-applied');assert.equal(php.readFileAsText('/data/local/config.dat').split('|')[11],'Название владельца');
+ assert.deepEqual(await run('define("BASEDIR","/www/");require "/www/includes/portal-brand.php";echo json_encode(motor_portal_online_fields([11=>"Мой город",12=>"Моя подпись",15=>"images/logo.png"]));'),{11:'Мой город',12:'Моя подпись',15:'images/logo.png'});
+ passed.push('online title upgrade changes only known name/subtitle once; exact previous-config backup; custom values and later edits preserved');
+
  result=await run('define("BASEDIR","/www/");require "/www/includes/portal-brand.php";$f=[11=>"Мой город",12=>"Своё приветствие",14=>"https://city.example",15=>"https://city.example/assets/lesika/leaf.svg",82=>"мои ключевые слова",83=>"Моё описание",96=>"private"];echo json_encode(motor_portal_brand_fields($f));');
  assert.equal(result[11],'Мой город');assert.equal(result[12],'Своё приветствие');assert.equal(result[15],'https://city.example/assets/lesika/lesozavodsk.svg');assert.equal(result[82],'мои ключевые слова');assert.equal(result[83],'Моё описание');assert.equal(result[96],'private');
  passed.push('custom metadata preserved, known previous logo URL upgraded');

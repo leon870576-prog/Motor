@@ -258,7 +258,7 @@ $data[8] = $name;
 $data[9] = $oemails;
 $data[14] = $osite;
 $data[15] = "$osite/assets/lesika/lesozavodsk.svg";
-$data = motor_portal_brand_fields($data);
+$data = motor_portal_online_fields(motor_portal_brand_fields($data));
 
 $utext = "";
 for ($u=0; $u<$config['configkeys']; $u++){

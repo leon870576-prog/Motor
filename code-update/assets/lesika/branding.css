@@ -1,6 +1,6 @@
 /* Preserve the city's original coat of arms and fit the longer name on phones. */
 body .site-header .brand { gap:6px; min-width:0; flex:1 1 auto }
-body .site-header .brand>span { font-size:1.5rem; line-height:1.12; letter-spacing:-.45px; white-space:normal; min-width:0 }
+body .site-header .brand>span { font-size:1.5rem; line-height:1.12; letter-spacing:-.45px; white-space:normal; min-width:0; overflow-wrap:anywhere }
 body .site-header .brand small { font-size:.625rem; line-height:1.3; letter-spacing:0; margin-top:3px; white-space:normal }
 body .site-header .brand img { width:30px; height:36px; object-fit:contain; flex:0 0 auto }
 .site-header .header-actions { flex:0 0 auto }
@@ -10,6 +10,13 @@ body .site-header .brand img { width:30px; height:36px; object-fit:contain; flex
  body .site-header .brand small { font-size:.5625rem }
  body .site-header .brand img { width:26px; height:31px }
 }
+.brand-settings form { display:grid; gap:12px; max-width:720px }
+.brand-settings label { display:grid; gap:5px; min-width:0 }
+.brand-settings input { width:100%; min-width:0; box-sizing:border-box }
+.brand-preview { display:flex; align-items:center; gap:12px; overflow-wrap:anywhere }
+.brand-preview img { width:60px; height:72px; object-fit:contain; flex:none }
+.brand-preview>div { min-width:0 }
+.brand-preview small { display:block }
 @media(min-width:900px) {
  body[data-theme^="lesika_web_"] .site-header .brand>span { font-size:1.75rem }
  body[data-theme^="lesika_web_"] .site-header .brand small { font-size:.6875rem }

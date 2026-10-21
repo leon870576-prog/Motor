@@ -1226,8 +1226,8 @@
   },
   {
     "path": "includes/functions.php",
-    "bytes": 71189,
-    "sha256": "d86396e8fd876ea70e997860b4f381f5dc1fab77b8b32fde28cfd92cbc302fdc"
+    "bytes": 71647,
+    "sha256": "d2cef215b8e1f41f8ae1c556fe6ebac8c6feaa255bee5b2a4764cf8e56cd0455"
   },
   {
     "path": "includes/gallery.php",
@@ -1311,8 +1311,8 @@
   },
   {
     "path": "includes/lesika/head.php",
-    "bytes": 4580,
-    "sha256": "1fb2e8758c29076b40827c37377d299320d8738c95020106811da986cb42ac73"
+    "bytes": 4702,
+    "sha256": "b1d750f5fa62795556ba0531b52a32b75323945e1b1127b749fa738a28d830a7"
   },
   {
     "path": "includes/lesika/home.php",
@@ -1381,8 +1381,8 @@
   },
   {
     "path": "includes/portal-brand.php",
-    "bytes": 2270,
-    "sha256": "d4a4bb1a9a4200911dd741516b1c4f91e6211e3d3cb888092fcaa1ed3225d533"
+    "bytes": 7159,
+    "sha256": "b46269e2dbd06acae8a9021bc24bbc5dccf71d2fd00c9d808c8a6cea92c1a6bb"
   },
   {
     "path": "includes/quotesbase.php",

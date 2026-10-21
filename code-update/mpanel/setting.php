@@ -25,6 +25,7 @@ echo'<img src="../images/img/partners.gif" alt="image" /> <b>Настройки 
 ############################################################################################
 if ($action==""){
 if ($log==$config['nickname']){
+echo '<a href="brand-settings.php">Заглавие и логотип сайта</a><br />';
 echo'<img src="../images/img/forums.gif" alt="image" /> <a href="setting.php?action=setone&amp;'.SID.'">Основные настройки</a><br />';}
 
 echo'<img src="../images/img/forums.gif" alt="image" /> <a href="setting.php?action=settwo&amp;'.SID.'">Вывод информации</a><br />';
@@ -47,6 +48,7 @@ if ($log==$config['nickname']){
 //1,2,3,8,9,10,11,12,13,14,15,16,29,50,52,57,61,62,69,113,118
 if ($action=="setone"){
 echo '<b>Основные настройки</b><br /><hr />';
+echo '<p><a href="brand-settings.php">Заглавие, подпись и логотип сайта</a></p>';
 
 echo '<form method="post" action="setting.php?action=editone&amp;uid='.$_SESSION['token'].'&amp;'.SID.'">';
 
@@ -59,11 +61,8 @@ echo '<select name="set113">'.lesika_theme_options($con_data[113], true).'</sele
 echo 'Логин администратора:<br /><input name="set8" maxlength="20" value="'.$con_data[8].'" /><br />';
 echo 'E-mail администратора:<br /><input name="set9" maxlength="50" value="'.$con_data[9].'" /><br />';
 echo 'Временной сдвиг:<br /><input name="set10" maxlength="3" value="'.$con_data[10].'" /><br />';
-echo 'Заголовок всех страниц:<br /><input name="set11" maxlength="100" value="'.$con_data[11].'" /><br />';
-echo 'Подпись вверху:<br /><input name="set12" maxlength="100" value="'.$con_data[12].'" /><br />';
 echo 'Подпись внизу:<br /><input name="set13" maxlength="100" value="'.$con_data[13].'" /><br />';
 echo 'Главная страница сайта:<br /><input name="set14" maxlength="50" value="'.$con_data[14].'" /><br />';
-echo 'Адрес логотипа:<br /><input name="set15" maxlength="100" value="'.$con_data[15].'" /><br />';
 echo 'Расширение страниц движка:<br /><input name="set16" maxlength="6" value="'.$con_data[16].'" /><br />';
 echo 'Время антифлуда (сек):<br /><input name="set29" maxlength="3" value="'.$con_data[29].'" /><br />';
 echo 'Лимит запросов с IP:<br /><input name="set57" maxlength="3" value="'.$con_data[57].'" /><br />';
@@ -148,9 +147,9 @@ if ($action=="editone"){
 $uid = check($_GET['uid']);
 
 if ($uid==$_SESSION['token']){
-if ($_POST['set1']!="" && $_POST['set2']!="" && $_POST['set3']!="" && $_POST['set8']!="" && $_POST['set9']!="" && $_POST['set10']!="" && $_POST['set11']!="" && $_POST['set12']!="" && $_POST['set13']!="" && $_POST['set14']!="" && $_POST['set15']!="" && $_POST['set16']!="" && $_POST['set29']!="" && $_POST['set50']!="" && $_POST['set52']!="" && $_POST['set57']!="" && $_POST['set61']!="" && $_POST['set62']!="" && $_POST['set69']!="" && $_POST['set118']!=""){
+if ($_POST['set1']!="" && $_POST['set2']!="" && $_POST['set3']!="" && $_POST['set8']!="" && $_POST['set9']!="" && $_POST['set10']!="" && $_POST['set13']!="" && $_POST['set14']!="" && $_POST['set16']!="" && $_POST['set29']!="" && $_POST['set50']!="" && $_POST['set52']!="" && $_POST['set57']!="" && $_POST['set61']!="" && $_POST['set62']!="" && $_POST['set69']!="" && $_POST['set118']!=""){
 
-change_setting(array(1=>check(no_br($_POST['set1'])), 2=>check(no_br($_POST['set2'])), 3=>check(no_br($_POST['set3'])), 8=>check(no_br($_POST['set8'])), 9=>check(no_br($_POST['set9'])), 10=>check(no_br($_POST['set10'])), 11=>check(no_br($_POST['set11'])), 12=>check(no_br($_POST['set12'])), 13=>check(no_br($_POST['set13'])), 14=>check(no_br($_POST['set14'])), 15=>check(no_br($_POST['set15'])), 16=>check(no_br($_POST['set16'])), 29=>(int)$_POST['set29'], 50=>(int)$_POST['set50'], 52=>(int)$_POST['set52'], 57=>(int)$_POST['set57'], 61=>(int)$_POST['set61'], 62=>(int)$_POST['set62'], 69=>(int)$_POST['set69'], 113=>check(no_br($_POST['set113'])), 118=>(int)$_POST['set118']));
+change_setting(array(1=>check(no_br($_POST['set1'])), 2=>check(no_br($_POST['set2'])), 3=>check(no_br($_POST['set3'])), 8=>check(no_br($_POST['set8'])), 9=>check(no_br($_POST['set9'])), 10=>check(no_br($_POST['set10'])), 13=>check(no_br($_POST['set13'])), 14=>check(no_br($_POST['set14'])), 16=>check(no_br($_POST['set16'])), 29=>(int)$_POST['set29'], 50=>(int)$_POST['set50'], 52=>(int)$_POST['set52'], 57=>(int)$_POST['set57'], 61=>(int)$_POST['set61'], 62=>(int)$_POST['set62'], 69=>(int)$_POST['set69'], 113=>check(no_br($_POST['set113'])), 118=>(int)$_POST['set118']));
 
 header ("Location: setting.php?isset=mp_yesset&".SID); exit;
 

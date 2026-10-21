@@ -35,6 +35,11 @@
     "sha256": "ac76ffbe7f3aa44fba78732fd480afad6a5a71c0f0c73413f4eb6a67bb4a8b0c"
   },
   {
+    "path": "mpanel/brand-settings.php",
+    "bytes": 3704,
+    "sha256": "345fc4ac81834de8c3f71b6e176b89e3af85d34668f0fbe856e39acc112028a8"
+  },
+  {
     "path": "mpanel/chat-settings.php",
     "bytes": 6865,
     "sha256": "10af82cdac122e712d155a7568414f7319bb36cd3dfa5aad5fae142741445c4b"
@@ -86,8 +91,8 @@
   },
   {
     "path": "mpanel/index.php",
-    "bytes": 9748,
-    "sha256": "27363e05c937b0bf021c3f2bb97702496688157c78507c090497282234911ce1"
+    "bytes": 9866,
+    "sha256": "11959b538795b213b44ac37c50a9ebf7748510b89258194f259d3958f7f4e083"
   },
   {
     "path": "mpanel/license.php",
@@ -136,8 +141,8 @@
   },
   {
     "path": "mpanel/setting.php",
-    "bytes": 52639,
-    "sha256": "1ac020bfae929fdd54f5132a1cb616ec35977a9c0fb18b6617264cc892f4a9eb"
+    "bytes": 52314,
+    "sha256": "48f12fa9097da6b3c683acb8d147197ba47b549dc5cc5f89d8ba52e02cacad96"
   },
   {
     "path": "mpanel/siteinfo.php",
@@ -191,8 +196,8 @@
   },
   {
     "path": "news/rss.php",
-    "bytes": 2241,
-    "sha256": "3f62ffad1d35f131ff03364ad3666fd30bc8fb6800f71ee235542ed6e8183187"
+    "bytes": 2377,
+    "sha256": "f4e642eaa5136ab5f0bb20d9ccbdbc9e31089f5b8cfc3e6b45e1d5ba77254f28"
   },
   {
     "path": "pages/account.php",

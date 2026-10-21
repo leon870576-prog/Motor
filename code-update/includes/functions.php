@@ -1873,7 +1873,7 @@ element.value = str.substr(0, start) + text1 + str.substr(start, length) + text2
 }
 
 // ----------------------- Функция изменения настроек сайта -------------------//
-function change_setting($str) {
+function change_setting($str,?string $brandVersion=null) {
     global $config;
     $path=DATADIR.'config.dat';
     if (is_link($path)) throw new RuntimeException('Недопустимый файл настроек.');
@@ -1882,6 +1882,10 @@ function change_setting($str) {
     try {
         if (!flock($fp,LOCK_EX)) throw new RuntimeException('Не удалось заблокировать настройки.');
         $data=explode('|',stream_get_contents($fp));
+        if ($brandVersion!==null) {
+            if (!motor_brand_owner() || ($_SESSION['log']??'')!==($data[8]??'')) throw new RuntimeException('Недостаточно прав.',403);
+            if (!hash_equals(motor_brand_version($data),$brandVersion)) throw new RuntimeException('Заглавие или логотип уже изменены. Обновите форму перед сохранением.',409);
+        }
         for($u=0;$u<$config['configkeys'];$u++)if(isset($str[$u]))$data[$u]=$str[$u];
         if (empty($data[8]) || empty($data[9])) throw new RuntimeException('Не заполнены основные настройки.');
         $text='';for($u=0;$u<$config['configkeys'];$u++)$text.=($data[$u]??'').'|';

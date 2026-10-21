@@ -38,6 +38,7 @@ COPY checks/userpages-native.php /opt/motor-userpages-native.php
 COPY checks/homepage-native.php /opt/motor-homepage-native.php
 COPY checks/home-template-native.php /opt/motor-home-template-native.php
 COPY checks/dat-pages-native.php /opt/motor-dat-pages-native.php
+COPY checks/brand-settings-native.php /opt/motor-brand-settings-native.php
 COPY checks/wallet-native.php /opt/motor-wallet-native.php
 COPY checks/settings-native.php /opt/motor-settings-native.php
 COPY checks/voting-native.php /opt/motor-voting-native.php
@@ -56,6 +57,7 @@ RUN chmod 755 /usr/local/bin/motor-entrypoint \
  && php /opt/motor-homepage-native.php \
  && php /opt/motor-home-template-native.php \
  && php /opt/motor-dat-pages-native.php \
+ && php /opt/motor-brand-settings-native.php \
  && php /opt/motor-wallet-native.php \
  && php /opt/motor-settings-native.php \
  && php /opt/motor-voting-native.php \

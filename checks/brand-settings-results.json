@@ -1,0 +1,10 @@
+{
+  "runtime": "PHP 8.4 WASM",
+  "requests": 69,
+  "passed": [
+    "one shared config source; owner-only administration and links; fresh installation name and subtitle; GET/HEAD preserve settings",
+    "CSRF, Origin, array, length, control-character and URL guards; traversal, symlinks and missing local images rejected without writes",
+    "title/subtitle/logo roundtrip with escaped HTML, quotes, delimiters and ampersands; consistent header/favicon/RSS; stale saves refused and unrelated settings retained",
+    "default emblem reset, empty subtitle and deliberate custom city title work; symlink settings refused; old basic-settings POST cannot overwrite branding; news and homepage selections unchanged"
+  ]
+}
