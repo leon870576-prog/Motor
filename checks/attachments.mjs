@@ -203,7 +203,7 @@ let beforeClosed=php.readFileAsText('/www/local/'+postPath);await req('/forum/to
 await req('/input.php?action=exit');await req('/input.php',{login:'MotorTestAdmin',pass:password});uid=await token();
 // All warm themes render the same media controls.
 for(const skin of ['lesika_dvor','lesika_gazeta','lesika_gostinaya','lesika_solnce','lesika_vecher','lesika_albom','lesika_uyut']){
- await req('/pages/skin.php',{skins:skin,uid,return:'themes'});r=await req('/forum/topic.php?fid='+fid+'&id='+topic);assert.ok(r.text.includes('<body data-theme="'+skin+'">'));assert.ok(r.text.includes('<video controls playsinline'));assert.ok(r.text.includes('дополнение.txt'));
+ await req('/pages/skin.php',{skins:skin,uid,return:'themes'});r=await req('/forum/topic.php?fid='+fid+'&id='+topic);assert.match(r.text,new RegExp('<body\\b[^>]*data-theme="'+skin+'"[^>]*>'));assert.ok(r.text.includes('<video controls playsinline'));assert.ok(r.text.includes('дополнение.txt'));
 }
 pass('closed-topic permissions and attachment rendering in all seven warm themes');
 

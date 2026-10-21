@@ -1,8 +1,8 @@
 {
   "runtime": "PHP 8.4 WASM",
-  "requests": 671,
-  "pages": 656,
-  "uniqueTargets": 721,
+  "requests": 674,
+  "pages": 659,
+  "uniqueTargets": 723,
   "skippedMutations": 14,
   "expectedDiagnostics": [
     "/check",

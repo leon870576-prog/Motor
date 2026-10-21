@@ -26,8 +26,8 @@
   },
   {
     "path": "_health.php",
-    "bytes": 264,
-    "sha256": "434f2176f5fba71f6f51241b24402abcb3746bdf14717b9d08fafefd2d6d24cc"
+    "bytes": 261,
+    "sha256": "f969f83e6a18b25c432d16880b77e2aab91db78955c8386f78258539bb2a0671"
   },
   {
     "path": "assets/lesika/arcade.css",
@@ -38,6 +38,11 @@
     "path": "assets/lesika/arcade.js",
     "bytes": 3162,
     "sha256": "69d0a0c6338b4a79a210e077a585292f43eea399204b5b271160c7f852093998"
+  },
+  {
+    "path": "assets/lesika/bottom-menu.css",
+    "bytes": 1020,
+    "sha256": "18cb576beb8804a64d3a472438fa66a05d30e68947548eb5def299d39603d192"
   },
   {
     "path": "assets/lesika/branding.css",
@@ -1493,10 +1498,5 @@
     "path": "images/avators2/112.gif",
     "bytes": 16967,
     "sha256": "f153d2f5d854a6eac4799dd712d7ff252b437750bd422f23ace503f3ef9c1c08"
-  },
-  {
-    "path": "images/avators2/113.gif",
-    "bytes": 14762,
-    "sha256": "208d04755beaefdedfed669823977571923a5a0abee81cd29be84deca08ee5e0"
   }
 ]

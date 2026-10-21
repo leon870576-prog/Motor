@@ -70,6 +70,7 @@ echo '<img src="../images/img/act.gif" alt="image" /> <a href="navigation.php?'.
 if (is_admin(array(101))){
 echo '--------------------------<br />';
 if (motor_brand_owner()) echo '<a href="brand-settings.php">Заглавие и логотип сайта</a><br />';
+if (motor_brand_owner()) echo '<a href="bottom-menu.php">Нижнее меню сайта</a><br />';
 echo '<a href="points-settings.php">Баллы: доступ к действиям</a><br />';
 echo '<a href="arcade-settings.php">Игры: вероятность выигрыша и ставки</a><br />';
 echo '<img src="../images/img/act.gif" alt="image" /> <a href="setting.php?'.SID.'">Настройки системы</a><br />';

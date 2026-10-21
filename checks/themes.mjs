@@ -88,7 +88,7 @@ try {
     for (const url of ['/index.php','/news/index.php','/forum/index.php','/book/index.php','/pages/themes.php']) {
       const page = await request({ url });
       assert.equal(page.httpStatusCode, 200, id + url);
-      assert.ok(page.text.includes('<body data-theme="' + id + '">'), id + url);
+      assert.match(page.text, new RegExp('<body\\b[^>]*data-theme="' + id + '"[^>]*>'), id + url);
       assert.ok(page.text.includes('name="viewport"'));
       assert.ok(!page.text.includes('/themes/default/') && !page.text.includes('/themes/toonel/'));
       assert.ok(!page.text.includes('Fatal error'));

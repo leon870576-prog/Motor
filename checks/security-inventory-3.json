@@ -1,5 +1,10 @@
 [
   {
+    "path": "images/img/exit.gif",
+    "bytes": 272,
+    "sha256": "aed18d450e81e6a38edaa6cff455b0b970ee5c719bef837da9b360fed1898748"
+  },
+  {
     "path": "images/img/faq.gif",
     "bytes": 364,
     "sha256": "771454cf2f3d682774ce8328fc5fbec8b8fd1c48139a60406bd993de1d18179f"
@@ -1165,6 +1170,11 @@
     "sha256": "140a1eec6cbbf822dfc6d8b88ceb27cedb8a136abdf03c8815fbfe93e828a848"
   },
   {
+    "path": "includes/bottom-menu.php",
+    "bytes": 9183,
+    "sha256": "1abf4618cd8c02e4fa511f607e573c900ccddb68029ce387a1b91719f60f8bfe"
+  },
+  {
     "path": "includes/calendar.php",
     "bytes": 2376,
     "sha256": "bc0337d4cd2e7065049b5060aa4ea1ea1dccc7cd61bd2ce1e33428254904f489"
@@ -1306,13 +1316,13 @@
   },
   {
     "path": "includes/lesika/foot.php",
-    "bytes": 1584,
-    "sha256": "62c9dde7ed31fa24ccb489f98896c72e88b3ebe315617ecddec32d8da9a8f9e1"
+    "bytes": 959,
+    "sha256": "ab8f04117caf578714459d79c1705cc8561b95c32132da4fb2d8939b22634847"
   },
   {
     "path": "includes/lesika/head.php",
-    "bytes": 4702,
-    "sha256": "b1d750f5fa62795556ba0531b52a32b75323945e1b1127b749fa738a28d830a7"
+    "bytes": 5050,
+    "sha256": "0a5c9f49c81d7395f14819c884f569e798cb5012d301838bc83cf5c7d2dae5fc"
   },
   {
     "path": "includes/lesika/home.php",
@@ -1488,15 +1498,5 @@
     "path": "mpanel/antimat.php",
     "bytes": 7371,
     "sha256": "deda0bbd92318b596def3496b3fd7ea94f3f27ab2d525b2c59f3267fa9b4e379"
-  },
-  {
-    "path": "mpanel/arcade-settings.php",
-    "bytes": 4964,
-    "sha256": "cbacd848ed103697e9dfebe0280f90a7ccd3b9f6af59560d350319c1d5d71a29"
-  },
-  {
-    "path": "mpanel/attachments.php",
-    "bytes": 4942,
-    "sha256": "6c6e67a4b5b458511066ab72151e73cc762db48416f45abc327ca10b67e3d221"
   }
 ]

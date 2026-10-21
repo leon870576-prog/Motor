@@ -1,6 +1,9 @@
 <?php
 if (!defined('BASEDIR')) { http_response_code(403); exit; }
 require_once __DIR__.'/catalog.php';
+require_once dirname(__DIR__).'/bottom-menu.php';
+global $motorBottomMenu;
+try {$motorBottomMenu=motor_bottom_settings();}catch(Throwable $e){$motorBottomMenu=motor_bottom_defaults();}
 $config['themes'] = lesika_theme_id($config['themes']);
 $lesikaTheme = lesika_themes()[$config['themes']];
 $portalBrand = motor_brand_values($config);
@@ -18,10 +21,11 @@ echo '<script src="'.BASEDIR.'assets/lesika/touch.js?v=scroll1" defer></script>'
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/gallery.css?v=gallery1"><script src="'.BASEDIR.'assets/lesika/gallery.js?v=gallery1" defer></script>';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/compact.css?v=compact2">';
 echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/branding.css?v=brand2">';
+echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/bottom-menu.css?v=bottom1">';
 if ($lesikaHome || in_array($php_self,['mpanel/home-settings.php','mpanel/files.php','pages/index.php','games/index.php'],true)) echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/home.css?v=home6">';
 if ($php_self==='pages/userpage.php') echo '<link rel="stylesheet" href="'.BASEDIR.'assets/lesika/userpages.css?v=userpages1">';
 echo '<link rel="alternate" type="application/rss+xml" title="'.motor_brand_escape('Новости — '.$portalBrand['title']).'" href="'.BASEDIR.'news/rss.php">';
-echo '</head><body data-theme="'.$config['themes'].'"><div class="site-shell">';
+echo '</head><body data-theme="'.$config['themes'].'" data-bottom-menu="'.(motor_bottom_items($motorBottomMenu)?'on':'off').'"><div class="site-shell">';
 echo '<a class="skip-link" href="#main-content">К содержимому</a><header class="site-header" id="up">';
 echo '<a class="brand" href="'.BASEDIR.'index.php" aria-label="'.motor_brand_escape($portalBrand['title'].' — на главную').'"><img src="'.motor_brand_escape($portalBrand['src']).'" alt="'.motor_brand_escape('Логотип '.$portalBrand['title']).'" width="59" height="70"><span>'.motor_brand_escape($portalBrand['title']).($portalBrand['subtitle']!==''?'<small>'.motor_brand_escape($portalBrand['subtitle']).'</small>':'').'</span></a>';
 echo '<div class="header-actions"><a class="icon-button" href="'.BASEDIR.$lesikaAccount.'" aria-label="'.$lesikaAccountLabel.'">'.lesika_icon('user').'</a>';

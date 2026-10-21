@@ -26,6 +26,7 @@ echo'<img src="../images/img/partners.gif" alt="image" /> <b>Настройки 
 if ($action==""){
 if ($log==$config['nickname']){
 echo '<a href="brand-settings.php">Заглавие и логотип сайта</a><br />';
+echo '<a href="bottom-menu.php">Нижнее меню сайта</a><br />';
 echo'<img src="../images/img/forums.gif" alt="image" /> <a href="setting.php?action=setone&amp;'.SID.'">Основные настройки</a><br />';}
 
 echo'<img src="../images/img/forums.gif" alt="image" /> <a href="setting.php?action=settwo&amp;'.SID.'">Вывод информации</a><br />';

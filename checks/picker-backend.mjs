@@ -131,7 +131,7 @@ await rendered('/votes/index.php');await rendered('/votes/vote.php');await rende
 assert.equal((await req('/pyramid/go.php',{uid,msg:message,icq:'123456'})).httpStatusCode,302);await rendered('/pyramid/history.php');await rendered('/index.php');pass('pyramid messages, history and home rendering');
 // Same stored content must render in each palette; the stylesheet bounds inline GIFs.
 const themes=Object.keys(JSON.parse(readFileSync(join(root,'includes/lesika/themes.json'))));
-for(const skin of themes){await req('/pages/skin.php',{skins:skin,uid,return:'themes'});r=await rendered(topicURL,'модератор исправил',':ban');assert.ok(r.text.includes('<body data-theme="'+skin+'">'));await rendered('/board/index.php?action=view&id=987&bid='+bid);}
+for(const skin of themes){await req('/pages/skin.php',{skins:skin,uid,return:'themes'});r=await rendered(topicURL,'модератор исправил',':ban');assert.match(r.text,new RegExp('<body\\b[^>]*data-theme="'+skin+'"[^>]*>'));await rendered('/board/index.php?action=view&id=987&bid='+bid);}
 assert.match(readFileSync(join(root,'assets/lesika/site.css'),'utf8'),/img\.motor-smile\{[^}]*max-height:48px/);pass('all twelve themes, inline size bounds and valid asset paths on every checked page');
 const fixtures=[];const fixturesDir=new URL('./fixtures/',import.meta.url);mkdirSync(fixturesDir,{recursive:true});
 async function capture(url,role,expectedCount){

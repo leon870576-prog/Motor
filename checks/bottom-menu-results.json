@@ -1,0 +1,11 @@
+{
+  "runtime": "PHP 8.4 WASM",
+  "requests": 140,
+  "passed": [
+    "owner-only menu administration; default five links and active item preserved; GET/HEAD do not create settings; admin links present",
+    "renaming, links, icons, order and hidden items applied together; escaped HTML/ampersands; invalid inputs rejected; stale forms cannot overwrite a saved menu",
+    "all 18 selectable destinations exist; section highlighting follows the target, distinguishes query pages and supports installation in a subdirectory",
+    "one, zero and disabled menu states; standard reset requires POST/CSRF/version and never reuses the initial revision",
+    "corrupt and symlink settings fail safely without overwrite; public fallback retains navigation; menu included in real ZIP backup; site settings and news unchanged"
+  ]
+}

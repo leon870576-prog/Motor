@@ -1,8 +1,18 @@
 [
   {
+    "path": "mpanel/arcade-settings.php",
+    "bytes": 4964,
+    "sha256": "cbacd848ed103697e9dfebe0280f90a7ccd3b9f6af59560d350319c1d5d71a29"
+  },
+  {
+    "path": "mpanel/attachments.php",
+    "bytes": 4942,
+    "sha256": "6c6e67a4b5b458511066ab72151e73cc762db48416f45abc327ca10b67e3d221"
+  },
+  {
     "path": "mpanel/backup.php",
-    "bytes": 14707,
-    "sha256": "6bd24f704285cc09c18434b2383acbd726fe89b25ed21216f5372054e67c58f6"
+    "bytes": 14726,
+    "sha256": "02490d0889a0dfee3bdb7817e27c50517fa8ac3fadc79a771ec745c7cf5abc56"
   },
   {
     "path": "mpanel/ban.php",
@@ -33,6 +43,11 @@
     "path": "mpanel/book.php",
     "bytes": 15217,
     "sha256": "ac76ffbe7f3aa44fba78732fd480afad6a5a71c0f0c73413f4eb6a67bb4a8b0c"
+  },
+  {
+    "path": "mpanel/bottom-menu.php",
+    "bytes": 4814,
+    "sha256": "146f7ab86a3861e3cb13499df31dfdabc5e4e0240ce00495eb620543ef0213a5"
   },
   {
     "path": "mpanel/brand-settings.php",
@@ -91,8 +106,8 @@
   },
   {
     "path": "mpanel/index.php",
-    "bytes": 9866,
-    "sha256": "11959b538795b213b44ac37c50a9ebf7748510b89258194f259d3958f7f4e083"
+    "bytes": 9968,
+    "sha256": "1aa94d96adc8bf9efb1ed5ad4853ce465a9cdcdbc50e5880744dd5a8592e0e30"
   },
   {
     "path": "mpanel/license.php",
@@ -141,8 +156,8 @@
   },
   {
     "path": "mpanel/setting.php",
-    "bytes": 52314,
-    "sha256": "48f12fa9097da6b3c683acb8d147197ba47b549dc5cc5f89d8ba52e02cacad96"
+    "bytes": 52391,
+    "sha256": "6314745244e65b3fdc414b867b14d60294a0042259340ade6997393ffb5d457f"
   },
   {
     "path": "mpanel/siteinfo.php",
