@@ -1,0 +1,28 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'ru.lesika.portal'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'ru.lesika.portal'
+        minSdk 26
+        targetSdk 36
+        versionCode 1
+        versionName '0.1.0'
+        buildConfigField 'String', 'SITE_URL', '"https://motor-testing.up.railway.app/"'
+        buildConfigField 'String', 'SITE_COMMIT', '"582d0ba309dd2923c91a3bbfd73e4d158967fd28"'
+        buildConfigField 'String', 'EXPECTED_RELEASE', '"2026-10-21-profile-management-r2"'
+    }
+    buildFeatures { buildConfig true }
+    buildTypes {
+        debug { applicationIdSuffix '.preview'; versionNameSuffix '-test' }
+        release { minifyEnabled false }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    lint { abortOnError true; checkReleaseBuilds true }
+}
+
+dependencies { testImplementation 'junit:junit:4.13.2' }
