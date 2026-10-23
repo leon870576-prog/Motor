@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.ByteArrayInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -68,7 +69,7 @@ public final class MainActivity extends Activity {
     private boolean multipleFiles;
     private String lastUrl = BuildConfig.SITE_URL;
     private String authHeader; // Memory only, never written to preferences, logs, APK or saved state.
-    private AlertDialog authDialog, downloadDialog;
+    private AlertDialog authDialog, downloadDialog, externalDialog;
     private HttpAuthHandler pendingAuth;
     private PendingDownload pendingDownload;
     private volatile HttpURLConnection activeDownload;
@@ -147,7 +148,8 @@ public final class MainActivity extends Activity {
         s.setJavaScriptEnabled(true); s.setDomStorageEnabled(true);
         s.setAllowFileAccess(false); s.setAllowContentAccess(false);
         s.setAllowFileAccessFromFileURLs(false); s.setAllowUniversalAccessFromFileURLs(false);
-        s.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW); s.setSafeBrowsingEnabled(true);
+        s.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
+        if (Build.VERSION.SDK_INT >= 26) s.setSafeBrowsingEnabled(true);
         s.setJavaScriptCanOpenWindowsAutomatically(false); s.setSupportMultipleWindows(true);
         s.setMediaPlaybackRequiresUserGesture(true); s.setGeolocationEnabled(false);
         s.setUseWideViewPort(true); s.setLoadWithOverviewMode(true);
@@ -181,7 +183,36 @@ public final class MainActivity extends Activity {
     }
     private void toast(String message) { Toast.makeText(this, message, Toast.LENGTH_LONG).show(); }
 
+    // API 22 does not enforce the manifest cleartext policy. Reject direct HTTP
+    // requests here as well; all authenticated native requests use UrlPolicy.
+    private WebResourceResponse blockCleartext(Uri url) {
+        if (!"http".equalsIgnoreCase(url.getScheme())) return null;
+        return new WebResourceResponse("text/plain", "UTF-8", 403, "HTTPS required",
+                java.util.Collections.emptyMap(), new ByteArrayInputStream(new byte[0]));
+    }
+
+    // The pre-24 callback has no reliable user-gesture flag. Require an explicit
+    // confirmation before handing an external URL to another application.
+    private boolean routeLegacyUrl(String url) {
+        if (policy.internal(url)) return false;
+        if ((!policy.externalWeb(url) && !policy.phoneOrEmail(url)) || externalDialog != null) return true;
+        externalDialog = new AlertDialog.Builder(this).setTitle("Открыть внешнюю ссылку?")
+                .setMessage(url.length() > 300 ? url.substring(0, 300) + "…" : url)
+                .setPositiveButton("Открыть", (d, w) -> openExternal(url))
+                .setNegativeButton("Отмена", null).create();
+        externalDialog.setOnDismissListener(d -> externalDialog = null);
+        externalDialog.show();
+        return true;
+    }
+
     private final class SiteClient extends WebViewClient {
+        @Override public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+            return blockCleartext(request.getUrl());
+        }
+        @SuppressWarnings("deprecation")
+        @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return routeLegacyUrl(url);
+        }
         @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             String url = request.getUrl().toString();
             if (!request.isForMainFrame()) return !policy.internal(url);
@@ -198,6 +229,12 @@ public final class MainActivity extends Activity {
         }
         @Override public void onReceivedError(WebView v, WebResourceRequest r, WebResourceError e) {
             if (r.isForMainFrame()) showError("Нет соединения с сайтом", "Проверьте интернет и нажмите «Попробовать снова». Несохранённую запись потребуется проверить перед повторной отправкой.");
+        }
+        @SuppressWarnings("deprecation")
+        @Override public void onReceivedError(WebView v, int code, String description, String failingUrl) {
+            // On API 22 this callback reports main-document failures only.
+            if (Build.VERSION.SDK_INT < 23 && policy.internal(failingUrl))
+                showError("Нет соединения с сайтом", "Проверьте интернет и нажмите «Попробовать снова».");
         }
         @Override public void onReceivedHttpError(WebView v, WebResourceRequest r, WebResourceResponse response) {
             if (r.isForMainFrame() && response.getStatusCode() >= 500) showError("Сайт временно недоступен", "Попробуйте открыть страницу немного позже.");
@@ -249,11 +286,16 @@ public final class MainActivity extends Activity {
             popup.postDelayed(popup::destroy, 30000);
             popup.setWebViewClient(new WebViewClient() {
                 private boolean handled;
+                @Override public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                    return blockCleartext(request.getUrl());
+                }
                 private boolean route(String url) {
                     if (handled) return true; handled = true;
                     if (policy.internal(url)) navigate(url); else openExternal(url);
                     popup.post(popup::destroy); return true;
                 }
+                @SuppressWarnings("deprecation")
+                @Override public boolean shouldOverrideUrlLoading(WebView v, String url) { return route(url); }
                 @Override public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest r) { return route(r.getUrl().toString()); }
                 @Override public void onPageStarted(WebView v, String url, android.graphics.Bitmap icon) {
                     v.stopLoading(); if (!"about:blank".equals(url)) route(url);
@@ -278,7 +320,10 @@ public final class MainActivity extends Activity {
         username.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         EditText password = new EditText(this); password.setHint("Пароль тестового доступа"); password.setSingleLine();
         password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        username.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO); password.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+        if (Build.VERSION.SDK_INT >= 26) {
+            username.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+            password.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+        }
         box.addView(username); box.addView(password);
         authDialog = new AlertDialog.Builder(this).setTitle("Доступ к сайту").setView(box)
                 .setPositiveButton("Продолжить", null).setNegativeButton("Отмена", (d, w) -> cancelAuth())
@@ -402,7 +447,8 @@ public final class MainActivity extends Activity {
                         if (!policy.internal(next)) throw new java.io.IOException("Cross-origin redirect");
                         current = next; continue;
                     }
-                    if (code != 200 || c.getContentLengthLong() > 128L*1024*1024) throw new java.io.IOException("Rejected response");
+                    long expected = DownloadPolicy.contentLength(c.getHeaderField("Content-Length"));
+                    if (code != 200 || expected > 128L*1024*1024) throw new java.io.IOException("Rejected response");
                     String actual = c.getContentType();
                     if (actual != null && actual.toLowerCase(java.util.Locale.ROOT).startsWith("text/html") && !"text/html".equals(d.mime)) throw new java.io.IOException("Login page");
                     try (InputStream input = c.getInputStream(); OutputStream output = getContentResolver().openOutputStream(destination, "wt")) {
@@ -413,7 +459,6 @@ public final class MainActivity extends Activity {
                             if (cancelDownload || total > 128L*1024*1024) throw new java.io.IOException("Cancelled or too large");
                             output.write(buffer, 0, size);
                         }
-                        long expected = c.getContentLengthLong();
                         if (expected >= 0 && total != expected) throw new java.io.IOException("Incomplete response");
                         output.flush();
                     }
@@ -449,7 +494,7 @@ public final class MainActivity extends Activity {
         else moveTaskToBack(true);
     }
     // API 33+ uses the platform OnBackInvokedDispatcher registered in onCreate.
-    // This override supplies the same behavior only to legacy Android 26–32.
+    // This override supplies the same behavior only to legacy Android 22–32.
     @SuppressLint("GestureBackNavigation")
     @SuppressWarnings("deprecation") @Override public void onBackPressed() { goBack(); }
     @Override protected void onSaveInstanceState(Bundle state) { state.putString("page", policy.shareUrl(lastUrl)); super.onSaveInstanceState(state); }
@@ -459,6 +504,7 @@ public final class MainActivity extends Activity {
         if (fileCallback != null) { fileCallback.onReceiveValue(null); fileCallback=null; }
         if (pendingAuth != null) { pendingAuth.cancel(); pendingAuth=null; }
         if (authDialog != null) authDialog.dismiss();
+        if (externalDialog != null) externalDialog.dismiss();
         stopDownload(); worker.shutdownNow(); if (downloadDialog != null) downloadDialog.dismiss();
         authHeader=null; pendingDownload=null; hideVideo();
         if (web != null) { content.removeView(web); web.destroy(); web=null; }

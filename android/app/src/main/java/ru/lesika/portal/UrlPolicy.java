@@ -61,7 +61,9 @@ public final class UrlPolicy {
             } catch (Exception ignored) { /* Omit malformed fields. */ }
         }
         String path = u.getRawPath();
+        StringBuilder query = new StringBuilder();
+        for (String pair : pairs) query.append(query.length() == 0 ? '?' : '&').append(pair);
         return "https://" + base.getHost() + (path == null || path.isEmpty() ? "/" : path)
-                + (pairs.isEmpty() ? "" : "?" + String.join("&", pairs));
+                + query;
     }
 }
