@@ -117,7 +117,7 @@ public final class MainActivity extends Activity {
         LinearLayout heading = new LinearLayout(this); heading.setOrientation(LinearLayout.VERTICAL);
         TextView title = text(getString(R.string.app_name), 18); title.setTypeface(null, android.graphics.Typeface.BOLD);
         TextView subtitle = text(getString(R.string.site_title), 11); subtitle.setSingleLine(true);
-        heading.addView(title); heading.addView(subtitle); heading.setContentDescription("Лесика. На главную");
+        heading.addView(title); heading.addView(subtitle); heading.setContentDescription("Лесон. На главную");
         heading.setOnClickListener(v -> navigate(BuildConfig.SITE_URL));
         toolbar.addView(heading, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
         toolbar.addView(action("↻", "Обновить страницу", v -> reload()), new LinearLayout.LayoutParams(dp(48), dp(52)));
@@ -152,7 +152,7 @@ public final class MainActivity extends Activity {
         s.setMediaPlaybackRequiresUserGesture(true); s.setGeolocationEnabled(false);
         s.setUseWideViewPort(true); s.setLoadWithOverviewMode(true);
         s.setBuiltInZoomControls(true); s.setDisplayZoomControls(false);
-        s.setUserAgentString(s.getUserAgentString() + " LesikaAndroid/" + BuildConfig.VERSION_NAME);
+        s.setUserAgentString(s.getUserAgentString() + " LesonAndroid/" + BuildConfig.VERSION_NAME);
         CookieManager.getInstance().setAcceptCookie(true); CookieManager.getInstance().setAcceptThirdPartyCookies(web, false);
         WebView.setWebContentsDebuggingEnabled(false);
         web.setWebViewClient(new SiteClient()); web.setWebChromeClient(new SiteChrome());
@@ -301,7 +301,7 @@ public final class MainActivity extends Activity {
     private void showSections() {
         String[] names = {"Главная", "Новости", "Объявления", "Форум", "Чат", "Личные сообщения", "Моя страница", "Фотогалерея", "Гостевая", "Темы оформления"};
         String[] paths = {"", "news/index.php", "board/index.php", "forum/index.php", "chat/index.php", "pages/privat.php", "pages/userpage.php", "gallery/index.php", "book/index.php", "pages/themes.php"};
-        new AlertDialog.Builder(this).setTitle("Разделы Лесики").setItems(names, (d, which) -> navigate(BuildConfig.SITE_URL + paths[which])).show();
+        new AlertDialog.Builder(this).setTitle("Разделы Лесона").setItems(names, (d, which) -> navigate(BuildConfig.SITE_URL + paths[which])).show();
     }
     private void showMenu(View anchor) {
         PopupMenu menu = new PopupMenu(this, anchor);
@@ -316,7 +316,7 @@ public final class MainActivity extends Activity {
                     share.putExtra(Intent.EXTRA_TEXT, policy.shareUrl(lastUrl)); startActivity(Intent.createChooser(share, "Поделиться")); break;
                 case 3: openExternal(policy.shareUrl(lastUrl)); break;
                 case 4: confirmClear(); break;
-                case 5: new AlertDialog.Builder(this).setTitle("Лесика " + BuildConfig.VERSION_NAME)
+                case 5: new AlertDialog.Builder(this).setTitle("Лесон " + BuildConfig.VERSION_NAME)
                         .setMessage("Лесозаводск онлайн\n\nПриложение использует общие данные сайта.\n\nЭто первая тестовая версия. Push-уведомления пока не подключены.")
                         .setPositiveButton("Понятно", null).show(); break;
                 default: return false;
@@ -345,7 +345,7 @@ public final class MainActivity extends Activity {
         PendingDownload(String u, String m, String c, String a) { url=u; mime=m; cookie=c; authorization=a; }
     }
     private void askSave(String url, String disposition, String mime) {
-        if (!policy.internal(url)) { toast("Скачивание доступно только с сайта Лесики"); return; }
+        if (!policy.internal(url)) { toast("Скачивание доступно только с сайта Лесона"); return; }
         if (pendingDownload != null || activeDownload != null || downloadDialog != null) { toast("Дождитесь завершения текущего сохранения"); return; }
         String safeMime = mime != null && mime.matches("[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+") ? mime : "application/octet-stream";
         String name = URLUtil.guessFileName(url, disposition, safeMime).replaceAll("[\\\\/\\p{Cntrl}]", "_");
@@ -390,7 +390,7 @@ public final class MainActivity extends Activity {
                     if (cancelDownload || !policy.internal(current)) throw new java.io.IOException("Rejected URL");
                     HttpURLConnection c = (HttpURLConnection) new URL(current).openConnection(); activeDownload = c;
                     c.setInstanceFollowRedirects(false); c.setConnectTimeout(15000); c.setReadTimeout(20000);
-                    c.setRequestProperty("User-Agent", "LesikaAndroid/" + BuildConfig.VERSION_NAME);
+                    c.setRequestProperty("User-Agent", "LesonAndroid/" + BuildConfig.VERSION_NAME);
                     c.setRequestProperty("Accept-Encoding", "identity");
                     if (d.cookie != null) c.setRequestProperty("Cookie", d.cookie);
                     if (d.authorization != null) c.setRequestProperty("Authorization", d.authorization);
