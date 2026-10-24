@@ -31,6 +31,7 @@ echo '<a class="brand" href="'.BASEDIR.'index.php" aria-label="'.motor_brand_esc
 echo '<div class="header-actions"><a class="icon-button" href="'.BASEDIR.$lesikaAccount.'" aria-label="'.$lesikaAccountLabel.'">'.lesika_icon('user').'</a>';
 echo '<details class="site-menu"><summary class="icon-button" aria-label="Меню">'.lesika_icon('menu').'</summary><nav class="menu-panel" aria-label="Все разделы">';
 foreach (['index.php'=>'Главная', 'news/index.php'=>'Новости', 'forum/index.php'=>'Форум', 'book/index.php'=>'Гостевая', 'chat/index.php'=>'Мини-чат', 'gallery/index.php'=>'Фотогалерея', 'board/index.php'=>'Объявления', 'pages/userlist.php'=>'Жители', 'pages/themes.php'=>'Оформление'] as $href => $title) {
+    if ($lesikaHome && $href === 'pages/themes.php') continue;
     echo '<a href="'.BASEDIR.$href.'">'.$title.lesika_icon('arrow').'</a>';
 }
 if (!empty($log)) echo '<a href="'.BASEDIR.'pages/userpage.php">Моя страница'.lesika_icon('user').'</a>';

@@ -1321,8 +1321,8 @@
   },
   {
     "path": "includes/lesika/head.php",
-    "bytes": 5126,
-    "sha256": "8f5b32f0819cf6594ee9daee59e53bbe86bbc409968855fde0d567439cf70ffa"
+    "bytes": 5189,
+    "sha256": "6b96e127c50064f64b3eda7176d35140e6e4116df1227a0a62c23bb4535730d6"
   },
   {
     "path": "includes/lesika/home.php",
